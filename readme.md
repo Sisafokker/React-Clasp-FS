@@ -1,3 +1,3 @@
 # My FS React Project
-> Joaquin's project
-hoakeen.com
+> Joaquin's project 
+> www.hoakeen.com
