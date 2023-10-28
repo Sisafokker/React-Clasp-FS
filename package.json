@@ -23,6 +23,9 @@
     "process": "^0.11.10"
   },
   "dependencies": {
+    "@react-oauth/google": "^0.11.1",
+    "gapi-script": "^1.2.0",
+    "google-auth-library": "^9.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "6.4"
