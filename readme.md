@@ -2,7 +2,9 @@
 > Joaquin's project 
 > www.hoakeen.com
 
+> Github Repository: https://github.com/Sisafokker/React-Clasp-FS
 > git pull
 > git add .
-> git commit -m "xyz"
+> git status
+> git commit -m "laptop"
 > git push
