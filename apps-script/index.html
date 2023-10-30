@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>JP React App</title>
+    
+    <!-- For Google Sign In -->
+    <script src="https://accounts.google.com/gsi/client"></script> 
     <style>h1 {
   color: red;
   font-size: 24px;
@@ -163,13 +166,13 @@ p {
       this[globalName] = mainExports;
     }
   }
-})({"bQ33X":[function(require,module,exports) {
+})({"iDeoB":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "f4fd9947e0f5ac8f";
+module.bundle.HMR_BUNDLE_ID = "7394b47052c40fa3";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -2956,7 +2959,7 @@ process.umask = function() {
     return 0;
 };
 
-},{}],"7RQx3":[function(require,module,exports) {
+},{}],"l7cOz":[function(require,module,exports) {
 var _indexJs = require("./index.js");
 
 },{"./index.js":"8lqZg"}],"8lqZg":[function(require,module,exports) {
@@ -31731,19 +31734,93 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _reactRouterDom = require("react-router-dom");
+var _react = require("react");
+var _jwtDecode = require("jwt-decode");
 var _nav = require("./components/nav");
 var _navDefault = parcelHelpers.interopDefault(_nav);
 var _home = require("./components/home");
 var _homeDefault = parcelHelpers.interopDefault(_home);
 var _about = require("./components/about");
 var _aboutDefault = parcelHelpers.interopDefault(_about);
+var _s = $RefreshSig$();
 function App() {
+    _s();
+    const [user, setUser] = (0, _react.useState)({});
+    // React Hook to initialize our Google Client once at the begining of our render
+    (0, _react.useEffect)(()=>{
+        window.google.accounts.id.initialize({
+            client_id: "240692930692-icvohb5b9herteb2oqk18qjb89hlqnls.apps.googleusercontent.com",
+            callback: handleCallbackResponse
+        });
+        window.google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+            theme: "outline",
+            size: "large"
+        });
+    }, []);
+    function handleCallbackResponse(response) {
+        let userCredentials = response.credential;
+        console.log(`Encoded JWT (Json Web Token) Id: ${userCredentials}`);
+        let userObject = (0, _jwtDecode.jwtDecode)(userCredentials);
+        console.log("User Object:", JSON.stringify(userObject, null, 4));
+        console.log(`User: ${userObject.email}`);
+        setUser(userObject);
+        // Hidding SignIn Button
+        document.getElementById("signInDiv").hidden = true;
+    }
+    function handleSignOut(e) {
+        console.log("handleSignOut: " + e);
+        setUser({});
+        document.getElementById("signInDiv").hidden = false;
+    }
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navDefault.default), {}, void 0, false, {
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                id: "signInDiv"
+            }, void 0, false, {
                 fileName: "src/App.js",
-                lineNumber: 8,
-                columnNumber: 8
+                lineNumber: 45,
+                columnNumber: 9
+            }, this),
+            Object.keys(user).length !== 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: (e)=>handleSignOut(e),
+                children: "Sign Out"
+            }, void 0, false, {
+                fileName: "src/App.js",
+                lineNumber: 49,
+                columnNumber: 13
+            }, this),
+            Object.keys(user).length !== 0 && user && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                        src: user.picture
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 55,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                        children: [
+                            "Hi ",
+                            user.name,
+                            " ( ",
+                            user.email,
+                            " )"
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/App.js",
+                        lineNumber: 56,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navDefault.default), {}, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 57,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/App.js",
+                lineNumber: 54,
+                columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
                 children: [
@@ -31752,7 +31829,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 10,
+                        lineNumber: 62,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31760,7 +31837,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _aboutDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 11,
+                        lineNumber: 63,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31768,22 +31845,23 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 12,
+                        lineNumber: 64,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/App.js",
-                lineNumber: 9,
+                lineNumber: 61,
                 columnNumber: 8
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/App.js",
-        lineNumber: 7,
-        columnNumber: 12
+        lineNumber: 44,
+        columnNumber: 5
     }, this);
 }
+_s(App, "l0nCqodPWuiGgcnCHidP90F0Gls=");
 _c = App;
 exports.default = App;
 var _c;
@@ -31794,7 +31872,61 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-router-dom":"9xmpe","./components/nav":"kefMG","./components/home":"l90Qn","./components/about":"adsiP","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"kefMG":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-router-dom":"9xmpe","react":"21dqq","jwt-decode":"EeAxo","./components/nav":"kefMG","./components/home":"l90Qn","./components/about":"adsiP","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"EeAxo":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "InvalidTokenError", ()=>InvalidTokenError);
+parcelHelpers.export(exports, "jwtDecode", ()=>jwtDecode);
+class InvalidTokenError extends Error {
+}
+InvalidTokenError.prototype.name = "InvalidTokenError";
+function b64DecodeUnicode(str) {
+    return decodeURIComponent(atob(str).replace(/(.)/g, (m, p)=>{
+        let code = p.charCodeAt(0).toString(16).toUpperCase();
+        if (code.length < 2) code = "0" + code;
+        return "%" + code;
+    }));
+}
+function base64UrlDecode(str) {
+    let output = str.replace(/-/g, "+").replace(/_/g, "/");
+    switch(output.length % 4){
+        case 0:
+            break;
+        case 2:
+            output += "==";
+            break;
+        case 3:
+            output += "=";
+            break;
+        default:
+            throw new Error("base64 string is not of the correct length");
+    }
+    try {
+        return b64DecodeUnicode(output);
+    } catch (err) {
+        return atob(output);
+    }
+}
+function jwtDecode(token, options) {
+    if (typeof token !== "string") throw new InvalidTokenError("Invalid token specified: must be a string");
+    options || (options = {});
+    const pos = options.header === true ? 0 : 1;
+    const part = token.split(".")[pos];
+    if (typeof part !== "string") throw new InvalidTokenError(`Invalid token specified: missing part #${pos + 1}`);
+    let decoded;
+    try {
+        decoded = base64UrlDecode(part);
+    } catch (e) {
+        throw new InvalidTokenError(`Invalid token specified: invalid base64 for part #${pos + 1} (${e.message})`);
+    }
+    try {
+        return JSON.parse(decoded);
+    } catch (e) {
+        throw new InvalidTokenError(`Invalid token specified: invalid json for part #${pos + 1} (${e.message})`);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kefMG":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$c5d7 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -32067,7 +32199,7 @@ $RefreshReg$(_c, "About");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}]},["bQ33X","1xC6H","7RQx3"], "7RQx3", "parcelRequire49fe")
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}]},["iDeoB","1xC6H","l7cOz"], "l7cOz", "parcelRequire49fe")
 
 </script>
 </body>

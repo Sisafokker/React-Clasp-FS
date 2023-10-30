@@ -3,9 +3,9 @@ import { BrowserRouter } from "react-router-dom";
 //import ReactDOM from "react-dom";
 import App from "./App";
 
-
 const container = document.getElementById("app");
 const root = createRoot(container)
+
 root.render(<App />);
 
 root.render( <BrowserRouter> 
