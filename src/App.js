@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import  { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-
 import Nav from "./components/nav";
 import Home from "./components/home";
 import About from "./components/about";
@@ -11,6 +10,7 @@ function App() {
     const [user, setUser] = useState({})
     // React Hook to initialize our Google Client once at the begining of our render
     useEffect( () => {
+        console.log("initialized: ", process.env.REACT_APP_CLIENT_ID)
         window.google.accounts.id.initialize({
             client_id: "240692930692-icvohb5b9herteb2oqk18qjb89hlqnls.apps.googleusercontent.com",
             callback: handleCallbackResponse
@@ -18,8 +18,11 @@ function App() {
 
         window.google.accounts.id.renderButton( 
             document.getElementById("signInDiv"), 
-            { theme: "outline", size: "large" }
+            { theme: "outline", width: 200 }
         )
+        
+        // Optional. Show list of Google Users (users same HandleCallbackResponse fx)
+        window.google.accounts.id.prompt();
     }, []); 
 
     function handleCallbackResponse(response) {

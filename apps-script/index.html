@@ -6,13 +6,14 @@
     
     <!-- For Google Sign In -->
     <script src="https://accounts.google.com/gsi/client"></script> 
+    
     <style>h1 {
-  color: red;
+  color: #000;
   font-size: 24px;
 }
 
 p {
-  color: green;
+  color: gray;
   font-size: 16px;
 }
 
@@ -31748,14 +31749,17 @@ function App() {
     const [user, setUser] = (0, _react.useState)({});
     // React Hook to initialize our Google Client once at the begining of our render
     (0, _react.useEffect)(()=>{
+        console.log("initialized: ", '"240692930692-icvohb5b9herteb2oqk18qjb89hlqnls.apps.googleusercontent.com";');
         window.google.accounts.id.initialize({
             client_id: "240692930692-icvohb5b9herteb2oqk18qjb89hlqnls.apps.googleusercontent.com",
             callback: handleCallbackResponse
         });
         window.google.accounts.id.renderButton(document.getElementById("signInDiv"), {
             theme: "outline",
-            size: "large"
+            width: 200
         });
+        // Optional. Show list of Google Users (users same HandleCallbackResponse fx)
+        window.google.accounts.id.prompt();
     }, []);
     function handleCallbackResponse(response) {
         let userCredentials = response.credential;
@@ -31778,7 +31782,7 @@ function App() {
                 id: "signInDiv"
             }, void 0, false, {
                 fileName: "src/App.js",
-                lineNumber: 45,
+                lineNumber: 48,
                 columnNumber: 9
             }, this),
             Object.keys(user).length !== 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -31786,7 +31790,7 @@ function App() {
                 children: "Sign Out"
             }, void 0, false, {
                 fileName: "src/App.js",
-                lineNumber: 49,
+                lineNumber: 52,
                 columnNumber: 13
             }, this),
             Object.keys(user).length !== 0 && user && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -31795,7 +31799,7 @@ function App() {
                         src: user.picture
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 55,
+                        lineNumber: 58,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
@@ -31808,18 +31812,18 @@ function App() {
                         ]
                     }, void 0, true, {
                         fileName: "src/App.js",
-                        lineNumber: 56,
+                        lineNumber: 59,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navDefault.default), {}, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 57,
+                        lineNumber: 60,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/App.js",
-                lineNumber: 54,
+                lineNumber: 57,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
@@ -31829,7 +31833,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 62,
+                        lineNumber: 65,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31837,7 +31841,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _aboutDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 63,
+                        lineNumber: 66,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31845,19 +31849,19 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 64,
+                        lineNumber: 67,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/App.js",
-                lineNumber: 61,
+                lineNumber: 64,
                 columnNumber: 8
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/App.js",
-        lineNumber: 44,
+        lineNumber: 47,
         columnNumber: 5
     }, this);
 }

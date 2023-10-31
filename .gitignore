@@ -1,3 +1,9 @@
+# Dependencies
 node_modules/
 .parcel-cache/
+
+#Keys (Ids and Secrets without "")
+.env
+
+#Project Notes
 notes.txt

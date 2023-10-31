@@ -1,3 +1,8 @@
 Tutorials used:
-https://www.youtube.com/watch?v=roxC8SMs7HU Google Identity Services Login with React (2023 React Google Login)
+Google Identity Services Login with React (2023 React Google Login): https://www.youtube.com/watch?v=roxC8SMs7HU 
+Google Authentication vs Authorization: https://www.youtube.com/watch?v=zZt8SFivjps&list=PLNYkxOF6rcIBQCKXOfi4AUtSpMj78pX5f&index=3
+Creating Documents using React / Google Docs API / Google OAuth 2.0: https://www.youtube.com/watch?v=0KoZSVnTnkA
 
+
+
+Cooper Codes: 
