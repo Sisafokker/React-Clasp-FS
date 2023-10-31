@@ -1,5 +1,0 @@
-console.log('TEST from Laptop 2')
-console.log('TEST from Bmax 3')
-console.log('TEST from Laptop 2')
-console.log('TEST from Bmax 3')
-console.log('TEST from Bmax 3')

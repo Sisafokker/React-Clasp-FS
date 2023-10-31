@@ -21,14 +21,16 @@
     "@parcel/transformer-sass": "^2.10.1",
     "crypto-browserify": "^3.12.0",
     "events": "^3.3.0",
+    "os-browserify": "^0.3.0",
     "parcel": "^2.10.1",
+    "path-browserify": "^1.0.1",
     "process": "^0.11.10",
     "stream-browserify": "^3.0.0",
     "util": "^0.12.5"
   },
   "dependencies": {
     "@react-oauth/google": "^0.11.1",
-    "gapi-script": "^1.2.0",
+    "dotenv": "^16.3.1",
     "google-auth-library": "^9.2.0",
     "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
