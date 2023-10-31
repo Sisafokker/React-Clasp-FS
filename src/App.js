@@ -5,14 +5,19 @@ import Nav from "./components/nav";
 import Home from "./components/home";
 import About from "./components/about";
 
+const SCOPES = "https://www.googleapis.com/auth/drive";
 
 function App() {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({});
+    const [tokenClient, setTokenClient ] = useState({});
+    const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+
     // React Hook to initialize our Google Client once at the begining of our render
     useEffect( () => {
-        console.log("initialized: ", process.env.REACT_APP_CLIENT_ID)
+        //console.log("App initialized", process.env.REACT_APP_CLIENT_ID)
         window.google.accounts.id.initialize({
-            client_id: "240692930692-icvohb5b9herteb2oqk18qjb89hlqnls.apps.googleusercontent.com",
+            client_id: CLIENT_ID,
+            //client_id: process.env.CLIENT_ID,
             callback: handleCallbackResponse
         })
 
@@ -21,6 +26,28 @@ function App() {
             { theme: "outline", width: 200 }
         )
         
+        // Get Access Token
+        setTokenClient(
+            window.google.accounts.oauth2.initTokenClient({
+                client_id: CLIENT_ID,
+                scope: SCOPES,
+                callback: (tokenResponse) => {
+                    console.log("tokenResponse", tokenResponse);
+                    if (tokenResponse && tokenResponse.access_token) {
+                        // Http request to API (try this method instead of http gapi.calendar.events)
+                        fetch("https://www.googleapis.com/drive/v3/files", {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${tokenResponse.access_token}`
+                            }, 
+                            body: JSON.stringify({"name": "CooperCodes_ReactAppFile", "mimeType": "text/plain"})
+                        })
+                    }
+                }
+            })
+        )
+
         // Optional. Show list of Google Users (users same HandleCallbackResponse fx)
         window.google.accounts.id.prompt();
     }, []); 
@@ -43,6 +70,10 @@ function App() {
         document.getElementById("signInDiv").hidden = false;
     }
 
+    function createDriveFile(){
+        tokenClient.requestAccessToken();
+    }
+
     return (
     <div>
         <div id="signInDiv"></div>
@@ -56,10 +87,12 @@ function App() {
         { Object.keys(user).length !== 0 && user && 
             <div> 
                 <img src={user.picture}></img>
-                <h3>Hi {user.name} ( {user.email} )</h3>
+                <h3>Holaaa {user.name} ( {user.email} )</h3>
+                <input type="submit" onClick={ createDriveFile } value="Create File"/>
                 <Nav />
             </div>           
         }
+
 
        <Routes>
             <Route path="/" element={<Home />}/>
