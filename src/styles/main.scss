@@ -1,9 +1,4 @@
-h1 {
-    font-size: 24px;
-    color: black;
-}
-
-p {
-    font-size: 16px;
-    color: grey;
-}
+@import "./variables.scss";
+@import "./base.scss";
+@import "./auth.scss";
+@import "./nav.scss";

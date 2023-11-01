@@ -1,0 +1,56 @@
+.auth-wrapper {
+  background-color: $offwhite;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.user-info {
+  text-align: center;
+
+  .sign-out-button {
+    background-color: $teal;
+    color: $offwhite;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $dark-teal;
+    }
+  }
+
+  .user-details {
+    display: flex;
+    align-items: center;
+    justify-content: center; // Center horizontally
+    margin-top: 10px;
+
+    .user-avatar {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .user-text {
+      text-align: center;
+
+      h3 {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 13px;
+      }
+    }
+  }
+}

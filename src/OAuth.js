@@ -2,6 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
+// Styles
+import "./styles/main.scss";
+
 // Components
 import Nav from "./components/nav";
 
@@ -18,13 +21,25 @@ function OAuth() {
         // Initialize Google Sign-In and set up event handlers
         console.log("👍App initialized")
 
+        // Check if user data exists in local storage
+        const storedUser = localStorage.getItem("user");
+
+        // If user data exists, set the user state with the stored data
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+            document.getElementById("googleLogIn").hidden = true;
+        } else {
+            // If no user data is found, prompt for Google Sign-In
+            window.google.accounts.id.prompt();
+        }
+
         window.google.accounts.id.initialize({
             client_id: CLIENT_ID,
             callback: handleCallbackResponse
         });
 
         // Render Google Sign-In button
-        window.google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+        window.google.accounts.id.renderButton(document.getElementById("googleLogIn"), {
             theme: "outline",
             width: 200
         });
@@ -52,8 +67,7 @@ function OAuth() {
             })
         );
 
-        // (Optional) Prompt the user to sign in using their Browser Google account
-        window.google.accounts.id.prompt();
+
 
         // Clean-up logic when the component is unmounted
         return () => {
@@ -66,15 +80,30 @@ function OAuth() {
         console.log("👍HandleSignIn")
         let userCredentials = response.credential;
         let userObject = jwtDecode(userCredentials); // Decode the JWT token to get user data
-        setUser(userObject); // Set the user data in the component state
-        document.getElementById("signInDiv").hidden = true;
+
+        // Set the user data in the component state
+        setUser(userObject);
+
+        // Hide SignIn Button
+        document.getElementById("googleLogIn").hidden = true;
+
+        // Save user data to local storage
+        localStorage.setItem("user", JSON.stringify(userObject));
     }
 
     // Function to handle user sign-out
     function handleSignOut(e) {
         console.log("👍handleSignOut")
+
+         // Clear user data from local storage
+        localStorage.removeItem("user");
+
+        // Clear user data from component state
         setUser({});
-        document.getElementById("signInDiv").hidden = false;
+
+        // Show SignIn Div and Prompt
+        document.getElementById("googleLogIn").hidden = false;
+        window.google.accounts.id.prompt();
     }
 
     // Function to create a file in Google Drive when the user clicks the "Create File" button
@@ -85,19 +114,31 @@ function OAuth() {
 
     // Render the OAuth component
     return (
-        <div>
-            <div id="signInDiv"></div>
-            {Object.keys(user).length !== 0 && ( // Conditionally render content if user data is available
-                <div>
-                    <button onClick={e => handleSignOut(e)}>Sign Out</button>
-                    <img src={user.picture} alt="User" />
-                    <h3>Hola {user.name} ({user.email})</h3>
-                    <Nav />
-                    <input type="submit" onClick={createDriveFile} value="Create File" />
+        <div className="auth-wrapper">
+          <div id="googleLogIn"></div>
+          {Object.keys(user).length !== 0 && ( // Conditionally render content if user data is available
+            <div className="user-nav-wrapper">
+                <div className="user-info">
+                <div className="user-details">
+                    <img className="user-avatar" src={user.picture} alt="User" />
+                    <div className="user-text">
+                    <h3>{user.name}</h3>
+                    <p>{user.email}</p>
+                    <div className="sign-out">
+                        <button className="sign-out-button" onClick={e => handleSignOut(e)}>Sign Out</button>
+                    </div>
+                    </div>
                 </div>
-            )}
+                </div>
+                <Nav />
+   {/*              <div className="others">
+                    <input className="create-file-button" type="submit" onClick={createDriveFile} value="Create File" />
+                </div> */}
+            </div>
+          )}
         </div>
-    );
+      );
+      
 }
 
 export default OAuth;

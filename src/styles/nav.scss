@@ -1,0 +1,26 @@
+.nav-wrapper {
+    background-color: $offwhite;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around; // equal space between them
+    margin-top: 20px;
+  
+    .nav-link {
+      text-decoration: none;
+      color: $teal;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s ease;
+  
+      &:hover {
+        color: $dark-teal;
+      }
+  
+      &:not(:last-child) {
+        margin-right: 20px; // right margin to separate links
+      }
+    }
+  }
+  
