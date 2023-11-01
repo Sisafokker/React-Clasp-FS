@@ -1,10 +1,15 @@
 .auth-wrapper {
   background-color: $offwhite;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 6px;
+  border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 100%;
   margin: 0 auto;
+}
+
+.google-login {
+  text-align: center;
+  margin-bottom: 5px;
 }
 
 .user-info {
@@ -30,7 +35,7 @@
     display: flex;
     align-items: center;
     justify-content: center; // Center horizontally
-    margin-top: 10px;
+    margin-top: 5px;
 
     .user-avatar {
       width: 75px;
