@@ -6,7 +6,8 @@ Using env file (environment variables): https://www.youtube.com/watch?v=KJE4LtAx
 Google Identity Services Login with React (2023 React Google Login): https://www.youtube.com/watch?v=roxC8SMs7HU 
 Get Access Token For Google Identity Services Login (Google Identity Services Access Token Tutorial): https://www.youtube.com/watch?v=C0DUNy6RjNw
 Google Authentication vs Authorization: https://www.youtube.com/watch?v=zZt8SFivjps&list=PLNYkxOF6rcIBQCKXOfi4AUtSpMj78pX5f&index=3
-
+How to OAuth 2.0 Authorization with Postman | Generate Google Access Token in Postman | Step By Step: https://www.youtube.com/watch?v=zHfR96IZECQ
+How to deploy React App on Google Cloud?: https://www.youtube.com/watch?v=OS0o1icJIZA
 
 ❌Didnt work:
 Creating Documents using React / Google Docs API / Google OAuth 2.0: https://www.youtube.com/watch?v=0KoZSVnTnkA

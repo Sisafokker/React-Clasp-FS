@@ -87,7 +87,7 @@ function App() {
         { Object.keys(user).length !== 0 && user && 
             <div> 
                 <img src={user.picture}></img>
-                <h3>Holaaa {user.name} ( {user.email} )</h3>
+                <h3>Hola {user.name} ( {user.email} )</h3>
                 <input type="submit" onClick={ createDriveFile } value="Create File"/>
                 <Nav />
             </div>           
