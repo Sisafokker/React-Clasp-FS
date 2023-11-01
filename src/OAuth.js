@@ -1,6 +1,7 @@
 // Dependencies
 import React, { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom"; // useNavigate Hook
 
 // Styles
 import "./styles/main.scss";
@@ -15,6 +16,7 @@ function OAuth() {
     const [user, setUser] = useState({});
     const [tokenClient, setTokenClient] = useState({});
     const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+    const navigate = useNavigate();
 
     // useEffect hook to handle component initialization and cleanup
     useEffect(() => {
@@ -27,8 +29,9 @@ function OAuth() {
         // If user data exists, set the user state with the stored data
         if (storedUser) {
             setUser(JSON.parse(storedUser));
-            document.getElementById("googleLogIn").hidden = true;
-        } else {
+            document.getElementById("googleLogIn").style.display = "none";
+            //document.getElementById("googleLogIn").hidden = true;
+           } else {
             // If no user data is found, prompt for Google Sign-In
             window.google.accounts.id.prompt();
         }
@@ -40,8 +43,7 @@ function OAuth() {
 
         // Render Google Sign-In button
         window.google.accounts.id.renderButton(document.getElementById("googleLogIn"), {
-            theme: "outline",
-            width: 200
+            theme: "outline", size: 'large', width: 250
         });
 
         // Set up the token client for accessing Google Drive API
@@ -85,10 +87,14 @@ function OAuth() {
         setUser(userObject);
 
         // Hide SignIn Button
-        document.getElementById("googleLogIn").hidden = true;
+        //document.getElementById("googleLogIn").hidden = true;
+        document.getElementById("googleLogIn").style.display = "none";
 
         // Save user data to local storage
         localStorage.setItem("user", JSON.stringify(userObject));
+
+        // Move to: 
+        navigate("/customers");
     }
 
     // Function to handle user sign-out
@@ -101,8 +107,12 @@ function OAuth() {
         // Clear user data from component state
         setUser({});
 
+        // Move to: 
+        navigate("/");
+
         // Show SignIn Div and Prompt
-        document.getElementById("googleLogIn").hidden = false;
+        document.getElementById("googleLogIn").style.display = "block";
+        //document.getElementById("googleLogIn").hidden = false;
         window.google.accounts.id.prompt();
     }
 
@@ -115,7 +125,7 @@ function OAuth() {
     // Render the OAuth component
     return (
         <div className="auth-wrapper">
-          <div id="googleLogIn"></div>
+          <div id="googleLogIn" className="google-login"></div>
           {Object.keys(user).length !== 0 && ( // Conditionally render content if user data is available
             <div className="user-nav-wrapper">
                 <div className="user-info">

@@ -1,6 +1,6 @@
 // Dependencies
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 // Styles
 import "./styles/main.scss";
@@ -8,8 +8,10 @@ import "./styles/main.scss";
 // Components
 import OAuth from "./OAuth";
 import Home from "./components/home";
-import About from "./components/about";
-import Actions from "./components/actions";
+import Customers from "./components/customers";
+import POs from "./components/pos";
+import Inventory from "./components/inventory";
+import AppUsers from "./components/appusers";
 import Tutorials from "./components/tutorials";
 
 
@@ -20,10 +22,12 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="about" element={<About />} />
-                <Route path="actions" element={<Actions />} />
+                <Route path="customers" element={<Customers />} />
+                <Route path="pos" element={<POs />} />
+                <Route path="inventory" element={<Inventory />} />
+                <Route path="appusers" element={<AppUsers />} />
                 <Route path="tutorials" element={<Tutorials />} />
-                <Route path="*" element={<Home />} />
+                <Route path="*" element={<Navigate to="/"/>} />
             </Routes>
 
         </div>

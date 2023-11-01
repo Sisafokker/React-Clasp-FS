@@ -31735,10 +31735,14 @@ var _oauth = require("./OAuth");
 var _oauthDefault = parcelHelpers.interopDefault(_oauth);
 var _home = require("./components/home");
 var _homeDefault = parcelHelpers.interopDefault(_home);
-var _about = require("./components/about");
-var _aboutDefault = parcelHelpers.interopDefault(_about);
-var _actions = require("./components/actions");
-var _actionsDefault = parcelHelpers.interopDefault(_actions);
+var _customers = require("./components/customers");
+var _customersDefault = parcelHelpers.interopDefault(_customers);
+var _pos = require("./components/pos");
+var _posDefault = parcelHelpers.interopDefault(_pos);
+var _inventory = require("./components/inventory");
+var _inventoryDefault = parcelHelpers.interopDefault(_inventory);
+var _appusers = require("./components/appusers");
+var _appusersDefault = parcelHelpers.interopDefault(_appusers);
 var _tutorials = require("./components/tutorials");
 var _tutorialsDefault = parcelHelpers.interopDefault(_tutorials);
 function App() {
@@ -31747,7 +31751,7 @@ function App() {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _oauthDefault.default), {}, void 0, false, {
                 fileName: "src/App.js",
-                lineNumber: 19,
+                lineNumber: 21,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
@@ -31757,23 +31761,39 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 22,
-                        columnNumber: 17
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                        path: "about",
-                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _aboutDefault.default), {}, void 0, false, void 0, void 0)
-                    }, void 0, false, {
-                        fileName: "src/App.js",
-                        lineNumber: 23,
-                        columnNumber: 17
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                        path: "actions",
-                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _actionsDefault.default), {}, void 0, false, void 0, void 0)
-                    }, void 0, false, {
-                        fileName: "src/App.js",
                         lineNumber: 24,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "customers",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _customersDefault.default), {}, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 25,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "pos",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _posDefault.default), {}, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 26,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "inventory",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inventoryDefault.default), {}, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 27,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "appusers",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appusersDefault.default), {}, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 28,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31781,27 +31801,29 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _tutorialsDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 25,
+                        lineNumber: 29,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                         path: "*",
-                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, void 0, void 0)
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
+                            to: "/"
+                        }, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 26,
+                        lineNumber: 30,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/App.js",
-                lineNumber: 21,
+                lineNumber: 23,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/App.js",
-        lineNumber: 18,
+        lineNumber: 20,
         columnNumber: 9
     }, this);
 }
@@ -31815,7 +31837,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","./styles/main.scss":"bo7w8","./OAuth":"4rTZc","./components/home":"l90Qn","./components/about":"adsiP","./components/actions":"fB4fz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/tutorials":"kz8Tg"}],"bo7w8":[function() {},{}],"4rTZc":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","./styles/main.scss":"bo7w8","./OAuth":"4rTZc","./components/home":"l90Qn","./components/customers":"4fr12","./components/pos":"a5zFZ","./components/inventory":"dN4Ui","./components/appusers":"9eCzN","./components/tutorials":"kz8Tg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bo7w8":[function() {},{}],"4rTZc":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$1183 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -31829,6 +31851,7 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _jwtDecode = require("jwt-decode");
+var _reactRouterDom = require("react-router-dom"); // useNavigate Hook
 // Styles
 var _mainScss = require("./styles/main.scss");
 // Components
@@ -31842,6 +31865,7 @@ function OAuth() {
     const [user, setUser] = (0, _react.useState)({});
     const [tokenClient, setTokenClient] = (0, _react.useState)({});
     const CLIENT_ID = "240692930692-icvohb5b9herteb2oqk18qjb89hlqnls.apps.googleusercontent.com";
+    const navigate = (0, _reactRouterDom.useNavigate)();
     // useEffect hook to handle component initialization and cleanup
     (0, _react.useEffect)(()=>{
         // Initialize Google Sign-In and set up event handlers
@@ -31851,7 +31875,8 @@ function OAuth() {
         // If user data exists, set the user state with the stored data
         if (storedUser) {
             setUser(JSON.parse(storedUser));
-            document.getElementById("googleLogIn").hidden = true;
+            document.getElementById("googleLogIn").style.display = "none";
+        //document.getElementById("googleLogIn").hidden = true;
         } else // If no user data is found, prompt for Google Sign-In
         window.google.accounts.id.prompt();
         window.google.accounts.id.initialize({
@@ -31861,7 +31886,8 @@ function OAuth() {
         // Render Google Sign-In button
         window.google.accounts.id.renderButton(document.getElementById("googleLogIn"), {
             theme: "outline",
-            width: 200
+            size: "large",
+            width: 250
         });
         // Set up the token client for accessing Google Drive API
         setTokenClient(window.google.accounts.oauth2.initTokenClient({
@@ -31894,9 +31920,12 @@ function OAuth() {
         // Set the user data in the component state
         setUser(userObject);
         // Hide SignIn Button
-        document.getElementById("googleLogIn").hidden = true;
+        //document.getElementById("googleLogIn").hidden = true;
+        document.getElementById("googleLogIn").style.display = "none";
         // Save user data to local storage
         localStorage.setItem("user", JSON.stringify(userObject));
+        // Move to: 
+        navigate("/customers");
     }
     // Function to handle user sign-out
     function handleSignOut(e) {
@@ -31905,8 +31934,11 @@ function OAuth() {
         localStorage.removeItem("user");
         // Clear user data from component state
         setUser({});
+        // Move to: 
+        navigate("/");
         // Show SignIn Div and Prompt
-        document.getElementById("googleLogIn").hidden = false;
+        document.getElementById("googleLogIn").style.display = "block";
+        //document.getElementById("googleLogIn").hidden = false;
         window.google.accounts.id.prompt();
     }
     // Function to create a file in Google Drive when the user clicks the "Create File" button
@@ -31919,10 +31951,11 @@ function OAuth() {
         className: "auth-wrapper",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                id: "googleLogIn"
+                id: "googleLogIn",
+                className: "google-login"
             }, void 0, false, {
                 fileName: "src/OAuth.js",
-                lineNumber: 118,
+                lineNumber: 128,
                 columnNumber: 11
             }, this),
             Object.keys(user).length !== 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -31939,7 +31972,7 @@ function OAuth() {
                                     alt: "User"
                                 }, void 0, false, {
                                     fileName: "src/OAuth.js",
-                                    lineNumber: 123,
+                                    lineNumber: 133,
                                     columnNumber: 21
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -31949,14 +31982,14 @@ function OAuth() {
                                             children: user.name
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 125,
+                                            lineNumber: 135,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                             children: user.email
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 126,
+                                            lineNumber: 136,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -31967,50 +32000,54 @@ function OAuth() {
                                                 children: "Sign Out"
                                             }, void 0, false, {
                                                 fileName: "src/OAuth.js",
-                                                lineNumber: 128,
+                                                lineNumber: 138,
                                                 columnNumber: 25
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 127,
+                                            lineNumber: 137,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/OAuth.js",
-                                    lineNumber: 124,
+                                    lineNumber: 134,
                                     columnNumber: 21
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/OAuth.js",
-                            lineNumber: 122,
+                            lineNumber: 132,
                             columnNumber: 17
                         }, this)
                     }, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 121,
+                        lineNumber: 131,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navDefault.default), {}, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 133,
+                        lineNumber: 143,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/OAuth.js",
-                lineNumber: 120,
+                lineNumber: 130,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/OAuth.js",
-        lineNumber: 117,
+        lineNumber: 127,
         columnNumber: 9
     }, this);
 }
-_s(OAuth, "RZAf3xTeIHTm71D6YjOF5XpYB2Y=");
+_s(OAuth, "tqRWOq5ViSTOKN1qhfnpX4hGF3M=", false, function() {
+    return [
+        (0, _reactRouterDom.useNavigate)
+    ];
+});
 _c = OAuth;
 exports.default = OAuth;
 var _c;
@@ -32021,7 +32058,7 @@ $RefreshReg$(_c, "OAuth");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","jwt-decode":"EeAxo","./styles/main.scss":"bo7w8","./components/nav":"kefMG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"EeAxo":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","jwt-decode":"EeAxo","react-router-dom":"9xmpe","./styles/main.scss":"bo7w8","./components/nav":"kefMG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"EeAxo":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "InvalidTokenError", ()=>InvalidTokenError);
@@ -32093,30 +32130,39 @@ function Nav() {
         className: "nav-wrapper",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                to: "/",
+                to: "/customers",
                 className: "nav-link",
-                children: "Home"
+                children: "Customers"
             }, void 0, false, {
                 fileName: "src/components/nav.js",
                 lineNumber: 7,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                to: "/about",
+                to: "/pos",
                 className: "nav-link",
-                children: "About"
+                children: "POs"
             }, void 0, false, {
                 fileName: "src/components/nav.js",
                 lineNumber: 8,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                to: "/actions",
+                to: "/appusers",
                 className: "nav-link",
-                children: "Actions"
+                children: "AppUsers"
             }, void 0, false, {
                 fileName: "src/components/nav.js",
                 lineNumber: 9,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
+                to: "/inventory",
+                className: "nav-link",
+                children: "Inventory"
+            }, void 0, false, {
+                fileName: "src/components/nav.js",
+                lineNumber: 10,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -32125,7 +32171,7 @@ function Nav() {
                 children: "Tutorials"
             }, void 0, false, {
                 fileName: "src/components/nav.js",
-                lineNumber: 10,
+                lineNumber: 11,
                 columnNumber: 7
             }, this)
         ]
@@ -32293,19 +32339,42 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _homeScss = require("../styles/home.scss");
 function Home() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-            children: "Welcome to React_Clasp"
-        }, void 0, false, {
-            fileName: "src/components/home.js",
-            lineNumber: 3,
-            columnNumber: 8
-        }, this)
-    }, void 0, false, {
+        className: "home-wrapper",
+        children: [
+            " ",
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                children: "Welcome to React_Clasp"
+            }, void 0, false, {
+                fileName: "src/components/home.js",
+                lineNumber: 7,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                children: "Please Sign In to continue"
+            }, void 0, false, {
+                fileName: "src/components/home.js",
+                lineNumber: 8,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                className: "custom-image",
+                src: "https://lh3.googleusercontent.com/17JVDv4jno5isn9OoNozJ-ghj_46GKB3mrcu7cHY9EVIG-gI3EYwUyL0BiFOv1cbEzNWTbmr2GfEcgT14Vk3EXhaKmp9rk1l2AGeaOgSLBoQy5NiUHj_xs3BKmpMLOkpD7lK6UoExw=w2400",
+                alt: "Hoakeen"
+            }, void 0, false, {
+                fileName: "src/components/home.js",
+                lineNumber: 9,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
         fileName: "src/components/home.js",
-        lineNumber: 2,
-        columnNumber: 12
+        lineNumber: 6,
+        columnNumber: 5
     }, this);
 }
 _c = Home;
@@ -32318,72 +32387,260 @@ $RefreshReg$(_c, "Home");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"adsiP":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$6418 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/home.scss":"3UZ0N"}],"3UZ0N":[function() {},{}],"4fr12":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$81db = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$6418.prelude(module);
+$parcel$ReactRefreshHelpers$81db.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-function About() {
+function Customers() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-            children: "About Page..."
-        }, void 0, false, {
-            fileName: "src/components/about.js",
-            lineNumber: 3,
-            columnNumber: 8
-        }, this)
-    }, void 0, false, {
-        fileName: "src/components/about.js",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                children: "About Customers..."
+            }, void 0, false, {
+                fileName: "src/components/customers.js",
+                lineNumber: 3,
+                columnNumber: 8
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                children: "Ideas:"
+            }, void 0, false, {
+                fileName: "src/components/customers.js",
+                lineNumber: 4,
+                columnNumber: 8
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                        children: "CRUD Google Cloud SQL Database"
+                    }, void 0, false, {
+                        fileName: "src/components/customers.js",
+                        lineNumber: 6,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                        children: "Action buttons (send email, etc) "
+                    }, void 0, false, {
+                        fileName: "src/components/customers.js",
+                        lineNumber: 7,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                        children: "List of PO's"
+                    }, void 0, false, {
+                        fileName: "src/components/customers.js",
+                        lineNumber: 8,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/customers.js",
+                lineNumber: 5,
+                columnNumber: 8
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/customers.js",
         lineNumber: 2,
         columnNumber: 12
     }, this);
 }
-_c = About;
-exports.default = About;
+_c = Customers;
+exports.default = Customers;
 var _c;
-$RefreshReg$(_c, "About");
+$RefreshReg$(_c, "Customers");
 
-  $parcel$ReactRefreshHelpers$6418.postlude(module);
+  $parcel$ReactRefreshHelpers$81db.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fB4fz":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$556a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"a5zFZ":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$9f3b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$556a.prelude(module);
+$parcel$ReactRefreshHelpers$9f3b.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-function Actions() {
+function POs() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-            children: "Actions Page..."
-        }, void 0, false, {
-            fileName: "src/components/actions.js",
-            lineNumber: 3,
-            columnNumber: 8
-        }, this)
-    }, void 0, false, {
-        fileName: "src/components/actions.js",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                children: "Purchase Orders..."
+            }, void 0, false, {
+                fileName: "src/components/pos.js",
+                lineNumber: 3,
+                columnNumber: 8
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                children: "Ideas:"
+            }, void 0, false, {
+                fileName: "src/components/pos.js",
+                lineNumber: 4,
+                columnNumber: 8
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                    children: "CRUD Google Cloud SQL Database"
+                }, void 0, false, {
+                    fileName: "src/components/pos.js",
+                    lineNumber: 6,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "src/components/pos.js",
+                lineNumber: 5,
+                columnNumber: 8
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/pos.js",
         lineNumber: 2,
         columnNumber: 12
     }, this);
 }
-_c = Actions;
-exports.default = Actions;
+_c = POs;
+exports.default = POs;
 var _c;
-$RefreshReg$(_c, "Actions");
+$RefreshReg$(_c, "POs");
 
-  $parcel$ReactRefreshHelpers$556a.postlude(module);
+  $parcel$ReactRefreshHelpers$9f3b.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"dN4Ui":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$fb67 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$fb67.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+function Inventory() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                children: "Inventory..."
+            }, void 0, false, {
+                fileName: "src/components/inventory.js",
+                lineNumber: 3,
+                columnNumber: 8
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                children: "Ideas:"
+            }, void 0, false, {
+                fileName: "src/components/inventory.js",
+                lineNumber: 4,
+                columnNumber: 8
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {}, void 0, false, {
+                    fileName: "src/components/inventory.js",
+                    lineNumber: 6,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "src/components/inventory.js",
+                lineNumber: 5,
+                columnNumber: 8
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/inventory.js",
+        lineNumber: 2,
+        columnNumber: 12
+    }, this);
+}
+_c = Inventory;
+exports.default = Inventory;
+var _c;
+$RefreshReg$(_c, "Inventory");
+
+  $parcel$ReactRefreshHelpers$fb67.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"9eCzN":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$e710 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$e710.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+function Appusers() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                children: "AppUsers Page..."
+            }, void 0, false, {
+                fileName: "src/components/appusers.js",
+                lineNumber: 3,
+                columnNumber: 8
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                children: "Ideas:"
+            }, void 0, false, {
+                fileName: "src/components/appusers.js",
+                lineNumber: 4,
+                columnNumber: 8
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                        children: "Google API admin console"
+                    }, void 0, false, {
+                        fileName: "src/components/appusers.js",
+                        lineNumber: 6,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                        children: "CRUD Google Workspace Users"
+                    }, void 0, false, {
+                        fileName: "src/components/appusers.js",
+                        lineNumber: 7,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                        children: "CRUD Google Cloud SQL Database"
+                    }, void 0, false, {
+                        fileName: "src/components/appusers.js",
+                        lineNumber: 8,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/appusers.js",
+                lineNumber: 5,
+                columnNumber: 8
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/appusers.js",
+        lineNumber: 2,
+        columnNumber: 12
+    }, this);
+}
+_c = Appusers;
+exports.default = Appusers;
+var _c;
+$RefreshReg$(_c, "Appusers");
+
+  $parcel$ReactRefreshHelpers$e710.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
@@ -32408,7 +32665,7 @@ function Tutorials() {
                 lineNumber: 3,
                 columnNumber: 8
             }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                 children: "Ideas:"
             }, void 0, false, {
                 fileName: "src/components/tutorials.js",
@@ -32418,17 +32675,24 @@ function Tutorials() {
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
-                        children: "Build simple API in script.google.com"
+                        children: "Build simple API with script.google.com"
                     }, void 0, false, {
                         fileName: "src/components/tutorials.js",
                         lineNumber: 6,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
-                        children: "GET / POST / PATCH options"
+                        children: "Form to GET / POST / PATCH options"
                     }, void 0, false, {
                         fileName: "src/components/tutorials.js",
                         lineNumber: 7,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                        children: "Display in HTML table"
+                    }, void 0, false, {
+                        fileName: "src/components/tutorials.js",
+                        lineNumber: 8,
                         columnNumber: 9
                     }, this)
                 ]
