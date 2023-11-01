@@ -1,6 +1,6 @@
 function Home() {
     return <div>
-       <h1> Home Sin Sign In...</h1>
+       <h1>Welcome to React_Clasp</h1>
     </div>
 }
 

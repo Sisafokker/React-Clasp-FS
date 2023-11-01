@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #000;
+  font-size: 24px;
+}
+
+p {
+  color: gray;
+  font-size: 16px;
+}
+
+#signInDiv {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.button, input[type="submit"] {
+  width: 100%;
+  margin-top: 10px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #000;
+  font-size: 24px;
+}
+
+p {
+  color: gray;
+  font-size: 16px;
+}
+
+#signInDiv {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.button, input[type="submit"] {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/*# sourceMappingURL=index.9a80af9b.css.map */
