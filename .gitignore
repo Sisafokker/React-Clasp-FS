@@ -1,6 +1,11 @@
 # Dependencies
-node_modules/
 .parcel-cache/
+
+node_modules/
+package-lock.json
+
+backend/node_modules/
+backend/package-lock.json
 
 #Keys (Ids and Secrets without "")
 .env

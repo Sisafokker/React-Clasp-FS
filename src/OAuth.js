@@ -60,7 +60,7 @@ function OAuth() {
                                 Authorization: `Bearer ${tokenResponse.access_token}`
                             },
                             body: JSON.stringify({
-                                name: "CooperCodes_ReactAppFile",
+                                name: "ReactAppFile",
                                 mimeType: "text/plain"
                             })
                         });
