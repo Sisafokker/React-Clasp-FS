@@ -20,62 +20,64 @@ function OAuth() {
 
     // useEffect hook to handle component initialization and cleanup
     useEffect(() => {
-        // Initialize Google Sign-In and set up event handlers
-        console.log("👍App initialized")
-
-        // Check if user data exists in local storage
-        const storedUser = localStorage.getItem("user");
-
-        // If user data exists, set the user state with the stored data
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-            document.getElementById("googleLogIn").style.display = "none";
-            //document.getElementById("googleLogIn").hidden = true;
-           } else {
-            // If no user data is found, prompt for Google Sign-In
-            window.google.accounts.id.prompt();
-        }
-
-        window.google.accounts.id.initialize({
-            client_id: CLIENT_ID,
-            callback: handleCallbackResponse
-        });
-
-        // Render Google Sign-In button
-        window.google.accounts.id.renderButton(document.getElementById("googleLogIn"), {
-            theme: "outline", size: 'large', width: 250
-        });
-
-        // Set up the token client for accessing Google Drive API
-        setTokenClient(
-            window.google.accounts.oauth2.initTokenClient({
-                client_id: CLIENT_ID,
-                scope: SCOPES,
-                callback: tokenResponse => {
-                    if (tokenResponse && tokenResponse.access_token) {
-                        fetch("https://www.googleapis.com/drive/v3/files", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: `Bearer ${tokenResponse.access_token}`
-                            },
-                            body: JSON.stringify({
-                                name: "ReactAppFile",
-                                mimeType: "text/plain"
-                            })
-                        });
-                    }
+        const initializeGoogleSignIn = () => {
+            if (window.google && window.google.accounts) {
+                // Google API is loaded, proceed with initialization
+                console.log("👍App initialized");
+                const storedUser = localStorage.getItem("user");
+                if (storedUser) {
+                    setUser(JSON.parse(storedUser));
+                    document.getElementById("googleLogIn").style.display = "none";
+                } else {
+                    window.google.accounts.id.prompt();
                 }
-            })
-        );
 
+                window.google.accounts.id.initialize({
+                    client_id: CLIENT_ID,
+                    callback: handleCallbackResponse
+                });
 
+                window.google.accounts.id.renderButton(document.getElementById("googleLogIn"), {
+                    theme: "outline",
+                    size: 'large',
+                    width: 250
+                });
+
+                setTokenClient(
+                    window.google.accounts.oauth2.initTokenClient({
+                        client_id: CLIENT_ID,
+                        scope: SCOPES,
+                        callback: tokenResponse => {
+                            if (tokenResponse && tokenResponse.access_token) {
+                                fetch("https://www.googleapis.com/drive/v3/files", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        Authorization: `Bearer ${tokenResponse.access_token}`
+                                    },
+                                    body: JSON.stringify({
+                                        name: "ReactAppFile",
+                                        mimeType: "text/plain"
+                                    })
+                                });
+                            }
+                        }
+                    })
+                );
+            } else {
+                setTimeout(initializeGoogleSignIn, 50); // Wait and try initializeGoogleSignIn again
+            }
+        };
+
+        // Initialize the entire process
+        initializeGoogleSignIn();
 
         // Clean-up logic when the component is unmounted
         return () => {
             // Cleanup logic, if needed
         };
     }, []); // The empty dependency array ensures that this effect runs once after the initial render
+    
 
     // Handle the response from Google Sign-In callback
     function handleCallbackResponse(response) {
@@ -101,7 +103,7 @@ function OAuth() {
     function handleSignOut(e) {
         console.log("👍handleSignOut")
 
-         // Clear user data from local storage
+        // Clear user data from local storage
         localStorage.removeItem("user");
 
         // Clear user data from component state
@@ -125,30 +127,30 @@ function OAuth() {
     // Render the OAuth component
     return (
         <div className="auth-wrapper">
-          <div id="googleLogIn" className="google-login"></div>
-          {Object.keys(user).length !== 0 && ( // Conditionally render content if user data is available
-            <div className="user-nav-wrapper">
-                <div className="user-info">
-                <div className="user-details">
-                    <img className="user-avatar" src={user.picture} alt="User" />
-                    <div className="user-text">
-                    <h3>{user.name}</h3>
-                    <p>{user.email}</p>
-                    <div className="sign-out">
-                        <button className="sign-out-button" onClick={e => handleSignOut(e)}>Sign Out</button>
+            <div id="googleLogIn" className="google-login"></div>
+            {Object.keys(user).length !== 0 && ( // Conditionally render content if user data is available
+                <div className="user-nav-wrapper">
+                    <div className="user-info">
+                        <div className="user-details">
+                            <img className="user-avatar" src={user.picture} alt="User" />
+                            <div className="user-text">
+                                <h3>{user.name}</h3>
+                                <p>{user.email}</p>
+                                <div className="sign-out">
+                                    <button className="sign-out-button" onClick={e => handleSignOut(e)}>Sign Out</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
-                </div>
-                <Nav />
-   {/*              <div className="others">
+                    <Nav />
+                    {/*              <div className="others">
                     <input className="create-file-button" type="submit" onClick={createDriveFile} value="Create File" />
                 </div> */}
-            </div>
-          )}
+                </div>
+            )}
         </div>
-      );
-      
+    );
+
 }
 
 export default OAuth;
