@@ -1,7 +1,7 @@
 {
-  "name": "webappreact",
+  "name": "React Project",
   "version": "1.0.0",
-  "description": "",
+  "description": "JP's Bottega React Project",
   "scripts": {
     "glogin": "clasp login",
     "glogout": "clasp logout",
@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@react-oauth/google": "^0.11.1",
+    "axios": "^1.6.0",
     "dotenv": "^16.3.1",
     "google-auth-library": "^9.2.0",
     "jwt-decode": "^4.0.0",

@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-//import ReactDOM from "react-dom";
+//require('dotenv').config(); // Needed for process.env to work outside of react.
 import App from "./App";
 
 const container = document.getElementById("app");

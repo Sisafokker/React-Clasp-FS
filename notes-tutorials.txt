@@ -8,6 +8,7 @@ Get Access Token For Google Identity Services Login (Google Identity Services Ac
 Google Authentication vs Authorization: https://www.youtube.com/watch?v=zZt8SFivjps&list=PLNYkxOF6rcIBQCKXOfi4AUtSpMj78pX5f&index=3
 How to OAuth 2.0 Authorization with Postman | Generate Google Access Token in Postman | Step By Step: https://www.youtube.com/watch?v=zHfR96IZECQ
 How to deploy React App on Google Cloud?: https://www.youtube.com/watch?v=OS0o1icJIZA
+Google Sheets - JSON API, Wep App: https://www.youtube.com/watch?v=VPI27L_fQC4&list=PLRmEk9smitaVGAAhgU0Pdc2sEs7yxDrEk
 
 ❌Didnt work:
 Creating Documents using React / Google Docs API / Google OAuth 2.0: https://www.youtube.com/watch?v=0KoZSVnTnkA

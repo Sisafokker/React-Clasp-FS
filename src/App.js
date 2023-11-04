@@ -2,6 +2,9 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
 // Styles
 import "./styles/main.scss";
 
@@ -14,12 +17,46 @@ import Inventory from "./components/inventory";
 import AppUsers from "./components/appusers";
 import Tutorials from "./components/tutorials";
 
+const PORT = process.env.REACT_APP_PORT || 3001;
 
 function App() {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        // Make API Request to Fetch Data from Backend Server
+        axios.get(`http://localhost:${PORT}/api/students`)
+          .then(response => {
+            setData(response.data);
+            console.log("students 👍", response.data)
+          })
+          .catch(error => {
+            console.error(error);
+          });
+
+          axios.get(`http://localhost:${PORT}/api/professors`)
+          .then(response => {
+            setData(response.data);
+            console.log("professors 👍", response.data)
+          })
+          .catch(error => {
+            console.error(error);
+          });
+
+          axios.get(`http://localhost:${PORT}/api/courses`)
+          .then(response => {
+            setData(response.data);
+            console.log("courses 👍", response.data)
+          })
+          .catch(error => {
+            console.error(error);
+          });
+
+      }, []);
+
     return (
         <div className="container">
             <OAuth />
-
+            <h1>{process.env.REACT_APP_PORT}</h1>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="customers" element={<Customers />} />
