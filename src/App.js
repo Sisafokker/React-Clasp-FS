@@ -56,7 +56,6 @@ function App() {
     return (
         <div className="container">
             <OAuth />
-            <h1>{process.env.REACT_APP_PORT}</h1>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="customers" element={<Customers />} />

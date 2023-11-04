@@ -31903,7 +31903,7 @@ var _appusersDefault = parcelHelpers.interopDefault(_appusers);
 var _tutorials = require("./components/tutorials");
 var _tutorialsDefault = parcelHelpers.interopDefault(_tutorials);
 var _s = $RefreshSig$();
-const PORT = "3001";
+const PORT = "5000";
 function App() {
     _s();
     const [data, setData] = (0, _react.useState)([]);
@@ -31936,13 +31936,6 @@ function App() {
                 lineNumber: 58,
                 columnNumber: 13
             }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                children: "3001"
-            }, void 0, false, {
-                fileName: "src/App.js",
-                lineNumber: 59,
-                columnNumber: 13
-            }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31950,7 +31943,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 61,
+                        lineNumber: 60,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31958,7 +31951,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _customersDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 62,
+                        lineNumber: 61,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31966,7 +31959,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _posDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 63,
+                        lineNumber: 62,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31974,7 +31967,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inventoryDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 64,
+                        lineNumber: 63,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31982,7 +31975,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appusersDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 65,
+                        lineNumber: 64,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31990,7 +31983,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _tutorialsDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 66,
+                        lineNumber: 65,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -32000,13 +31993,13 @@ function App() {
                         }, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 67,
+                        lineNumber: 66,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/App.js",
-                lineNumber: 60,
+                lineNumber: 59,
                 columnNumber: 13
             }, this)
         ]
@@ -36600,45 +36593,45 @@ function OAuth() {
     const navigate = (0, _reactRouterDom.useNavigate)();
     // useEffect hook to handle component initialization and cleanup
     (0, _react.useEffect)(()=>{
-        // Initialize Google Sign-In and set up event handlers
-        console.log("\uD83D\uDC4DApp initialized");
-        // Check if user data exists in local storage
-        const storedUser = localStorage.getItem("user");
-        // If user data exists, set the user state with the stored data
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-            document.getElementById("googleLogIn").style.display = "none";
-        //document.getElementById("googleLogIn").hidden = true;
-        } else // If no user data is found, prompt for Google Sign-In
-        window.google.accounts.id.prompt();
-        window.google.accounts.id.initialize({
-            client_id: CLIENT_ID,
-            callback: handleCallbackResponse
-        });
-        // Render Google Sign-In button
-        window.google.accounts.id.renderButton(document.getElementById("googleLogIn"), {
-            theme: "outline",
-            size: "large",
-            width: 250
-        });
-        // Set up the token client for accessing Google Drive API
-        setTokenClient(window.google.accounts.oauth2.initTokenClient({
-            client_id: CLIENT_ID,
-            scope: SCOPES,
-            callback: (tokenResponse)=>{
-                if (tokenResponse && tokenResponse.access_token) fetch("https://www.googleapis.com/drive/v3/files", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${tokenResponse.access_token}`
-                    },
-                    body: JSON.stringify({
-                        name: "ReactAppFile",
-                        mimeType: "text/plain"
-                    })
+        const initializeGoogleSignIn = ()=>{
+            if (window.google && window.google.accounts) {
+                // Google API is loaded, proceed with initialization
+                console.log("\uD83D\uDC4DApp initialized");
+                const storedUser = localStorage.getItem("user");
+                if (storedUser) {
+                    setUser(JSON.parse(storedUser));
+                    document.getElementById("googleLogIn").style.display = "none";
+                } else window.google.accounts.id.prompt();
+                window.google.accounts.id.initialize({
+                    client_id: CLIENT_ID,
+                    callback: handleCallbackResponse
                 });
-            }
-        }));
+                window.google.accounts.id.renderButton(document.getElementById("googleLogIn"), {
+                    theme: "outline",
+                    size: "large",
+                    width: 250
+                });
+                setTokenClient(window.google.accounts.oauth2.initTokenClient({
+                    client_id: CLIENT_ID,
+                    scope: SCOPES,
+                    callback: (tokenResponse)=>{
+                        if (tokenResponse && tokenResponse.access_token) fetch("https://www.googleapis.com/drive/v3/files", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: `Bearer ${tokenResponse.access_token}`
+                            },
+                            body: JSON.stringify({
+                                name: "ReactAppFile",
+                                mimeType: "text/plain"
+                            })
+                        });
+                    }
+                }));
+            } else setTimeout(initializeGoogleSignIn, 50); // Wait and try initializeGoogleSignIn again
+        };
+        // Initialize the entire process
+        initializeGoogleSignIn();
         // Clean-up logic when the component is unmounted
         return ()=>{
         // Cleanup logic, if needed
@@ -36687,8 +36680,8 @@ function OAuth() {
                 className: "google-login"
             }, void 0, false, {
                 fileName: "src/OAuth.js",
-                lineNumber: 128,
-                columnNumber: 11
+                lineNumber: 130,
+                columnNumber: 13
             }, this),
             Object.keys(user).length !== 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "user-nav-wrapper",
@@ -36704,8 +36697,8 @@ function OAuth() {
                                     alt: "User"
                                 }, void 0, false, {
                                     fileName: "src/OAuth.js",
-                                    lineNumber: 133,
-                                    columnNumber: 21
+                                    lineNumber: 135,
+                                    columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                     className: "user-text",
@@ -36714,15 +36707,15 @@ function OAuth() {
                                             children: user.name
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 135,
-                                            columnNumber: 21
+                                            lineNumber: 137,
+                                            columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                             children: user.email
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 136,
-                                            columnNumber: 21
+                                            lineNumber: 138,
+                                            columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                             className: "sign-out",
@@ -36732,46 +36725,46 @@ function OAuth() {
                                                 children: "Sign Out"
                                             }, void 0, false, {
                                                 fileName: "src/OAuth.js",
-                                                lineNumber: 138,
-                                                columnNumber: 25
+                                                lineNumber: 140,
+                                                columnNumber: 37
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 137,
-                                            columnNumber: 21
+                                            lineNumber: 139,
+                                            columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/OAuth.js",
-                                    lineNumber: 134,
-                                    columnNumber: 21
+                                    lineNumber: 136,
+                                    columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/OAuth.js",
-                            lineNumber: 132,
-                            columnNumber: 17
+                            lineNumber: 134,
+                            columnNumber: 25
                         }, this)
                     }, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 131,
-                        columnNumber: 17
+                        lineNumber: 133,
+                        columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navDefault.default), {}, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 143,
-                        columnNumber: 17
+                        lineNumber: 145,
+                        columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/OAuth.js",
-                lineNumber: 130,
-                columnNumber: 13
+                lineNumber: 132,
+                columnNumber: 17
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/OAuth.js",
-        lineNumber: 127,
+        lineNumber: 129,
         columnNumber: 9
     }, this);
 }
@@ -37118,59 +37111,122 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _appusersform = require("./appusersform");
+var _appusersformDefault = parcelHelpers.interopDefault(_appusersform);
+var _s = $RefreshSig$();
 function Appusers() {
+    _s();
+    const [app_users, setApp_users] = (0, _react.useState)([]);
+    (0, _react.useEffect)(()=>{
+        // Make API Request to Fetch Student Data
+        (0, _axiosDefault.default).get(`http://localhost:${"5000"}/api/students`).then((response)=>{
+            setApp_users(response.data);
+        }).catch((error)=>{
+            console.error(error);
+        });
+    }, []);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                children: "AppUsers Page..."
-            }, void 0, false, {
-                fileName: "src/components/appusers.js",
-                lineNumber: 3,
-                columnNumber: 8
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
-                children: "Ideas:"
-            }, void 0, false, {
-                fileName: "src/components/appusers.js",
-                lineNumber: 4,
-                columnNumber: 8
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
-                        children: "Google API admin console"
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                        children: "AppUsers Page..."
                     }, void 0, false, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 6,
-                        columnNumber: 9
+                        lineNumber: 21,
+                        columnNumber: 8
                     }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
-                        children: "CRUD Google Workspace Users"
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                        children: "Ideas:"
                     }, void 0, false, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 7,
-                        columnNumber: 9
+                        lineNumber: 22,
+                        columnNumber: 8
                     }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
-                        children: "CRUD Google Cloud SQL Database"
-                    }, void 0, false, {
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                children: "Google API admin console"
+                            }, void 0, false, {
+                                fileName: "src/components/appusers.js",
+                                lineNumber: 24,
+                                columnNumber: 9
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                children: "CRUD Google Workspace Users"
+                            }, void 0, false, {
+                                fileName: "src/components/appusers.js",
+                                lineNumber: 25,
+                                columnNumber: 9
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                children: "CRUD Google Cloud SQL Database"
+                            }, void 0, false, {
+                                fileName: "src/components/appusers.js",
+                                lineNumber: 26,
+                                columnNumber: 9
+                            }, this)
+                        ]
+                    }, void 0, true, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 8,
-                        columnNumber: 9
+                        lineNumber: 23,
+                        columnNumber: 8
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/appusers.js",
-                lineNumber: 5,
-                columnNumber: 8
+                lineNumber: 20,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                        children: "SQL AppUsers List"
+                    }, void 0, false, {
+                        fileName: "src/components/appusers.js",
+                        lineNumber: 30,
+                        columnNumber: 7
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appusersformDefault.default), {}, void 0, false, {
+                        fileName: "src/components/appusers.js",
+                        lineNumber: 31,
+                        columnNumber: 7
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+                        children: app_users.map((u)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                children: [
+                                    u.students_firstName,
+                                    " ",
+                                    u.students_lastName
+                                ]
+                            }, u.students_id, true, {
+                                fileName: "src/components/appusers.js",
+                                lineNumber: 34,
+                                columnNumber: 11
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "src/components/appusers.js",
+                        lineNumber: 32,
+                        columnNumber: 7
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/appusers.js",
+                lineNumber: 29,
+                columnNumber: 5
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/appusers.js",
-        lineNumber: 2,
+        lineNumber: 19,
         columnNumber: 12
     }, this);
 }
+_s(Appusers, "sxEn2dRrnmrHL5VT7RJftgGM+WM=");
 _c = Appusers;
 exports.default = Appusers;
 var _c;
@@ -37181,7 +37237,140 @@ $RefreshReg$(_c, "Appusers");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"kz8Tg":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","axios":"jo6P5","react":"21dqq","./appusersform":"37Jh8"}],"37Jh8":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$2897 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$2897.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _s = $RefreshSig$();
+const AppUsersForm = ()=>{
+    _s();
+    const [firstName, setFirstName] = (0, _react.useState)("");
+    const [lastName, setLastName] = (0, _react.useState)("");
+    const [email, setEmail] = (0, _react.useState)("");
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        // Make API Request to Add AppUser
+        (0, _axiosDefault.default).post(`http://localhost:${"5000"}/api/students`, {
+            firstName: firstName,
+            lastName: lastName,
+            email: email
+        }).then((response)=>{
+            console.log("AppUser added successfully:", response.data);
+        // Handle success, e.g., redirect to the appusers list page
+        }).catch((error)=>{
+            console.error(error);
+        // Handle error, show error message to the user
+        });
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                children: "Add AppUser"
+            }, void 0, false, {
+                fileName: "src/components/appusersform.js",
+                lineNumber: 29,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+                onSubmit: handleSubmit,
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                        children: [
+                            "First Name:",
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                type: "text",
+                                value: firstName,
+                                onChange: (e)=>setFirstName(e.target.value)
+                            }, void 0, false, {
+                                fileName: "src/components/appusersform.js",
+                                lineNumber: 33,
+                                columnNumber: 11
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/appusersform.js",
+                        lineNumber: 31,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                        children: [
+                            "Last Name:",
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                type: "text",
+                                value: lastName,
+                                onChange: (e)=>setLastName(e.target.value)
+                            }, void 0, false, {
+                                fileName: "src/components/appusersform.js",
+                                lineNumber: 37,
+                                columnNumber: 11
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/appusersform.js",
+                        lineNumber: 35,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                        children: [
+                            "Email:",
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                type: "text",
+                                value: email,
+                                onChange: (e)=>setEmail(e.target.value)
+                            }, void 0, false, {
+                                fileName: "src/components/appusersform.js",
+                                lineNumber: 41,
+                                columnNumber: 11
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/appusersform.js",
+                        lineNumber: 39,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        type: "submit",
+                        children: "Add AppUser"
+                    }, void 0, false, {
+                        fileName: "src/components/appusersform.js",
+                        lineNumber: 43,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/appusersform.js",
+                lineNumber: 30,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/appusersform.js",
+        lineNumber: 28,
+        columnNumber: 5
+    }, undefined);
+};
+_s(AppUsersForm, "wShrMBcK0848S6z1mzSI0GoJuBE=");
+_c = AppUsersForm;
+exports.default = AppUsersForm;
+var _c;
+$RefreshReg$(_c, "AppUsersForm");
+
+  $parcel$ReactRefreshHelpers$2897.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"kz8Tg":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$0b6a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
