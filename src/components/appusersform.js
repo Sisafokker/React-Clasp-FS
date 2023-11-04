@@ -10,9 +10,9 @@ const AppUsersForm = () => {
     e.preventDefault();
     // Make API Request to Add AppUser
     axios.post(`http://localhost:${process.env.REACT_APP_PORT}/api/students`, {
-      firstName: firstName,
-      lastName: lastName,
-      email: email
+        students_firstName: firstName,
+        students_lastName: lastName,
+        students_email: email
     })
       .then(response => {
         console.log('AppUser added successfully:', response.data);

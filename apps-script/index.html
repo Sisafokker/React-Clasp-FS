@@ -37199,9 +37199,12 @@ function Appusers() {
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
                         children: app_users.map((u)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                 children: [
+                                    u.students_lastName,
+                                    ", ",
                                     u.students_firstName,
-                                    " ",
-                                    u.students_lastName
+                                    " \uD83D\uDCE7 ",
+                                    u.students_email,
+                                    " "
                                 ]
                             }, u.students_id, true, {
                                 fileName: "src/components/appusers.js",
@@ -37261,9 +37264,9 @@ const AppUsersForm = ()=>{
         e.preventDefault();
         // Make API Request to Add AppUser
         (0, _axiosDefault.default).post(`http://localhost:${"5000"}/api/students`, {
-            firstName: firstName,
-            lastName: lastName,
-            email: email
+            students_firstName: firstName,
+            students_lastName: lastName,
+            students_email: email
         }).then((response)=>{
             console.log("AppUser added successfully:", response.data);
         // Handle success, e.g., redirect to the appusers list page

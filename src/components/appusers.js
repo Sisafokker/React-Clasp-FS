@@ -31,7 +31,7 @@ function Appusers() {
       <AppUsersForm />
       <ul>
         {app_users.map(u => (
-          <li key={u.students_id}>{u.students_firstName} {u.students_lastName}</li>
+          <li key={u.students_id}>{u.students_lastName}, {u.students_firstName} 📧 {u.students_email} </li>
         ))}
       </ul>
     </div>
