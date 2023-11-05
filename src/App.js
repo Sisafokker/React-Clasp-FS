@@ -20,54 +20,58 @@ import Tutorials from "./components/tutorials";
 const PORT = process.env.REACT_APP_PORT || 3001;
 
 function App() {
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-        // Make API Request to Fetch Data from Backend Server
-        axios.get(`http://localhost:${PORT}/api/students`)
-          .then(response => {
-            setData(response.data);
-            console.log("students 👍", response.data)
-          })
-          .catch(error => {
-            console.error(error);
-          });
+  useEffect(() => {
+    allGetRequests()
+  }, []);
 
-          axios.get(`http://localhost:${PORT}/api/professors`)
-          .then(response => {
-            setData(response.data);
-            console.log("professors 👍", response.data)
-          })
-          .catch(error => {
-            console.error(error);
-          });
+  const allGetRequests = () => {
+    // All API Fetch Requests from SQL Backend
+    axios.get(`http://localhost:${PORT}/api/students`)
+      .then(response => {
+        setData(response.data);
+        console.log("👍students")//, response.data)
+      })
+      .catch(error => {
+        console.error(error);
+      });
 
-          axios.get(`http://localhost:${PORT}/api/courses`)
-          .then(response => {
-            setData(response.data);
-            console.log("courses 👍", response.data)
-          })
-          .catch(error => {
-            console.error(error);
-          });
+    axios.get(`http://localhost:${PORT}/api/professors`)
+      .then(response => {
+        setData(response.data);
+        console.log("👍professors")//, response.data)
+      })
+      .catch(error => {
+        console.error(error);
+      });
 
-      }, []);
+    axios.get(`http://localhost:${PORT}/api/courses`)
+      .then(response => {
+        setData(response.data);
+        console.log("👍courses")//, response.data)
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
-    return (
-        <div className="container">
-            <OAuth />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="customers" element={<Customers />} />
-                <Route path="pos" element={<POs />} />
-                <Route path="inventory" element={<Inventory />} />
-                <Route path="appusers" element={<AppUsers />} />
-                <Route path="tutorials" element={<Tutorials />} />
-                <Route path="*" element={<Navigate to="/"/>} />
-            </Routes>
 
-        </div>
-    );
+  return (
+    <div className="container">
+      <OAuth />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="customers" element={<Customers />} />
+        <Route path="pos" element={<POs />} />
+        <Route path="inventory" element={<Inventory />} />
+        <Route path="appusers" element={<AppUsers />} />
+        <Route path="tutorials" element={<Tutorials />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+
+    </div>
+  );
 }
 
 export default App;
