@@ -31,6 +31,14 @@ input[type="submit"] {
     margin-top: 5px;
 }
 
+.successWarning{
+    color: $success;
+}
+
+.errorWarning{
+    color: $warning;
+}
+
 // Mobile-friendly using media queries
 // Styles for Small Screens
 @media screen and (max-width: 768px) {

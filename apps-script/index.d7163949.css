@@ -56,6 +56,14 @@ p {
   margin-top: 5px;
 }
 
+.successWarning {
+  color: #3d9900;
+}
+
+.errorWarning {
+  color: #ff3030;
+}
+
 @media screen and (width <= 768px) {
   .container {
     background-color: #add8e6;
@@ -96,7 +104,7 @@ p {
 }
 
 .user-info .sign-out-button:hover {
-  background-color: #207b88;
+  background-color: #248897;
 }
 
 .user-info .user-details {
@@ -146,7 +154,7 @@ p {
 }
 
 .nav-wrapper .nav-link:hover {
-  color: #207b88;
+  color: #248897;
 }
 
 .nav-wrapper .nav-link:not(:last-child) {
