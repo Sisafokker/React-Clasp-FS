@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
-
 import AppusersForm from "./appusersform";
+
+// styles
+import "../styles/main.scss";
+import "../styles/appusers-table.scss";
 
 function Appusers() {
     const [app_users, setApp_users] = useState([]);
@@ -44,23 +47,27 @@ function Appusers() {
     };
     
     return <div>
-        <div>
-            <h1>AppUsers Page...</h1>
-            <h3>Ideas:</h3>
-            <ul>
-                <li>CRUD Google Cloud SQL Database</li>
-                <li>Google API admin console</li>
-                <li>CRUD Google Workspace Users</li>
-            </ul>
+        <h1>AppUsers Page...</h1>
+        <div className='tasks-wrapper'>
+            <div>
+                <h3>Methods:</h3>
+                <ul>
+                    <li>CRUD Google Cloud SQL Database</li>
+                    <li>Google API admin console</li>
+                    <li>CRUD Google Workspace Users</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Pending:</h3>
+                <ul>
+                    <li>Sorting before rendering</li>
+                    <li>Sorting Table by Column</li>
+                </ul>
+            </div>
         </div>
         <div>
             <AppusersForm prop_handleUserAction={handleUserAction} prop_selectedUser={selectedUser} prop_action={action}/>
-            <h1>[SQL] Current AppUsers:</h1>
-{/*             <ul>
-                {app_users.map(u => (
-                    <li key={u.students_id}>{u.students_lastName}, {u.students_firstName} 📧 {u.students_email} </li>
-                ))}
-            </ul> */}
+            <h2>[SQL] Current AppUsers:</h2>
             <table>
                     <thead>
                         <tr>

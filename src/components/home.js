@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../Context";
+//import React from "react";
 import "../styles/home.scss";
 
 function Home() {
+  const {user, setUser} = useContext(Context);
+
   return (
     <div className="home-wrapper"> {/* Add className for styling */}
+      {user && <h1>{user.name}</h1>}
       <h1>Welcome to React_Clasp</h1>
       <h3>Please Sign In to continue</h3>
       <img className="custom-image"

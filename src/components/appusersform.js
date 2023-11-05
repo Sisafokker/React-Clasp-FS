@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// styles
+import "../styles/appusers-form.scss";
+
 const AppusersForm = ({ prop_handleUserAction, prop_selectedUser, prop_action }) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -99,29 +102,31 @@ const AppusersForm = ({ prop_handleUserAction, prop_selectedUser, prop_action })
     return (
         <div>
             <h2>[SQL] Add AppUser</h2>
-            <form onSubmit={handleFormSubmit}>
-                <div>
-                    <label>
-                        First Name:
-                        <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                    </label>
-                    <label>
-                        Last Name:
-                        <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Email:
-                        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-                    </label>
-                </div>
-                <div>
-                    {formError && <div className='errorWarning'>{formError}</div>}
-                    {formSuccess && <div className='successWarning'>{formSuccess}</div>}
-                    {showButton && <button className='button' type="submit">{btnText}</button>}
-                </div>
-            </form>
+            <div className="form-container">
+                <form onSubmit={handleFormSubmit}>
+                    <div>
+                        <label>
+                            First Name:
+                            <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                        </label>
+                        <label>
+                            Last Name:
+                            <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Email:
+                            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </label>
+                    </div>
+                    <div>
+                        {formError && <div className='errorWarning'>{formError}</div>}
+                        {formSuccess && <div className='successWarning'>{formSuccess}</div>}
+                        {showButton && <button className='button' type="submit">{btnText}</button>}
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };

@@ -1,5 +1,7 @@
+// OAuth.js
 // Dependencies
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { Context } from "./Context";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom"; // useNavigate Hook
 
@@ -11,9 +13,10 @@ import Nav from "./components/nav";
 
 const SCOPES = "https://www.googleapis.com/auth/drive";
 
-function OAuth() {
+function OAuth({ prop_renderRoutes }) {
     // State variables to manage user data and token client
-    const [user, setUser] = useState({});
+    const { user, setUser } = useContext(Context);
+    //const [user, setUser] = useState({});
     const [tokenClient, setTokenClient] = useState({});
     const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
     const navigate = useNavigate();
@@ -24,7 +27,7 @@ function OAuth() {
             if (window.google && window.google.accounts) {
                 // Google API is loaded, proceed with initialization
                 console.log("👍App initialized");
-                const storedUser = localStorage.getItem("user");
+                const storedUser = localStorage.getItem("local_user");
                 if (storedUser) {
                     setUser(JSON.parse(storedUser));
                     document.getElementById("googleLogIn").style.display = "none";
@@ -72,9 +75,8 @@ function OAuth() {
         // Initialize the entire process
         initializeGoogleSignIn();
 
-        // Clean-up logic when the component is unmounted
         return () => {
-            // Cleanup logic, if needed
+            // Clean-up logic when the component is unmounted
         };
     }, []); // The empty dependency array ensures that this effect runs once after the initial render
     
@@ -93,10 +95,13 @@ function OAuth() {
         document.getElementById("googleLogIn").style.display = "none";
 
         // Save user data to local storage
-        localStorage.setItem("user", JSON.stringify(userObject));
+        localStorage.setItem("local_user", JSON.stringify(userObject));
 
-        // Move to: 
-        navigate("/customers");
+        // Render Routes after signin
+        prop_renderRoutes();
+
+         // Move to the desired route
+         navigate("/customers");
     }
 
     // Function to handle user sign-out
@@ -104,13 +109,13 @@ function OAuth() {
         console.log("👍handleSignOut")
 
         // Clear user data from local storage
-        localStorage.removeItem("user");
+        localStorage.removeItem("local_user");
 
         // Clear user data from component state
         setUser({});
 
         // Move to: 
-        navigate("/");
+        navigate("/home");
 
         // Show SignIn Div and Prompt
         document.getElementById("googleLogIn").style.display = "block";
