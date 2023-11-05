@@ -21,6 +21,7 @@ const PORT = process.env.REACT_APP_PORT || 3001;
 
 function App() {
   const [data, setData] = useState([]);
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   useEffect(() => {
     allGetRequests()
