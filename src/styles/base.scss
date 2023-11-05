@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -46,6 +48,11 @@ input[type="submit"] {
     &:hover {
         color: $dark-teal;
       }
+}
+
+.tasks-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 // Mobile-friendly using media queries
