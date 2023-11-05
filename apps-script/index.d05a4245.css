@@ -6,7 +6,7 @@ body {
 
 h1 {
   color: #000;
-  font-size: 24px;
+  font-size: 22px;
 }
 
 p {
@@ -28,6 +28,23 @@ p {
 .button, input[type="submit"] {
   width: 20%;
   margin-top: 5px;
+}
+
+.successWarning {
+  color: #3d9900;
+}
+
+.errorWarning {
+  color: #ff3030;
+}
+
+.clickable {
+  cursor: pointer;
+  color: #26bfd4;
+}
+
+.clickable:hover {
+  color: #1a6d7a;
 }
 
 @media screen and (width <= 768px) {
@@ -70,7 +87,7 @@ p {
 }
 
 .user-info .sign-out-button:hover {
-  background-color: #207b88;
+  background-color: #1a6d7a;
 }
 
 .user-info .user-details {
@@ -120,7 +137,7 @@ p {
 }
 
 .nav-wrapper .nav-link:hover {
-  color: #207b88;
+  color: #1a6d7a;
 }
 
 .nav-wrapper .nav-link:not(:last-child) {

@@ -5,7 +5,7 @@ body {
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 22px;
     color: black;
 }
 
@@ -37,6 +37,15 @@ input[type="submit"] {
 
 .errorWarning{
     color: $warning;
+}
+
+.clickable{
+    cursor: pointer;
+    color: $teal;
+
+    &:hover {
+        color: $dark-teal;
+      }
 }
 
 // Mobile-friendly using media queries
