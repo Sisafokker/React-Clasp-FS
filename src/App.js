@@ -17,7 +17,7 @@ import AppUsers from "./components/appusers";
 import Tutorials from "./components/tutorials";
 import { Context } from "./Context";
 
-const PORT = process.env.REACT_APP_PORT || 3001;
+//const PORT = process.env.REACT_APP_PORT || 3001;
 
 function App() {
   const context = useContext(Context) || { user: {}, setUser: () => {} };
@@ -31,31 +31,31 @@ function App() {
 
   const allGetRequests = () => {
     // All API Fetch Requests from SQL Backend
-    axios.get(`http://localhost:${PORT}/api/students`)
+    axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/users`)
       .then(response => {
         setData(response.data);
-        console.log("👍students")//, response.data)
+        console.log("👍get_users")//, response.data)
       })
       .catch(error => {
-        console.error(error);
+        console.error("❌get_users", error);
       });
 
-    axios.get(`http://localhost:${PORT}/api/professors`)
+      axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/companies`)
       .then(response => {
         setData(response.data);
-        console.log("👍professors")//, response.data)
+        console.log("👍get_companies")//, response.data)
       })
       .catch(error => {
-        console.error(error);
+        console.error("❌get_companies", error);
       });
 
-    axios.get(`http://localhost:${PORT}/api/courses`)
+      axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/contacts`)
       .then(response => {
         setData(response.data);
-        console.log("👍courses")//, response.data)
+        console.log("👍get_contacts")//, response.data)
       })
       .catch(error => {
-        console.error(error);
+        console.error("❌get_contacts", error);
       });
   }
 

@@ -4,19 +4,14 @@ require('dotenv').config({ path: path.join(__dirname, '../.env') }); // because 
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors'); // When your React app running on http://localhost:1234 tries to make a request to your Node.js server running on http://localhost:3001, the browser blocks the request due to CORS policy.
-const bodyParser = require('body-parser'); 
+const bodyParser = require('body-parser');
 const PORT = process.env.REACT_APP_PORT || 3001;
-
-// SQL Tables / Endpoints
-const students = 'students';
-const professors = 'professors';
-const courses = 'courses';
 
 // Initializes your Express application.
 const appExp = express();
 
 // Enable CORS for all routes
-appExp.use(cors()); 
+appExp.use(cors());
 
 // Use body-parser middleware to parse JSON requests
 appExp.use(bodyParser.json());
@@ -28,83 +23,83 @@ const pool = mysql.createPool({
   database: process.env.SQL_DATABASE
 });
 
-// Define API Endpoints
-appExp.get(`/api/${students}`, (req, res) => {
-  pool.query(`SELECT * FROM ${students}`, (error, results) => {
+// DEFINE API ENDPOINTS // --------------------------------------------------------------------------------------------------
+appExp.get('/api/users', (req, res) => {
+  pool.query('SELECT * FROM users', (error, results) => {
     if (error) {
       throw error;
     }
-    res.json(results);
+    res.status(200).json(results);
   });
 });
 
-appExp.post(`/api/${students}`, (req, res) => {
-  const { students_firstName, students_lastName, students_email } = req.body; // Destructure the parameters from the request body
-  const INSERT_STUDENT_QUERY = 'INSERT INTO students (students_firstName, students_lastName, students_email) VALUES (?, ?, ?)';
+appExp.post('/api/users', (req, res) => {
+  const { firstName, lastName, email, password, type } = req.body; // Destructure the parameters from the request body
+  const INSERT_USER_QUERY = 'INSERT INTO users (firstName, lastName, email, password, type) VALUES (?, ?, ?, ?, ?)';
 
   // Validate data & handle errors
 
-  pool.query(INSERT_STUDENT_QUERY, [students_firstName, students_lastName, students_email], (error, results) => {
+  pool.query(INSERT_USER_QUERY, [firstName, lastName, email, password, type], (error, results) => {
     if (error) {
       console.error(error);
       return res.status(500).json({ error: 'Internal server error' });
     }
     // Handle successful query execution with 'results' object
-    return res.status(201).json({ message: 'Student added successfully' });
+    return res.status(201).json({ message: 'User added successfully' });
   });
 });
 
-appExp.patch(`/api/${students}/:id`, (req, res) => {
+appExp.patch('/api/users/:id', (req, res) => {
   const id = req.params.id;
-  const { students_firstName, students_lastName, students_email } = req.body; // Destructure the updated user data from the request body
-  const UPDATE_STUDENT_QUERY = 'UPDATE students SET students_firstName=?, students_lastName=?, students_email=? WHERE students_id=?';
+  const { firstName, lastName, email, type, status } = req.body; // Destructure the updated user data from the request body
+  const UPDATE_USER_QUERY = 'UPDATE users SET firstName=?, lastName=?, email=?, type=?, status=? WHERE id=?';
 
   // Validate data & handle errors
 
-  pool.query(UPDATE_STUDENT_QUERY, [students_firstName, students_lastName, students_email, id], (error, results) => {
+  pool.query(UPDATE_USER_QUERY, [firstName, lastName, email, type, status, id], (error, results) => {
     if (error) {
       console.error(error);
       return res.status(500).json({ error: 'Internal server error' });
     }
     // Handle successful query execution with 'results' object
-    return res.status(200).json({ message: 'Student updated successfully' });
+    return res.status(200).json({ message: 'User updated successfully' });
   });
 });
 
-appExp.delete(`/api/${students}/:id`, (req, res) => {
+appExp.delete('/api/users/:id', (req, res) => {
   const id = req.params.id;
-  const DELETE_STUDENT_QUERY = 'DELETE FROM students WHERE students_id=?';
+  const DELETE_USER_QUERY = 'DELETE FROM users WHERE id=?';
 
   // Validate data & handle errors
 
-  pool.query(DELETE_STUDENT_QUERY, [id], (error, results) => {
+  pool.query(DELETE_USER_QUERY, [id], (error, results) => {
     if (error) {
       console.error(error);
       return res.status(500).json({ error: 'Internal server error' });
     }
     // Handle successful query execution with 'results' object
-    return res.status(200).json({ message: 'Student deleted successfully' });
+    return res.status(200).json({ message: 'User deleted successfully' });
   });
 });
 
-
-appExp.get(`/api/${professors}`, (req, res) => {
-  pool.query(`SELECT * FROM ${professors}`, (error, results) => {
+appExp.get('/api/contacts', (req, res) => {
+  pool.query('SELECT * FROM contacts', (error, results) => {
     if (error) {
       throw error;
     }
-    res.json(results);
+    res.status(200).json(results);
   });
 });
 
-appExp.get(`/api/${courses}`, (req, res) => {
-  pool.query(`SELECT * FROM ${courses}`, (error, results) => {
+appExp.get('/api/companies', (req, res) => {
+  pool.query('SELECT * FROM companies', (error, results) => {
     if (error) {
       throw error;
     }
-    res.json(results);
+    res.status(200).json(results);
   });
 });
+
 
 //Start the Server for specified PORT
 appExp.listen(PORT, () => {
