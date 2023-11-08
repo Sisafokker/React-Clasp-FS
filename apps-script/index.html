@@ -31750,7 +31750,7 @@ var _appusersDefault = parcelHelpers.interopDefault(_appusers);
 var _tutorials = require("./components/tutorials");
 var _tutorialsDefault = parcelHelpers.interopDefault(_tutorials);
 var _s = $RefreshSig$();
-const PORT = "5000";
+//const PORT = process.env.REACT_APP_PORT || 3001;
 function App() {
     _s();
     const context = (0, _react.useContext)((0, _context.Context)) || {
@@ -31765,26 +31765,26 @@ function App() {
     }, []);
     const allGetRequests = ()=>{
         // All API Fetch Requests from SQL Backend
-        (0, _axiosDefault.default).get(`http://localhost:${PORT}/api/students`).then((response)=>{
+        (0, _axiosDefault.default).get(`http://localhost:${"5000"}/api/users`).then((response)=>{
             setData(response.data);
-            console.log("\uD83D\uDC4Dstudents") //, response.data)
+            console.log("\uD83D\uDC4Dget_users") //, response.data)
             ;
         }).catch((error)=>{
-            console.error(error);
+            console.error("\u274Cget_users", error);
         });
-        (0, _axiosDefault.default).get(`http://localhost:${PORT}/api/professors`).then((response)=>{
+        (0, _axiosDefault.default).get(`http://localhost:${"5000"}/api/companies`).then((response)=>{
             setData(response.data);
-            console.log("\uD83D\uDC4Dprofessors") //, response.data)
+            console.log("\uD83D\uDC4Dget_companies") //, response.data)
             ;
         }).catch((error)=>{
-            console.error(error);
+            console.error("\u274Cget_companies", error);
         });
-        (0, _axiosDefault.default).get(`http://localhost:${PORT}/api/courses`).then((response)=>{
+        (0, _axiosDefault.default).get(`http://localhost:${"5000"}/api/contacts`).then((response)=>{
             setData(response.data);
-            console.log("\uD83D\uDC4Dcourses") //, response.data)
+            console.log("\uD83D\uDC4Dget_contacts") //, response.data)
             ;
         }).catch((error)=>{
-            console.error(error);
+            console.error("\u274Cget_contacts", error);
         });
     };
     const renderRoutes = ()=>{
@@ -37143,42 +37143,132 @@ var _appusersTableScss = require("../styles/appusers-table.scss");
 var _s = $RefreshSig$();
 function Appusers() {
     _s();
-    const [app_users, setApp_users] = (0, _react.useState)([]);
-    const [selectedUser, setSelectedUser] = (0, _react.useState)(null);
-    const [action, setAction] = (0, _react.useState)(null);
+    const [appUsers, setAppUsers] = (0, _react.useState)([]);
+    const [userAction, setUserAction] = (0, _react.useState)({
+        user: null,
+        action: null
+    });
     (0, _react.useEffect)(()=>{
         fetchAppUsers();
     }, []); // Fetch data on initial component mount
     // Get Student Data
-    const fetchAppUsers = ()=>{
-        (0, _axiosDefault.default).get(`http://localhost:${"5000"}/api/students`).then((response)=>{
-            setApp_users(response.data);
-            console.log("\uD83D\uDC4Dstudents");
-        }).catch((error)=>{
-            console.error(error);
+    const fetchAppUsers = (0, _react.useCallback)(()=>{
+        const url = `http://localhost:${"5000"}/api/users`;
+        (0, _axiosDefault.default).get(url).then((response)=>{
+            setAppUsers(response.data);
+            console.log("Fetched app users");
+        }).catch(console.error);
+    }, []);
+    // const fetchAppUsers = () => {
+    //     axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/users`)
+    //         .then(response => {
+    //             setApp_users(response.data);
+    //             console.log("👍students")
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
+    // };
+    // After a new user is added / edited / removed
+    const handleUserAction = (0, _react.useCallback)(()=>{
+        fetchAppUsers();
+    }, [
+        fetchAppUsers
+    ]);
+    const handleAction = (user, action)=>{
+        setUserAction({
+            user,
+            action
         });
     };
-    // After a new user is added / edited / removed
-    const handleUserAction = ()=>{
-        fetchAppUsers();
-    };
-    const handleEditClick = (u)=>{
-        console.log("EDIT clicked: ", u);
-        setSelectedUser(u);
-        setAction("Edit");
-    };
-    const handleRemoveClick = (u)=>{
-        console.log("REMOVE clicked: ", u);
-        setSelectedUser(u);
-        setAction("Remove");
-    };
+    const renderTableRows = appUsers.map((u)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tr", {
+            children: [
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
+                    children: u.lastName
+                }, void 0, false, {
+                    fileName: "src/components/appusers.js",
+                    lineNumber: 52,
+                    columnNumber: 13
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
+                    children: u.firstName
+                }, void 0, false, {
+                    fileName: "src/components/appusers.js",
+                    lineNumber: 53,
+                    columnNumber: 13
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
+                    children: u.email
+                }, void 0, false, {
+                    fileName: "src/components/appusers.js",
+                    lineNumber: 54,
+                    columnNumber: 13
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
+                    children: u.type
+                }, void 0, false, {
+                    fileName: "src/components/appusers.js",
+                    lineNumber: 56,
+                    columnNumber: 13
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
+                    children: u.status
+                }, void 0, false, {
+                    fileName: "src/components/appusers.js",
+                    lineNumber: 57,
+                    columnNumber: 13
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
+                    children: [
+                        " ",
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactFontawesome.FontAwesomeIcon), {
+                            icon: (0, _freeSolidSvgIcons.faPenToSquare),
+                            className: "clickable",
+                            onClick: ()=>handleAction(u, "Edit")
+                        }, void 0, false, {
+                            fileName: "src/components/appusers.js",
+                            lineNumber: 60,
+                            columnNumber: 18
+                        }, this),
+                        " "
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/appusers.js",
+                    lineNumber: 60,
+                    columnNumber: 13
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
+                    children: [
+                        " ",
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactFontawesome.FontAwesomeIcon), {
+                            icon: (0, _freeSolidSvgIcons.faTrash),
+                            className: "clickable",
+                            onClick: ()=>handleAction(u, "Remove")
+                        }, void 0, false, {
+                            fileName: "src/components/appusers.js",
+                            lineNumber: 61,
+                            columnNumber: 18
+                        }, this),
+                        " "
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/appusers.js",
+                    lineNumber: 61,
+                    columnNumber: 13
+                }, this)
+            ]
+        }, u.id, true, {
+            fileName: "src/components/appusers.js",
+            lineNumber: 51,
+            columnNumber: 9
+        }, this));
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
                 children: "AppUsers Page..."
             }, void 0, false, {
                 fileName: "src/components/appusers.js",
-                lineNumber: 50,
+                lineNumber: 66,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37190,7 +37280,7 @@ function Appusers() {
                                 children: "Methods:"
                             }, void 0, false, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 53,
+                                lineNumber: 69,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
@@ -37199,33 +37289,33 @@ function Appusers() {
                                         children: "CRUD Google Cloud SQL Database"
                                     }, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 55,
+                                        lineNumber: 71,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                         children: "Google API admin console"
                                     }, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 56,
+                                        lineNumber: 72,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                         children: "CRUD Google Workspace Users"
                                     }, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 57,
+                                        lineNumber: 73,
                                         columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 54,
+                                lineNumber: 70,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 52,
+                        lineNumber: 68,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37234,7 +37324,7 @@ function Appusers() {
                                 children: "Pending:"
                             }, void 0, false, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 61,
+                                lineNumber: 77,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
@@ -37243,50 +37333,49 @@ function Appusers() {
                                         children: "Sorting before rendering"
                                     }, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 63,
+                                        lineNumber: 79,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                         children: "Sorting Table by Column"
                                     }, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 64,
+                                        lineNumber: 80,
                                         columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 62,
+                                lineNumber: 78,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 60,
+                        lineNumber: 76,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/appusers.js",
-                lineNumber: 51,
+                lineNumber: 67,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appusersformDefault.default), {
                         prop_handleUserAction: handleUserAction,
-                        prop_selectedUser: selectedUser,
-                        prop_action: action
+                        prop_userAction: userAction
                     }, void 0, false, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 69,
+                        lineNumber: 85,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                         children: "[SQL] Current AppUsers:"
                     }, void 0, false, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 70,
+                        lineNumber: 89,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("table", {
@@ -37298,139 +37387,89 @@ function Appusers() {
                                             children: "Last Name"
                                         }, void 0, false, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 74,
-                                            columnNumber: 29
+                                            lineNumber: 93,
+                                            columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                             children: "First Name"
                                         }, void 0, false, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 75,
-                                            columnNumber: 29
+                                            lineNumber: 94,
+                                            columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                             children: "Email"
                                         }, void 0, false, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 76,
-                                            columnNumber: 29
+                                            lineNumber: 95,
+                                            columnNumber: 25
+                                        }, this),
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
+                                            children: "Type"
+                                        }, void 0, false, {
+                                            fileName: "src/components/appusers.js",
+                                            lineNumber: 97,
+                                            columnNumber: 25
+                                        }, this),
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
+                                            children: "Status"
+                                        }, void 0, false, {
+                                            fileName: "src/components/appusers.js",
+                                            lineNumber: 98,
+                                            columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                             children: "Edit"
                                         }, void 0, false, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 78,
-                                            columnNumber: 29
+                                            lineNumber: 101,
+                                            columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                             children: "Delete"
                                         }, void 0, false, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 79,
-                                            columnNumber: 29
+                                            lineNumber: 102,
+                                            columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusers.js",
-                                    lineNumber: 73,
-                                    columnNumber: 25
+                                    lineNumber: 92,
+                                    columnNumber: 21
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 72,
-                                columnNumber: 21
+                                lineNumber: 91,
+                                columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tbody", {
-                                children: app_users.map((u)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tr", {
-                                        children: [
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
-                                                children: u.students_lastName
-                                            }, void 0, false, {
-                                                fileName: "src/components/appusers.js",
-                                                lineNumber: 85,
-                                                columnNumber: 33
-                                            }, this),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
-                                                children: u.students_firstName
-                                            }, void 0, false, {
-                                                fileName: "src/components/appusers.js",
-                                                lineNumber: 86,
-                                                columnNumber: 33
-                                            }, this),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
-                                                children: u.students_email
-                                            }, void 0, false, {
-                                                fileName: "src/components/appusers.js",
-                                                lineNumber: 87,
-                                                columnNumber: 33
-                                            }, this),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
-                                                children: [
-                                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactFontawesome.FontAwesomeIcon), {
-                                                        icon: (0, _freeSolidSvgIcons.faPenToSquare),
-                                                        className: "clickable",
-                                                        onClick: ()=>handleEditClick(u)
-                                                    }, void 0, false, {
-                                                        fileName: "src/components/appusers.js",
-                                                        lineNumber: 89,
-                                                        columnNumber: 37
-                                                    }, this),
-                                                    " "
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "src/components/appusers.js",
-                                                lineNumber: 89,
-                                                columnNumber: 33
-                                            }, this),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
-                                                children: [
-                                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactFontawesome.FontAwesomeIcon), {
-                                                        icon: (0, _freeSolidSvgIcons.faTrash),
-                                                        className: "clickable",
-                                                        onClick: ()=>handleRemoveClick(u)
-                                                    }, void 0, false, {
-                                                        fileName: "src/components/appusers.js",
-                                                        lineNumber: 90,
-                                                        columnNumber: 37
-                                                    }, this),
-                                                    " "
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "src/components/appusers.js",
-                                                lineNumber: 90,
-                                                columnNumber: 33
-                                            }, this)
-                                        ]
-                                    }, u.students_id, true, {
-                                        fileName: "src/components/appusers.js",
-                                        lineNumber: 84,
-                                        columnNumber: 29
-                                    }, this))
+                                children: renderTableRows
                             }, void 0, false, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 82,
-                                columnNumber: 21
+                                lineNumber: 105,
+                                columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 71,
+                        lineNumber: 90,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/appusers.js",
-                lineNumber: 68,
+                lineNumber: 84,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/appusers.js",
-        lineNumber: 49,
+        lineNumber: 65,
         columnNumber: 12
     }, this);
 }
-_s(Appusers, "fTAAiFW2YGrfFlgbBHoA5AiwzfE=");
+_s(Appusers, "tPrRbKuJIXQqrbYpEweI9hvyoR4=");
 _c = Appusers;
 exports.default = Appusers;
 var _c;
@@ -62802,92 +62841,147 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 // styles
 var _appusersFormScss = require("../styles/appusers-form.scss");
 var _s = $RefreshSig$();
-const AppusersForm = ({ prop_handleUserAction, prop_selectedUser, prop_action })=>{
+const AppusersForm = ({ prop_handleUserAction, prop_userAction })=>{
     _s();
-    const [firstName, setFirstName] = (0, _react.useState)("");
-    const [lastName, setLastName] = (0, _react.useState)("");
-    const [email, setEmail] = (0, _react.useState)("");
-    const [id, setId] = (0, _react.useState)(null);
-    const [action, setAction] = (0, _react.useState)("Add");
-    const [btnText, setBtnText] = (0, _react.useState)(`${action} User`);
-    const [formError, setFormError] = (0, _react.useState)(null);
-    const [formSuccess, setFormSuccess] = (0, _react.useState)(null);
-    const [showButton, setShowButton] = (0, _react.useState)(true);
+    const [formUser, setFormUser] = (0, _react.useState)({
+        id: null,
+        firstName: "",
+        lastName: "",
+        email: "",
+        type: "",
+        status: "active"
+    });
+    const [cancelled, setCancelled] = (0, _react.useState)(null);
+    const [visuals, setVisuals] = (0, _react.useState)({
+        btnText: `${prop_userAction.action} User`,
+        showButton: true,
+        formError: null,
+        formSuccess: null
+    });
     (0, _react.useEffect)(()=>{
-        if (prop_selectedUser) {
-            setId(prop_selectedUser.students_id);
-            setFirstName(prop_selectedUser.students_firstName);
-            setLastName(prop_selectedUser.students_lastName);
-            setEmail(prop_selectedUser.students_email);
-            setAction(prop_action);
-            setBtnText(`${prop_action} user`);
-            setFormSuccess(null);
+        console.log("prop_Action: ", prop_userAction.action);
+        console.log("prop_User: ", prop_userAction.user);
+        if (prop_userAction.user) {
+            setFormUser({
+                ...prop_userAction.user
+            });
+            setVisuals((i)=>({
+                    ...i,
+                    btnText: `${prop_userAction.action} User`
+                }));
         } else {
-            setFirstName("");
-            setLastName("");
-            setEmail("");
+            setFormUser({
+                id: null,
+                firstName: "",
+                lastName: "",
+                email: "",
+                type: "",
+                status: "active"
+            });
+            setVisuals((i)=>({
+                    ...i,
+                    btnText: "Add User",
+                    formError: null
+                }));
         }
     }, [
-        prop_selectedUser,
-        prop_action
+        prop_userAction
     ]);
     const handleFormSubmit = (e)=>{
         e.preventDefault();
-        setShowButton(false);
-        if (action === "Add") (0, _axiosDefault.default).post(`http://localhost:${"5000"}/api/students`, {
-            students_firstName: firstName,
-            students_lastName: lastName,
-            students_email: email
-        }).then((response)=>{
-            console.log("AppUser added successfully:", response.data);
-            prop_handleUserAction(action); // Call the prop_handleUserAction prop to trigger a refresh of the App Users list
+        if (cancelled) {
+            console.log("CANCELADO");
+            clearForm(true);
+            return;
+        }
+        setVisuals((i)=>({
+                ...i,
+                showButton: false
+            }));
+        const userPayload = {
+            ...formUser
+        };
+        console.log("userPayload: ", userPayload);
+        if (prop_userAction.action === "Add") (0, _axiosDefault.default).post(`http://localhost:${"5000"}/api/users`, userPayload).then((response)=>{
+            console.log("User added successfully:", response.data);
+            prop_handleUserAction(prop_userAction.action); // Call the prop_handleUserAction prop to trigger a refresh of the users list
             clearForm(); // Clear form
         }).catch((error)=>{
-            console.error(error);
-            setFormError("Add Failed. Please try again.");
-            setShowButton(true);
+            console.error("Add Failed ", error);
+            setVisuals((i)=>({
+                    ...i,
+                    formError: "Add Failed",
+                    showButton: true
+                }));
         });
-        else if (action === "Edit" && id) {
-            console.log("Edit ID:", id);
-            (0, _axiosDefault.default).patch(`http://localhost:${"5000"}/api/students/${id}`, {
-                students_firstName: firstName,
-                students_lastName: lastName,
-                students_email: email
-            }).then((response)=>{
-                console.log("AppUser edited successfully:", response.data);
-                prop_handleUserAction(action);
-                clearForm();
-            }).catch((error)=>{
-                console.error(error);
-                setFormError("Edit Failed. Please try again.");
-                setShowButton(true);
-            });
-        } else if (action === "Remove" && id) {
-            console.log("Remove ID:", id);
-            (0, _axiosDefault.default).delete(`http://localhost:${"5000"}/api/students/${id}`).then((response)=>{
-                console.log("AppUser removed successfully:", response.data);
-                prop_handleUserAction(action);
-                clearForm();
-            }).catch((error)=>{
-                console.error(error);
-                setFormError("Remove Failed. Please try again.");
-                setShowButton(true);
-            });
-        }
+        else if (prop_userAction.action === "Edit" && formUser.id) (0, _axiosDefault.default).patch(`http://localhost:${"5000"}/api/users/${prop_userAction.user.id}`, userPayload).then((response)=>{
+            console.log("User edited successfully:", response.data);
+            prop_handleUserAction(prop_userAction.action);
+            clearForm();
+        }).catch((error)=>{
+            console.error("Edit Failed", error);
+            setVisuals((i)=>({
+                    ...i,
+                    formError: "Edit Failed",
+                    showButton: true
+                }));
+        });
+        else if (prop_userAction.action === "Remove" && id) (0, _axiosDefault.default).delete(`http://localhost:${"5000"}/api/users/${prop_userAction.user.id}`).then((response)=>{
+            console.log("User removed successfully:", response.data);
+            prop_handleUserAction(prop_userAction.action);
+            clearForm();
+        }).catch((error)=>{
+            console.error("Remove Failed", error);
+            setVisuals((i)=>({
+                    ...i,
+                    formError: "Remove Failed",
+                    showButton: true
+                }));
+        });
     };
-    const clearForm = ()=>{
-        setId(null);
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setFormError(null);
-        setFormSuccess(`\u{1F44D} ${action} User \u{1F44D}`);
-        setTimeout(()=>{
-            setFormSuccess(null);
-            setAction("Add");
-            setBtnText("Add user");
-            setShowButton(true);
-        }, 1500);
+    const canSubmitForm = ()=>{
+        return formUser.firstName != "" && formUser.lastName != "" && formUser.email != "" && [
+            "admin",
+            "usuario"
+        ].includes(formUser.type) && [
+            "active",
+            "inactive"
+        ].includes(formUser.status);
+    //&& formUser.type != "" && formUser.status != "";
+    };
+    // Function to clear form and reset state
+    const clearForm = (wasCancelled)=>{
+        setFormUser({
+            id: null,
+            firstName: "",
+            lastName: "",
+            email: "",
+            type: "",
+            status: "active"
+        });
+        if (wasCancelled) setVisuals({
+            btnText: "Add User",
+            showButton: true,
+            formError: null,
+            formSuccess: null
+        });
+        else {
+            setVisuals({
+                ...visuals,
+                formError: null,
+                showButton: true,
+                formSuccess: `\u{1F44D} ${prop_userAction.action} User \u{1F44D}`
+            });
+            setTimeout(()=>{
+                setVisuals({
+                    ...visuals,
+                    formError: null,
+                    formSuccess: null,
+                    btnText: "Add User"
+                });
+            }, 1500);
+            prop_userAction.action = "Add";
+        }
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
@@ -62895,8 +62989,8 @@ const AppusersForm = ({ prop_handleUserAction, prop_selectedUser, prop_action })
                 children: "[SQL] Add AppUser"
             }, void 0, false, {
                 fileName: "src/components/appusersform.js",
-                lineNumber: 104,
-                columnNumber: 13
+                lineNumber: 135,
+                columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "form-container",
@@ -62904,125 +62998,236 @@ const AppusersForm = ({ prop_handleUserAction, prop_selectedUser, prop_action })
                     onSubmit: handleFormSubmit,
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "input-group",
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                                     children: [
-                                        "First Name:",
+                                        "First Name: ",
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                             type: "text",
-                                            value: firstName,
-                                            onChange: (e)=>setFirstName(e.target.value)
+                                            value: formUser.firstName,
+                                            onChange: (e)=>setFormUser({
+                                                    ...formUser,
+                                                    firstName: e.target.value
+                                                })
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 110,
-                                            columnNumber: 29
-                                        }, undefined)
+                                            lineNumber: 139,
+                                            columnNumber: 32
+                                        }, undefined),
+                                        " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 108,
-                                    columnNumber: 25
+                                    lineNumber: 139,
+                                    columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                                     children: [
-                                        "Last Name:",
+                                        "Last Name: ",
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                             type: "text",
-                                            value: lastName,
-                                            onChange: (e)=>setLastName(e.target.value)
+                                            value: formUser.lastName,
+                                            onChange: (e)=>setFormUser({
+                                                    ...formUser,
+                                                    lastName: e.target.value
+                                                })
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 114,
-                                            columnNumber: 29
+                                            lineNumber: 140,
+                                            columnNumber: 31
+                                        }, undefined),
+                                        " "
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/components/appusersform.js",
+                                    lineNumber: 140,
+                                    columnNumber: 13
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                    children: [
+                                        "Email: ",
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                            type: "text",
+                                            value: formUser.email,
+                                            onChange: (e)=>setFormUser({
+                                                    ...formUser,
+                                                    email: e.target.value
+                                                })
+                                        }, void 0, false, {
+                                            fileName: "src/components/appusersform.js",
+                                            lineNumber: 141,
+                                            columnNumber: 27
+                                        }, undefined),
+                                        " "
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/components/appusersform.js",
+                                    lineNumber: 141,
+                                    columnNumber: 13
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                    children: [
+                                        "Type: ",
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
+                                            value: formUser.type,
+                                            onChange: (e)=>setFormUser({
+                                                    ...formUser,
+                                                    type: e.target.value
+                                                }),
+                                            children: [
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                                    value: "",
+                                                    children: "Select type"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/appusersform.js",
+                                                    lineNumber: 145,
+                                                    columnNumber: 29
+                                                }, undefined),
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                                    value: "admin",
+                                                    children: "admin"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/appusersform.js",
+                                                    lineNumber: 146,
+                                                    columnNumber: 29
+                                                }, undefined),
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                                    value: "usuario",
+                                                    children: "usuario"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/appusersform.js",
+                                                    lineNumber: 147,
+                                                    columnNumber: 29
+                                                }, undefined)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "src/components/appusersform.js",
+                                            lineNumber: 144,
+                                            columnNumber: 26
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 112,
-                                    columnNumber: 25
+                                    lineNumber: 144,
+                                    columnNumber: 13
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                    children: [
+                                        "Status: ",
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
+                                            value: formUser.status,
+                                            onChange: (e)=>setFormUser({
+                                                    ...formUser,
+                                                    status: e.target.value
+                                                }),
+                                            children: [
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                                    value: "",
+                                                    children: "Select status"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/appusersform.js",
+                                                    lineNumber: 151,
+                                                    columnNumber: 29
+                                                }, undefined),
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                                    value: "active",
+                                                    children: "active"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/appusersform.js",
+                                                    lineNumber: 152,
+                                                    columnNumber: 29
+                                                }, undefined),
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                                    value: "inactive",
+                                                    children: "inactive"
+                                                }, void 0, false, {
+                                                    fileName: "src/components/appusersform.js",
+                                                    lineNumber: 153,
+                                                    columnNumber: 29
+                                                }, undefined)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "src/components/appusersform.js",
+                                            lineNumber: 150,
+                                            columnNumber: 28
+                                        }, undefined)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/components/appusersform.js",
+                                    lineNumber: 150,
+                                    columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/appusersform.js",
-                            lineNumber: 107,
-                            columnNumber: 21
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                children: [
-                                    "Email:",
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                        type: "text",
-                                        value: email,
-                                        onChange: (e)=>setEmail(e.target.value)
-                                    }, void 0, false, {
-                                        fileName: "src/components/appusersform.js",
-                                        lineNumber: 120,
-                                        columnNumber: 29
-                                    }, undefined)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/appusersform.js",
-                                lineNumber: 118,
-                                columnNumber: 25
-                            }, undefined)
-                        }, void 0, false, {
-                            fileName: "src/components/appusersform.js",
-                            lineNumber: 117,
-                            columnNumber: 21
+                            lineNumber: 138,
+                            columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                             children: [
-                                formError && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                visuals.formError && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                     className: "errorWarning",
-                                    children: formError
+                                    children: visuals.formError
                                 }, void 0, false, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 124,
-                                    columnNumber: 39
+                                    lineNumber: 158,
+                                    columnNumber: 35
                                 }, undefined),
-                                formSuccess && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                visuals.formSuccess && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                     className: "successWarning",
-                                    children: formSuccess
+                                    children: visuals.formSuccess
                                 }, void 0, false, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 125,
-                                    columnNumber: 41
+                                    lineNumber: 159,
+                                    columnNumber: 37
                                 }, undefined),
-                                showButton && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                    className: "button",
+                                visuals.showButton && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                    className: "button advance",
                                     type: "submit",
-                                    children: btnText
+                                    disabled: !canSubmitForm(),
+                                    onClick: ()=>setCancelled(false),
+                                    children: visuals.btnText
                                 }, void 0, false, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 126,
-                                    columnNumber: 40
+                                    lineNumber: 160,
+                                    columnNumber: 36
+                                }, undefined),
+                                visuals.showButton && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                    className: "button cancel",
+                                    type: "submit",
+                                    onClick: ()=>setCancelled(true),
+                                    children: "Cancel"
+                                }, void 0, false, {
+                                    fileName: "src/components/appusersform.js",
+                                    lineNumber: 161,
+                                    columnNumber: 36
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/appusersform.js",
-                            lineNumber: 123,
-                            columnNumber: 21
+                            lineNumber: 157,
+                            columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/appusersform.js",
-                    lineNumber: 106,
-                    columnNumber: 17
+                    lineNumber: 137,
+                    columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/appusersform.js",
-                lineNumber: 105,
-                columnNumber: 13
+                lineNumber: 136,
+                columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/appusersform.js",
-        lineNumber: 103,
-        columnNumber: 9
+        lineNumber: 133,
+        columnNumber: 5
     }, undefined);
 };
-_s(AppusersForm, "Eg6Mu3youXfbZiz0RUHFQiMjQj0=");
+_s(AppusersForm, "OoImbnIxmfEdE6ycNzHlqCPoSCE=");
 _c = AppusersForm;
 exports.default = AppusersForm;
 var _c;

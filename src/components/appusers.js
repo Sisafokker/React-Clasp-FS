@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -9,43 +9,59 @@ import "../styles/main.scss";
 import "../styles/appusers-table.scss";
 
 function Appusers() {
-    const [app_users, setApp_users] = useState([]);
-    const [selectedUser, setSelectedUser] = useState(null);
-    const [action, setAction] =useState(null);
+    const [appUsers, setAppUsers] = useState([]);
+    const [userAction, setUserAction] = useState({ user: null, action: null });
 
     useEffect(() => {
         fetchAppUsers();
     }, []); // Fetch data on initial component mount
 
     // Get Student Data
-    const fetchAppUsers = () => {
-        axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/students`)
+    const fetchAppUsers = useCallback(() => {  // useCallback => React Hook that lets you cache a function definition between re-renders.
+        const url = `http://localhost:${process.env.REACT_APP_PORT}/api/users`;
+        axios.get(url)
             .then(response => {
-                setApp_users(response.data);
-                console.log("👍students")
+                setAppUsers(response.data);
+                console.log("Fetched app users");
             })
-            .catch(error => {
-                console.error(error);
-            });
-    };
+            .catch(console.error);
+    }, []);
 
-    // After a new user is added / edited / removed
-    const handleUserAction = () => {
+    // const fetchAppUsers = () => {
+    //     axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/users`)
+    //         .then(response => {
+    //             setApp_users(response.data);
+    //             console.log("👍students")
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
+    // };
+
+     // After a new user is added / edited / removed
+     const handleUserAction = useCallback(() => {
         fetchAppUsers();
+    }, [fetchAppUsers]);
+
+    const handleAction = (user, action) => {
+        setUserAction({ user, action });
     };
 
-    const handleEditClick = (u) => {
-        console.log("EDIT clicked: ",u)
-        setSelectedUser(u);
-        setAction("Edit");
-    };
+    const renderTableRows = appUsers.map(u => (
+        <tr key={u.id}>
+            <td>{u.lastName}</td>
+            <td>{u.firstName}</td>
+            <td>{u.email}</td>
+            {/* <td>{u.password}</td> */}
+            <td>{u.type}</td>
+            <td>{u.status}</td>
+            {/* <td>{u.createdAt}</td> */}
+            {/* <td>{u.updatedAt}</td> */}
+            <td> <FontAwesomeIcon icon={faPenToSquare} className='clickable'onClick={() => handleAction(u, 'Edit')} /> </td>
+            <td> <FontAwesomeIcon icon={faTrash} className='clickable' onClick={() => handleAction(u, 'Remove')} /> </td>
+        </tr>
+    ));
 
-    const handleRemoveClick = (u) => {
-        console.log("REMOVE clicked: ",u)
-        setSelectedUser(u);
-        setAction("Remove");
-    };
-    
     return <div>
         <h1>AppUsers Page...</h1>
         <div className='tasks-wrapper'>
@@ -66,32 +82,30 @@ function Appusers() {
             </div>
         </div>
         <div>
-            <AppusersForm prop_handleUserAction={handleUserAction} prop_selectedUser={selectedUser} prop_action={action}/>
+            <AppusersForm 
+                prop_handleUserAction={handleUserAction} 
+                prop_userAction={userAction} 
+            />
             <h2>[SQL] Current AppUsers:</h2>
             <table>
-                    <thead>
-                        <tr>
-                            <th>Last Name</th>
-                            <th>First Name</th>
-                            <th>Email</th>
-                            {/* <th>Id</th> */}
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {app_users.map(u => (
-                            <tr key={u.students_id}>
-                                <td>{u.students_lastName}</td>
-                                <td>{u.students_firstName}</td>
-                                <td>{u.students_email}</td>
-                                {/* <td>{u.students_id}</td> */}
-                                <td><FontAwesomeIcon icon={faPenToSquare} className='clickable' onClick={() => handleEditClick(u)}/> </td>
-                                <td><FontAwesomeIcon icon={faTrash} className='clickable' onClick={() => handleRemoveClick(u)}/> </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <thead>
+                    <tr>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Email</th>
+                        {/* <th>Password</th> */}
+                        <th>Type</th>
+                        <th>Status</th>
+                        {/* <th>Created</th> */}
+                        {/*  <th>Updated</th> */}
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {renderTableRows}
+                </tbody>
+            </table>
         </div>
     </div>
 }

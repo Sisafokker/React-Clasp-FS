@@ -6,31 +6,46 @@
   width: 80%;
   margin: 0 auto;
 
+  .input-group { // New class for the flex container
+    display: flex;
+    gap: 25px;
+   // justify-content: space-between; // This will put space between your two input fields
+    margin-bottom: 10px; // Spacing between this group and other elements
+
+    @media (max-width: 768px) { // Adjust this value based on your requirements
+      flex-direction: column; // Stack the elements vertically on small screens
+    }
+  }
+
   label {
-    display: block;
+    flex: 1 1 50%;
+    display: flex; // make label a flex container to align text and input
+    flex-direction: column; // Stack label text above the input
     margin-bottom: 8px;
+
+    input, select{
+      width: 100%; // input will fill the width of the label
+      padding: 5px;
+      margin-top: 2px; // small space between label text and input
+      border: 1px solid #ddd;
+    }
+
+    select {
+      padding: 4px;
+      border: 1px solid $teal;
+    }
   }
 
-  input {
-    width: calc(100% - 20px);
-    padding: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    /* border-radius: 4px; */
-  }
-
-
-  .button {
+/*   .button {
     background-color: $teal;
     color: $offwhite;
     padding: 10px 20px;
     border: none;
-    border-radius: 4;
+    border-radius: 4px; // Changed from 4 to 4px
     font-weight: 600;
 
     &:hover {
-        background-color: $dark-teal;
-      }
-  }
-
+      background-color: $dark-teal;
+    }
+  } */
 }
