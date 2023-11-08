@@ -4,11 +4,12 @@
 node_modules/
 package-lock.json
 
-backend/node_modules/
-backend/package-lock.json
+/backend/node_modules/
+/backend/package-lock.json
 
 #Keys (Ids and Secrets without "")
 .env
 
-#Project Notes
-notes-hidden.txt
+#Sql Keys
+/backend/sql_credentials/reactfscloudsql-9e64e71b4f50.json
+
