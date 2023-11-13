@@ -36295,13 +36295,14 @@ var _mainScss = require("./styles/main.scss");
 // Components
 var _nav = require("./components/nav");
 var _navDefault = parcelHelpers.interopDefault(_nav);
+var _oauthform = require("./components/oauthform");
+var _oauthformDefault = parcelHelpers.interopDefault(_oauthform);
 var _s = $RefreshSig$();
 const SCOPES = "https://www.googleapis.com/auth/drive";
 function OAuth({ prop_renderRoutes }) {
     _s();
-    // State variables to manage user data and token client
     const { user, setUser } = (0, _react.useContext)((0, _context.Context));
-    //const [user, setUser] = useState({});
+    const [showGoogleLogin, setShowGoogleLogin] = (0, _react.useState)(true); // New state to control Google login visibility
     const [tokenClient, setTokenClient] = (0, _react.useState)({});
     const CLIENT_ID = "240692930692-icvohb5b9herteb2oqk18qjb89hlqnls.apps.googleusercontent.com";
     const navigate = (0, _reactRouterDom.useNavigate)();
@@ -36353,6 +36354,7 @@ function OAuth({ prop_renderRoutes }) {
     // Handle the response from Google Sign-In callback
     function handleCallbackResponse(response) {
         console.log("\uD83D\uDC4DHandleSignIn");
+        setShowGoogleLogin(false);
         let userCredentials = response.credential;
         let userObject = (0, _jwtDecode.jwtDecode)(userCredentials); // Decode the JWT token to get user data
         // Set the user data in the component state
@@ -36370,14 +36372,12 @@ function OAuth({ prop_renderRoutes }) {
     // Function to handle user sign-out
     function handleSignOut(e) {
         console.log("\uD83D\uDC4DhandleSignOut");
-        // Clear user data from local storage
-        localStorage.removeItem("local_user");
-        // Clear user data from component state
-        setUser({});
-        // Move to: 
-        navigate("/home");
+        setShowGoogleLogin(true);
+        localStorage.removeItem("local_user"); // Clear user data from local storage
+        setUser({}); // Clear user data from component state
+        navigate("/home"); // Move to: 
         // Show SignIn Div and Prompt
-        document.getElementById("googleLogIn").style.display = "block";
+        //document.getElementById("googleLogIn").style.display = "block";
         //document.getElementById("googleLogIn").hidden = false;
         window.google.accounts.id.prompt();
     }
@@ -36390,15 +36390,20 @@ function OAuth({ prop_renderRoutes }) {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "auth-wrapper",
         children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            !user || Object.keys(user).length === 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _oauthformDefault.default), {}, void 0, false, {
+                fileName: "src/OAuth.js",
+                lineNumber: 132,
+                columnNumber: 57
+            }, this),
+            showGoogleLogin && Object.keys(user).length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 id: "googleLogIn",
                 className: "google-login"
             }, void 0, false, {
                 fileName: "src/OAuth.js",
-                lineNumber: 135,
-                columnNumber: 13
-            }, this),
-            Object.keys(user).length !== 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                lineNumber: 133,
+                columnNumber: 66
+            }, this) : null,
+            user && Object.keys(user).length !== 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "user-nav-wrapper",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36408,11 +36413,11 @@ function OAuth({ prop_renderRoutes }) {
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                                     className: "user-avatar",
-                                    src: user.picture,
+                                    src: user.picture || "https://use.fontawesome.com/releases/v5.15.4/svgs/solid/user.svg",
                                     alt: "User"
                                 }, void 0, false, {
                                     fileName: "src/OAuth.js",
-                                    lineNumber: 140,
+                                    lineNumber: 138,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36422,14 +36427,14 @@ function OAuth({ prop_renderRoutes }) {
                                             children: user.name
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 142,
+                                            lineNumber: 140,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                             children: user.email
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 143,
+                                            lineNumber: 141,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36440,50 +36445,50 @@ function OAuth({ prop_renderRoutes }) {
                                                 children: "Sign Out"
                                             }, void 0, false, {
                                                 fileName: "src/OAuth.js",
-                                                lineNumber: 145,
+                                                lineNumber: 143,
                                                 columnNumber: 37
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 144,
+                                            lineNumber: 142,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/OAuth.js",
-                                    lineNumber: 141,
+                                    lineNumber: 139,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/OAuth.js",
-                            lineNumber: 139,
+                            lineNumber: 137,
                             columnNumber: 25
                         }, this)
                     }, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 138,
+                        lineNumber: 136,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navDefault.default), {}, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 150,
+                        lineNumber: 148,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/OAuth.js",
-                lineNumber: 137,
+                lineNumber: 135,
                 columnNumber: 17
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/OAuth.js",
-        lineNumber: 134,
+        lineNumber: 131,
         columnNumber: 9
     }, this);
 }
-_s(OAuth, "v1KDy4/UtO0s9eUvoDsLybLrLj8=", false, function() {
+_s(OAuth, "bX+wHnhk17ODik3Eol5SmGdrk20=", false, function() {
     return [
         (0, _reactRouterDom.useNavigate)
     ];
@@ -36498,7 +36503,7 @@ $RefreshReg$(_c, "OAuth");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","jwt-decode":"EeAxo","react-router-dom":"9xmpe","./styles/main.scss":"bo7w8","./components/nav":"kefMG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./Context":"49Q86"}],"EeAxo":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","jwt-decode":"EeAxo","react-router-dom":"9xmpe","./styles/main.scss":"bo7w8","./components/nav":"kefMG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./Context":"49Q86","./components/oauthform":"bPYBM"}],"EeAxo":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "InvalidTokenError", ()=>InvalidTokenError);
@@ -36811,7 +36816,247 @@ $RefreshReg$(_c, "ContextProvider");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"l90Qn":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bPYBM":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$6282 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$6282.prelude(module);
+
+try {
+// OAuthForm.js
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _context = require("../Context");
+var _s = $RefreshSig$();
+const OAuthForm = ()=>{
+    _s();
+    const [isSignUp, setIsSignUp] = (0, _react.useState)(false);
+    const { setUser } = (0, _react.useContext)((0, _context.Context));
+    const [formData, setFormData] = (0, _react.useState)({
+        email: "",
+        password: "",
+        passwordOne: "",
+        passwordTwo: "",
+        firstName: "",
+        lastName: ""
+    });
+    const [feedback, setFeedback] = (0, _react.useState)({
+        error: null,
+        success: null
+    });
+    const handleFormSubmit = async (event)=>{
+        event.preventDefault();
+        if (isSignUp && formData.passwordOne !== formData.passwordTwo) {
+            setFeedback({
+                error: "Both Passwords do not match",
+                success: null
+            });
+            return;
+        }
+        const requestData = isSignUp ? {
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            password: formData.passwordOne
+        } : {
+            email: formData.email,
+            password: formData.password
+        };
+        const url = `http://localhost:${"5000"}/api/${isSignUp ? "signup" : "login"}`;
+        try {
+            const response = await (0, _axiosDefault.default).post(url, requestData);
+            console.log("Success!");
+            console.log(response.data.user);
+            const userObj = {
+                name: response.data.user.firstName + " " + response.data.user.lastName,
+                email: response.data.user.email
+            };
+            setUser(userObj);
+            setFeedback({
+                success: "Success!",
+                error: null
+            });
+        } catch (error) {
+            setFeedback({
+                error: error.response.data.message,
+                success: null
+            });
+        }
+    };
+    const updateFormData = (field)=>(event)=>{
+            setFormData({
+                ...formData,
+                [field]: event.target.value
+            });
+        };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+                onSubmit: handleFormSubmit,
+                children: [
+                    isSignUp && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                type: "text",
+                                name: "firstName",
+                                placeholder: "First Name",
+                                value: formData.firstName,
+                                onChange: updateFormData("firstName"),
+                                required: true
+                            }, void 0, false, {
+                                fileName: "src/components/oauthform.js",
+                                lineNumber: 68,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                type: "text",
+                                name: "lastName",
+                                placeholder: "Last Name",
+                                value: formData.lastName,
+                                onChange: updateFormData("lastName"),
+                                required: true
+                            }, void 0, false, {
+                                fileName: "src/components/oauthform.js",
+                                lineNumber: 69,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                type: "email",
+                                name: "email",
+                                placeholder: "Email",
+                                value: formData.email,
+                                onChange: updateFormData("email"),
+                                required: true
+                            }, void 0, false, {
+                                fileName: "src/components/oauthform.js",
+                                lineNumber: 70,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                type: "password",
+                                name: "passwordOne",
+                                placeholder: "Password",
+                                value: formData.passwordOne,
+                                onChange: updateFormData("passwordOne"),
+                                required: true
+                            }, void 0, false, {
+                                fileName: "src/components/oauthform.js",
+                                lineNumber: 71,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                type: "password",
+                                name: "passwordTwo",
+                                placeholder: "Repeat Password",
+                                value: formData.passwordTwo,
+                                onChange: updateFormData("passwordTwo"),
+                                required: true
+                            }, void 0, false, {
+                                fileName: "src/components/oauthform.js",
+                                lineNumber: 72,
+                                columnNumber: 13
+                            }, undefined)
+                        ]
+                    }, void 0, true),
+                    !isSignUp && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                type: "email",
+                                name: "email",
+                                placeholder: "Email",
+                                value: formData.email,
+                                onChange: updateFormData("email"),
+                                required: true
+                            }, void 0, false, {
+                                fileName: "src/components/oauthform.js",
+                                lineNumber: 78,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                type: "password",
+                                name: "password",
+                                placeholder: "Password",
+                                value: formData.password,
+                                onChange: updateFormData("password"),
+                                required: true
+                            }, void 0, false, {
+                                fileName: "src/components/oauthform.js",
+                                lineNumber: 79,
+                                columnNumber: 13
+                            }, undefined)
+                        ]
+                    }, void 0, true),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        type: "submit",
+                        children: isSignUp ? "Sign Up" : "Log In"
+                    }, void 0, false, {
+                        fileName: "src/components/oauthform.js",
+                        lineNumber: 83,
+                        columnNumber: 9
+                    }, undefined),
+                    isSignUp ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                        href: "#login",
+                        onClick: ()=>setIsSignUp(false),
+                        children: "Or Log In here"
+                    }, void 0, false, {
+                        fileName: "src/components/oauthform.js",
+                        lineNumber: 85,
+                        columnNumber: 11
+                    }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                        href: "#signup",
+                        onClick: ()=>setIsSignUp(true),
+                        children: "Or Sign Up here"
+                    }, void 0, false, {
+                        fileName: "src/components/oauthform.js",
+                        lineNumber: 87,
+                        columnNumber: 11
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/oauthform.js",
+                lineNumber: 65,
+                columnNumber: 7
+            }, undefined),
+            feedback.error && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "error",
+                children: feedback.error
+            }, void 0, false, {
+                fileName: "src/components/oauthform.js",
+                lineNumber: 90,
+                columnNumber: 26
+            }, undefined),
+            feedback.success && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "success",
+                children: feedback.success
+            }, void 0, false, {
+                fileName: "src/components/oauthform.js",
+                lineNumber: 91,
+                columnNumber: 28
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/oauthform.js",
+        lineNumber: 64,
+        columnNumber: 5
+    }, undefined);
+};
+_s(OAuthForm, "jYLAVkMHyR45RpuPA7pn/Xn+EmA=");
+_c = OAuthForm;
+exports.default = OAuthForm;
+var _c;
+$RefreshReg$(_c, "OAuthForm");
+
+  $parcel$ReactRefreshHelpers$6282.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","axios":"jo6P5","../Context":"49Q86"}],"l90Qn":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$f362 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
