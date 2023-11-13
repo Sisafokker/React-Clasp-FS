@@ -10,13 +10,13 @@ import "./styles/main.scss";
 
 // Components
 import Nav from "./components/nav";
+import OAuthForm from "./components/oauthform";
 
 const SCOPES = "https://www.googleapis.com/auth/drive";
 
 function OAuth({ prop_renderRoutes }) {
-    // State variables to manage user data and token client
     const { user, setUser } = useContext(Context);
-    //const [user, setUser] = useState({});
+    const [showGoogleLogin, setShowGoogleLogin] = useState(true); // New state to control Google login visibility
     const [tokenClient, setTokenClient] = useState({});
     const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
     const navigate = useNavigate();
@@ -84,6 +84,7 @@ function OAuth({ prop_renderRoutes }) {
     // Handle the response from Google Sign-In callback
     function handleCallbackResponse(response) {
         console.log("👍HandleSignIn")
+        setShowGoogleLogin(false);
         let userCredentials = response.credential;
         let userObject = jwtDecode(userCredentials); // Decode the JWT token to get user data
 
@@ -107,18 +108,14 @@ function OAuth({ prop_renderRoutes }) {
     // Function to handle user sign-out
     function handleSignOut(e) {
         console.log("👍handleSignOut")
-
-        // Clear user data from local storage
-        localStorage.removeItem("local_user");
-
-        // Clear user data from component state
-        setUser({});
-
-        // Move to: 
-        navigate("/home");
+        setShowGoogleLogin(true);
+        localStorage.removeItem("local_user");  // Clear user data from local storage
+        setUser({});                            // Clear user data from component state
+        navigate("/home");                      // Move to: 
+        
 
         // Show SignIn Div and Prompt
-        document.getElementById("googleLogIn").style.display = "block";
+        //document.getElementById("googleLogIn").style.display = "block";
         //document.getElementById("googleLogIn").hidden = false;
         window.google.accounts.id.prompt();
     }
@@ -132,12 +129,13 @@ function OAuth({ prop_renderRoutes }) {
     // Render the OAuth component
     return (
         <div className="auth-wrapper">
-            <div id="googleLogIn" className="google-login"></div>
-            {Object.keys(user).length !== 0 && ( // Conditionally render content if user data is available
+            {!user || Object.keys(user).length === 0 && <OAuthForm />}
+            {showGoogleLogin && Object.keys(user).length === 0 ? <div id="googleLogIn" className="google-login"></div> : null}
+            {user && Object.keys(user).length !== 0 && (                
                 <div className="user-nav-wrapper">
                     <div className="user-info">
                         <div className="user-details">
-                            <img className="user-avatar" src={user.picture} alt="User" />
+                            <img className="user-avatar" src={user.picture || "https://use.fontawesome.com/releases/v5.15.4/svgs/solid/user.svg"} alt="User" />
                             <div className="user-text">
                                 <h3>{user.name}</h3>
                                 <p>{user.email}</p>
