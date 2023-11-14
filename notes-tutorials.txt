@@ -13,3 +13,7 @@ Google Sheets - JSON API, Wep App: https://www.youtube.com/watch?v=VPI27L_fQC4&l
 ❌Didnt work:
 Creating Documents using React / Google Docs API / Google OAuth 2.0: https://www.youtube.com/watch?v=0KoZSVnTnkA
 Using env file (environment variables): https://www.youtube.com/watch?v=KJE4LtAxLEw
+
+
+NOTE:
+Sync .env file with Google Drive so you can access it from your two computers.

@@ -16,7 +16,6 @@ const SCOPES = "https://www.googleapis.com/auth/drive";
 
 function OAuth({ prop_renderRoutes }) {
     const { user, setUser } = useContext(Context);
-    const [showGoogleLogin, setShowGoogleLogin] = useState(true); // New state to control Google login visibility
     const [tokenClient, setTokenClient] = useState({});
     const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
     const navigate = useNavigate();
@@ -68,7 +67,7 @@ function OAuth({ prop_renderRoutes }) {
                     })
                 );
             } else {
-                setTimeout(initializeGoogleSignIn, 50); // Wait and try initializeGoogleSignIn again
+                setTimeout(initializeGoogleSignIn, 100); // Wait and try initializeGoogleSignIn again
             }
         };
 
@@ -84,40 +83,39 @@ function OAuth({ prop_renderRoutes }) {
     // Handle the response from Google Sign-In callback
     function handleCallbackResponse(response) {
         console.log("👍HandleSignIn")
-        setShowGoogleLogin(false);
         let userCredentials = response.credential;
         let userObject = jwtDecode(userCredentials); // Decode the JWT token to get user data
 
-        // Set the user data in the component state
-        setUser(userObject);
-
-        // Hide SignIn Button
-        //document.getElementById("googleLogIn").hidden = true;
-        document.getElementById("googleLogIn").style.display = "none";
-
-        // Save user data to local storage
-        localStorage.setItem("local_user", JSON.stringify(userObject));
-
-        // Render Routes after signin
-        prop_renderRoutes();
-
-         // Move to the desired route
-         navigate("/customers");
+        setUser(userObject); // Set the user data in the component state
+        localStorage.setItem("local_user", JSON.stringify(userObject)); // Save user data to local storage
+        prop_renderRoutes(); // Render Routes after signin
+         navigate("/customers"); // Move to the desired route
+        
+         // Hide SignIn Button
+        //document.getElementById("allLogin").style.display = "none";
+        const allLoginElement = document.getElementById("allLogin");
+        if (allLoginElement) {
+            allLoginElement.style.display = "none";
+        }
     }
 
     // Function to handle user sign-out
     function handleSignOut(e) {
         console.log("👍handleSignOut")
-        setShowGoogleLogin(true);
-        localStorage.removeItem("local_user");  // Clear user data from local storage
-        setUser({});                            // Clear user data from component state
-        navigate("/home");                      // Move to: 
-        
+        localStorage.removeItem("local_user");  // Clear user from local storage
+        setUser({});                            // Clear user state
+        navigate("/home");                      // Move to:        
 
         // Show SignIn Div and Prompt
-        //document.getElementById("googleLogIn").style.display = "block";
-        //document.getElementById("googleLogIn").hidden = false;
-        window.google.accounts.id.prompt();
+        const allLoginElement = document.getElementById("allLogin");
+        if (allLoginElement) {
+            allLoginElement.style.display = "block";
+        }
+        //window.google.accounts.id.prompt();
+
+        if (window.google && window.google.accounts) {
+            window.google.accounts.id.prompt();
+        }
     }
 
     // Function to create a file in Google Drive when the user clicks the "Create File" button
@@ -129,8 +127,12 @@ function OAuth({ prop_renderRoutes }) {
     // Render the OAuth component
     return (
         <div className="auth-wrapper">
-            {!user || Object.keys(user).length === 0 && <OAuthForm />}
-            {showGoogleLogin && Object.keys(user).length === 0 ? <div id="googleLogIn" className="google-login"></div> : null}
+            {!user || Object.keys(user).length === 0 && (
+            <div className="allLogin">
+                <OAuthForm /> 
+                <div id="googleLogIn" className="google-login"></div> 
+            </div>)
+            }
             {user && Object.keys(user).length !== 0 && (                
                 <div className="user-nav-wrapper">
                     <div className="user-info">
@@ -157,3 +159,4 @@ function OAuth({ prop_renderRoutes }) {
 }
 
 export default OAuth;
+
