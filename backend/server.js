@@ -34,10 +34,17 @@ appExp.post('/api/signup', async (req, res) => {
 
   pool.query(INSERT_USER_QUERY, [firstName, lastName, email, hashedPassword, 'usuario', 'active'], (error, results) => {
     if (error) {
-      console.error("SignUp Error",error);
-      return res.status(500).json({ error: 'Internal server error' });
+      if (error.code === 'ER_DUP_ENTRY') {
+        return res.status(409).json({ error: '❌ Email already registered' });
+      }
+      console.error("SignUp Error", error);
+      return res.status(500).json({ error: '❌ SignUp Error: Internal server error' });
     }
-    return res.status(201).json({ message: 'User registered successfully' });
+    const user = {};
+    return res.status(201).json({ 
+      message: 'User registered successfully', 
+      user: { firstName: firstName, lastName: lastName, email: email , password: undefined }  
+    });
   });
 });
 
@@ -50,10 +57,10 @@ appExp.post('/api/login', (req, res) => {
   pool.query(FIND_USER_QUERY, [email], async (error, results) => {
     if (error) {
       console.error(error);
-      return res.status(500).json({ error: 'Internal server error' });
+      return res.status(500).json({ error: '❌ Login Error: Internal server error' });
     }
     if (results.length === 0) {
-      return res.status(401).json({ error: 'User not found' });
+      return res.status(401).json({ error: '❌ Login Error: User not found' });
     }
 
     const user = results[0];
@@ -62,9 +69,9 @@ appExp.post('/api/login', (req, res) => {
     // Check passwords
     const match = await bcrypt.compare(password, user.password);
     if (match) {
-      return res.status(200).json({ message: 'Logged in successfully', user: { ...user, password: undefined } });
+      return res.status(200).json({ message: '👍 Logged in successfully', user: { ...user, password: undefined } });
     } else {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ error: '❌ Invalid credentials' });
     }
   });
 });

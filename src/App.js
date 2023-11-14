@@ -1,3 +1,5 @@
+// App.js
+
 // Dependencies
 import React, { useState, useEffect, useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -20,10 +22,18 @@ import { Context } from "./Context";
 //const PORT = process.env.REACT_APP_PORT || 3001;
 
 function App() {
-  const context = useContext(Context) || { user: {}, setUser: () => {} };
-  const { user } = context;
+  const { user, setUser } = useContext(Context)
   const [data, setData] = useState([]);
   //const [isSignedIn, setIsSignedIn] = useState(false);
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("local_user"));
+    if (storedUser) {
+      setUser(storedUser);
+    }
+
+    //allGetRequests()
+  }, [setUser]);
 
   useEffect(() => {
     allGetRequests()
@@ -61,7 +71,12 @@ function App() {
 
   const renderRoutes = () => {
     const storedUser = localStorage.getItem("local_user");
-    if (user && user.name != "" && storedUser ) {
+    // console.log("User", user)
+    // console.log("User.Name", user.name)
+    // console.log("storedUser", storedUser)
+
+    if (user && user.name && storedUser) {
+      console.log("renderRoutes(): ENABLED")
       // User is signed in, render all routes
       return (
         <Routes>
@@ -78,6 +93,7 @@ function App() {
       );
     } else {
       // User is not signed in, render only the home route
+      console.log("renderRoutes(): DISABLED")
       return (
         <Routes>
           <Route path="/" element={<Home />} />
@@ -88,12 +104,10 @@ function App() {
   };
 
   return (
-    <ContextProvider>
     <div className="container">
         <OAuth prop_renderRoutes={renderRoutes} />
         {renderRoutes()}
     </div>
-    </ContextProvider>
   );
 }
 

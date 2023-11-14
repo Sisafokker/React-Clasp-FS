@@ -2968,23 +2968,30 @@ var _reactRouterDom = require("react-router-dom");
 //require('dotenv').config(); // Needed for process.env to work outside of react.
 var _app = require("./App");
 var _appDefault = parcelHelpers.interopDefault(_app);
+var _context = require("./Context");
 const container = document.getElementById("app");
 const root = (0, _client.createRoot)(container);
 root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appDefault.default), {}, void 0, false, {
     fileName: "src/index.js",
-    lineNumber: 9,
+    lineNumber: 10,
     columnNumber: 13
 }, undefined));
-root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
-    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appDefault.default), {}, void 0, false, {
+root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _context.ContextProvider), {
+    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appDefault.default), {}, void 0, false, {
+            fileName: "src/index.js",
+            lineNumber: 15,
+            columnNumber: 17
+        }, undefined)
+    }, void 0, false, {
         fileName: "src/index.js",
-        lineNumber: 12,
-        columnNumber: 17
+        lineNumber: 14,
+        columnNumber: 9
     }, undefined)
 }, void 0, false, {
     fileName: "src/index.js",
-    lineNumber: 11,
-    columnNumber: 14
+    lineNumber: 13,
+    columnNumber: 5
 }, undefined)); // const app = document.getElementById("app");
  // ReactDOM.render(<BrowserRouter> <App /> </BrowserRouter>, app)
 
@@ -2993,7 +3000,7 @@ root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Browser
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","react-router-dom":"9xmpe","./App":"2kQhy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","react-router-dom":"9xmpe","./App":"2kQhy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./Context":"49Q86"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("ee51401569654d91");
 
@@ -31722,6 +31729,7 @@ var prevRefreshSig = window.$RefreshSig$;
 $parcel$ReactRefreshHelpers$f00f.prelude(module);
 
 try {
+// App.js
 // Dependencies
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -31753,13 +31761,16 @@ var _s = $RefreshSig$();
 //const PORT = process.env.REACT_APP_PORT || 3001;
 function App() {
     _s();
-    const context = (0, _react.useContext)((0, _context.Context)) || {
-        user: {},
-        setUser: ()=>{}
-    };
-    const { user } = context;
+    const { user, setUser } = (0, _react.useContext)((0, _context.Context));
     const [data, setData] = (0, _react.useState)([]);
     //const [isSignedIn, setIsSignedIn] = useState(false);
+    (0, _react.useEffect)(()=>{
+        const storedUser = JSON.parse(localStorage.getItem("local_user"));
+        if (storedUser) setUser(storedUser);
+    //allGetRequests()
+    }, [
+        setUser
+    ]);
     (0, _react.useEffect)(()=>{
         allGetRequests();
     }, []);
@@ -31789,134 +31800,136 @@ function App() {
     };
     const renderRoutes = ()=>{
         const storedUser = localStorage.getItem("local_user");
-        if (user && user.name != "" && storedUser) // User is signed in, render all routes
-        return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
-            children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                    path: "/",
-                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _customersDefault.default), {}, void 0, false, void 0, void 0)
-                }, void 0, false, {
-                    fileName: "src/App.js",
-                    lineNumber: 69,
-                    columnNumber: 11
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                    path: "customers",
-                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _customersDefault.default), {}, void 0, false, void 0, void 0)
-                }, void 0, false, {
-                    fileName: "src/App.js",
-                    lineNumber: 70,
-                    columnNumber: 11
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                    path: "home",
-                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, void 0, void 0)
-                }, void 0, false, {
-                    fileName: "src/App.js",
-                    lineNumber: 71,
-                    columnNumber: 11
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                    path: "pos",
-                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _posDefault.default), {}, void 0, false, void 0, void 0)
-                }, void 0, false, {
-                    fileName: "src/App.js",
-                    lineNumber: 72,
-                    columnNumber: 11
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                    path: "inventory",
-                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inventoryDefault.default), {}, void 0, false, void 0, void 0)
-                }, void 0, false, {
-                    fileName: "src/App.js",
-                    lineNumber: 73,
-                    columnNumber: 11
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                    path: "appusers",
-                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appusersDefault.default), {}, void 0, false, void 0, void 0)
-                }, void 0, false, {
-                    fileName: "src/App.js",
-                    lineNumber: 74,
-                    columnNumber: 11
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                    path: "tutorials",
-                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _tutorialsDefault.default), {}, void 0, false, void 0, void 0)
-                }, void 0, false, {
-                    fileName: "src/App.js",
-                    lineNumber: 75,
-                    columnNumber: 11
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                    path: "*",
-                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
-                        to: "/customers"
-                    }, void 0, false, void 0, void 0)
-                }, void 0, false, {
-                    fileName: "src/App.js",
-                    lineNumber: 76,
-                    columnNumber: 11
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "src/App.js",
-            lineNumber: 67,
-            columnNumber: 9
-        }, this);
-        else // User is not signed in, render only the home route
-        return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
-            children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                    path: "/",
-                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, void 0, void 0)
-                }, void 0, false, {
-                    fileName: "src/App.js",
-                    lineNumber: 83,
-                    columnNumber: 11
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                    path: "*",
-                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
-                        to: "/"
-                    }, void 0, false, void 0, void 0)
-                }, void 0, false, {
-                    fileName: "src/App.js",
-                    lineNumber: 84,
-                    columnNumber: 11
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "src/App.js",
-            lineNumber: 82,
-            columnNumber: 9
-        }, this);
+        // console.log("User", user)
+        // console.log("User.Name", user.name)
+        // console.log("storedUser", storedUser)
+        if (user && user.name && storedUser) {
+            console.log("renderRoutes(): ENABLED");
+            // User is signed in, render all routes
+            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "/",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _customersDefault.default), {}, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 84,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "customers",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _customersDefault.default), {}, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 85,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "home",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 86,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "pos",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _posDefault.default), {}, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 87,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "inventory",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inventoryDefault.default), {}, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 88,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "appusers",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appusersDefault.default), {}, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 89,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "tutorials",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _tutorialsDefault.default), {}, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 90,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "*",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
+                            to: "/customers"
+                        }, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 91,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/App.js",
+                lineNumber: 82,
+                columnNumber: 9
+            }, this);
+        } else {
+            // User is not signed in, render only the home route
+            console.log("renderRoutes(): DISABLED");
+            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "/",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 99,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "*",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
+                            to: "/"
+                        }, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 100,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/App.js",
+                lineNumber: 98,
+                columnNumber: 9
+            }, this);
+        }
     };
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _context.ContextProvider), {
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            className: "container",
-            children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _oauthDefault.default), {
-                    prop_renderRoutes: renderRoutes
-                }, void 0, false, {
-                    fileName: "src/App.js",
-                    lineNumber: 93,
-                    columnNumber: 9
-                }, this),
-                renderRoutes()
-            ]
-        }, void 0, true, {
-            fileName: "src/App.js",
-            lineNumber: 92,
-            columnNumber: 5
-        }, this)
-    }, void 0, false, {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "container",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _oauthDefault.default), {
+                prop_renderRoutes: renderRoutes
+            }, void 0, false, {
+                fileName: "src/App.js",
+                lineNumber: 108,
+                columnNumber: 9
+            }, this),
+            renderRoutes()
+        ]
+    }, void 0, true, {
         fileName: "src/App.js",
-        lineNumber: 91,
+        lineNumber: 107,
         columnNumber: 5
     }, this);
 }
-_s(App, "vEj5CjpTehMh64O8VqopYkMbvPo=");
+_s(App, "2Qf79hRqF9ts+7FmQncSWUVCt2Y=");
 _c = App;
 exports.default = App;
 var _c;
@@ -31927,7 +31940,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","axios":"jo6P5","./styles/main.scss":"bo7w8","./OAuth":"4rTZc","./components/home":"l90Qn","./components/customers":"4fr12","./components/pos":"a5zFZ","./components/inventory":"dN4Ui","./components/appusers":"9eCzN","./components/tutorials":"kz8Tg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./Context":"49Q86"}],"jo6P5":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","axios":"jo6P5","./styles/main.scss":"bo7w8","./Context":"49Q86","./OAuth":"4rTZc","./components/home":"l90Qn","./components/customers":"4fr12","./components/pos":"a5zFZ","./components/inventory":"dN4Ui","./components/appusers":"9eCzN","./components/tutorials":"kz8Tg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"jo6P5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _axiosJsDefault.default));
@@ -35031,11 +35044,15 @@ function toURLEncodedForm(data, options) {
 },{"../utils.js":"5By4s","./toFormData.js":"ajoez","../platform/index.js":"7tDev","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7tDev":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>(0, _indexJsDefault.default));
 var _indexJs = require("./node/index.js");
 var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
+var _utilsJs = require("./common/utils.js");
+exports.default = {
+    ..._utilsJs,
+    ...(0, _indexJsDefault.default)
+};
 
-},{"./node/index.js":"cVeqE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cVeqE":[function(require,module,exports) {
+},{"./node/index.js":"cVeqE","./common/utils.js":"iIwkL","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cVeqE":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _urlsearchParamsJs = require("./classes/URLSearchParams.js");
@@ -35044,39 +35061,6 @@ var _formDataJs = require("./classes/FormData.js");
 var _formDataJsDefault = parcelHelpers.interopDefault(_formDataJs);
 var _blobJs = require("./classes/Blob.js");
 var _blobJsDefault = parcelHelpers.interopDefault(_blobJs);
-/**
- * Determine if we're running in a standard browser environment
- *
- * This allows axios to run in a web worker, and react-native.
- * Both environments support XMLHttpRequest, but not fully standard globals.
- *
- * web workers:
- *  typeof window -> undefined
- *  typeof document -> undefined
- *
- * react-native:
- *  navigator.product -> 'ReactNative'
- * nativescript
- *  navigator.product -> 'NativeScript' or 'NS'
- *
- * @returns {boolean}
- */ const isStandardBrowserEnv = (()=>{
-    let product;
-    if (typeof navigator !== "undefined" && ((product = navigator.product) === "ReactNative" || product === "NativeScript" || product === "NS")) return false;
-    return typeof window !== "undefined" && typeof document !== "undefined";
-})();
-/**
- * Determine if we're running in a standard browser webWorker environment
- *
- * Although the `isStandardBrowserEnv` method indicates that
- * `allows axios to run in a web worker`, the WebWorker will still be
- * filtered out due to its judgment standard
- * `typeof window !== 'undefined' && typeof document !== 'undefined'`.
- * This leads to a problem when axios post `FormData` in webWorker
- */ const isStandardBrowserWebWorkerEnv = (()=>{
-    return typeof WorkerGlobalScope !== "undefined" && // eslint-disable-next-line no-undef
-    self instanceof WorkerGlobalScope && typeof self.importScripts === "function";
-})();
 exports.default = {
     isBrowser: true,
     classes: {
@@ -35084,8 +35068,6 @@ exports.default = {
         FormData: (0, _formDataJsDefault.default),
         Blob: (0, _blobJsDefault.default)
     },
-    isStandardBrowserEnv,
-    isStandardBrowserWebWorkerEnv,
     protocols: [
         "http",
         "https",
@@ -35115,6 +35097,49 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 "use strict";
 exports.default = typeof Blob !== "undefined" ? Blob : null;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iIwkL":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "hasBrowserEnv", ()=>hasBrowserEnv);
+parcelHelpers.export(exports, "hasStandardBrowserWebWorkerEnv", ()=>hasStandardBrowserWebWorkerEnv);
+parcelHelpers.export(exports, "hasStandardBrowserEnv", ()=>hasStandardBrowserEnv);
+const hasBrowserEnv = typeof window !== "undefined" && typeof document !== "undefined";
+/**
+ * Determine if we're running in a standard browser environment
+ *
+ * This allows axios to run in a web worker, and react-native.
+ * Both environments support XMLHttpRequest, but not fully standard globals.
+ *
+ * web workers:
+ *  typeof window -> undefined
+ *  typeof document -> undefined
+ *
+ * react-native:
+ *  navigator.product -> 'ReactNative'
+ * nativescript
+ *  navigator.product -> 'NativeScript' or 'NS'
+ *
+ * @returns {boolean}
+ */ const hasStandardBrowserEnv = ((product)=>{
+    return hasBrowserEnv && [
+        "ReactNative",
+        "NativeScript",
+        "NS"
+    ].indexOf(product) < 0;
+})(typeof navigator !== "undefined" && navigator.product);
+/**
+ * Determine if we're running in a standard browser webWorker environment
+ *
+ * Although the `isStandardBrowserEnv` method indicates that
+ * `allows axios to run in a web worker`, the WebWorker will still be
+ * filtered out due to its judgment standard
+ * `typeof window !== 'undefined' && typeof document !== 'undefined'`.
+ * This leads to a problem when axios post `FormData` in webWorker
+ */ const hasStandardBrowserWebWorkerEnv = (()=>{
+    return typeof WorkerGlobalScope !== "undefined" && // eslint-disable-next-line no-undef
+    self instanceof WorkerGlobalScope && typeof self.importScripts === "function";
+})();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"01RfH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -35616,10 +35641,15 @@ exports.default = isXHRAdapterSupported && function(config) {
         }
         let contentType;
         if ((0, _utilsJsDefault.default).isFormData(requestData)) {
-            if ((0, _indexJsDefault.default).isStandardBrowserEnv || (0, _indexJsDefault.default).isStandardBrowserWebWorkerEnv) requestHeaders.setContentType(false); // Let the browser set it
-            else if (!requestHeaders.getContentType(/^\s*multipart\/form-data/)) requestHeaders.setContentType("multipart/form-data"); // mobile/desktop app frameworks
-            else if ((0, _utilsJsDefault.default).isString(contentType = requestHeaders.getContentType())) // fix semicolon duplication issue for ReactNative FormData implementation
-            requestHeaders.setContentType(contentType.replace(/^\s*(multipart\/form-data);+/, "$1"));
+            if ((0, _indexJsDefault.default).hasStandardBrowserEnv || (0, _indexJsDefault.default).hasStandardBrowserWebWorkerEnv) requestHeaders.setContentType(false); // Let the browser set it
+            else if ((contentType = requestHeaders.getContentType()) !== false) {
+                // fix semicolon duplication issue for ReactNative FormData implementation
+                const [type, ...tokens] = contentType ? contentType.split(";").map((token)=>token.trim()).filter(Boolean) : [];
+                requestHeaders.setContentType([
+                    type || "multipart/form-data",
+                    ...tokens
+                ].join("; "));
+            }
         }
         let request = new XMLHttpRequest();
         // HTTP basic authentication
@@ -35696,7 +35726,7 @@ exports.default = isXHRAdapterSupported && function(config) {
         // Add xsrf header
         // This is only done if running in a standard browser environment.
         // Specifically not if we're in a web worker, or react-native.
-        if ((0, _indexJsDefault.default).isStandardBrowserEnv) {
+        if ((0, _indexJsDefault.default).hasStandardBrowserEnv) {
             // Add xsrf header
             // regarding CVE-2023-45857 config.withCredentials condition was removed temporarily
             const xsrfValue = (0, _isURLSameOriginJsDefault.default)(fullPath) && config.xsrfCookieName && (0, _cookiesJsDefault.default).read(config.xsrfCookieName);
@@ -35762,7 +35792,7 @@ var _utilsJsDefault = parcelHelpers.interopDefault(_utilsJs);
 var _indexJs = require("../platform/index.js");
 var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
 "use strict";
-exports.default = (0, _indexJsDefault.default).isStandardBrowserEnv ? // Standard browser envs support document.cookie
+exports.default = (0, _indexJsDefault.default).hasStandardBrowserEnv ? // Standard browser envs support document.cookie
 function standardBrowserEnv() {
     return {
         write: function write(name, value, expires, path, domain, secure) {
@@ -35836,7 +35866,7 @@ var _utilsJsDefault = parcelHelpers.interopDefault(_utilsJs);
 var _indexJs = require("../platform/index.js");
 var _indexJsDefault = parcelHelpers.interopDefault(_indexJs);
 "use strict";
-exports.default = (0, _indexJsDefault.default).isStandardBrowserEnv ? // Standard browser envs have full support of the APIs needed to test
+exports.default = (0, _indexJsDefault.default).hasStandardBrowserEnv ? // Standard browser envs have full support of the APIs needed to test
 // whether the request URL is of the same origin as current location.
 function standardBrowserEnv() {
     const msie = /(msie|trident)/i.test(navigator.userAgent);
@@ -36089,7 +36119,7 @@ exports.default = {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "VERSION", ()=>VERSION);
-const VERSION = "1.6.0";
+const VERSION = "1.6.1";
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"45wzn":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -36273,370 +36303,49 @@ Object.entries(HttpStatusCode).forEach(([key, value])=>{
 });
 exports.default = HttpStatusCode;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bo7w8":[function() {},{}],"4rTZc":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$1183 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bo7w8":[function() {},{}],"49Q86":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$6bdd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$1183.prelude(module);
+$parcel$ReactRefreshHelpers$6bdd.prelude(module);
 
 try {
-// OAuth.js
-// Dependencies
+// Context.js GLOBAL Variables passed among all components.
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Context", ()=>Context);
+parcelHelpers.export(exports, "ContextProvider", ()=>ContextProvider);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-var _context = require("./Context");
-var _jwtDecode = require("jwt-decode");
-var _reactRouterDom = require("react-router-dom"); // useNavigate Hook
-// Styles
-var _mainScss = require("./styles/main.scss");
-// Components
-var _nav = require("./components/nav");
-var _navDefault = parcelHelpers.interopDefault(_nav);
-var _oauthform = require("./components/oauthform");
-var _oauthformDefault = parcelHelpers.interopDefault(_oauthform);
 var _s = $RefreshSig$();
-const SCOPES = "https://www.googleapis.com/auth/drive";
-function OAuth({ prop_renderRoutes }) {
+const Context = /*#__PURE__*/ (0, _reactDefault.default).createContext();
+const ContextProvider = ({ children })=>{
     _s();
-    const { user, setUser } = (0, _react.useContext)((0, _context.Context));
-    const [showGoogleLogin, setShowGoogleLogin] = (0, _react.useState)(true); // New state to control Google login visibility
-    const [tokenClient, setTokenClient] = (0, _react.useState)({});
-    const CLIENT_ID = "240692930692-icvohb5b9herteb2oqk18qjb89hlqnls.apps.googleusercontent.com";
-    const navigate = (0, _reactRouterDom.useNavigate)();
-    // useEffect hook to handle component initialization and cleanup
-    (0, _react.useEffect)(()=>{
-        const initializeGoogleSignIn = ()=>{
-            if (window.google && window.google.accounts) {
-                // Google API is loaded, proceed with initialization
-                console.log("\uD83D\uDC4DApp initialized");
-                const storedUser = localStorage.getItem("local_user");
-                if (storedUser) {
-                    setUser(JSON.parse(storedUser));
-                    document.getElementById("googleLogIn").style.display = "none";
-                } else window.google.accounts.id.prompt();
-                window.google.accounts.id.initialize({
-                    client_id: CLIENT_ID,
-                    callback: handleCallbackResponse
-                });
-                window.google.accounts.id.renderButton(document.getElementById("googleLogIn"), {
-                    theme: "outline",
-                    size: "large",
-                    width: 250
-                });
-                setTokenClient(window.google.accounts.oauth2.initTokenClient({
-                    client_id: CLIENT_ID,
-                    scope: SCOPES,
-                    callback: (tokenResponse)=>{
-                        if (tokenResponse && tokenResponse.access_token) fetch("https://www.googleapis.com/drive/v3/files", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                Authorization: `Bearer ${tokenResponse.access_token}`
-                            },
-                            body: JSON.stringify({
-                                name: "ReactAppFile",
-                                mimeType: "text/plain"
-                            })
-                        });
-                    }
-                }));
-            } else setTimeout(initializeGoogleSignIn, 50); // Wait and try initializeGoogleSignIn again
-        };
-        // Initialize the entire process
-        initializeGoogleSignIn();
-        return ()=>{
-        // Clean-up logic when the component is unmounted
-        };
-    }, []); // The empty dependency array ensures that this effect runs once after the initial render
-    // Handle the response from Google Sign-In callback
-    function handleCallbackResponse(response) {
-        console.log("\uD83D\uDC4DHandleSignIn");
-        setShowGoogleLogin(false);
-        let userCredentials = response.credential;
-        let userObject = (0, _jwtDecode.jwtDecode)(userCredentials); // Decode the JWT token to get user data
-        // Set the user data in the component state
-        setUser(userObject);
-        // Hide SignIn Button
-        //document.getElementById("googleLogIn").hidden = true;
-        document.getElementById("googleLogIn").style.display = "none";
-        // Save user data to local storage
-        localStorage.setItem("local_user", JSON.stringify(userObject));
-        // Render Routes after signin
-        prop_renderRoutes();
-        // Move to the desired route
-        navigate("/customers");
-    }
-    // Function to handle user sign-out
-    function handleSignOut(e) {
-        console.log("\uD83D\uDC4DhandleSignOut");
-        setShowGoogleLogin(true);
-        localStorage.removeItem("local_user"); // Clear user data from local storage
-        setUser({}); // Clear user data from component state
-        navigate("/home"); // Move to: 
-        // Show SignIn Div and Prompt
-        //document.getElementById("googleLogIn").style.display = "block";
-        //document.getElementById("googleLogIn").hidden = false;
-        window.google.accounts.id.prompt();
-    }
-    // Function to create a file in Google Drive when the user clicks the "Create File" button
-    function createDriveFile() {
-        console.log("\uD83D\uDC4DcreateDriveFile");
-        tokenClient.requestAccessToken();
-    }
-    // Render the OAuth component
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "auth-wrapper",
-        children: [
-            !user || Object.keys(user).length === 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _oauthformDefault.default), {}, void 0, false, {
-                fileName: "src/OAuth.js",
-                lineNumber: 132,
-                columnNumber: 57
-            }, this),
-            showGoogleLogin && Object.keys(user).length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                id: "googleLogIn",
-                className: "google-login"
-            }, void 0, false, {
-                fileName: "src/OAuth.js",
-                lineNumber: 133,
-                columnNumber: 66
-            }, this) : null,
-            user && Object.keys(user).length !== 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "user-nav-wrapper",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "user-info",
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            className: "user-details",
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                    className: "user-avatar",
-                                    src: user.picture || "https://use.fontawesome.com/releases/v5.15.4/svgs/solid/user.svg",
-                                    alt: "User"
-                                }, void 0, false, {
-                                    fileName: "src/OAuth.js",
-                                    lineNumber: 138,
-                                    columnNumber: 29
-                                }, this),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                    className: "user-text",
-                                    children: [
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
-                                            children: user.name
-                                        }, void 0, false, {
-                                            fileName: "src/OAuth.js",
-                                            lineNumber: 140,
-                                            columnNumber: 33
-                                        }, this),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                            children: user.email
-                                        }, void 0, false, {
-                                            fileName: "src/OAuth.js",
-                                            lineNumber: 141,
-                                            columnNumber: 33
-                                        }, this),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                            className: "sign-out",
-                                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                                className: "sign-out-button",
-                                                onClick: (e)=>handleSignOut(e),
-                                                children: "Sign Out"
-                                            }, void 0, false, {
-                                                fileName: "src/OAuth.js",
-                                                lineNumber: 143,
-                                                columnNumber: 37
-                                            }, this)
-                                        }, void 0, false, {
-                                            fileName: "src/OAuth.js",
-                                            lineNumber: 142,
-                                            columnNumber: 33
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/OAuth.js",
-                                    lineNumber: 139,
-                                    columnNumber: 29
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/OAuth.js",
-                            lineNumber: 137,
-                            columnNumber: 25
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "src/OAuth.js",
-                        lineNumber: 136,
-                        columnNumber: 21
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navDefault.default), {}, void 0, false, {
-                        fileName: "src/OAuth.js",
-                        lineNumber: 148,
-                        columnNumber: 21
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/OAuth.js",
-                lineNumber: 135,
-                columnNumber: 17
-            }, this)
-        ]
-    }, void 0, true, {
-        fileName: "src/OAuth.js",
-        lineNumber: 131,
+    const [user, setUser] = (0, _react.useState)({});
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Context.Provider, {
+        value: {
+            user,
+            setUser
+        },
+        children: children
+    }, void 0, false, {
+        fileName: "src/Context.js",
+        lineNumber: 9,
         columnNumber: 9
-    }, this);
-}
-_s(OAuth, "bX+wHnhk17ODik3Eol5SmGdrk20=", false, function() {
-    return [
-        (0, _reactRouterDom.useNavigate)
-    ];
-});
-_c = OAuth;
-exports.default = OAuth;
+    }, undefined);
+};
+_s(ContextProvider, "cCRtNmj6gRKVA5wOmLEmdl385z4=");
+_c = ContextProvider;
 var _c;
-$RefreshReg$(_c, "OAuth");
+$RefreshReg$(_c, "ContextProvider");
 
-  $parcel$ReactRefreshHelpers$1183.postlude(module);
+  $parcel$ReactRefreshHelpers$6bdd.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","jwt-decode":"EeAxo","react-router-dom":"9xmpe","./styles/main.scss":"bo7w8","./components/nav":"kefMG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./Context":"49Q86","./components/oauthform":"bPYBM"}],"EeAxo":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "InvalidTokenError", ()=>InvalidTokenError);
-parcelHelpers.export(exports, "jwtDecode", ()=>jwtDecode);
-class InvalidTokenError extends Error {
-}
-InvalidTokenError.prototype.name = "InvalidTokenError";
-function b64DecodeUnicode(str) {
-    return decodeURIComponent(atob(str).replace(/(.)/g, (m, p)=>{
-        let code = p.charCodeAt(0).toString(16).toUpperCase();
-        if (code.length < 2) code = "0" + code;
-        return "%" + code;
-    }));
-}
-function base64UrlDecode(str) {
-    let output = str.replace(/-/g, "+").replace(/_/g, "/");
-    switch(output.length % 4){
-        case 0:
-            break;
-        case 2:
-            output += "==";
-            break;
-        case 3:
-            output += "=";
-            break;
-        default:
-            throw new Error("base64 string is not of the correct length");
-    }
-    try {
-        return b64DecodeUnicode(output);
-    } catch (err) {
-        return atob(output);
-    }
-}
-function jwtDecode(token, options) {
-    if (typeof token !== "string") throw new InvalidTokenError("Invalid token specified: must be a string");
-    options || (options = {});
-    const pos = options.header === true ? 0 : 1;
-    const part = token.split(".")[pos];
-    if (typeof part !== "string") throw new InvalidTokenError(`Invalid token specified: missing part #${pos + 1}`);
-    let decoded;
-    try {
-        decoded = base64UrlDecode(part);
-    } catch (e) {
-        throw new InvalidTokenError(`Invalid token specified: invalid base64 for part #${pos + 1} (${e.message})`);
-    }
-    try {
-        return JSON.parse(decoded);
-    } catch (e) {
-        throw new InvalidTokenError(`Invalid token specified: invalid json for part #${pos + 1} (${e.message})`);
-    }
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bo7w8":[function() {},{}],"kefMG":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$c5d7 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$c5d7.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reactRouterDom = require("react-router-dom");
-function Nav() {
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "nav-wrapper",
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                to: "/customers",
-                className: "nav-link",
-                children: "Customers"
-            }, void 0, false, {
-                fileName: "src/components/nav.js",
-                lineNumber: 7,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                to: "/pos",
-                className: "nav-link",
-                children: "POs"
-            }, void 0, false, {
-                fileName: "src/components/nav.js",
-                lineNumber: 8,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                to: "/appusers",
-                className: "nav-link",
-                children: "AppUsers"
-            }, void 0, false, {
-                fileName: "src/components/nav.js",
-                lineNumber: 9,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                to: "/inventory",
-                className: "nav-link",
-                children: "Inventory"
-            }, void 0, false, {
-                fileName: "src/components/nav.js",
-                lineNumber: 10,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                to: "/tutorials",
-                className: "nav-link",
-                children: "Tutorials"
-            }, void 0, false, {
-                fileName: "src/components/nav.js",
-                lineNumber: 11,
-                columnNumber: 7
-            }, this)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/nav.js",
-        lineNumber: 6,
-        columnNumber: 5
-    }, this);
-}
-_c = Nav;
-exports.default = Nav;
-var _c;
-$RefreshReg$(_c, "Nav");
-
-  $parcel$ReactRefreshHelpers$c5d7.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"km3Ru":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"km3Ru":[function(require,module,exports) {
 "use strict";
 var Refresh = require("7422ead32dcc1e6b");
 function debounce(func, delay) {
@@ -36774,49 +36483,374 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"7422ead32dcc1e6b":"786KC"}],"49Q86":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$6bdd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"7422ead32dcc1e6b":"786KC"}],"4rTZc":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$1183 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$6bdd.prelude(module);
+$parcel$ReactRefreshHelpers$1183.prelude(module);
 
 try {
-// Context.js GLOBAL Variables passed among all components.
+// OAuth.js
+// Dependencies
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Context", ()=>Context);
-parcelHelpers.export(exports, "ContextProvider", ()=>ContextProvider);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _context = require("./Context");
+var _jwtDecode = require("jwt-decode");
+var _reactRouterDom = require("react-router-dom"); // useNavigate Hook
+// Styles
+var _mainScss = require("./styles/main.scss");
+// Components
+var _nav = require("./components/nav");
+var _navDefault = parcelHelpers.interopDefault(_nav);
+var _oauthform = require("./components/oauthform");
+var _oauthformDefault = parcelHelpers.interopDefault(_oauthform);
 var _s = $RefreshSig$();
-const Context = /*#__PURE__*/ (0, _reactDefault.default).createContext();
-const ContextProvider = ({ children })=>{
+const SCOPES = "https://www.googleapis.com/auth/drive";
+function OAuth({ prop_renderRoutes }) {
     _s();
-    const [user, setUser] = (0, _react.useState)({});
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Context.Provider, {
-        value: {
-            user,
-            setUser
-        },
-        children: children
-    }, void 0, false, {
-        fileName: "src/Context.js",
-        lineNumber: 9,
+    const { user, setUser } = (0, _react.useContext)((0, _context.Context));
+    const [tokenClient, setTokenClient] = (0, _react.useState)({});
+    const CLIENT_ID = "240692930692-icvohb5b9herteb2oqk18qjb89hlqnls.apps.googleusercontent.com";
+    const navigate = (0, _reactRouterDom.useNavigate)();
+    // useEffect hook to handle component initialization and cleanup
+    (0, _react.useEffect)(()=>{
+        const initializeGoogleSignIn = ()=>{
+            if (window.google && window.google.accounts) {
+                // Google API is loaded, proceed with initialization
+                console.log("\uD83D\uDC4DApp initialized");
+                const storedUser = localStorage.getItem("local_user");
+                if (storedUser) {
+                    setUser(JSON.parse(storedUser));
+                    document.getElementById("googleLogIn").style.display = "none";
+                } else window.google.accounts.id.prompt();
+                window.google.accounts.id.initialize({
+                    client_id: CLIENT_ID,
+                    callback: handleCallbackResponse
+                });
+                window.google.accounts.id.renderButton(document.getElementById("googleLogIn"), {
+                    theme: "outline",
+                    size: "large",
+                    width: 250
+                });
+                setTokenClient(window.google.accounts.oauth2.initTokenClient({
+                    client_id: CLIENT_ID,
+                    scope: SCOPES,
+                    callback: (tokenResponse)=>{
+                        if (tokenResponse && tokenResponse.access_token) fetch("https://www.googleapis.com/drive/v3/files", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: `Bearer ${tokenResponse.access_token}`
+                            },
+                            body: JSON.stringify({
+                                name: "ReactAppFile",
+                                mimeType: "text/plain"
+                            })
+                        });
+                    }
+                }));
+            } else setTimeout(initializeGoogleSignIn, 100); // Wait and try initializeGoogleSignIn again
+        };
+        // Initialize the entire process
+        initializeGoogleSignIn();
+        return ()=>{
+        // Clean-up logic when the component is unmounted
+        };
+    }, []); // The empty dependency array ensures that this effect runs once after the initial render
+    // Handle the response from Google Sign-In callback
+    function handleCallbackResponse(response) {
+        console.log("\uD83D\uDC4DHandleSignIn");
+        let userCredentials = response.credential;
+        let userObject = (0, _jwtDecode.jwtDecode)(userCredentials); // Decode the JWT token to get user data
+        setUser(userObject); // Set the user data in the component state
+        localStorage.setItem("local_user", JSON.stringify(userObject)); // Save user data to local storage
+        prop_renderRoutes(); // Render Routes after signin
+        navigate("/customers"); // Move to the desired route
+        // Hide SignIn Button
+        //document.getElementById("allLogin").style.display = "none";
+        const allLoginElement = document.getElementById("allLogin");
+        if (allLoginElement) allLoginElement.style.display = "none";
+    }
+    // Function to handle user sign-out
+    function handleSignOut(e) {
+        console.log("\uD83D\uDC4DhandleSignOut");
+        localStorage.removeItem("local_user"); // Clear user from local storage
+        setUser({}); // Clear user state
+        navigate("/home"); // Move to:        
+        // Show SignIn Div and Prompt
+        const allLoginElement = document.getElementById("allLogin");
+        if (allLoginElement) allLoginElement.style.display = "block";
+        //window.google.accounts.id.prompt();
+        if (window.google && window.google.accounts) window.google.accounts.id.prompt();
+    }
+    // Function to create a file in Google Drive when the user clicks the "Create File" button
+    function createDriveFile() {
+        console.log("\uD83D\uDC4DcreateDriveFile");
+        tokenClient.requestAccessToken();
+    }
+    // Render the OAuth component
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "auth-wrapper",
+        children: [
+            !user || Object.keys(user).length === 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "allLogin",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _oauthformDefault.default), {}, void 0, false, {
+                        fileName: "src/OAuth.js",
+                        lineNumber: 132,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        id: "googleLogIn",
+                        className: "google-login"
+                    }, void 0, false, {
+                        fileName: "src/OAuth.js",
+                        lineNumber: 133,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/OAuth.js",
+                lineNumber: 131,
+                columnNumber: 13
+            }, this),
+            user && Object.keys(user).length !== 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "user-nav-wrapper",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "user-info",
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "user-details",
+                            children: [
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                    className: "user-avatar",
+                                    src: user.picture || "https://use.fontawesome.com/releases/v5.15.4/svgs/solid/user.svg",
+                                    alt: "User"
+                                }, void 0, false, {
+                                    fileName: "src/OAuth.js",
+                                    lineNumber: 140,
+                                    columnNumber: 29
+                                }, this),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                    className: "user-text",
+                                    children: [
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                                            children: user.name
+                                        }, void 0, false, {
+                                            fileName: "src/OAuth.js",
+                                            lineNumber: 142,
+                                            columnNumber: 33
+                                        }, this),
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                            children: user.email
+                                        }, void 0, false, {
+                                            fileName: "src/OAuth.js",
+                                            lineNumber: 143,
+                                            columnNumber: 33
+                                        }, this),
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                            className: "sign-out",
+                                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                                className: "sign-out-button",
+                                                onClick: (e)=>handleSignOut(e),
+                                                children: "Sign Out"
+                                            }, void 0, false, {
+                                                fileName: "src/OAuth.js",
+                                                lineNumber: 145,
+                                                columnNumber: 37
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "src/OAuth.js",
+                                            lineNumber: 144,
+                                            columnNumber: 33
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/OAuth.js",
+                                    lineNumber: 141,
+                                    columnNumber: 29
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/OAuth.js",
+                            lineNumber: 139,
+                            columnNumber: 25
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "src/OAuth.js",
+                        lineNumber: 138,
+                        columnNumber: 21
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navDefault.default), {}, void 0, false, {
+                        fileName: "src/OAuth.js",
+                        lineNumber: 150,
+                        columnNumber: 21
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/OAuth.js",
+                lineNumber: 137,
+                columnNumber: 17
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/OAuth.js",
+        lineNumber: 129,
         columnNumber: 9
-    }, undefined);
-};
-_s(ContextProvider, "cCRtNmj6gRKVA5wOmLEmdl385z4=");
-_c = ContextProvider;
+    }, this);
+}
+_s(OAuth, "v1KDy4/UtO0s9eUvoDsLybLrLj8=", false, function() {
+    return [
+        (0, _reactRouterDom.useNavigate)
+    ];
+});
+_c = OAuth;
+exports.default = OAuth;
 var _c;
-$RefreshReg$(_c, "ContextProvider");
+$RefreshReg$(_c, "OAuth");
 
-  $parcel$ReactRefreshHelpers$6bdd.postlude(module);
+  $parcel$ReactRefreshHelpers$1183.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bPYBM":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Context":"49Q86","jwt-decode":"EeAxo","react-router-dom":"9xmpe","./styles/main.scss":"bo7w8","./components/nav":"kefMG","./components/oauthform":"bPYBM","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"EeAxo":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "InvalidTokenError", ()=>InvalidTokenError);
+parcelHelpers.export(exports, "jwtDecode", ()=>jwtDecode);
+class InvalidTokenError extends Error {
+}
+InvalidTokenError.prototype.name = "InvalidTokenError";
+function b64DecodeUnicode(str) {
+    return decodeURIComponent(atob(str).replace(/(.)/g, (m, p)=>{
+        let code = p.charCodeAt(0).toString(16).toUpperCase();
+        if (code.length < 2) code = "0" + code;
+        return "%" + code;
+    }));
+}
+function base64UrlDecode(str) {
+    let output = str.replace(/-/g, "+").replace(/_/g, "/");
+    switch(output.length % 4){
+        case 0:
+            break;
+        case 2:
+            output += "==";
+            break;
+        case 3:
+            output += "=";
+            break;
+        default:
+            throw new Error("base64 string is not of the correct length");
+    }
+    try {
+        return b64DecodeUnicode(output);
+    } catch (err) {
+        return atob(output);
+    }
+}
+function jwtDecode(token, options) {
+    if (typeof token !== "string") throw new InvalidTokenError("Invalid token specified: must be a string");
+    options || (options = {});
+    const pos = options.header === true ? 0 : 1;
+    const part = token.split(".")[pos];
+    if (typeof part !== "string") throw new InvalidTokenError(`Invalid token specified: missing part #${pos + 1}`);
+    let decoded;
+    try {
+        decoded = base64UrlDecode(part);
+    } catch (e) {
+        throw new InvalidTokenError(`Invalid token specified: invalid base64 for part #${pos + 1} (${e.message})`);
+    }
+    try {
+        return JSON.parse(decoded);
+    } catch (e) {
+        throw new InvalidTokenError(`Invalid token specified: invalid json for part #${pos + 1} (${e.message})`);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bo7w8":[function() {},{}],"kefMG":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$c5d7 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$c5d7.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRouterDom = require("react-router-dom");
+function Nav() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "nav-wrapper",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
+                to: "/customers",
+                className: "nav-link",
+                children: "Customers"
+            }, void 0, false, {
+                fileName: "src/components/nav.js",
+                lineNumber: 7,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
+                to: "/pos",
+                className: "nav-link",
+                children: "POs"
+            }, void 0, false, {
+                fileName: "src/components/nav.js",
+                lineNumber: 8,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
+                to: "/appusers",
+                className: "nav-link",
+                children: "AppUsers"
+            }, void 0, false, {
+                fileName: "src/components/nav.js",
+                lineNumber: 9,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
+                to: "/inventory",
+                className: "nav-link",
+                children: "Inventory"
+            }, void 0, false, {
+                fileName: "src/components/nav.js",
+                lineNumber: 10,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
+                to: "/tutorials",
+                className: "nav-link",
+                children: "Tutorials"
+            }, void 0, false, {
+                fileName: "src/components/nav.js",
+                lineNumber: 11,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/nav.js",
+        lineNumber: 6,
+        columnNumber: 5
+    }, this);
+}
+_c = Nav;
+exports.default = Nav;
+var _c;
+$RefreshReg$(_c, "Nav");
+
+  $parcel$ReactRefreshHelpers$c5d7.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bPYBM":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$6282 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -36853,7 +36887,7 @@ const OAuthForm = ()=>{
         event.preventDefault();
         if (isSignUp && formData.passwordOne !== formData.passwordTwo) {
             setFeedback({
-                error: "Both Passwords do not match",
+                error: `\u{274C} Both Passwords must be equal. Modify and try again`,
                 success: null
             });
             return;
@@ -36876,14 +36910,36 @@ const OAuthForm = ()=>{
                 name: response.data.user.firstName + " " + response.data.user.lastName,
                 email: response.data.user.email
             };
-            setUser(userObj);
-            setFeedback({
-                success: "Success!",
-                error: null
-            });
+            if (isSignUp) {
+                setFeedback({
+                    success: `\u{1F44D}\u{1F44D} Congratulations ${userObj.name}, your email ${userObj.email} was approved. You can now login`,
+                    error: null
+                });
+                // Reset form & pass email for login
+                setFormData({
+                    email: userObj.email,
+                    password: "",
+                    passwordOne: "",
+                    passwordTwo: "",
+                    firstName: "",
+                    lastName: ""
+                });
+                setIsSignUp(false); // Switch to the login form
+            } else {
+                // For login, set the user in context and clear feedback
+                setUser(userObj);
+                setFeedback({
+                    success: "SignIn Success!",
+                    error: null
+                });
+            }
         } catch (error) {
-            setFeedback({
-                error: error.response.data.message,
+            if (error.response && error.response.data && error.response.data.error) setFeedback({
+                error: error.response.data.error,
+                success: null
+            });
+            else setFeedback({
+                error: "An unexpected error occurred.",
                 success: null
             });
         }
@@ -36910,7 +36966,7 @@ const OAuthForm = ()=>{
                                 required: true
                             }, void 0, false, {
                                 fileName: "src/components/oauthform.js",
-                                lineNumber: 68,
+                                lineNumber: 94,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -36922,7 +36978,7 @@ const OAuthForm = ()=>{
                                 required: true
                             }, void 0, false, {
                                 fileName: "src/components/oauthform.js",
-                                lineNumber: 69,
+                                lineNumber: 95,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -36934,7 +36990,7 @@ const OAuthForm = ()=>{
                                 required: true
                             }, void 0, false, {
                                 fileName: "src/components/oauthform.js",
-                                lineNumber: 70,
+                                lineNumber: 96,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -36946,7 +37002,7 @@ const OAuthForm = ()=>{
                                 required: true
                             }, void 0, false, {
                                 fileName: "src/components/oauthform.js",
-                                lineNumber: 71,
+                                lineNumber: 97,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -36958,7 +37014,7 @@ const OAuthForm = ()=>{
                                 required: true
                             }, void 0, false, {
                                 fileName: "src/components/oauthform.js",
-                                lineNumber: 72,
+                                lineNumber: 98,
                                 columnNumber: 13
                             }, undefined)
                         ]
@@ -36974,7 +37030,7 @@ const OAuthForm = ()=>{
                                 required: true
                             }, void 0, false, {
                                 fileName: "src/components/oauthform.js",
-                                lineNumber: 78,
+                                lineNumber: 104,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -36986,7 +37042,7 @@ const OAuthForm = ()=>{
                                 required: true
                             }, void 0, false, {
                                 fileName: "src/components/oauthform.js",
-                                lineNumber: 79,
+                                lineNumber: 105,
                                 columnNumber: 13
                             }, undefined)
                         ]
@@ -36996,7 +37052,7 @@ const OAuthForm = ()=>{
                         children: isSignUp ? "Sign Up" : "Log In"
                     }, void 0, false, {
                         fileName: "src/components/oauthform.js",
-                        lineNumber: 83,
+                        lineNumber: 109,
                         columnNumber: 9
                     }, undefined),
                     isSignUp ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -37005,7 +37061,7 @@ const OAuthForm = ()=>{
                         children: "Or Log In here"
                     }, void 0, false, {
                         fileName: "src/components/oauthform.js",
-                        lineNumber: 85,
+                        lineNumber: 111,
                         columnNumber: 11
                     }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
                         href: "#signup",
@@ -37013,13 +37069,13 @@ const OAuthForm = ()=>{
                         children: "Or Sign Up here"
                     }, void 0, false, {
                         fileName: "src/components/oauthform.js",
-                        lineNumber: 87,
+                        lineNumber: 113,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/oauthform.js",
-                lineNumber: 65,
+                lineNumber: 91,
                 columnNumber: 7
             }, undefined),
             feedback.error && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37027,7 +37083,7 @@ const OAuthForm = ()=>{
                 children: feedback.error
             }, void 0, false, {
                 fileName: "src/components/oauthform.js",
-                lineNumber: 90,
+                lineNumber: 116,
                 columnNumber: 26
             }, undefined),
             feedback.success && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37035,13 +37091,13 @@ const OAuthForm = ()=>{
                 children: feedback.success
             }, void 0, false, {
                 fileName: "src/components/oauthform.js",
-                lineNumber: 91,
+                lineNumber: 117,
                 columnNumber: 28
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/oauthform.js",
-        lineNumber: 64,
+        lineNumber: 90,
         columnNumber: 5
     }, undefined);
 };
@@ -37056,7 +37112,7 @@ $RefreshReg$(_c, "OAuthForm");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","axios":"jo6P5","../Context":"49Q86"}],"l90Qn":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../Context":"49Q86","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"l90Qn":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$f362 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -37079,13 +37135,6 @@ function Home() {
         className: "home-wrapper",
         children: [
             " ",
-            user && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                children: user.name
-            }, void 0, false, {
-                fileName: "src/components/home.js",
-                lineNumber: 11,
-                columnNumber: 16
-            }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
                 children: "Welcome to React_Clasp"
             }, void 0, false, {
@@ -37094,7 +37143,7 @@ function Home() {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
-                children: "Please Sign In to continue"
+                children: "Please Log In to continue"
             }, void 0, false, {
                 fileName: "src/components/home.js",
                 lineNumber: 13,
@@ -37127,7 +37176,7 @@ $RefreshReg$(_c, "Home");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../styles/home.scss":"3UZ0N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../Context":"49Q86"}],"3UZ0N":[function() {},{}],"4fr12":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../Context":"49Q86","../styles/home.scss":"3UZ0N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"3UZ0N":[function() {},{}],"4fr12":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$81db = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -37364,7 +37413,7 @@ $RefreshReg$(_c, "Inventory");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq","../Context":"49Q86"}],"9eCzN":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../Context":"49Q86","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"9eCzN":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$e710 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -37725,7 +37774,7 @@ $RefreshReg$(_c, "Appusers");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@fortawesome/react-fontawesome":"clIT3","@fortawesome/free-solid-svg-icons":"5lkdy","./appusersform":"37Jh8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/appusers-table.scss":"gXQPt","../styles/main.scss":"bo7w8"}],"clIT3":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@fortawesome/react-fontawesome":"clIT3","@fortawesome/free-solid-svg-icons":"5lkdy","./appusersform":"37Jh8","../styles/main.scss":"bo7w8","../styles/appusers-table.scss":"gXQPt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"clIT3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "FontAwesomeIcon", ()=>FontAwesomeIcon);
@@ -63483,7 +63532,7 @@ $RefreshReg$(_c, "AppusersForm");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/appusers-form.scss":"8PYMb"}],"8PYMb":[function() {},{}],"gXQPt":[function() {},{}],"bo7w8":[function() {},{}],"kz8Tg":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../styles/appusers-form.scss":"8PYMb","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8PYMb":[function() {},{}],"bo7w8":[function() {},{}],"gXQPt":[function() {},{}],"kz8Tg":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$0b6a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

@@ -19,42 +19,68 @@ const OAuthForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (isSignUp && formData.passwordOne !== formData.passwordTwo) {
-      setFeedback({ error: 'Both Passwords do not match', success: null });
+      setFeedback({ error: `❌ Both Passwords must be equal. Modify and try again`, success: null });
       return;
     }
-
+  
     const requestData = isSignUp
       ? {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        password: formData.passwordOne
-      }
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          password: formData.passwordOne
+        }
       : {
-        email: formData.email,
-        password: formData.password
-      };
-
+          email: formData.email,
+          password: formData.password
+        };
+  
     const url = `http://localhost:${process.env.REACT_APP_PORT}/api/${isSignUp ? 'signup' : 'login'}`;
-
     try {
       const response = await axios.post(url, requestData);
       console.log("Success!")
       console.log(response.data.user)
-
+      
       const userObj = {
-        name: response.data.user.firstName + " " + response.data.user.lastName,
+        name: response.data.user.firstName + " " +response.data.user.lastName,
         email: response.data.user.email
       };
 
-      setUser(userObj);
-      setFeedback({ success: 'Success!', error: null });
+      if (isSignUp) {
+        setFeedback({ 
+          success: `👍👍 Congratulations ${userObj.name}, your email ${userObj.email} was approved. You can now login`, 
+          error: null 
+        });
+  
+        // Reset form & pass email for login
+        setFormData({
+          email: userObj.email,
+          password: '',
+          passwordOne: '',
+          passwordTwo: '',
+          firstName: '',
+          lastName: ''
+        });
+  
+        setIsSignUp(false); // Switch to the login form
+  
+      } else {
+        // For login, set the user in context and clear feedback
+        setUser(userObj);
+        setFeedback({ success: 'SignIn Success!', error: null });
+      }
+  
     } catch (error) {
-      setFeedback({ error: error.response.data.message, success: null });
+      if (error.response && error.response.data && error.response.data.error) {
+        setFeedback({ error: error.response.data.error, success: null });
+      } else {
+        setFeedback({ error: 'An unexpected error occurred.', success: null });
+      }
     }
   };
+  
 
   const updateFormData = (field) => (event) => {
     setFormData({ ...formData, [field]: event.target.value });
