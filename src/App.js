@@ -19,7 +19,7 @@ import AppUsers from "./components/appusers";
 import Tutorials from "./components/tutorials";
 import { Context } from "./Context";
 
-//const PORT = process.env.REACT_APP_PORT || 3001;
+//const PORT = process.env.REACT_APP_BACKEND_PORT || 5000;
 
 function App() {
   const { user, setUser } = useContext(Context)
@@ -41,7 +41,7 @@ function App() {
 
   const allGetRequests = () => {
     // All API Fetch Requests from SQL Backend
-    axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/users`)
+    axios.get(`http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/users`)
       .then(response => {
         setData(response.data);
         console.log("👍get_users")//, response.data)
@@ -50,32 +50,32 @@ function App() {
         console.error("❌get_users", error);
       });
 
-      axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/companies`)
-      .then(response => {
-        setData(response.data);
-        console.log("👍get_companies")//, response.data)
-      })
-      .catch(error => {
-        console.error("❌get_companies", error);
-      });
+      // axios.get(`http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/companies`)
+      // .then(response => {
+      //   setData(response.data);
+      //   console.log("👍get_companies")//, response.data)
+      // })
+      // .catch(error => {
+      //   console.error("❌get_companies", error);
+      // });
 
-      axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/contacts`)
-      .then(response => {
-        setData(response.data);
-        console.log("👍get_contacts")//, response.data)
-      })
-      .catch(error => {
-        console.error("❌get_contacts", error);
-      });
+      // axios.get(`http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/contacts`)
+      // .then(response => {
+      //   setData(response.data);
+      //   console.log("👍get_contacts")//, response.data)
+      // })
+      // .catch(error => {
+      //   console.error("❌get_contacts", error);
+      // });
   }
 
   const renderRoutes = () => {
     const storedUser = localStorage.getItem("local_user");
-    // console.log("User", user)
-    // console.log("User.Name", user.name)
-    // console.log("storedUser", storedUser)
+    console.log("User", user)
+    console.log("User.Name", user.name)
+    console.log("storedUser", storedUser)
 
-    if (user && user.name && storedUser) {
+    if (user && user.name || storedUser) {
       console.log("renderRoutes(): ENABLED")
       // User is signed in, render all routes
       return (

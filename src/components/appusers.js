@@ -18,7 +18,7 @@ function Appusers() {
 
     // Get Student Data
     const fetchAppUsers = useCallback(() => {  // useCallback => React Hook that lets you cache a function definition between re-renders.
-        const url = `http://localhost:${process.env.REACT_APP_PORT}/api/users`;
+        const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/users`;
         axios.get(url)
             .then(response => {
                 setAppUsers(response.data);
@@ -28,7 +28,7 @@ function Appusers() {
     }, []);
 
     // const fetchAppUsers = () => {
-    //     axios.get(`http://localhost:${process.env.REACT_APP_PORT}/api/users`)
+    //     axios.get(`http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/users`)
     //         .then(response => {
     //             setApp_users(response.data);
     //             console.log("👍students")
@@ -86,7 +86,7 @@ function Appusers() {
                 prop_handleUserAction={handleUserAction} 
                 prop_userAction={userAction} 
             />
-            <h2>[SQL] Current AppUsers:</h2>
+            <h2>[SQL] Signed-Up Users:</h2>
             <table>
                 <thead>
                     <tr>
