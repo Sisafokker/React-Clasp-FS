@@ -10,7 +10,7 @@
     "gpull": "clasp pull",
     "gpush": "clasp push",
     "gstart": "clasp push --watch",
-    "start": "parcel src/index.html --dist-dir ./apps-script",
+    "start": "parcel src/index.html --dist-dir ./apps-script --port 1234",
     "build": "parcel build src/index.html --dist-dir ./apps-script"
   },
   "keywords": [],
