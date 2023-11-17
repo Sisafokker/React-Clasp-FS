@@ -37,7 +37,8 @@ const OAuthForm = () => {
           password: formData.password
         };
   
-    const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/${isSignUp ? 'signup' : 'login'}`;
+    //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/${isSignUp ? 'signup' : 'login'}`;
+    const url = `${process.env.REACT_APP_Backend_URL}/api/${isSignUp ? 'signup' : 'login'}`;
     try {
       const response = await axios.post(url, requestData);
       console.log("Success!")

@@ -10,6 +10,7 @@ package-lock.json
 #Keys (Ids and Secrets without "")
 .env
 /backend/.env
+/backend/app.yaml
 
 #Sql Keys
 /backend/sql_credentials/reactfscloudsql-9e64e71b4f50.json
