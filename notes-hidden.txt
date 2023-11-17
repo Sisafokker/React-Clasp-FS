@@ -4,3 +4,15 @@ git add .
 git status
 git commit -m "laptop"
 git push
+
+
+Cloud CLI
+    europe-west-4
+    gcloud cheat-sheet
+
+Build FrontEnd
+    In frontEnd Directory: npm run build
+
+Deploy Backend
+    In backend directory: gcloud app deploy
+    europe-west-2

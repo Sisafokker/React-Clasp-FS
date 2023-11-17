@@ -6,7 +6,7 @@ const mysql = require('mysql');
 const cors = require('cors'); // When your React app running on http://localhost:1234 tries to make a request to your Node.js server running on http://localhost:3001, the browser blocks the request due to CORS policy.
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5000;
 
 // Initializes your Express application.
 const appExp = express();
@@ -25,7 +25,7 @@ appExp.use(bodyParser.json());
 // });
 
 const pool = mysql.createPool({
-  host: process.env.GOOGLE_SQL_HOST,
+  host: process.env.GOOGLE_SQL_CONNECTION_NAME,
   user: process.env.GOOGLE_SQL_USER,
   password: process.env.GOOGLE_SQL_PASSWORD,
   database: process.env.GOOGLE_SQL_DATABASE
@@ -163,5 +163,5 @@ appExp.get('/api/companies', (req, res) => {
 
 //Start the Server for specified PORT
 appExp.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`👉Server is running on port ${PORT}`);
 });

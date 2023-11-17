@@ -41,7 +41,8 @@ function App() {
 
   const allGetRequests = () => {
     // All API Fetch Requests from SQL Backend
-    axios.get(`http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/users`)
+    const url = process.env.REACT_APP_Backend_URL;
+    axios.get(`${url}/api/users`)
       .then(response => {
         setData(response.data);
         console.log("👍get_users")//, response.data)
@@ -50,7 +51,7 @@ function App() {
         console.error("❌get_users", error);
       });
 
-      // axios.get(`http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/companies`)
+      // axios.get(`${url}/api/companies`)
       // .then(response => {
       //   setData(response.data);
       //   console.log("👍get_companies")//, response.data)
@@ -59,7 +60,7 @@ function App() {
       //   console.error("❌get_companies", error);
       // });
 
-      // axios.get(`http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/contacts`)
+      // axios.get(`${url}/api/contacts`)
       // .then(response => {
       //   setData(response.data);
       //   console.log("👍get_contacts")//, response.data)
