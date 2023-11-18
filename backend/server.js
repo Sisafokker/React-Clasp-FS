@@ -17,6 +17,7 @@ appExp.use(cors());
 // Use body-parser middleware to parse JSON requests
 appExp.use(bodyParser.json());
 
+/* LOCAL EVERYTHING*/ 
 // const pool = mysql.createPool({
 //   host: process.env.SQL_HOST,
 //   user: process.env.SQL_USER,
@@ -24,8 +25,16 @@ appExp.use(bodyParser.json());
 //   database: process.env.SQL_DATABASE
 // });
 
+/* LOCAL BACKEND - CLOUD SQL*/ 
+// const pool = mysql.createPool({
+//   host: process.env.GOOGLE_SQL_DB_HOST_LOCAL_BACKEND,
+//   user: process.env.GOOGLE_SQL_USER,
+//   password: process.env.GOOGLE_SQL_PASSWORD,
+//   database: process.env.GOOGLE_SQL_DATABASE,
+// });
+
+/* CLOUD BACKEND && CLOUD SQL*/ 
 const pool = mysql.createPool({
-  //host: process.env.GOOGLE_SQL_DB_HOST,
   user: process.env.GOOGLE_SQL_USER,
   password: process.env.GOOGLE_SQL_PASSWORD,
   database: process.env.GOOGLE_SQL_DATABASE,
