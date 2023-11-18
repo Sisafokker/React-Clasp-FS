@@ -18,8 +18,21 @@ Deploy Backend
     $ gcloud app logs tail -s default
     europe-west-2
 
+Cloud Storage Frontend: ❌
+    Bucket Name: fsreactclaspfrontend
+    First: npm run build
+    Second: gsutil -m cp -r ./apps-script/* gs://fsreactclaspfrontend
+    Third (optional to list files in the bucket): gsutil ls gs://fsreactclaspfrontend
+    URL: http://fsreactclaspfrontend.storage.googleapis.com
 
-Appengine
+Clasp
+    npm run gstart
+
+SCSS Compiler
+    npm run compile-scss
+
+
+Backend AppEngine Info
 descriptor:                  [C:\Users\JP\Desktop\GAS in VSCode\React_Clasp\backend\app.yaml]
 source:                      [C:\Users\JP\Desktop\GAS in VSCode\React_Clasp\backend]
 target project:              [reactfscloudsql]

@@ -11,7 +11,7 @@ How to deploy React App on Google Cloud?: https://www.youtube.com/watch?v=OS0o1i
 Google Sheets - JSON API, Wep App: https://www.youtube.com/watch?v=VPI27L_fQC4&list=PLRmEk9smitaVGAAhgU0Pdc2sEs7yxDrEk
 
 
-❓ Connect from App Engine standard environment: https://cloud.google.com/sql/docs/mysql/connect-app-engine-standard
+👍👍 Connect from App Engine standard environment: https://cloud.google.com/sql/docs/mysql/connect-app-engine-standard (crucial arctile to make AppEngine communicate with Cloud SQL)
 
 ❌Didnt work:
 Creating Documents using React / Google Docs API / Google OAuth 2.0: https://www.youtube.com/watch?v=0KoZSVnTnkA

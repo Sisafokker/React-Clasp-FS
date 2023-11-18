@@ -1,0 +1,15 @@
+service: frontend
+runtime: nodejs20 # specify the runtime
+
+handlers:
+  # Serve all static files with a URL ending with a file extension
+  - url: /(.*\.(gif|png|jpg|css|js|ico|html|map))
+    static_files: apps-script/\1
+    upload: apps-script/.*\.(gif|png|jpg|css|js|ico|html|map)
+    secure: always # Redirect HTTP to HTTPS
+
+  # Serve index.html for all other requests
+  - url: /.*
+    static_files: apps-script/index.html
+    upload: apps-script/index.html
+    secure: always # Redirect HTTP to HTTPS

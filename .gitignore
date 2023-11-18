@@ -15,3 +15,5 @@ package-lock.json
 #Sql Keys
 /backend/sql_credentials/reactfscloudsql-9e64e71b4f50.json
 
+#Compiled Styles to CSS
+/apps-script/styles_compiled/
