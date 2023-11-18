@@ -8,11 +8,22 @@ git push
 
 Cloud CLI
     europe-west-4
-    gcloud cheat-sheet
+    $ gcloud cheat-sheet
 
 Build FrontEnd
-    In frontEnd Directory: npm run build
+    In frontEnd Directory: $ npm run build
 
 Deploy Backend
-    In backend directory: gcloud app deploy
+    In backend directory: $ gcloud app deploy
+    $ gcloud app logs tail -s default
     europe-west-2
+
+
+Appengine
+descriptor:                  [C:\Users\JP\Desktop\GAS in VSCode\React_Clasp\backend\app.yaml]
+source:                      [C:\Users\JP\Desktop\GAS in VSCode\React_Clasp\backend]
+target project:              [reactfscloudsql]
+target service:              [default]
+target version:              [20231118t093811]
+target url:                  [https://reactfscloudsql.nw.r.appspot.com]
+target service account:      [reactfscloudsql@appspot.gserviceaccount.com]
