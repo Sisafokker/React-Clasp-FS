@@ -10,6 +10,9 @@ How to OAuth 2.0 Authorization with Postman | Generate Google Access Token in Po
 How to deploy React App on Google Cloud?: https://www.youtube.com/watch?v=OS0o1icJIZA
 Google Sheets - JSON API, Wep App: https://www.youtube.com/watch?v=VPI27L_fQC4&list=PLRmEk9smitaVGAAhgU0Pdc2sEs7yxDrEk
 
+
+❓ Connect from App Engine standard environment: https://cloud.google.com/sql/docs/mysql/connect-app-engine-standard
+
 ❌Didnt work:
 Creating Documents using React / Google Docs API / Google OAuth 2.0: https://www.youtube.com/watch?v=0KoZSVnTnkA
 Using env file (environment variables): https://www.youtube.com/watch?v=KJE4LtAxLEw

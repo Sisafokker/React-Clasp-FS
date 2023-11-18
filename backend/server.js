@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const PORT = process.env.PORT || 5000;
 
-// Initializes your Express application.
+// Initializes your Express application
 const appExp = express();
 
 // Enable CORS for all routes
@@ -25,10 +25,11 @@ appExp.use(bodyParser.json());
 // });
 
 const pool = mysql.createPool({
-  host: process.env.GOOGLE_SQL_CONNECTION_NAME,
+  //host: process.env.GOOGLE_SQL_DB_HOST,
   user: process.env.GOOGLE_SQL_USER,
   password: process.env.GOOGLE_SQL_PASSWORD,
-  database: process.env.GOOGLE_SQL_DATABASE
+  database: process.env.GOOGLE_SQL_DATABASE,
+  socketPath: process.env.GOOGLE_SQL_DB_HOST
 });
 
 // DEFINE API ENDPOINTS // --------------------------------------------------------------------------------------------------
@@ -100,6 +101,7 @@ appExp.post('/api/users', (req, res) => {
   // Validate data & handle errors
 
   pool.query(INSERT_USER_QUERY, [firstName, lastName, email, password, type], (error, results) => {
+    logDbConnectionStatus(error)
     if (error) {
       console.error(error);
       return res.status(500).json({ error: 'Internal server error' });
@@ -117,6 +119,7 @@ appExp.patch('/api/users/:id', (req, res) => {
   // Validate data & handle errors
 
   pool.query(UPDATE_USER_QUERY, [firstName, lastName, email, type, status, id], (error, results) => {
+    logDbConnectionStatus(error)
     if (error) {
       console.error(error);
       return res.status(500).json({ error: 'Internal server error' });
@@ -133,6 +136,7 @@ appExp.delete('/api/users/:id', (req, res) => {
   // Validate data & handle errors
 
   pool.query(DELETE_USER_QUERY, [id], (error, results) => {
+    logDbConnectionStatus(error)
     if (error) {
       console.error(error);
       return res.status(500).json({ error: 'Internal server error' });
@@ -144,6 +148,7 @@ appExp.delete('/api/users/:id', (req, res) => {
 
 appExp.get('/api/contacts', (req, res) => {
   pool.query('SELECT * FROM contacts', (error, results) => {
+    logDbConnectionStatus(error)
     if (error) {
       throw error;
     }
@@ -153,6 +158,7 @@ appExp.get('/api/contacts', (req, res) => {
 
 appExp.get('/api/companies', (req, res) => {
   pool.query('SELECT * FROM companies', (error, results) => {
+    logDbConnectionStatus(error)
     if (error) {
       throw error;
     }
@@ -163,5 +169,16 @@ appExp.get('/api/companies', (req, res) => {
 
 //Start the Server for specified PORT
 appExp.listen(PORT, () => {
-  console.log(`👉Server is running on port ${PORT}`);
+  console.log(`Connection_AppEngine: 👍 - Server is running on port ${PORT}`);
 });
+
+
+// Helper to log SQL_DB connection status
+function logDbConnectionStatus(error) {
+  if (error) {
+    console.log(`Connection_CloudSQL: ❌ - Error: ${error.message}`);
+    console.log(`Connection_CloudSQL: ❌ - Using: ${process.env.GOOGLE_SQL_DB_HOST}`);
+  } else {
+    console.log('Connection_CloudSQL: 👍');
+  }
+}
