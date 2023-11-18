@@ -6,7 +6,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import axios from 'axios';
 
 // Styles
-import "./styles/main.scss";
+//import "./styles/main.scss";
+// Compiled CSS Styles files
+import "../apps-script/styles_compiled/main.css";
 
 // Components
 import { ContextProvider } from './Context';

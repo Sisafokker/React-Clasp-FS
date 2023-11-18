@@ -1,7 +1,11 @@
 import React, { useContext } from "react";
 import { Context } from "../Context";
+
 //import React from "react";
-import "../styles/home.scss";
+//import "../styles/home.scss";
+
+// Compiled CSS Styles files
+import "../../apps-script/styles_compiled/home.css" 
 
 function Home() {
   const {user, setUser} = useContext(Context);
