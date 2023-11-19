@@ -6,9 +6,9 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom"; // useNavigate Hook
 
 // Styles
-//import "./styles/main.scss";
+import "./styles/main.scss";
 // Compiled CSS Styles files
-import "../apps-script/styles_compiled/main.css";
+//import "../apps-script/styles_compiled/main.css";
 
 // Components
 import Nav from "./components/nav";
