@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+// appusers.js
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -43,7 +44,13 @@ function Appusers() {
         setUserAction({ user, action });
     };
 
-    const renderTableRows = appUsers.map(u => (
+    // Sorting
+    const sortedAppUsers = useMemo(() => {
+        // useMemo hook: used to version of sorted appUsers array, recalculated only when appUsers changes. Better for performance.
+        return [...appUsers].sort((a, b) => a.lastName.localeCompare(b.lastName));
+    }, [appUsers]);
+
+    const renderTableRows = sortedAppUsers.map(u => (
         <tr key={u.id}>
             <td>{u.lastName}</td>
             <td>{u.firstName}</td>

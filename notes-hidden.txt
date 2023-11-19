@@ -1,42 +1,54 @@
 Github Repository: https://github.com/Sisafokker/React-Clasp-FS
-git pull
-git add .
-git status
-git commit -m "laptop"
-git push
+    git pull
+    git add .
+    git status
+    git commit -m "laptop"
+    git push
 
-
-Cloud CLI
+Cloud CLI: commands
     europe-west-4
     $ gcloud cheat-sheet
 
-Build FrontEnd
-    In frontEnd Directory: $ npm run build
+Clasp
+    Sync current app to G.A.S. Webapp: npm run gstart
 
-Deploy Backend
-    In backend directory: $ gcloud app deploy
+SCSS Compiler:
+    npm run compile-scss
+
+Deploy Cloud FrontEnd: In frontEnd Directory: 
+    SCSS Compiler:          $ npm run compile-scss  (Needed only if I made modifications to the Styles. Remember, you did this compiling for CLASP)
+    Build App:              $ npm run build
+    Deploy FrontEnd:        $ gcloud app deploy
+    Stream logs:            $ gcloud app logs tail -s frontend
+    View app in browser:    $ gcloud app browse -s frontend
+
+Deploy Cloud Backend: In backend directory: 
+    $ gcloud app deploy
     $ gcloud app logs tail -s default
     europe-west-2
 
-Cloud Storage Frontend: ❌
+Cloud Storage Frontend: ❌ (FAILES ATTEMPT)
     Bucket Name: fsreactclaspfrontend
     First: npm run build
     Second: gsutil -m cp -r ./apps-script/* gs://fsreactclaspfrontend
     Third (optional to list files in the bucket): gsutil ls gs://fsreactclaspfrontend
     URL: http://fsreactclaspfrontend.storage.googleapis.com
 
-Clasp
-    npm run gstart
+FONTEND: AppEngine Info
+    descriptor:                  [C:\Users\JP\Desktop\GAS in VSCode\React_Clasp\app.yaml]
+    source:                      [C:\Users\JP\Desktop\GAS in VSCode\React_Clasp]
+    target project:              [reactfscloudsql]
+    target service:              [frontend]
+    target version:              [20231119t103634]
+    target url:                  [https://frontend-dot-reactfscloudsql.nw.r.appspot.com]
+    target service account:      [reactfscloudsql@appspot.gserviceaccount.com]
 
-SCSS Compiler
-    npm run compile-scss
 
-
-Backend AppEngine Info
-descriptor:                  [C:\Users\JP\Desktop\GAS in VSCode\React_Clasp\backend\app.yaml]
-source:                      [C:\Users\JP\Desktop\GAS in VSCode\React_Clasp\backend]
-target project:              [reactfscloudsql]
-target service:              [default]
-target version:              [20231118t093811]
-target url:                  [https://reactfscloudsql.nw.r.appspot.com]
-target service account:      [reactfscloudsql@appspot.gserviceaccount.com]
+BACKEND: AppEngine Info
+    descriptor:                  [C:\Users\JP\Desktop\GAS in VSCode\React_Clasp\backend\app.yaml]
+    source:                      [C:\Users\JP\Desktop\GAS in VSCode\React_Clasp\backend]
+    target project:              [reactfscloudsql]
+    target service:              [default]
+    target version:              [20231118t093811]
+    target url:                  [https://reactfscloudsql.nw.r.appspot.com]
+    target service account:      [reactfscloudsql@appspot.gserviceaccount.com]
