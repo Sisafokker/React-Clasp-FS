@@ -1,0 +1,3 @@
+PENDIENTES: 
+(1) Disable Parcel's HMR when building for Production to avoid: ❌"[parcel] 🚨 Connection to the HMR server was lost" 
+(2) Keep researching ❌"[GSI_LOGGER]: Missing required parameter: client_id."

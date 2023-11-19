@@ -1,0 +1,18 @@
+.nav-wrapper {
+  background-color: #f6f6f6;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px; }
+  .nav-wrapper .nav-link {
+    text-decoration: none;
+    color: #26bfd4;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease; }
+    .nav-wrapper .nav-link:hover {
+      color: #1a6d7a; }
+    .nav-wrapper .nav-link:not(:last-child) {
+      margin-right: 20px; }

@@ -13,3 +13,6 @@ handlers:
     static_files: apps-script/index.html
     upload: apps-script/index.html
     secure: always # Redirect HTTP to HTTPS
+
+env_variables:
+  REACT_APP_CLIENT_ID: 240692930692-icvohb5b9herteb2oqk18qjb89hlqnls.apps.googleusercontent.com

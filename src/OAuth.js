@@ -14,6 +14,7 @@ import "../apps-script/styles_compiled/main.css";
 import Nav from "./components/nav";
 import OAuthForm from "./components/oauthform";
 
+
 const SCOPES = "https://www.googleapis.com/auth/drive";
 
 function OAuth({ prop_renderRoutes }) {
@@ -24,6 +25,7 @@ function OAuth({ prop_renderRoutes }) {
 
     // useEffect hook to handle component initialization and cleanup
     useEffect(() => {
+        console.log("CLIENT_ID",CLIENT_ID);
         const initializeGoogleSignIn = () => {
             if (window.google && window.google.accounts) {
                 // Google API is loaded, proceed with initialization
@@ -38,7 +40,9 @@ function OAuth({ prop_renderRoutes }) {
 
                 window.google.accounts.id.initialize({
                     client_id: CLIENT_ID,
-                    callback: handleCallbackResponse
+                    context: 'signin',
+                    callback: handleCallbackResponse,
+                    cancel_on_tap_outside: false,
                 });
 
                 window.google.accounts.id.renderButton(document.getElementById("googleLogIn"), {
@@ -81,12 +85,21 @@ function OAuth({ prop_renderRoutes }) {
         };
     }, []); // The empty dependency array ensures that this effect runs once after the initial render
     
+    function decodeJwtResponse(token) {
+        let base64Url = token.split('.')[1];
+        let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        let jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+    }
 
     // Handle the response from Google Sign-In callback
     function handleCallbackResponse(response) {
         console.log("👍HandleSignIn")
         let userCredentials = response.credential;
-        let userObject = jwtDecode(userCredentials); // Decode the JWT token to get user data
+        //let userObject = jwtDecode(userCredentials);          // Alternative 1: Decode the JWT token to get user data
+        let userObject = decodeJwtResponse(userCredentials);    // Alternative 2: To Decode the JWT token
 
         setUser(userObject); // Set the user data in the component state
         localStorage.setItem("local_user", JSON.stringify(userObject)); // Save user data to local storage
