@@ -13,11 +13,22 @@ table {
         text-align: left;
         border-bottom: 1px solid #ddd;
     }
-
-    th {
-        background-color: #9e9e9e;
-        
+    
+    th.sortable {
+        cursor: pointer;
     }
+
+    
+    th {
+        background-color: #9e9e9e;       
+    }
+
+
+    .sort-indicator {
+        font-size: 0.8em;
+        color: $offwhite
+    }
+
 
     tr:nth-child(even) {
         background-color: #f2f2f2;
@@ -28,3 +39,4 @@ table {
     }
 
 }
+

@@ -5,13 +5,13 @@
     <title>JP React App</title>
     
     <!-- For Google Sign In -->
-    <link rel="stylesheet" href="/index.57b22008.css"><script src="https://accounts.google.com/gsi/client" async="" defer=""></script> 
+    <link rel="stylesheet" href="/index.d05a4245.css"><script src="https://accounts.google.com/gsi/client" async="" defer=""></script> 
     
     <!-- Import Styles -->
-    <!-- <style> @import "./styles/main.scss"; </style> -->
     <style>
 
 </style>
+    <!-- <style> @import "../apps-script/styles_compiled/main.css"; </style> -->
 </head>
 <body>
     <div id="app">  </div>    
@@ -31741,9 +31741,9 @@ var _reactRouterDom = require("react-router-dom");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 // Styles
-//import "./styles/main.scss";
+var _mainScss = require("./styles/main.scss");
 // Compiled CSS Styles files
-var _mainCss = require("../apps-script/styles_compiled/main.css");
+//import "../apps-script/styles_compiled/main.css";
 // Components
 var _context = require("./Context");
 var _oauth = require("./OAuth");
@@ -31946,7 +31946,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","axios":"jo6P5","../apps-script/styles_compiled/main.css":"dLhPe","./Context":"49Q86","./OAuth":"4rTZc","./components/home":"l90Qn","./components/customers":"4fr12","./components/pos":"a5zFZ","./components/inventory":"dN4Ui","./components/appusers":"9eCzN","./components/tutorials":"kz8Tg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"jo6P5":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","axios":"jo6P5","./Context":"49Q86","./OAuth":"4rTZc","./components/home":"l90Qn","./components/customers":"4fr12","./components/pos":"a5zFZ","./components/inventory":"dN4Ui","./components/appusers":"9eCzN","./components/tutorials":"kz8Tg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./styles/main.scss":"bo7w8"}],"jo6P5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _axiosJsDefault.default));
@@ -36308,7 +36308,7 @@ Object.entries(HttpStatusCode).forEach(([key, value])=>{
 });
 exports.default = HttpStatusCode;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dLhPe":[function() {},{}],"49Q86":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49Q86":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$6bdd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -36506,9 +36506,9 @@ var _context = require("./Context");
 var _jwtDecode = require("jwt-decode");
 var _reactRouterDom = require("react-router-dom"); // useNavigate Hook
 // Styles
-//import "./styles/main.scss";
+var _mainScss = require("./styles/main.scss");
 // Compiled CSS Styles files
-var _mainCss = require("../apps-script/styles_compiled/main.css");
+//import "../apps-script/styles_compiled/main.css";
 // Components
 var _nav = require("./components/nav");
 var _navDefault = parcelHelpers.interopDefault(_nav);
@@ -36736,7 +36736,7 @@ $RefreshReg$(_c, "OAuth");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Context":"49Q86","jwt-decode":"EeAxo","react-router-dom":"9xmpe","../apps-script/styles_compiled/main.css":"dLhPe","./components/nav":"kefMG","./components/oauthform":"bPYBM","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"EeAxo":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Context":"49Q86","jwt-decode":"EeAxo","react-router-dom":"9xmpe","./components/nav":"kefMG","./components/oauthform":"bPYBM","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./styles/main.scss":"bo7w8"}],"EeAxo":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "InvalidTokenError", ()=>InvalidTokenError);
@@ -36790,7 +36790,7 @@ function jwtDecode(token, options) {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dLhPe":[function() {},{}],"kefMG":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kefMG":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$c5d7 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -37132,7 +37132,7 @@ $RefreshReg$(_c, "OAuthForm");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../Context":"49Q86","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"l90Qn":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../Context":"49Q86","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bo7w8":[function() {},{}],"l90Qn":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$f362 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -37146,10 +37146,10 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _context = require("../Context");
 //import React from "react";
-//import "../styles/home.scss";
-// Compiled CSS Styles files
-var _homeCss = require("../../apps-script/styles_compiled/home.css");
+var _homeScss = require("../styles/home.scss");
 var _s = $RefreshSig$();
+// Compiled CSS Styles files
+//import "../../apps-script/styles_compiled/home.css" 
 function Home() {
     _s();
     const { user, setUser } = (0, _react.useContext)((0, _context.Context));
@@ -37205,7 +37205,7 @@ $RefreshReg$(_c, "Home");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../Context":"49Q86","../../apps-script/styles_compiled/home.css":"jWCM1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"jWCM1":[function() {},{}],"4fr12":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../Context":"49Q86","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/home.scss":"3UZ0N"}],"3UZ0N":[function() {},{}],"4fr12":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$81db = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -37462,12 +37462,12 @@ var _freeSolidSvgIcons = require("@fortawesome/free-solid-svg-icons");
 var _appusersform = require("./appusersform");
 var _appusersformDefault = parcelHelpers.interopDefault(_appusersform);
 // styles
-// import "../styles/main.scss";
-// import "../styles/appusers-table.scss";
-// Compiled CSS Styles files
-var _mainCss = require("../../apps-script/styles_compiled/main.css");
-var _appusersTableCss = require("../../apps-script/styles_compiled/appusers-table.css");
+var _mainScss = require("../styles/main.scss");
+var _appusersTableScss = require("../styles/appusers-table.scss");
 var _s = $RefreshSig$();
+// Compiled CSS Styles files
+// import "../../apps-script/styles_compiled/main.css";
+// import "../../apps-script/styles_compiled/appusers-table.css";
 function Appusers() {
     _s();
     const [appUsers, setAppUsers] = (0, _react.useState)([]);
@@ -37475,6 +37475,10 @@ function Appusers() {
         user: null,
         action: null
     });
+    const [sortConfig, setSortConfig] = (0, _react.useState)({
+        key: "lastName",
+        direction: "ascending"
+    }); // keep track of current sorting
     (0, _react.useEffect)(()=>{
         fetchAppUsers();
     }, []); // Fetch data on initial component mount
@@ -37500,13 +37504,35 @@ function Appusers() {
         });
     };
     // Sorting
+    // const sortedAppUsers = useMemo(() => {
+    //     // useMemo hook: used to version of sorted appUsers array, recalculated only when appUsers changes. Better for performance.
+    //     return [...appUsers].sort((a, b) => a.lastName.localeCompare(b.lastName));
+    // }, [appUsers]);
+    const onSort = (key)=>{
+        let direction = "ascending";
+        if (sortConfig.key === key && sortConfig.direction === "ascending") direction = "descending";
+        setSortConfig({
+            key,
+            direction
+        });
+    };
+    const getSortDirectionText = (key)=>{
+        if (sortConfig.key === key) return sortConfig.direction === "ascending" ? " \u2B07\u2B07" : " \u2B06\u2B06";
+        return "";
+    };
     const sortedAppUsers = (0, _react.useMemo)(()=>{
-        // useMemo hook: used to version of sorted appUsers array, recalculated only when appUsers changes. Better for performance.
-        return [
+        let sortableUsers = [
             ...appUsers
-        ].sort((a, b)=>a.lastName.localeCompare(b.lastName));
+        ];
+        if (sortConfig !== null) sortableUsers.sort((a, b)=>{
+            if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === "ascending" ? -1 : 1;
+            if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === "ascending" ? 1 : -1;
+            return 0;
+        });
+        return sortableUsers;
     }, [
-        appUsers
+        appUsers,
+        sortConfig
     ]);
     const renderTableRows = sortedAppUsers.map((u)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tr", {
             children: [
@@ -37514,35 +37540,35 @@ function Appusers() {
                     children: u.lastName
                 }, void 0, false, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 55,
+                    lineNumber: 88,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
                     children: u.firstName
                 }, void 0, false, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 56,
+                    lineNumber: 89,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
                     children: u.email
                 }, void 0, false, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 57,
+                    lineNumber: 90,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
                     children: u.type
                 }, void 0, false, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 59,
+                    lineNumber: 92,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
                     children: u.status
                 }, void 0, false, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 60,
+                    lineNumber: 93,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -37554,14 +37580,14 @@ function Appusers() {
                             onClick: ()=>handleAction(u, "Edit")
                         }, void 0, false, {
                             fileName: "src/components/appusers.js",
-                            lineNumber: 63,
+                            lineNumber: 96,
                             columnNumber: 18
                         }, this),
                         " "
                     ]
                 }, void 0, true, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 63,
+                    lineNumber: 96,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -37573,20 +37599,20 @@ function Appusers() {
                             onClick: ()=>handleAction(u, "Remove")
                         }, void 0, false, {
                             fileName: "src/components/appusers.js",
-                            lineNumber: 64,
+                            lineNumber: 97,
                             columnNumber: 18
                         }, this),
                         " "
                     ]
                 }, void 0, true, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 64,
+                    lineNumber: 97,
                     columnNumber: 13
                 }, this)
             ]
         }, u.id, true, {
             fileName: "src/components/appusers.js",
-            lineNumber: 54,
+            lineNumber: 87,
             columnNumber: 9
         }, this));
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37595,7 +37621,7 @@ function Appusers() {
                 children: "AppUsers Page..."
             }, void 0, false, {
                 fileName: "src/components/appusers.js",
-                lineNumber: 69,
+                lineNumber: 102,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37607,7 +37633,7 @@ function Appusers() {
                                 children: "Methods:"
                             }, void 0, false, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 72,
+                                lineNumber: 105,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
@@ -37616,33 +37642,33 @@ function Appusers() {
                                         children: "CRUD Google Cloud SQL Database"
                                     }, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 74,
+                                        lineNumber: 107,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                         children: "Google API admin console"
                                     }, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 75,
+                                        lineNumber: 108,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                         children: "CRUD Google Workspace Users"
                                     }, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 76,
+                                        lineNumber: 109,
                                         columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 73,
+                                lineNumber: 106,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 71,
+                        lineNumber: 104,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37651,7 +37677,7 @@ function Appusers() {
                                 children: "Pending:"
                             }, void 0, false, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 80,
+                                lineNumber: 113,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
@@ -37660,32 +37686,32 @@ function Appusers() {
                                         children: "Sorting before rendering"
                                     }, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 82,
+                                        lineNumber: 115,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                         children: "Sorting Table by Column"
                                     }, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 83,
+                                        lineNumber: 116,
                                         columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 81,
+                                lineNumber: 114,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 79,
+                        lineNumber: 112,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/appusers.js",
-                lineNumber: 70,
+                lineNumber: 103,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37695,14 +37721,14 @@ function Appusers() {
                         prop_userAction: userAction
                     }, void 0, false, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 88,
+                        lineNumber: 121,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                         children: "[SQL] Signed-Up Users:"
                     }, void 0, false, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 92,
+                        lineNumber: 125,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("table", {
@@ -37711,92 +37737,162 @@ function Appusers() {
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tr", {
                                     children: [
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
-                                            children: "Last Name"
-                                        }, void 0, false, {
+                                            className: "sortable",
+                                            title: "Click to Sort",
+                                            onClick: ()=>onSort("lastName"),
+                                            children: [
+                                                "Last Name ",
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                    className: "sort-indicator",
+                                                    children: getSortDirectionText("lastName")
+                                                }, void 0, false, {
+                                                    fileName: "src/components/appusers.js",
+                                                    lineNumber: 129,
+                                                    columnNumber: 117
+                                                }, this),
+                                                " "
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 96,
+                                            lineNumber: 129,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
-                                            children: "First Name"
-                                        }, void 0, false, {
+                                            className: "sortable",
+                                            title: "Click to Sort",
+                                            onClick: ()=>onSort("firstName"),
+                                            children: [
+                                                "First Name ",
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                    className: "sort-indicator",
+                                                    children: getSortDirectionText("firstName")
+                                                }, void 0, false, {
+                                                    fileName: "src/components/appusers.js",
+                                                    lineNumber: 130,
+                                                    columnNumber: 119
+                                                }, this),
+                                                " "
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 97,
+                                            lineNumber: 130,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
-                                            children: "Email"
-                                        }, void 0, false, {
+                                            className: "sortable",
+                                            title: "Click to Sort",
+                                            onClick: ()=>onSort("email"),
+                                            children: [
+                                                "Email ",
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                    className: "sort-indicator",
+                                                    children: getSortDirectionText("email")
+                                                }, void 0, false, {
+                                                    fileName: "src/components/appusers.js",
+                                                    lineNumber: 131,
+                                                    columnNumber: 110
+                                                }, this),
+                                                " "
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 98,
+                                            lineNumber: 131,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
-                                            children: "Type"
-                                        }, void 0, false, {
+                                            className: "sortable",
+                                            title: "Click to Sort",
+                                            onClick: ()=>onSort("type"),
+                                            children: [
+                                                "Type ",
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                    className: "sort-indicator",
+                                                    children: getSortDirectionText("type")
+                                                }, void 0, false, {
+                                                    fileName: "src/components/appusers.js",
+                                                    lineNumber: 133,
+                                                    columnNumber: 108
+                                                }, this),
+                                                " "
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 100,
+                                            lineNumber: 133,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
-                                            children: "Status"
-                                        }, void 0, false, {
+                                            className: "sortable",
+                                            title: "Click to Sort",
+                                            onClick: ()=>onSort("status"),
+                                            children: [
+                                                "Status ",
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                    className: "sort-indicator",
+                                                    children: getSortDirectionText("status")
+                                                }, void 0, false, {
+                                                    fileName: "src/components/appusers.js",
+                                                    lineNumber: 134,
+                                                    columnNumber: 112
+                                                }, this),
+                                                " "
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 101,
+                                            lineNumber: 134,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                             children: "Edit"
                                         }, void 0, false, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 104,
+                                            lineNumber: 137,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                             children: "Delete"
                                         }, void 0, false, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 105,
+                                            lineNumber: 138,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusers.js",
-                                    lineNumber: 95,
+                                    lineNumber: 128,
                                     columnNumber: 21
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 94,
+                                lineNumber: 127,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tbody", {
                                 children: renderTableRows
                             }, void 0, false, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 108,
+                                lineNumber: 141,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 93,
+                        lineNumber: 126,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/appusers.js",
-                lineNumber: 87,
+                lineNumber: 120,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/appusers.js",
-        lineNumber: 68,
+        lineNumber: 101,
         columnNumber: 12
     }, this);
 }
-_s(Appusers, "WnJ1l4VEPNpw4kDzEQlbsqXLtPA=");
+_s(Appusers, "OUKJRCXEFLDyhXffMHCYntmaZAY=");
 _c = Appusers;
 exports.default = Appusers;
 var _c;
@@ -37807,7 +37903,7 @@ $RefreshReg$(_c, "Appusers");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@fortawesome/react-fontawesome":"clIT3","@fortawesome/free-solid-svg-icons":"5lkdy","./appusersform":"37Jh8","../../apps-script/styles_compiled/main.css":"dLhPe","../../apps-script/styles_compiled/appusers-table.css":"flmFM","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"clIT3":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@fortawesome/react-fontawesome":"clIT3","@fortawesome/free-solid-svg-icons":"5lkdy","./appusersform":"37Jh8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/main.scss":"bo7w8","../styles/appusers-table.scss":"gXQPt"}],"clIT3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "FontAwesomeIcon", ()=>FontAwesomeIcon);
@@ -63166,10 +63262,10 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 // styles
-//import "../styles/appusers-form.scss";
-// Compiled CSS Styles files
-var _appusersFormCss = require("../../apps-script/styles_compiled/appusers-form.css");
+var _appusersFormScss = require("../styles/appusers-form.scss");
 var _s = $RefreshSig$();
+// Compiled CSS Styles files
+//import "../../apps-script/styles_compiled/appusers-form.css";
 const AppusersForm = ({ prop_handleUserAction, prop_userAction })=>{
     _s();
     const [formUser, setFormUser] = (0, _react.useState)({
@@ -63574,7 +63670,7 @@ $RefreshReg$(_c, "AppusersForm");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../../apps-script/styles_compiled/appusers-form.css":"gb9jB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"gb9jB":[function() {},{}],"dLhPe":[function() {},{}],"flmFM":[function() {},{}],"kz8Tg":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/appusers-form.scss":"8PYMb"}],"8PYMb":[function() {},{}],"bo7w8":[function() {},{}],"gXQPt":[function() {},{}],"kz8Tg":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$0b6a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -63647,7 +63743,7 @@ $RefreshReg$(_c, "Tutorials");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}]},["9Y5CW","1xC6H","b6HaR"], "b6HaR", "parcelRequire0bdc")
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bo7w8":[function() {},{}]},["9Y5CW","1xC6H","b6HaR"], "b6HaR", "parcelRequire0bdc")
 
 </script>
 </body>

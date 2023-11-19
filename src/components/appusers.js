@@ -6,18 +6,19 @@ import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import AppusersForm from "./appusersform";
 
 // styles
-// import "../styles/main.scss";
-// import "../styles/appusers-table.scss";
+import "../styles/main.scss";
+import "../styles/appusers-table.scss";
 
 
 // Compiled CSS Styles files
-import "../../apps-script/styles_compiled/main.css";
-import "../../apps-script/styles_compiled/appusers-table.css";
+// import "../../apps-script/styles_compiled/main.css";
+// import "../../apps-script/styles_compiled/appusers-table.css";
 
 
 function Appusers() {
     const [appUsers, setAppUsers] = useState([]);
     const [userAction, setUserAction] = useState({ user: null, action: null });
+    const [sortConfig, setSortConfig] = useState({ key: 'lastName', direction: 'ascending' });  // keep track of current sorting
 
     useEffect(() => {
         fetchAppUsers();
@@ -45,10 +46,42 @@ function Appusers() {
     };
 
     // Sorting
+    // const sortedAppUsers = useMemo(() => {
+    //     // useMemo hook: used to version of sorted appUsers array, recalculated only when appUsers changes. Better for performance.
+    //     return [...appUsers].sort((a, b) => a.lastName.localeCompare(b.lastName));
+    // }, [appUsers]);
+
+    const onSort = (key) => {
+        let direction = 'ascending';
+        if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+            direction = 'descending';
+        }
+        setSortConfig({ key, direction });
+    };
+
+    const getSortDirectionText = (key) => {
+        if (sortConfig.key === key) {
+            return sortConfig.direction === 'ascending' ? ' ⬇⬇' : ' ⬆⬆';
+        }
+        return '';
+    };
+
     const sortedAppUsers = useMemo(() => {
-        // useMemo hook: used to version of sorted appUsers array, recalculated only when appUsers changes. Better for performance.
-        return [...appUsers].sort((a, b) => a.lastName.localeCompare(b.lastName));
-    }, [appUsers]);
+        let sortableUsers = [...appUsers];
+        if (sortConfig !== null) {
+            sortableUsers.sort((a, b) => {
+                if (a[sortConfig.key] < b[sortConfig.key]) {
+                    return sortConfig.direction === 'ascending' ? -1 : 1;
+                }
+                if (a[sortConfig.key] > b[sortConfig.key]) {
+                    return sortConfig.direction === 'ascending' ? 1 : -1;
+                }
+                return 0;
+            });
+        }
+        return sortableUsers;
+    }, [appUsers, sortConfig]);
+
 
     const renderTableRows = sortedAppUsers.map(u => (
         <tr key={u.id}>
@@ -93,12 +126,12 @@ function Appusers() {
             <table>
                 <thead>
                     <tr>
-                        <th>Last Name</th>
-                        <th>First Name</th>
-                        <th>Email</th>
+                        <th className="sortable" title="Click to Sort" onClick={() => onSort('lastName')}>Last Name <span className="sort-indicator">{getSortDirectionText('lastName')}</span> </th>
+                        <th className="sortable" title="Click to Sort" onClick={() => onSort('firstName')}>First Name <span className="sort-indicator">{getSortDirectionText('firstName')}</span> </th>
+                        <th className="sortable" title="Click to Sort" onClick={() => onSort('email')}>Email <span className="sort-indicator">{getSortDirectionText('email')}</span> </th>
                         {/* <th>Password</th> */}
-                        <th>Type</th>
-                        <th>Status</th>
+                        <th className="sortable" title="Click to Sort" onClick={() => onSort('type')}>Type <span className="sort-indicator">{getSortDirectionText('type')}</span> </th>
+                        <th className="sortable" title="Click to Sort" onClick={() => onSort('status')}>Status <span className="sort-indicator">{getSortDirectionText('status')}</span> </th>
                         {/* <th>Created</th> */}
                         {/*  <th>Updated</th> */}
                         <th>Edit</th>
