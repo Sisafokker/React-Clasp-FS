@@ -52,3 +52,6 @@ BACKEND: AppEngine Info
     target version:              [20231118t093811]
     target url:                  [https://reactfscloudsql.nw.r.appspot.com]
     target service account:      [reactfscloudsql@appspot.gserviceaccount.com]
+
+SQL Commands
+gcloud sql connect devcamp-reactfs-cloudsql-2023 --user=Hoakeen 
