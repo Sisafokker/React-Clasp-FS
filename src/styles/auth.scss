@@ -1,42 +1,39 @@
-@import "./variables.scss";
+//auth.scss
+@import "variables.scss";
+@import "mixins.scss"; 
+
+.userNav-wrapper {
+  width: 100%;
+}
 
 .auth-wrapper {
-  background-color: $offwhite;
-  padding: 6px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 100%;
-  margin: 0 auto;
+  @include cardStyle;
+  box-sizing: border-box;
 }
 
 .google-login {
+  @include flexCenter;
   text-align: center;
-  margin-bottom: 5px;
+  margin-bottom: 12px;
 }
 
-.user-info {
+.user-wrapper {
   text-align: center;
 
+
   .sign-out-button {
-    background-color: $teal;
-    color: $offwhite;
-    border: none;
-    padding: 10px 20px;
+    @include responsiveFontSize(12px);
+    @include buttonStyle($hover-color:$warning);
+    padding: 8px 16px;
     margin-top: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: $dark-teal;
+      background-color: $warning;
     }
   }
 
   .user-details {
-    display: flex;
-    align-items: center;
-    justify-content: center; // Center horizontally
+    @include flexCenter;
     margin-top: 5px;
 
     .user-avatar {
@@ -51,12 +48,10 @@
 
       h3 {
         margin: 0;
-        font-size: 16px;
       }
 
       p {
         margin: 0;
-        font-size: 13px;
       }
     }
   }

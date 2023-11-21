@@ -18,3 +18,8 @@ app.yaml
 
 #Compiled Styles to CSS
 /apps-script/styles_compiled/
+
+#Other Logs
+Log_AppStructure.js
+Log_ScssFiles.js
+Log_CompFiles.js

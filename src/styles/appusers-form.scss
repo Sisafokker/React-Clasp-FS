@@ -1,32 +1,35 @@
 // appusers-form.scss
 
-@import "./variables.scss";
+@import "variables.scss";
+@import "base.scss";
 
 .form-container {
   width: 80%;
   margin: 0 auto;
 
-  .input-group { // New class for the flex container
+  .input-group { 
     display: flex;
     gap: 25px;
    // justify-content: space-between; // This will put space between your two input fields
     margin-bottom: 10px; // Spacing between this group and other elements
 
-    @media (max-width: 768px) { // Adjust this value based on your requirements
-      flex-direction: column; // Stack the elements vertically on small screens
+    @media screen and (max-width: $tablet) { 
+      flex-direction: column;     // Stack elements vertically
+      gap: 8px;
     }
   }
 
   label {
+    @include responsiveFontSize(14px);
     flex: 1 1 50%;
-    display: flex; // make label a flex container to align text and input
+    display: flex; 
     flex-direction: column; // Stack label text above the input
     margin-bottom: 8px;
 
     input, select{
-      width: 100%; // input will fill the width of the label
+      width: 100%;          // input to fill width of label
       padding: 5px;
-      margin-top: 2px; // small space between label text and input
+      margin-top: 2px; 
       border: 1px solid #ddd;
     }
 
@@ -36,16 +39,4 @@
     }
   }
 
-/*   .button {
-    background-color: $teal;
-    color: $offwhite;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px; // Changed from 4 to 4px
-    font-weight: 600;
-
-    &:hover {
-      background-color: $dark-teal;
-    }
-  } */
 }

@@ -19,6 +19,9 @@ import POs from "./components/pos";
 import Inventory from "./components/inventory";
 import AppUsers from "./components/appusers";
 import Tutorials from "./components/tutorials";
+import Footer from "./components/footer";
+
+
 import { Context } from "./Context";
 
 //const PORT = process.env.REACT_APP_BACKEND_PORT || 5000;
@@ -101,15 +104,16 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+        </Routes> 
       )
     }
   };
 
   return (
-    <div className="container">
+    <div className="app-wrapper">
         <OAuth prop_renderRoutes={renderRoutes} />
         {renderRoutes()}
+    <Footer />
     </div>
   );
 }

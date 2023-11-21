@@ -1,28 +1,40 @@
-@import "./variables.scss";
+// nav.scss 
+@import "variables.scss";
+@import "mixins.scss"; 
+
+.auth-wrapper {
+  width: 100%;
+}
 
 .nav-wrapper {
-    background-color: $offwhite;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    @include cardStyle;
+    width: 90%;
     display: flex;
-    justify-content: space-around; // equal space between them
+    justify-content: space-evenly; // equal space between them
     margin-top: 20px;
   
     .nav-link {
+      @include responsiveFontSize(17px);
       text-decoration: none;
       color: $teal;
       font-weight: bold;
-      font-size: 16px;
       transition: color 0.3s ease;
   
       &:hover {
         color: $dark-teal;
       }
-  
+      
       &:not(:last-child) {
-        margin-right: 20px; // right margin to separate links
+        @media screen and (max-width: $tablet) {
+         margin-right: 10px; // right margin to separate links
+         
+        }
       }
     }
+
+  @media screen and (max-width: $tablet) {
+    background-color: red;
   }
+
+}
   

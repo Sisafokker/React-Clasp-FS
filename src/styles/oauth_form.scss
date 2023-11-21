@@ -1,0 +1,70 @@
+// oauth-form.scss
+@import "variables.scss";
+@import "mixins.scss";
+
+.oauth-form-container {
+    @include cardStyle;
+    @include flexCenter;
+    box-shadow: none;
+    margin: 5px auto; // Center the form container
+    width: 95%;
+    max-width: 95%;
+    border: 1px solid #ddd;
+
+    form {
+        width: 100%;
+
+        .input-group {
+            display: flex;
+            flex-direction: column; // Stack elements vertically
+            align-items: center; // Center elements horizontally within the group
+            margin-bottom: 15px; 
+
+            label {
+                @include textStyle(14px, $secondaryColor);
+                min-width: 350px;
+                max-width: 350px;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="password"] {
+                width: 100%;
+                padding: 5px;
+                margin-bottom: 12px;
+                border: 1px solid #ddd;
+                max-width: 100%;
+            }
+
+        }
+
+    }
+
+    .signLogButton {
+        @include flexCenter;
+        width: 100%;
+        margin-bottom: 5px;
+
+        button {
+            @include buttonStyle;
+            margin-right: 15px;
+        }
+    }
+
+    .error,
+    .success {
+        @include textStyle(14px, $secondaryColor);
+        text-align: center;
+        margin-top: 5px;
+    }
+
+    .error {
+        @include textStyle(14px, $warning);
+        //color: $warning;
+    }
+
+    .success {
+        @include textStyle(14px, $success);
+        //color: $success;
+    }
+}

@@ -1,5 +1,5 @@
 function Tutorials() {
-    return <div>
+    return <div className='container'>
        <h1>Tutorials Page...</h1>
        <h2>Ideas:</h2>
        <ul>

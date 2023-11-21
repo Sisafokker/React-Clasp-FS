@@ -55,3 +55,9 @@ BACKEND: AppEngine Info
 
 SQL Commands
 gcloud sql connect devcamp-reactfs-cloudsql-2023 --user=Hoakeen 
+
+
+Log Commands - from Root:
+node Log_AppStructure.js
+node Log_ScssFiles.js
+node Log_CompFiles.js
