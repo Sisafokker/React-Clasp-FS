@@ -8,16 +8,18 @@ import "../styles/footer.scss";
 
 const Footer = () => {
   return (
-    <footer className="footer-wrapper">
-      <div className="footer-Col">
-        {/* <h4>First Column</h4> */}
-        <FooterInfoVersion />
+    <div className="footer-container">
+      <div className="footer-wrapper">
+        <div className="footer-Col">
+          {/* <h4>First Column</h4> */}
+          <FooterInfoVersion />
+        </div>
+        <div className="footer-Col">
+          {/* <h4>Second Column</h4> */}
+          © { new Date().getFullYear() } - Hoakeen - Full Stack Project
+        </div>
       </div>
-      <div className="footer-Col">
-        {/* <h4>Second Column</h4> */}
-        © { new Date().getFullYear() } - Hoakeen - Full Stack Project
-      </div>
-    </footer>
+    </div>
   );
 };
 
