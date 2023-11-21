@@ -98,7 +98,7 @@ function Appusers() {
         </tr>
     ));
 
-    return <div>
+    return <div className='container'>
         <h1>AppUsers Page...</h1>
         <div className='tasks-wrapper'>
             <div>

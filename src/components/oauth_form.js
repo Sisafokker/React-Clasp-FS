@@ -1,9 +1,12 @@
-// OAuthForm.js
+// OAuth_Form.js
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Context } from '../Context';
 
-const OAuthForm = () => {
+// Styles
+import '../styles/oauth_form.scss';
+
+const OAuth_Form = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const { setUser } = useContext(Context);
   const [formData, setFormData] = useState({
@@ -88,31 +91,38 @@ const OAuthForm = () => {
   };
 
   return (
-    <div>
+    <div className="oauth-form-container">
       <form onSubmit={handleFormSubmit}>
         {isSignUp && (
-          <>
-            <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={updateFormData('firstName')} required />
-            <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={updateFormData('lastName')} required />
-            <input type="email" name="email" placeholder="Email" value={formData.email} onChange={updateFormData('email')} required />
-            <input type="password" name="passwordOne" placeholder="Password" value={formData.passwordOne} onChange={updateFormData('passwordOne')} required />
-            <input type="password" name="passwordTwo" placeholder="Repeat Password" value={formData.passwordTwo} onChange={updateFormData('passwordTwo')} required />
-          </>
+          <div className='signUp-wrapper'>
+            <div className='input-group'>
+              <label>Name: <input type="text" name="firstName" placeholder="Your First Name" value={formData.firstName} onChange={updateFormData('firstName')} required /> </label>
+              <label>Last Name: <input type="text" name="lastName" placeholder="Your Last Name" value={formData.lastName} onChange={updateFormData('lastName')} required /> </label>
+              <label>Email: <input type="email" name="email" placeholder="Your Email" value={formData.email} onChange={updateFormData('email')} required /> </label>
+              <label>Password: <input type="password" name="passwordOne" placeholder="Your Password" value={formData.passwordOne} onChange={updateFormData('passwordOne')} required /> </label>
+              <label>Confirm Password: <input type="password" name="passwordTwo" placeholder="Confirm Your Password" value={formData.passwordTwo} onChange={updateFormData('passwordTwo')} required /> </label>
+            </div>
+          </div>
         )}
 
         {!isSignUp && (
-          <>
-            <input type="email" name="email" placeholder="Email" value={formData.email} onChange={updateFormData('email')} required />
-            <input type="password" name="password" placeholder="Password" value={formData.password} onChange={updateFormData('password')} required />
-          </>
+          <div className='logIn-wrapper'>
+            <div className='input-group'>
+            <label>Email: <input type="email" name="email" placeholder="Your Email" value={formData.email} onChange={updateFormData('email')} required /> </label>
+            <label>Password: <input type="password" name="password" placeholder="Your Password" value={formData.password} onChange={updateFormData('password')} required /> </label>
+            </div>
+          </div>
         )}
-
-        <button type="submit">{isSignUp ? 'Sign Up' : 'Log In'}</button>
-        {isSignUp ? (
-          <a href="#login" onClick={() => setIsSignUp(false)}>Or Log In here</a>
-        ) : (
-          <a href="#signup" onClick={() => setIsSignUp(true)}>Or Sign Up here</a>
-        )}
+        <div>
+          <div className='signLogButton'>
+            <button type="submit">{isSignUp ? 'Sign Up' : 'Log In'}</button>
+            {isSignUp ? (
+              <a href="#login" onClick={() => setIsSignUp(false)}>Or Log In here</a>
+            ) : (
+              <a href="#signup" onClick={() => setIsSignUp(true)}>Or Sign Up here</a>
+            )}
+            </div>
+        </div>
       </form>
       {feedback.error && <div className="error">{feedback.error}</div>}
       {feedback.success && <div className="success">{feedback.success}</div>}
@@ -121,4 +131,4 @@ const OAuthForm = () => {
 
 };
 
-export default OAuthForm;
+export default OAuth_Form;

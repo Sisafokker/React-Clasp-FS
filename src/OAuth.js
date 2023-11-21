@@ -12,7 +12,7 @@ import "./styles/main.scss";
 
 // Components
 import Nav from "./components/nav";
-import OAuthForm from "./components/oauthform";
+import OAuth_Form from "./components/oauth_form";
 
 
 const SCOPES = "https://www.googleapis.com/auth/drive";
@@ -143,14 +143,14 @@ function OAuth({ prop_renderRoutes }) {
     return (
         <div className="auth-wrapper">
             {!user || Object.keys(user).length === 0 && (
-            <div className="allLogin">
-                <OAuthForm /> 
-                <div id="googleLogIn" className="google-login"></div> 
-            </div>)
-            }
+                <div className="allLogin">
+                    <div id="googleLogIn" className="google-login" ></div> 
+                    <OAuth_Form />
+                </div>
+            )}
             {user && Object.keys(user).length !== 0 && (                
-                <div className="user-nav-wrapper">
-                    <div className="user-info">
+                <div className="userNav-wrapper">
+                    <div className="user-wrapper">
                         <div className="user-details">
                             <img className="user-avatar" src={user.picture || "https://use.fontawesome.com/releases/v5.15.4/svgs/solid/user.svg"} alt="User" />
                             <div className="user-text">

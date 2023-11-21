@@ -1,5 +1,5 @@
 function POs() {
-    return <div>
+    return <div className='container'>
        <h1>Purchase Orders...</h1>
        <h3>Ideas:</h3>
        <ul>

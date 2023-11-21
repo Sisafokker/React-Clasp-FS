@@ -1,0 +1,79 @@
+// mixins.scss
+
+@mixin textStyle($size, $color: $primaryColor) { 
+    @include responsiveFontSize($size);
+    color: $color;
+}
+
+@mixin cardStyle {
+    background-color: $offwhite;
+    padding: 10px 20px; //  top&Bottom left&Right // top, right, bottom, left 
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    min-width: 75%;
+    margin: 0; // The "0 auto" was generating a lot of trouble.
+}
+
+@mixin flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center; // Horiz.
+}
+
+@mixin flexLeft {
+    display: flex;
+    align-items: center;
+    justify-content: left; // Horiz.
+}
+
+@mixin responsiveTable {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 0 auto;
+
+    th,
+    td {
+        @include responsiveFontSize(14px);
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+}
+
+@mixin buttonStyle ($background-color: $teal, $color: $offwhite, $hover-color: $dark-teal, $width: auto){
+    background-color: $background-color;
+    color: $color;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    width: $width;
+    text-align: center;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $hover-color;
+    }
+
+    &:disabled {
+        background-color: #ccc;
+        color: $disabledColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+}
+
+
+@mixin responsiveFontSize($size: 14px) {
+    font-size: $size;
+
+    @media screen and (max-width: $tablet) {
+        font-size: $size * 0.85;
+    }
+
+    @media screen and (max-width: $mobile) {
+        font-size: $size * 0.75;
+    }
+}
