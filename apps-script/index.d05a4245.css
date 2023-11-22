@@ -378,7 +378,7 @@ h3 {
 .footer-wrapper {
   background-color: #f6f6f6;
   border-radius: 5px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   justify-content: center;
   align-items: center;
   gap: 20px;
@@ -923,7 +923,7 @@ table tr:hover {
 .footer-wrapper {
   background-color: #f6f6f6;
   border-radius: 5px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   justify-content: center;
   align-items: center;
   gap: 20px;
