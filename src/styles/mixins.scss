@@ -9,7 +9,7 @@
     background-color: $offwhite;
     padding: 10px 20px; //  top&Bottom left&Right // top, right, bottom, left 
     border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px $boxshadow;
     max-width: 100%;
     min-width: 75%;
     margin: 0; // The "0 auto" was generating a lot of trouble.
@@ -37,7 +37,7 @@
         @include responsiveFontSize(14px);
         padding: 8px;
         text-align: left;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid $lightgrey;
     }
 }
 
@@ -58,7 +58,7 @@
     }
 
     &:disabled {
-        background-color: #ccc;
+        background-color: $lightgrey;
         color: $disabledColor;
         cursor: not-allowed;
         opacity: 0.5;

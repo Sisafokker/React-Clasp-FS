@@ -18,12 +18,12 @@ appExp.use(cors());
 appExp.use(bodyParser.json());
 
 /* LOCAL EVERYTHING*/ 
-// const pool = mysql.createPool({
-//   host: process.env.SQL_HOST,
-//   user: process.env.SQL_USER,
-//   password: process.env.SQL_PASSWORD,
-//   database: process.env.SQL_DATABASE
-// });
+const pool = mysql.createPool({
+  host: process.env.SQL_HOST,
+  user: process.env.SQL_USER,
+  password: process.env.SQL_PASSWORD,
+  database: process.env.SQL_DATABASE
+});
 
 /* LOCAL BACKEND - CLOUD SQL*/ 
 // const pool = mysql.createPool({
@@ -34,12 +34,12 @@ appExp.use(bodyParser.json());
 // });
 
 /* CLOUD BACKEND && CLOUD SQL*/ 
-const pool = mysql.createPool({
-  user: process.env.GOOGLE_SQL_USER,
-  password: process.env.GOOGLE_SQL_PASSWORD,
-  database: process.env.GOOGLE_SQL_DATABASE,
-  socketPath: process.env.GOOGLE_SQL_DB_HOST
-});
+// const pool = mysql.createPool({
+//   user: process.env.GOOGLE_SQL_USER,
+//   password: process.env.GOOGLE_SQL_PASSWORD,
+//   database: process.env.GOOGLE_SQL_DATABASE,
+//   socketPath: process.env.GOOGLE_SQL_DB_HOST
+// });
 
 // DEFINE API ENDPOINTS // --------------------------------------------------------------------------------------------------
 // SignUp
@@ -103,26 +103,28 @@ appExp.get('/api/users', (req, res) => {
   });
 });
 
-appExp.post('/api/users', (req, res) => {
-  const { firstName, lastName, email, password, type } = req.body; // Destructure the parameters from the request body
+appExp.post('/api/users', async (req, res) => {
+  const { firstName, lastName, email, password, type } = req.body; // Destructure from the request body
+  const hashedPassword = await bcrypt.hash("app_generated", 10);
   const INSERT_USER_QUERY = 'INSERT INTO users (firstName, lastName, email, password, type) VALUES (?, ?, ?, ?, ?)';
 
   // Validate data & handle errors
 
-  pool.query(INSERT_USER_QUERY, [firstName, lastName, email, password, type], (error, results) => {
+  pool.query(INSERT_USER_QUERY, [firstName, lastName, email, hashedPassword, type], (error, results) => {
     logDbConnectionStatus(error)
     if (error) {
-      console.error(error);
-      return res.status(500).json({ error: 'Internal server error' });
+      console.error('users_Post:', error);
+      return res.status(500).json({ error: 'users_Post: Internal server error' });
     }
-    // Handle successful query execution with 'results' object
-    return res.status(201).json({ message: 'User added successfully' });
+    console.log("users Post Results: ", results)
+    console.log("Result id: ",results.insertId)
+    return res.status(201).json({ message: 'users_Post: success', id: results.insertId});
   });
 });
 
 appExp.patch('/api/users/:id', (req, res) => {
   const id = req.params.id;
-  const { firstName, lastName, email, type, status } = req.body; // Destructure the updated user data from the request body
+  const { firstName, lastName, email, type, status } = req.body;
   const UPDATE_USER_QUERY = 'UPDATE users SET firstName=?, lastName=?, email=?, type=?, status=? WHERE id=?';
 
   // Validate data & handle errors
@@ -130,11 +132,10 @@ appExp.patch('/api/users/:id', (req, res) => {
   pool.query(UPDATE_USER_QUERY, [firstName, lastName, email, type, status, id], (error, results) => {
     logDbConnectionStatus(error)
     if (error) {
-      console.error(error);
-      return res.status(500).json({ error: 'Internal server error' });
+      console.error('users_Patch:', error);
+      return res.status(500).json({ error: 'users_Patch: Internal server error' });
     }
-    // Handle successful query execution with 'results' object
-    return res.status(200).json({ message: 'User updated successfully' });
+    return res.status(200).json({ message: 'users_Patch: success!' });
   });
 });
 
@@ -147,11 +148,10 @@ appExp.delete('/api/users/:id', (req, res) => {
   pool.query(DELETE_USER_QUERY, [id], (error, results) => {
     logDbConnectionStatus(error)
     if (error) {
-      console.error(error);
-      return res.status(500).json({ error: 'Internal server error' });
+      console.error('users_Delete:', error);
+      return res.status(500).json({ error: 'users_Delete: Internal server error' });
     }
-    // Handle successful query execution with 'results' object
-    return res.status(200).json({ message: 'User deleted successfully' });
+    return res.status(200).json({ message: 'users_Delete: success' });
   });
 });
 
@@ -174,6 +174,38 @@ appExp.get('/api/companies', (req, res) => {
     res.status(200).json(results);
   });
 });
+
+
+appExp.get('/api/intCompanyUser', (req, res) => {
+  pool.query('SELECT * FROM intCompanyUser', (error, results) => {
+    if (error) {
+      throw error;
+    }
+    res.status(200).json(results);
+  });
+});
+
+
+appExp.post('/api/intCompanyUser', (req, res) => {
+  console.log("Adding to intCompanyUser...")
+  const { companyId , userId } = req.body; 
+  if (!companyId || !userId) {
+    return res.status(400).json({ error: 'intCompanyUser_Post: Missing companyId or userId' });
+  }
+  const INSERT_USER_QUERY = 'INSERT INTO intCompanyUser (companyId , userId ) VALUES (?, ?)';
+
+  pool.query(INSERT_USER_QUERY, [companyId , userId], (error, results) => {
+    logDbConnectionStatus(error)
+    if (error) {
+      console.error('intCompanyUser_Post:', error);
+      return res.status(500).json({ error: 'intCompanyUser_Post: Internal server error' });
+    }
+    console.log('intCompanyUser_Post: success')
+    return res.status(201).json({ message: 'intCompanyUser_Post: success' });
+  });
+});
+
+
 
 
 //Start the Server for specified PORT

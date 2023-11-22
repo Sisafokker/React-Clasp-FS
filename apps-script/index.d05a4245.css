@@ -136,14 +136,14 @@ p {
 }
 
 .button:hover, input[type="submit"]:hover {
-  background-color: #1a6d7a;
+  background-color: #026f7e;
 }
 
 .button:disabled, input[type="submit"]:disabled {
-  color: #666;
+  color: #424242;
   cursor: not-allowed;
   opacity: .5;
-  background-color: #ccc;
+  background-color: #ddd;
 }
 
 .button.cancel {
@@ -166,10 +166,10 @@ p {
 }
 
 .button.cancel:disabled {
-  color: #666;
+  color: #424242;
   cursor: not-allowed;
   opacity: .5;
-  background-color: #ccc;
+  background-color: #ddd;
 }
 
 @media screen and (width <= 768px) {
@@ -198,7 +198,7 @@ p {
 }
 
 .clickable:hover {
-  color: #1a6d7a;
+  color: #026f7e;
 }
 
 .tasks-wrapper {
@@ -218,7 +218,7 @@ p {
   max-width: 100%;
   margin: 0;
   padding: 10px 20px;
-  box-shadow: 0 0 5px #0000001a;
+  box-shadow: 0 0 5px #00000019;
 }
 
 .google-login {
@@ -261,10 +261,10 @@ p {
 }
 
 .user-wrapper .sign-out-button:disabled {
-  color: #666;
+  color: #424242;
   cursor: not-allowed;
   opacity: .5;
-  background-color: #ccc;
+  background-color: #ddd;
 }
 
 .user-wrapper .sign-out-button:hover {
@@ -307,7 +307,7 @@ p {
   margin: 20px 0 0;
   padding: 10px 20px;
   display: flex;
-  box-shadow: 0 0 5px #0000001a;
+  box-shadow: 0 0 5px #00000019;
 }
 
 .nav-wrapper .nav-link {
@@ -331,7 +331,7 @@ p {
 }
 
 .nav-wrapper .nav-link:hover {
-  color: #1a6d7a;
+  color: #026f7e;
 }
 
 @media screen and (width <= 768px) {
@@ -340,7 +340,7 @@ p {
   }
 
   .nav-wrapper {
-    background-color: red;
+    background-color: #ff3030;
   }
 }
 
@@ -388,7 +388,7 @@ h3 {
   margin: 8px 0 0;
   padding: 10px 20px;
   display: grid;
-  box-shadow: 0 0 5px #0000001a;
+  box-shadow: 0 0 5px #00000019;
 }
 
 .footer-wrapper .footer-Col {
@@ -407,8 +407,41 @@ h3 {
   }
 }
 
+.popup-container {
+  z-index: 1000;
+  background: #00000080;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+
+.popup-wrapper {
+  z-index: 1001;
+  background: #f6f6f6;
+  border-radius: 5px;
+  padding: 20px;
+  position: relative;
+}
+
+.popup-content {
+  text-align: left;
+  padding: 5px 20px 5px 5px;
+}
+
+.close-btn {
+  cursor: pointer;
+  background: none;
+  border: 1px solid #ddd;
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
 .oauth-form-container {
-  box-shadow: 0 0 5px #0000001a;
+  box-shadow: 0 0 5px #00000019;
   box-shadow: none;
   background-color: #f6f6f6;
   border: 1px solid #ddd;
@@ -484,14 +517,14 @@ h3 {
 }
 
 .oauth-form-container .signLogButton button:hover {
-  background-color: #1a6d7a;
+  background-color: #026f7e;
 }
 
 .oauth-form-container .signLogButton button:disabled {
-  color: #666;
+  color: #424242;
   cursor: not-allowed;
   opacity: .5;
-  background-color: #ccc;
+  background-color: #ddd;
 }
 
 .oauth-form-container .error, .oauth-form-container .success {
@@ -716,14 +749,14 @@ p {
 }
 
 .button:hover, input[type="submit"]:hover {
-  background-color: #1a6d7a;
+  background-color: #026f7e;
 }
 
 .button:disabled, input[type="submit"]:disabled {
-  color: #666;
+  color: #424242;
   cursor: not-allowed;
   opacity: .5;
-  background-color: #ccc;
+  background-color: #ddd;
 }
 
 .button.cancel {
@@ -746,10 +779,10 @@ p {
 }
 
 .button.cancel:disabled {
-  color: #666;
+  color: #424242;
   cursor: not-allowed;
   opacity: .5;
-  background-color: #ccc;
+  background-color: #ddd;
 }
 
 @media screen and (width <= 768px) {
@@ -778,7 +811,7 @@ p {
 }
 
 .clickable:hover {
-  color: #1a6d7a;
+  color: #026f7e;
 }
 
 .tasks-wrapper {
@@ -900,7 +933,7 @@ table tr:hover {
   margin: 8px 0 0;
   padding: 10px 20px;
   display: grid;
-  box-shadow: 0 0 5px #0000001a;
+  box-shadow: 0 0 5px #00000019;
 }
 
 .footer-wrapper .footer-Col {

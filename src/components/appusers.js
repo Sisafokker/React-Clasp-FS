@@ -19,15 +19,26 @@ function Appusers() {
     const [appUsers, setAppUsers] = useState([]);
     const [userAction, setUserAction] = useState({ user: null, action: null });
     const [sortConfig, setSortConfig] = useState({ key: 'lastName', direction: 'ascending' });  // keep track of current sorting
+    const [companies, setCompanies] = useState([]);
+    const url = process.env.REACT_APP_Backend_URL
 
     useEffect(() => {
         fetchAppUsers();
+        fetchCompanies();
     }, []); // Fetch data on initial component mount
+    
+      const fetchCompanies = () => {
+        axios.get(`${url}/api/companies`)
+            .then(response => {
+                setCompanies(response.data);
+                console.log('Companies: ', response.data);
+            })
+            .catch(console.error);
+      };
 
     // Get Student Data
     const fetchAppUsers = useCallback(() => {  // useCallback => React Hook that lets you cache a function definition between re-renders.
         //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/users`;
-        const url = process.env.REACT_APP_Backend_URL
         axios.get(`${url}/api/users`)
             .then(response => {
                 setAppUsers(response.data);
@@ -121,6 +132,7 @@ function Appusers() {
             <AppusersForm 
                 prop_handleUserAction={handleUserAction} 
                 prop_userAction={userAction} 
+                prop_companies={companies}
             />
             <h2>[SQL] Signed-Up Users:</h2>
             <table>

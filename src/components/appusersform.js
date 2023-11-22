@@ -8,9 +8,11 @@ import "../styles/appusers-form.scss";
 //import "../../apps-script/styles_compiled/appusers-form.css";
 
 
-const AppusersForm = ({ prop_handleUserAction, prop_userAction }) => { // prop_selectedUser, prop_action
+const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies }) => { 
+  //console.log('❓Received companies:', prop_companies);
+  const url = process.env.REACT_APP_Backend_URL;
   const [formUser, setFormUser] = useState({
-    id: null, firstName: "", lastName: "", email: "", type: "", status: "active"
+    id: null, firstName: "", lastName: "", email: "", type: "", status: "active", companyId: ""
   });
   const [cancelled, setCancelled] = useState(null)
   const [visuals, setVisuals] = useState({
@@ -31,6 +33,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction }) => { // prop_s
         email: "",
         type: "",
         status: "active",
+        companyId: "", 
       });
 
       setVisuals(i => ({ ...i, btnText: 'Add User', formError: null }));
@@ -51,19 +54,35 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction }) => { // prop_s
     const userPayload = { ...formUser };
     console.log("userPayload: ", userPayload);
 
-    const url = process.env.REACT_APP_Backend_URL;
     if (prop_userAction.action === "Add") {
       //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/users`;
       axios.post(`${url}/api/users`, userPayload)
         .then(response => {
           console.log('User added successfully:', response.data);
-          prop_handleUserAction(prop_userAction.action); // Call the prop_handleUserAction prop to trigger a refresh of the users list
+          
+          // Process intCompanyUser DB Action
+          if (userPayload.companyId) {
+            console.log("CompanyId: ", userPayload.companyId)
+            console.log("New UserId:" , response.data.id)
+            return processCompanyToUserAssignment("Add", userPayload.companyId, response.data.id);
+          }
+          return Promise.resolve(); // If no company assignment is needed, resolve the promise chain
+        })
+        .then(() => {
+          if (userPayload.companyId) {
+            console.log('User && CompanyUser successfully.');
+          } else {
+            console.log('User  successfully (withouth CompanyUser)');
+          }
+          prop_handleUserAction(prop_userAction.action); // Refresh the users list
           clearForm(); // Clear form
         })
         .catch(error => {
           console.error('Add Failed ', error);
           setVisuals(i => ({ ...i, formError: 'Add Failed', showButton: true }));
         });
+
+
     } else if (prop_userAction.action === "Edit" && formUser.id) {
       //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/users/${prop_userAction.user.id}`;
       axios.patch(`${url}/api/users/${prop_userAction.user.id}`, userPayload)
@@ -76,10 +95,10 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction }) => { // prop_s
           console.error("Edit Failed", error);
           setVisuals(i => ({ ...i, formError: 'Edit Failed', showButton: true }));
         });
-    } else if (prop_userAction.action === "Remove" && id) {
+
+    } else if (prop_userAction.action === "Remove" && formUser.id) {
       //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/users/${prop_userAction.user.id}`;
-      const url = `${url}/api/users/${prop_userAction.user.id}`;
-      axios.delete(url)
+      axios.delete(`${url}/api/users/${prop_userAction.user.id}`)
         .then(response => {
           console.log('User removed successfully:', response.data);
           prop_handleUserAction(prop_userAction.action);
@@ -91,6 +110,22 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction }) => { // prop_s
         });
     }
   };
+
+const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
+  if (backendAction === "Add" && companyId) {
+    return axios.post(`${url}/api/intCompanyUser`, { companyId, userId }) // Return this promise
+        .then(response => {
+          console.log('intCompanyUser added successfully:', response.data);
+        })
+        .catch(error => {
+          console.error('Error adding intCompanyUser:', error);
+          throw error; // Need to propagate the error
+        });
+  } else {
+    console.log("Only ADD actions have been setup for now.");
+    return Promise.reject('Missing companyId?? or invalid action??'); // Reject to propagate
+  }
+};
 
   const canSubmitForm = () => {
     return formUser.firstName != "" && formUser.lastName != "" && formUser.email != ""
@@ -107,6 +142,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction }) => { // prop_s
       email: '',
       type: '',
       status: 'active',
+      companyId: '',
     });
 
     if (wasCancelled) {
@@ -161,6 +197,22 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction }) => { // prop_s
                             <option value="active">active</option>
                             <option value="inactive">inactive</option>
                           </select>
+            </label>
+            <label>Company: <select value={formUser.companyId} onChange={(e) => setFormUser({ ...formUser, companyId: e.target.value })} disabled={formUser.type === '' || formUser.status === 'inactive'}>
+                            <option value="">Select a company</option>
+                            {/* {prop_companies.map(company => ( 
+                            <option key={company.companyId} value={company.companyId}> 
+                              {company.companyName} 
+                            </option> ))} */}
+                            {prop_companies.map(company => {
+                              //console.log('Mapping company:', company); // Debug!
+                              return (
+                                <option key={company.companyId} value={company.companyId}>
+                                  {company.companyName}
+                                </option>
+                                  );
+                              })}
+                            </select>
             </label>
           </div>
           <div>
