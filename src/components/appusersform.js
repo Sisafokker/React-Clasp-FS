@@ -8,22 +8,32 @@ import "../styles/appusers-form.scss";
 //import "../../apps-script/styles_compiled/appusers-form.css";
 
 
-const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies }) => { 
+const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, prop_intCompUser }) => { 
+  console.log("🚀ACTION Prop: ",prop_userAction.action)
   //console.log('❓Received companies:', prop_companies);
   const url = process.env.REACT_APP_Backend_URL;
   const [formUser, setFormUser] = useState({
-    id: null, firstName: "", lastName: "", email: "", type: "", status: "active", companyId: ""
+    id: null, firstName: "", lastName: "", email: "", type: "", status: "active", companyId: [] // companyId: ""
   });
   const [cancelled, setCancelled] = useState(null)
   const [visuals, setVisuals] = useState({
     btnText: `${prop_userAction.action} User`, showButton: true, formError: null, formSuccess: null
   });
 
-  useEffect(() => {
-    console.log("prop_Action: ", prop_userAction.action)
-    console.log("prop_User: ", prop_userAction.user)
+   useEffect(() => {
+    console.log("🚀prop_Action: ", prop_userAction.action)
+    console.log("👤prop_User: ", prop_userAction.user)
     if (prop_userAction.user) {
       setFormUser({ ...prop_userAction.user });
+        if (prop_userAction.action !== "Add") { // Get company IDs associated with the user
+          const userCompanyIds = prop_intCompUser
+            .filter(rowObj => rowObj.userId === prop_userAction.user.id)
+            .map(rowObj => rowObj.companyId.toString());
+
+            // prevState_FormUser: the current state BEFORE this update
+            setFormUser(prevState_FormUser => ({ ...prevState_FormUser, companyId: userCompanyIds }));
+      }
+
       setVisuals(i => ({ ...i, btnText: `${prop_userAction.action} User` }));
     } else {
       setFormUser({
@@ -33,18 +43,18 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies }
         email: "",
         type: "",
         status: "active",
-        companyId: "", 
+        companyId: [], 
       });
 
       setVisuals(i => ({ ...i, btnText: 'Add User', formError: null }));
     }
-  }, [prop_userAction]);
+  }, [prop_userAction, prop_intCompUser]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (cancelled) { // Do nothing 
-      console.log("CANCELADO");
+    if (cancelled) {
+      console.log("Action Canceled");
       clearForm(true);
       return;
     }
@@ -55,36 +65,47 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies }
     console.log("userPayload: ", userPayload);
 
     if (prop_userAction.action === "Add") {
-      //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/users`;
       axios.post(`${url}/api/users`, userPayload)
         .then(response => {
           console.log('User added successfully:', response.data);
           
           // Process intCompanyUser DB Action
-          if (userPayload.companyId) {
-            console.log("CompanyId: ", userPayload.companyId)
-            console.log("New UserId:" , response.data.id)
-            return processCompanyToUserAssignment("Add", userPayload.companyId, response.data.id);
+          if (userPayload.companyId && userPayload.companyId.length > 0) {
+            // 👉Process intCompanyUser DB Action for multiple companies
+            const userId = response.data.id;
+            const companyAssignments = userPayload.companyId.map(companyId => 
+              processCompanyToUserAssignment("Add", companyId, userId)
+              );
+              console.log('STAGE ONE REACHED!');
+              return Promise.all(companyAssignments); // Wait for ALL assignments
+
+            // 👉Process Single intCompanyUser DB 
+            // console.log("CompanyId: ", userPayload.companyId)
+            // console.log("New UserId:" , response.data.id)
+            // return processCompanyToUserAssignment("Add", userPayload.companyId, response.data.id);
           }
           return Promise.resolve(); // If no company assignment is needed, resolve the promise chain
         })
         .then(() => {
-          if (userPayload.companyId) {
-            console.log('User && CompanyUser successfully.');
+          console.log('STAGE TWO REACHED!');
+          if (userPayload.companyId && userPayload.companyId.length > 0) {
+            console.log('User && CompanyUser success.');
           } else {
-            console.log('User  successfully (withouth CompanyUser)');
+            console.log('User success (withouth CompanyUser)');
           }
+          console.log('STAGE THREE REACHED!');
           prop_handleUserAction(prop_userAction.action); // Refresh the users list
           clearForm(); // Clear form
         })
         .catch(error => {
-          console.error('Add Failed ', error);
+          console.log('STAGE FOUR REACHED!');
+          console.error('Add Failed: ', error);
+          console.error('Error:', error.response ? error.response.data : error.message);
           setVisuals(i => ({ ...i, formError: 'Add Failed', showButton: true }));
         });
 
 
     } else if (prop_userAction.action === "Edit" && formUser.id) {
-      //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/users/${prop_userAction.user.id}`;
       axios.patch(`${url}/api/users/${prop_userAction.user.id}`, userPayload)
         .then(response => {
           console.log('User edited successfully:', response.data);
@@ -97,7 +118,6 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies }
         });
 
     } else if (prop_userAction.action === "Remove" && formUser.id) {
-      //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/users/${prop_userAction.user.id}`;
       axios.delete(`${url}/api/users/${prop_userAction.user.id}`)
         .then(response => {
           console.log('User removed successfully:', response.data);
@@ -108,12 +128,17 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies }
           console.error('Remove Failed', error);
           setVisuals(i => ({ ...i, formError: 'Remove Failed', showButton: true }));
         });
+    } else {
+      console.error("prop_userAction.action???: ", prop_userAction.action)
+      setVisuals(i => ({ ...i, formError: 'Add Failed', showButton: true }));
     }
   };
 
+// Intermediary tables
 const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
+  let endpoint = `${url}/api/intCompanyUser`;
   if (backendAction === "Add" && companyId) {
-    return axios.post(`${url}/api/intCompanyUser`, { companyId, userId }) // Return this promise
+    return axios.post(endpoint, { companyId, userId }) // Return promise
         .then(response => {
           console.log('intCompanyUser added successfully:', response.data);
         })
@@ -121,11 +146,23 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
           console.error('Error adding intCompanyUser:', error);
           throw error; // Need to propagate the error
         });
-  } else {
+  } else if (backendAction === "Remove" && companyId) {
+    return axios.delete(endpoint, { data: { companyId, userId } }) // Return promise
+    .then(response => {
+        console.log('Relationship deleted successfully:', response.data);
+        // Update UI or state as necessary
+    })
+    .catch(error => {
+      console.error('Error adding intCompanyUser:', error);
+      throw error; // Need to propagate the error
+    });
+
+  }else {
     console.log("Only ADD actions have been setup for now.");
     return Promise.reject('Missing companyId?? or invalid action??'); // Reject to propagate
   }
 };
+
 
   const canSubmitForm = () => {
     return formUser.firstName != "" && formUser.lastName != "" && formUser.email != ""
@@ -152,7 +189,6 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
         formError: null,
         formSuccess: null
       });
-
     } else {
       setVisuals({
         ...visuals,
@@ -169,9 +205,8 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
           btnText: 'Add User'
         });
       }, 1500);
-
-      prop_userAction.action = "Add"
     }
+    prop_userAction.action = "Add"
   };
 
   return (
@@ -198,12 +233,9 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
                             <option value="inactive">inactive</option>
                           </select>
             </label>
-            <label>Company: <select value={formUser.companyId} onChange={(e) => setFormUser({ ...formUser, companyId: e.target.value })} disabled={formUser.type === '' || formUser.status === 'inactive'}>
+            {/* <label>Company: <select value={formUser.companyId} onChange={(e) => setFormUser({ ...formUser, companyId: e.target.value })} 
+                            disabled={formUser.type === '' || formUser.status === 'inactive'}>
                             <option value="">Select a company</option>
-                            {/* {prop_companies.map(company => ( 
-                            <option key={company.companyId} value={company.companyId}> 
-                              {company.companyName} 
-                            </option> ))} */}
                             {prop_companies.map(company => {
                               //console.log('Mapping company:', company); // Debug!
                               return (
@@ -212,6 +244,21 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
                                 </option>
                                   );
                               })}
+                            </select>
+            </label> */}
+            <label>Customers: [{formUser.companyId.length}] <select multiple value={formUser.companyId} // 'multiple' will now make this an array
+                            onChange={(e) => { const selectedCompanyIds = Array.from(e.target.selectedOptions, option => option.value);
+                              setFormUser({ ...formUser, companyId: selectedCompanyIds });
+                              console.log("Selected Companies❓: ", selectedCompanyIds);
+                            }}
+                            disabled={formUser.type === '' || formUser.status === 'inactive'} >
+                            {prop_companies.map(company => {
+                              return (
+                                <option key={company.companyId} value={company.companyId}>
+                                  {company.companyName}
+                                </option>
+                                  );
+                            })}
                             </select>
             </label>
           </div>

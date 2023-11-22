@@ -338,7 +338,14 @@ p {
   .nav-wrapper .nav-link:not(:last-child) {
     margin-right: 10px;
   }
+}
 
+.nav-wrapper .active-link {
+  color: #015661;
+  font-weight: 700;
+}
+
+@media screen and (width <= 768px) {
   .nav-wrapper {
     background-color: #ff3030;
   }
