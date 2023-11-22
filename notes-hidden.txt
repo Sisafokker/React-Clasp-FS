@@ -1,3 +1,5 @@
+Color Paletton: https://paletton.com/#uid=13l0u0kqLN5cDVwkqQSCCIME-pT
+
 Github Repository: https://github.com/Sisafokker/React-Clasp-FS
     git pull
     git add .
@@ -53,8 +55,6 @@ BACKEND: AppEngine Info
     target url:                  [https://reactfscloudsql.nw.r.appspot.com]
     target service account:      [reactfscloudsql@appspot.gserviceaccount.com]
 
-SQL Commands
-gcloud sql connect devcamp-reactfs-cloudsql-2023 --user=Hoakeen 
 
 
 Log Commands - from Root:

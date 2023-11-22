@@ -56,23 +56,32 @@ function App() {
         console.error("❌get_users", error);
       });
 
-      // axios.get(`${url}/api/companies`)
-      // .then(response => {
-      //   setData(response.data);
-      //   console.log("👍get_companies")//, response.data)
-      // })
-      // .catch(error => {
-      //   console.error("❌get_companies", error);
-      // });
+      axios.get(`${url}/api/companies`)
+      .then(response => {
+        setData(response.data);
+        console.log("👍get_companies")//, response.data)
+      })
+      .catch(error => {
+        console.error("❌get_companies", error);
+      });
 
-      // axios.get(`${url}/api/contacts`)
-      // .then(response => {
-      //   setData(response.data);
-      //   console.log("👍get_contacts")//, response.data)
-      // })
-      // .catch(error => {
-      //   console.error("❌get_contacts", error);
-      // });
+      axios.get(`${url}/api/contacts`)
+      .then(response => {
+        setData(response.data);
+        console.log("👍get_contacts")//, response.data)
+      })
+      .catch(error => {
+        console.error("❌get_contacts", error);
+      });
+
+      axios.get(`${url}/api/intCompanyUser`)
+      .then(response => {
+        setData(response.data);
+        console.log("👍get_intCompanyUser")//, response.data)
+      })
+      .catch(error => {
+        console.error("❌get_intCompanyUser", error);
+      });
   }
 
   const renderRoutes = () => {
