@@ -17,14 +17,16 @@ import "../styles/appusers-table.scss";
 
 function Appusers() {
     const [appUsers, setAppUsers] = useState([]);
-    const [userAction, setUserAction] = useState({ user: null, action: null });
+    const [userAction, setUserAction] = useState({ user: null, action: "Add" });
     const [sortConfig, setSortConfig] = useState({ key: 'lastName', direction: 'ascending' });  // keep track of current sorting
     const [companies, setCompanies] = useState([]);
+    const [intCompUser, setIntCompUser] = useState([]);
     const url = process.env.REACT_APP_Backend_URL
 
     useEffect(() => {
         fetchAppUsers();
         fetchCompanies();
+        fetchIntCompanyUser();
     }, []); // Fetch data on initial component mount
     
       const fetchCompanies = () => {
@@ -36,9 +38,16 @@ function Appusers() {
             .catch(console.error);
       };
 
-    // Get Student Data
+      const fetchIntCompanyUser = () => {
+        axios.get(`${url}/api/intCompanyUSer`)
+            .then(response => {
+                setIntCompUser(response.data);
+                console.log('IntCompUser: ', response.data);
+            })
+            .catch(console.error);
+      };
+
     const fetchAppUsers = useCallback(() => {  // useCallback => React Hook that lets you cache a function definition between re-renders.
-        //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/users`;
         axios.get(`${url}/api/users`)
             .then(response => {
                 setAppUsers(response.data);
@@ -50,6 +59,7 @@ function Appusers() {
      // After a new user is added / edited / removed
      const handleUserAction = useCallback(() => {
         fetchAppUsers();
+        fetchIntCompanyUser();
     }, [fetchAppUsers]);
 
     const handleAction = (user, action) => {
@@ -93,6 +103,21 @@ function Appusers() {
         return sortableUsers;
     }, [appUsers, sortConfig]);
 
+        const getCompanyNamesForUser = (userId) => {
+        // Find all company-user relationships for this user
+        const userCompanies = intCompUser.filter(rowObj => rowObj.userId === userId);
+      
+        // Map the company IDs to company names
+        const companyNames = userCompanies.map(rowObj => {
+          const company = companies.find(company => company.companyId === rowObj.companyId);
+          return company ? company.companyName : '';
+        });
+        
+        const result = companyNames.join(', ');
+        console.log("RES: ", result)
+        return result;
+      };
+      
 
     const renderTableRows = sortedAppUsers.map(u => (
         <tr key={u.id}>
@@ -104,6 +129,7 @@ function Appusers() {
             <td>{u.status}</td>
             {/* <td>{u.createdAt}</td> */}
             {/* <td>{u.updatedAt}</td> */}
+            <td> {getCompanyNamesForUser(u.id)} </td>
             <td> <FontAwesomeIcon icon={faPenToSquare} className='clickable'onClick={() => handleAction(u, 'Edit')} /> </td>
             <td> <FontAwesomeIcon icon={faTrash} className='clickable' onClick={() => handleAction(u, 'Remove')} /> </td>
         </tr>
@@ -133,6 +159,7 @@ function Appusers() {
                 prop_handleUserAction={handleUserAction} 
                 prop_userAction={userAction} 
                 prop_companies={companies}
+                prop_intCompUser={intCompUser}
             />
             <h2>[SQL] Signed-Up Users:</h2>
             <table>
@@ -146,8 +173,9 @@ function Appusers() {
                         <th className="sortable" title="Click to Sort" onClick={() => onSort('status')}>Status <span className="sort-indicator">{getSortDirectionText('status')}</span> </th>
                         {/* <th>Created</th> */}
                         {/*  <th>Updated</th> */}
+                        <th>Customers</th>
                         <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Del</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -51,8 +51,7 @@ function App() {
       .then(response => {
         setData(response.data);
         console.log("👍get_users")//, response.data)
-      })
-      .catch(error => {
+      }).catch(error => {
         console.error("❌get_users", error);
       });
 
@@ -60,8 +59,7 @@ function App() {
       .then(response => {
         setData(response.data);
         console.log("👍get_companies")//, response.data)
-      })
-      .catch(error => {
+      }).catch(error => {
         console.error("❌get_companies", error);
       });
 
@@ -69,8 +67,7 @@ function App() {
       .then(response => {
         setData(response.data);
         console.log("👍get_contacts")//, response.data)
-      })
-      .catch(error => {
+      }).catch(error => {
         console.error("❌get_contacts", error);
       });
 
@@ -78,8 +75,7 @@ function App() {
       .then(response => {
         setData(response.data);
         console.log("👍get_intCompanyUser")//, response.data)
-      })
-      .catch(error => {
+      }).catch(error => {
         console.error("❌get_intCompanyUser", error);
       });
   }

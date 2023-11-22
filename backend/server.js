@@ -17,7 +17,7 @@ appExp.use(cors());
 // Use body-parser middleware to parse JSON requests
 appExp.use(bodyParser.json());
 
-/* LOCAL EVERYTHING*/ 
+/* LOCAL EVERYTHING ⌛⌛DEVELOPMENT ENVIRONMENT⌛⌛*/ 
 const pool = mysql.createPool({
   host: process.env.SQL_HOST,
   user: process.env.SQL_USER,
@@ -33,7 +33,8 @@ const pool = mysql.createPool({
 //   database: process.env.GOOGLE_SQL_DATABASE,
 // });
 
-/* CLOUD BACKEND && CLOUD SQL*/ 
+
+/* CLOUD BACKEND && CLOUD SQL 🚩🚩USE THESE ONLY WHEN UPDATING CLOUD ENGINE🚩🚩 */ 
 // const pool = mysql.createPool({
 //   user: process.env.GOOGLE_SQL_USER,
 //   password: process.env.GOOGLE_SQL_PASSWORD,
@@ -176,6 +177,12 @@ appExp.get('/api/companies', (req, res) => {
 });
 
 
+/*Intermediary Tables:
+Many-To-Many: No need for a rowId. The combo of two foreign keys (companyId & userId) serves as a primary key. 
+This composite key identifies each row and ensures that the same combo of company & user will not be added more than once.
+In this scenario, you do not PATCH rows, you just delete it and set a new one with the new relationship.
+*/
+
 appExp.get('/api/intCompanyUser', (req, res) => {
   pool.query('SELECT * FROM intCompanyUser', (error, results) => {
     if (error) {
@@ -205,6 +212,21 @@ appExp.post('/api/intCompanyUser', (req, res) => {
   });
 });
 
+appExp.delete('/api/intCompanyUser', (req, res) => {
+  const { companyId, userId } = req.body;
+  if (!companyId || !userId) {
+      return res.status(400).json({ error: 'intCompanyUser_Delete: Missing companyId or userId' });
+  }
+  const DELETE_RELATIONSHIP_QUERY = 'DELETE FROM intCompanyUser WHERE companyId = ? AND userId = ?';
+
+  pool.query(DELETE_RELATIONSHIP_QUERY, [companyId, userId], (error, results) => {
+      if (error) {
+          console.error('Deleted intCompanyUser:', error);
+          return res.status(500).json({ error: 'intCompanyUser_Delete: Internal server error' });
+      }
+      return res.status(200).json({ message: 'intCompanyUser_Delete: Relationship deleted successfully' });
+  });
+});
 
 
 
