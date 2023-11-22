@@ -64187,14 +64187,40 @@ const Footer = ()=>{
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                     className: "footer-Col",
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                        className: "custom-image",
+                        src: "https://lh3.googleusercontent.com/17JVDv4jno5isn9OoNozJ-ghj_46GKB3mrcu7cHY9EVIG-gI3EYwUyL0BiFOv1cbEzNWTbmr2GfEcgT14Vk3EXhaKmp9rk1l2AGeaOgSLBoQy5NiUHj_xs3BKmpMLOkpD7lK6UoExw=w70",
+                        alt: "Hoakeen"
+                    }, void 0, false, {
+                        fileName: "src/components/footer.js",
+                        lineNumber: 19,
+                        columnNumber: 11
+                    }, undefined)
+                }, void 0, false, {
+                    fileName: "src/components/footer.js",
+                    lineNumber: 17,
+                    columnNumber: 9
+                }, undefined),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "footer-Col",
                     children: [
                         "\xa9 ",
                         new Date().getFullYear(),
-                        " - Hoakeen - Full Stack Project"
+                        " - ",
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                            href: "http://www.hoakeen.com",
+                            target: "_blank",
+                            children: "Hoakeen"
+                        }, void 0, false, {
+                            fileName: "src/components/footer.js",
+                            lineNumber: 26,
+                            columnNumber: 44
+                        }, undefined),
+                        " - FS Project"
                     ]
                 }, void 0, true, {
                     fileName: "src/components/footer.js",
-                    lineNumber: 17,
+                    lineNumber: 24,
                     columnNumber: 9
                 }, undefined)
             ]
@@ -64241,7 +64267,7 @@ var _popupDefault = parcelHelpers.interopDefault(_popup);
 var _s = $RefreshSig$();
 const InfoVersion = ()=>{
     _s();
-    const [showPopup, setShowPopup] = (0, _react.useState)(false); // Corrected state variable name
+    const [showPopup, setShowPopup] = (0, _react.useState)(false);
     const latestNote = (0, _footerInfoDefault.default).getLatestNote();
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "info-version",
@@ -64249,8 +64275,12 @@ const InfoVersion = ()=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: "Developer's notes: "
-                    }, void 0, false, {
+                        children: [
+                            "v. ",
+                            (0, _footerInfoDefault.default).getVersion(),
+                            " | Dev's Notes: "
+                        ]
+                    }, void 0, true, {
                         fileName: "src/components/footer_infoversion.js",
                         lineNumber: 15,
                         columnNumber: 9
@@ -64269,22 +64299,6 @@ const InfoVersion = ()=>{
                 lineNumber: 14,
                 columnNumber: 7
             }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                    children: [
-                        " v. ",
-                        (0, _footerInfoDefault.default).getVersion()
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/footer_infoversion.js",
-                    lineNumber: 19,
-                    columnNumber: 9
-                }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/footer_infoversion.js",
-                lineNumber: 18,
-                columnNumber: 7
-            }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _popupDefault.default), {
                 isOpen: showPopup,
                 closePopup: ()=>setShowPopup(false),
@@ -64294,17 +64308,17 @@ const InfoVersion = ()=>{
                             children: detail
                         }, index, false, {
                             fileName: "src/components/footer_infoversion.js",
-                            lineNumber: 30,
+                            lineNumber: 26,
                             columnNumber: 13
                         }, undefined))
                 }, void 0, false, {
                     fileName: "src/components/footer_infoversion.js",
-                    lineNumber: 28,
+                    lineNumber: 24,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/footer_infoversion.js",
-                lineNumber: 23,
+                lineNumber: 19,
                 columnNumber: 7
             }, undefined)
         ]
@@ -64331,6 +64345,25 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const Info = Object.freeze({
     notes: [
+        {
+            version: "v0.4.2",
+            description: "TBD",
+            details: [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+            ]
+        },
+        {
+            version: "v0.4.1",
+            description: "Footer Visual Changes",
+            details: [
+                "Added Logo to Footer",
+                "Added 3rd column to footer"
+            ]
+        },
         {
             version: "v0.4.0",
             description: "SQL Updates",
@@ -64367,7 +64400,7 @@ const Info = Object.freeze({
             version: "v0.0.0",
             description: "Initial Release",
             details: [
-                "Initial release"
+                "Initial release (if this info section)"
             ]
         }
     ],

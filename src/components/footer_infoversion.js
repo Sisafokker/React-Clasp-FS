@@ -6,20 +6,16 @@ import FooterInfo from './footer_info';
 import Popup from './popup';
 
 const InfoVersion = () => {
-  const [showPopup, setShowPopup] = useState(false); // Corrected state variable name
+  const [showPopup, setShowPopup] = useState(false);
   const latestNote = FooterInfo.getLatestNote();
 
   return (
     <div className="info-version">
       <div>
-        <span>Developer's notes: </span>
+        <span>v. {FooterInfo.getVersion()} | Dev's Notes: </span>
         <FontAwesomeIcon icon={faCircleInfo} onClick={() => setShowPopup(true)} />
       </div>
-      <div>
-        <span> v. {FooterInfo.getVersion()}</span>
-      </div>
 
-      {/* Popup for latest note */}
       <Popup 
         isOpen={showPopup} 
         closePopup={() => setShowPopup(false)} 
