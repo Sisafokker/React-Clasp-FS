@@ -30,7 +30,9 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
             .filter(rowObj => rowObj.userId === prop_userAction.user.id)
             .map(rowObj => rowObj.companyId.toString());
 
-            // prevState_FormUser: the current state BEFORE this update
+            // Callback function to ensure I am working with the most current state.
+            /* In the context of React's state setter functions (like setFormUser, setCancelled, etc), when you use a callback fx, 
+               the first argument of that callback fx automatically represents the previous state of the associated state variable. */
             setFormUser(prevState_FormUser => ({ ...prevState_FormUser, companyId: userCompanyIds }));
       }
 
@@ -48,7 +50,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
 
       setVisuals(i => ({ ...i, btnText: 'Add User', formError: null }));
     }
-  }, [prop_userAction, prop_intCompUser]);
+  }, [prop_userAction]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -105,19 +107,52 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
         });
 
 
-    } else if (prop_userAction.action === "Edit" && formUser.id) {
-      axios.patch(`${url}/api/users/${prop_userAction.user.id}`, userPayload)
-        .then(response => {
-          console.log('User edited successfully:', response.data);
-          prop_handleUserAction(prop_userAction.action);
+    } 
+      else if (prop_userAction.action === "Edit" && formUser.id) {
+        axios.patch(`${url}/api/users/${prop_userAction.user.id}`, userPayload)
+          .then(response => {
+            console.log('User edited successfully:', response.data);
+    
+          // Remove company-user relationships for this user
+          const deletePromises = prop_intCompUser
+            .filter(rowObj => rowObj.userId === prop_userAction.user.id)
+            .map(rowObj => processCompanyToUserAssignment("Remove", rowObj.companyId, prop_userAction.user.id));
+    
+          return Promise.all(deletePromises);
+        })
+        .then(() => {
+          // Create new company-user relationships for this user
+          const addPromises = userPayload.companyId.map(companyId => 
+            processCompanyToUserAssignment("Add", companyId, prop_userAction.user.id));
+    
+          return Promise.all(addPromises);
+        })
+        .then(() => {
+          console.log('CompanyUser relationships updated successfully');
+          prop_handleUserAction(prop_userAction.action); // Refresh the users list
           clearForm();
         })
         .catch(error => {
           console.error("Edit Failed", error);
           setVisuals(i => ({ ...i, formError: 'Edit Failed', showButton: true }));
         });
+    }
+    
+    // else if (prop_userAction.action === "Edit" && formUser.id) {
+    //   axios.patch(`${url}/api/users/${prop_userAction.user.id}`, userPayload)
+    //     .then(response => {
+    //       console.log('User edited successfully:', response.data);
+    //       prop_handleUserAction(prop_userAction.action);
+    //       clearForm();
+    //     })
+    //     .catch(error => {
+    //       console.error("Edit Failed", error);
+    //       setVisuals(i => ({ ...i, formError: 'Edit Failed', showButton: true }));
+    //     });
 
-    } else if (prop_userAction.action === "Remove" && formUser.id) {
+    // } 
+    
+    else if (prop_userAction.action === "Remove" && formUser.id) {
       axios.delete(`${url}/api/users/${prop_userAction.user.id}`)
         .then(response => {
           console.log('User removed successfully:', response.data);
@@ -172,6 +207,7 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
 
   // Function to clear form and reset state
   const clearForm = (wasCancelled) => {
+    console.log("Clearing Form ----------")
     setFormUser({
       id: null,
       firstName: '',
@@ -246,7 +282,7 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
                               })}
                             </select>
             </label> */}
-            <label>Customers: [{formUser.companyId.length}] <select multiple value={formUser.companyId} // 'multiple' will now make this an array
+            <label>Customers: [{formUser.companyId ? formUser.companyId.length : 0}] <select multiple value={formUser.companyId} // 'multiple' make this an array
                             onChange={(e) => { const selectedCompanyIds = Array.from(e.target.selectedOptions, option => option.value);
                               setFormUser({ ...formUser, companyId: selectedCompanyIds });
                               console.log("Selected Companies❓: ", selectedCompanyIds);

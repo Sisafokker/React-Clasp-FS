@@ -40,15 +40,24 @@ const Customers = () => {
     
     
     return <div className='container'>
-       <h1>About Customers...</h1>
-       <h3>Ideas:</h3>
-       <ul>
-        <li>CRUD Google Cloud SQL Database</li>
-        <li>Action buttons (send email, etc) </li>
-        <li>List of PO's</li>
-       </ul>
-
-       <div>
+    <h1>Customers...</h1>
+    <div className='tasks-wrapper'>
+        <div>
+        <h3>Ideas:</h3>
+            <ul>
+                <li>CRUD Google Cloud SQL Database</li>
+                <li>Action buttons (send email, etc) </li>
+                <li>List of PO's</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Pending:</h3>
+                <ul>
+                    <li></li>
+                    <li></li>
+                </ul>
+        </div>
+    </div>
         <h2>Customers SQL</h2>
         <table>
             <thead>
@@ -74,8 +83,6 @@ const Customers = () => {
                 ))}
             </tbody>
         </table>
-    </div>
-
     </div>
 }
 

@@ -141,7 +141,6 @@ function Appusers() {
             <div>
                 <h3>Methods:</h3>
                 <ul>
-                    <li>CRUD Google Cloud SQL Database</li>
                     <li>Google API admin console</li>
                     <li>CRUD Google Workspace Users</li>
                 </ul>
@@ -149,8 +148,8 @@ function Appusers() {
             <div>
                 <h3>Pending:</h3>
                 <ul>
-                    <li>Sorting before rendering</li>
-                    <li>Sorting Table by Column</li>
+                    <li></li>
+                    <li></li>
                 </ul>
             </div>
         </div>
