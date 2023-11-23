@@ -5,7 +5,7 @@ const Info = Object.freeze({
     version: {
       major: 0,
       minor: 5,
-      patch: 0,
+      patch: 1,
       toString() { 
         return `${this.major}.${this.minor}.${this.patch}`;
       }
@@ -13,8 +13,9 @@ const Info = Object.freeze({
   },
 
   notes: [
-    //{ version: "v0.5.X", description: "TBD", details: ["1", "2", "3", "4", "5",],  },
-    { version: "v0.5.0", description: "TBD", details: ["Multi Select Companies in AppUsers (Available for Add, edit and Remove", "Customers: [4] counter","Active-link in Nav has diff color"],  },
+    //{ version: "v0.5.X", description: "TBD", details: ["1", "2", "3",],  },
+    { version: "v0.5.1", description: "MultiCompany", details: ["Edit AppUser with Multi Select Companies", "Solved small State status issues" ],  },
+    { version: "v0.5.0", description: "MultiCompany", details: ["Multi Select Companies in AppUsers (Available for Add and Remove", "Customers: [4] counter","Active-link in Nav has diff color"],  },
     { version: "v0.4.1", description: "Footer Visual Changes", details: ["Added Logo to Footer", "Added 3rd column to footer",],  },
     { version: "v0.4.0", description: "SQL Updates", details: ["Added SQL Intermediary Table intCompanyUsers", "Added IntCompanyUsers to Server.js", 
       "You can create Appusers and assign them to a Company", "Created Popup Component", "Cleaned Scss a bit more", ], },
