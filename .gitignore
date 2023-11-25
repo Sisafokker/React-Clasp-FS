@@ -9,7 +9,7 @@ package-lock.json
 
 #Keys (Ids and Secrets without "")
 .env
-TestGoogleBackend.js
+GoogleBackend_Test.js
 app.yaml
 /backend/.env
 /backend/app.yaml

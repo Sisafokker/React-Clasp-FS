@@ -11,7 +11,7 @@ import "./styles/main.scss";
 //import "../apps-script/styles_compiled/main.css";
 
 // Components
-import { ContextProvider } from './Context';
+//import { ContextProvider } from './Context';
 import OAuth from "./OAuth";
 import Crm from "./components/crm";
 import Home from "./components/home";

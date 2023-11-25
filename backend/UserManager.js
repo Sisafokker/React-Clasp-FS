@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const Database = require('./Database'); // Same dir.
+const Database = require('./Database');
 
 class UserManager {
   constructor() {
@@ -25,9 +25,23 @@ class UserManager {
     return { ...user, password: undefined };
   }
 
+  async verifyUser(email) {
+    const FIND_QUERY = `SELECT * FROM ${this.table} WHERE email = ?`;
+    const users = await this.db.query(FIND_QUERY, [email]);
+    let typeStatus = { email: email}
+    if (!users || users.length === 0) {
+      typeStatus.type = "usuario"
+      typeStatus.status = "unverified"
+    } else {
+      typeStatus.type = users[0].type
+      typeStatus.status = users[0].status
+    }
+    return typeStatus;
+  }
+
   async getUsers() {
-    const GET_USERS_QUERY = `SELECT * FROM ${this.table}`;
-    return this.db.query(GET_USERS_QUERY, false, `GET ${this.table}`);
+    const GET_QUERY = `SELECT * FROM ${this.table}`;
+    return this.db.query(GET_QUERY, false, `GET ${this.table}`);
   }
 
   async addUser(firstName, lastName, email, password) {

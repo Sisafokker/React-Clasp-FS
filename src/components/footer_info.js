@@ -5,7 +5,7 @@ const Info = Object.freeze({
     version: {
       major: 0,
       minor: 6,
-      patch: 1,
+      patch: 2,
       toString() { 
         return `${this.major}.${this.minor}.${this.patch}`;
       }
@@ -14,6 +14,7 @@ const Info = Object.freeze({
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+    { version: "v0.6.2", title: "User Type & Status", details: ["Verifying Type & Status on both Logins","Started CRM Components","Backend hopefully ready...",] },
     { version: "v0.6.1", title: "New SQL tables, classes, etc", details: ["New Orders tables","New Items tables","New IntOrderItem table","OrderManager and ItemManager into backend",] },
     { version: "v0.6.0", title: "Backend OPP Refactoring", details: ["Refactored Entire Backend- ServerOPP.js",] },
     { version: "v0.5.1", title: "MultiCompany", details: ["Edit AppUser with Multi Select Companies", "Solved small State status issues" ],  },

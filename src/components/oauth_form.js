@@ -49,7 +49,10 @@ const OAuth_Form = () => {
       
       const userObj = {
         name: response.data.user.firstName + " " +response.data.user.lastName,
-        email: response.data.user.email
+        email: response.data.user.email,
+        type: response.data.user.type,
+        status: response.data.user.status,
+        iss: "Not-Google"
       };
 
       if (isSignUp) {

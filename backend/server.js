@@ -47,6 +47,18 @@ appExp.post('/api/login', async (req, res) => {
   }
 });
 
+// Verify Type & Status
+appExp.post('/api/verifyUser', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await userManager.verifyUser(email);
+    res.status(200).json({ message: 'User Verified Successfully', user });
+  } catch (error) {
+    console.error('Login Error:', error);
+    res.status(401).json({ error: 'User Verification Error: ' + error.message });
+  }
+});
+
 // Get Users
 appExp.get('/api/users', async (req, res) => {
   try {

@@ -1,6 +1,7 @@
 // OAuth.js
 // Dependencies
 import React, { useEffect, useState, useContext } from "react";
+import axios from 'axios';
 import { Context } from "./Context";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom"; // useNavigate Hook
@@ -99,20 +100,41 @@ function OAuth({ prop_renderRoutes }) {
         console.log("👍HandleSignIn")
         let userCredentials = response.credential;
         //let userObject = jwtDecode(userCredentials);          // Alternative 1: Decode the JWT token to get user data
-        let userObject = decodeJwtResponse(userCredentials);    // Alternative 2: To Decode the JWT token
-
-        setUser(userObject); // Set the user data in the component state
-        localStorage.setItem("local_user", JSON.stringify(userObject)); // Save user data to local storage
-        prop_renderRoutes(); // Render Routes after signin
-         navigate("/customers"); // Move to the desired route
+        let temp_userObject = decodeJwtResponse(userCredentials);    // Alternative 2: To Decode the JWT token
         
-         // Hide SignIn Button
-        //document.getElementById("allLogin").style.display = "none";
-        const allLoginElement = document.getElementById("allLogin");
-        if (allLoginElement) {
-            allLoginElement.style.display = "none";
+        let userObject = {
+            name:  temp_userObject.name,
+            email: temp_userObject.email,
+            iss: "Google"
+          };
+
+        
+        // Verify Google User's type and status in own DB
+        axios.post(`${process.env.REACT_APP_Backend_URL}/api/verifyUser`, { email: userObject.email })
+        .then(verifResponse => {
+            //console.log("verifResponse", verifResponse.data)
+            const { type, status } = verifResponse.data.user;
+            userObject.type = type;
+            userObject.status = status;
+
+            // Set user in component state
+            setUser(userObject);
+            localStorage.setItem("local_user", JSON.stringify(userObject));
+
+            // Render Routes after signin and navigate to the desired route
+            prop_renderRoutes();
+            navigate("/customers");
+
+            // Hide SignIn Button
+            const allLoginElement = document.getElementById("allLogin");
+            if (allLoginElement) {
+                allLoginElement.style.display = "none";
+            }
+        })
+        .catch(error => {
+        console.error(error);
+        });
         }
-    }
 
     // Function to handle user sign-out
     function handleSignOut(e) {

@@ -31745,7 +31745,7 @@ var _mainScss = require("./styles/main.scss");
 // Compiled CSS Styles files
 //import "../apps-script/styles_compiled/main.css";
 // Components
-var _context = require("./Context");
+//import { ContextProvider } from './Context';
 var _oauth = require("./OAuth");
 var _oauthDefault = parcelHelpers.interopDefault(_oauth);
 var _crm = require("./components/crm");
@@ -31764,6 +31764,7 @@ var _tutorials = require("./components/tutorials");
 var _tutorialsDefault = parcelHelpers.interopDefault(_tutorials);
 var _footer = require("./components/footer");
 var _footerDefault = parcelHelpers.interopDefault(_footer);
+var _context = require("./Context");
 var _s = $RefreshSig$();
 //const PORT = process.env.REACT_APP_BACKEND_PORT || 5000;
 function App() {
@@ -36545,6 +36546,8 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _context = require("./Context");
 var _jwtDecode = require("jwt-decode");
 var _reactRouterDom = require("react-router-dom"); // useNavigate Hook
@@ -36626,15 +36629,32 @@ function OAuth({ prop_renderRoutes }) {
         console.log("\uD83D\uDC4DHandleSignIn");
         let userCredentials = response.credential;
         //let userObject = jwtDecode(userCredentials);          // Alternative 1: Decode the JWT token to get user data
-        let userObject = decodeJwtResponse(userCredentials); // Alternative 2: To Decode the JWT token
-        setUser(userObject); // Set the user data in the component state
-        localStorage.setItem("local_user", JSON.stringify(userObject)); // Save user data to local storage
-        prop_renderRoutes(); // Render Routes after signin
-        navigate("/customers"); // Move to the desired route
-        // Hide SignIn Button
-        //document.getElementById("allLogin").style.display = "none";
-        const allLoginElement = document.getElementById("allLogin");
-        if (allLoginElement) allLoginElement.style.display = "none";
+        let temp_userObject = decodeJwtResponse(userCredentials); // Alternative 2: To Decode the JWT token
+        let userObject = {
+            name: temp_userObject.name,
+            email: temp_userObject.email,
+            iss: "Google"
+        };
+        // Verify Google User's type and status in own DB
+        (0, _axiosDefault.default).post(`${"http://localhost:5000"}/api/verifyUser`, {
+            email: userObject.email
+        }).then((verifResponse)=>{
+            //console.log("verifResponse", verifResponse.data)
+            const { type, status } = verifResponse.data.user;
+            userObject.type = type;
+            userObject.status = status;
+            // Set user in component state
+            setUser(userObject);
+            localStorage.setItem("local_user", JSON.stringify(userObject));
+            // Render Routes after signin and navigate to the desired route
+            prop_renderRoutes();
+            navigate("/customers");
+            // Hide SignIn Button
+            const allLoginElement = document.getElementById("allLogin");
+            if (allLoginElement) allLoginElement.style.display = "none";
+        }).catch((error)=>{
+            console.error(error);
+        });
     }
     // Function to handle user sign-out
     function handleSignOut(e) {
@@ -36665,18 +36685,18 @@ function OAuth({ prop_renderRoutes }) {
                         className: "google-login"
                     }, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 147,
+                        lineNumber: 169,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _oauthFormDefault.default), {}, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 148,
+                        lineNumber: 170,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/OAuth.js",
-                lineNumber: 146,
+                lineNumber: 168,
                 columnNumber: 17
             }, this),
             user && Object.keys(user).length !== 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36693,7 +36713,7 @@ function OAuth({ prop_renderRoutes }) {
                                     alt: "User"
                                 }, void 0, false, {
                                     fileName: "src/OAuth.js",
-                                    lineNumber: 155,
+                                    lineNumber: 177,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36703,14 +36723,14 @@ function OAuth({ prop_renderRoutes }) {
                                             children: user.name
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 157,
+                                            lineNumber: 179,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                             children: user.email
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 158,
+                                            lineNumber: 180,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36721,46 +36741,46 @@ function OAuth({ prop_renderRoutes }) {
                                                 children: "Sign Out"
                                             }, void 0, false, {
                                                 fileName: "src/OAuth.js",
-                                                lineNumber: 160,
+                                                lineNumber: 182,
                                                 columnNumber: 37
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 159,
+                                            lineNumber: 181,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/OAuth.js",
-                                    lineNumber: 156,
+                                    lineNumber: 178,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/OAuth.js",
-                            lineNumber: 154,
+                            lineNumber: 176,
                             columnNumber: 25
                         }, this)
                     }, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 153,
+                        lineNumber: 175,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navDefault.default), {}, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 165,
+                        lineNumber: 187,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/OAuth.js",
-                lineNumber: 152,
+                lineNumber: 174,
                 columnNumber: 17
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/OAuth.js",
-        lineNumber: 144,
+        lineNumber: 166,
         columnNumber: 9
     }, this);
 }
@@ -36779,7 +36799,7 @@ $RefreshReg$(_c, "OAuth");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Context":"49Q86","jwt-decode":"EeAxo","react-router-dom":"9xmpe","./components/nav":"kefMG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./styles/main.scss":"bo7w8","./components/oauth_form":"1iJRs"}],"EeAxo":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Context":"49Q86","jwt-decode":"EeAxo","react-router-dom":"9xmpe","./components/nav":"kefMG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./styles/main.scss":"bo7w8","./components/oauth_form":"1iJRs","axios":"jo6P5"}],"EeAxo":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "InvalidTokenError", ()=>InvalidTokenError);
@@ -36983,7 +37003,10 @@ const OAuth_Form = ()=>{
             console.log(response.data.user);
             const userObj = {
                 name: response.data.user.firstName + " " + response.data.user.lastName,
-                email: response.data.user.email
+                email: response.data.user.email,
+                type: response.data.user.type,
+                status: response.data.user.status,
+                iss: "Not-Google"
             };
             if (isSignUp) {
                 setFeedback({
@@ -37048,14 +37071,14 @@ const OAuth_Form = ()=>{
                                             required: true
                                         }, void 0, false, {
                                             fileName: "src/components/oauth_form.js",
-                                            lineNumber: 99,
+                                            lineNumber: 102,
                                             columnNumber: 28
                                         }, undefined),
                                         " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/oauth_form.js",
-                                    lineNumber: 99,
+                                    lineNumber: 102,
                                     columnNumber: 15
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -37070,14 +37093,14 @@ const OAuth_Form = ()=>{
                                             required: true
                                         }, void 0, false, {
                                             fileName: "src/components/oauth_form.js",
-                                            lineNumber: 100,
+                                            lineNumber: 103,
                                             columnNumber: 33
                                         }, undefined),
                                         " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/oauth_form.js",
-                                    lineNumber: 100,
+                                    lineNumber: 103,
                                     columnNumber: 15
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -37092,14 +37115,14 @@ const OAuth_Form = ()=>{
                                             required: true
                                         }, void 0, false, {
                                             fileName: "src/components/oauth_form.js",
-                                            lineNumber: 101,
+                                            lineNumber: 104,
                                             columnNumber: 29
                                         }, undefined),
                                         " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/oauth_form.js",
-                                    lineNumber: 101,
+                                    lineNumber: 104,
                                     columnNumber: 15
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -37114,14 +37137,14 @@ const OAuth_Form = ()=>{
                                             required: true
                                         }, void 0, false, {
                                             fileName: "src/components/oauth_form.js",
-                                            lineNumber: 102,
+                                            lineNumber: 105,
                                             columnNumber: 32
                                         }, undefined),
                                         " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/oauth_form.js",
-                                    lineNumber: 102,
+                                    lineNumber: 105,
                                     columnNumber: 15
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -37136,25 +37159,25 @@ const OAuth_Form = ()=>{
                                             required: true
                                         }, void 0, false, {
                                             fileName: "src/components/oauth_form.js",
-                                            lineNumber: 103,
+                                            lineNumber: 106,
                                             columnNumber: 40
                                         }, undefined),
                                         " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/oauth_form.js",
-                                    lineNumber: 103,
+                                    lineNumber: 106,
                                     columnNumber: 15
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/oauth_form.js",
-                            lineNumber: 98,
+                            lineNumber: 101,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/oauth_form.js",
-                        lineNumber: 97,
+                        lineNumber: 100,
                         columnNumber: 11
                     }, undefined),
                     !isSignUp && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37174,14 +37197,14 @@ const OAuth_Form = ()=>{
                                             required: true
                                         }, void 0, false, {
                                             fileName: "src/components/oauth_form.js",
-                                            lineNumber: 111,
+                                            lineNumber: 114,
                                             columnNumber: 27
                                         }, undefined),
                                         " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/oauth_form.js",
-                                    lineNumber: 111,
+                                    lineNumber: 114,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -37196,25 +37219,25 @@ const OAuth_Form = ()=>{
                                             required: true
                                         }, void 0, false, {
                                             fileName: "src/components/oauth_form.js",
-                                            lineNumber: 112,
+                                            lineNumber: 115,
                                             columnNumber: 30
                                         }, undefined),
                                         " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/oauth_form.js",
-                                    lineNumber: 112,
+                                    lineNumber: 115,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/oauth_form.js",
-                            lineNumber: 110,
+                            lineNumber: 113,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/oauth_form.js",
-                        lineNumber: 109,
+                        lineNumber: 112,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37226,7 +37249,7 @@ const OAuth_Form = ()=>{
                                     children: isSignUp ? "Sign Up" : "Log In"
                                 }, void 0, false, {
                                     fileName: "src/components/oauth_form.js",
-                                    lineNumber: 118,
+                                    lineNumber: 121,
                                     columnNumber: 13
                                 }, undefined),
                                 isSignUp ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -37235,7 +37258,7 @@ const OAuth_Form = ()=>{
                                     children: "Or Log In here"
                                 }, void 0, false, {
                                     fileName: "src/components/oauth_form.js",
-                                    lineNumber: 120,
+                                    lineNumber: 123,
                                     columnNumber: 15
                                 }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
                                     href: "#signup",
@@ -37243,24 +37266,24 @@ const OAuth_Form = ()=>{
                                     children: "Or Sign Up here"
                                 }, void 0, false, {
                                     fileName: "src/components/oauth_form.js",
-                                    lineNumber: 122,
+                                    lineNumber: 125,
                                     columnNumber: 15
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/oauth_form.js",
-                            lineNumber: 117,
+                            lineNumber: 120,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/oauth_form.js",
-                        lineNumber: 116,
+                        lineNumber: 119,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/oauth_form.js",
-                lineNumber: 95,
+                lineNumber: 98,
                 columnNumber: 7
             }, undefined),
             feedback.error && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37268,7 +37291,7 @@ const OAuth_Form = ()=>{
                 children: feedback.error
             }, void 0, false, {
                 fileName: "src/components/oauth_form.js",
-                lineNumber: 127,
+                lineNumber: 130,
                 columnNumber: 26
             }, undefined),
             feedback.success && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37276,13 +37299,13 @@ const OAuth_Form = ()=>{
                 children: feedback.success
             }, void 0, false, {
                 fileName: "src/components/oauth_form.js",
-                lineNumber: 128,
+                lineNumber: 131,
                 columnNumber: 28
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/oauth_form.js",
-        lineNumber: 94,
+        lineNumber: 97,
         columnNumber: 5
     }, undefined);
 };
@@ -64688,44 +64711,125 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-function CRM() {
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _context = require("../Context");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _crmCompanyList = require("./crm_company_list");
+var _crmCompanyListDefault = parcelHelpers.interopDefault(_crmCompanyList);
+var _crmCompanyDetail = require("./crm_company_detail");
+var _crmCompanyDetailDefault = parcelHelpers.interopDefault(_crmCompanyDetail);
+var _crmOrderList = require("./crm_order_list");
+var _crmOrderListDefault = parcelHelpers.interopDefault(_crmOrderList);
+var _crmOrderDetail = require("./crm_order_detail");
+var _crmOrderDetailDefault = parcelHelpers.interopDefault(_crmOrderDetail);
+var _s = $RefreshSig$();
+const CRM = ()=>{
+    _s();
+    const { user } = (0, _react.useContext)((0, _context.Context));
+    const [companies, setCompanies] = (0, _react.useState)([]);
+    const [selectedCompany, setSelectedCompany] = (0, _react.useState)(null);
+    const [orders, setOrders] = (0, _react.useState)([]);
+    const [selectedOrder, setSelectedOrder] = (0, _react.useState)(null);
+    (0, _react.useEffect)(()=>{
+        fetchCompanies();
+    }, []);
+    const fetchCompanies = async ()=>{
+        try {
+            const response = await (0, _axiosDefault.default).get("api/companies");
+            // Filter companies based on TYPE of user
+            const filteredCompanies = userType === "usuario" ? response.data.filter((company)=>company.userId === userId) : response.data;
+            setCompanies(filteredCompanies);
+        } catch (error) {
+            console.error("Error fetching companies:", error);
+        }
+    };
+    const handleCompanySelect = async (companyId)=>{
+        setSelectedCompany(companyId);
+    // Fetch orders for the selected company
+    // ...
+    // ...
+    // ...
+    // ...
+    };
+    const handleOrderSelect = (orderId)=>{
+        setSelectedOrder(orderId);
+    // Fetch order details
+    // ...
+    // ...
+    // ...
+    // ...
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "container",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                children: "CRM"
+                children: "CRM Dashboard"
             }, void 0, false, {
                 fileName: "src/components/crm.js",
-                lineNumber: 3,
-                columnNumber: 8
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
-                children: "Ideas:"
+                lineNumber: 55,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                        children: "Companies"
+                    }, void 0, false, {
+                        fileName: "src/components/crm.js",
+                        lineNumber: 57,
+                        columnNumber: 17
+                    }, undefined),
+                    companies.map((company)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            onClick: ()=>handleCompanySelect(company.id),
+                            children: company.name
+                        }, company.id, false, {
+                            fileName: "src/components/crm.js",
+                            lineNumber: 60,
+                            columnNumber: 21
+                        }, undefined))
+                ]
+            }, void 0, true, {
+                fileName: "src/components/crm.js",
+                lineNumber: 56,
+                columnNumber: 13
+            }, undefined),
+            selectedCompany && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                    children: [
+                        "Orders for ",
+                        selectedCompany
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/crm.js",
+                    lineNumber: 68,
+                    columnNumber: 21
+                }, undefined)
             }, void 0, false, {
                 fileName: "src/components/crm.js",
-                lineNumber: 4,
-                columnNumber: 8
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
-                    children: "CRUD Google Cloud SQL Database"
+                lineNumber: 67,
+                columnNumber: 17
+            }, undefined),
+            selectedOrder && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                    children: "Order Details"
                 }, void 0, false, {
                     fileName: "src/components/crm.js",
-                    lineNumber: 6,
-                    columnNumber: 9
-                }, this)
+                    lineNumber: 78,
+                    columnNumber: 21
+                }, undefined)
             }, void 0, false, {
                 fileName: "src/components/crm.js",
-                lineNumber: 5,
-                columnNumber: 8
-            }, this)
+                lineNumber: 77,
+                columnNumber: 17
+            }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/crm.js",
-        lineNumber: 2,
-        columnNumber: 12
-    }, this);
-}
+        lineNumber: 54,
+        columnNumber: 9
+    }, undefined);
+};
+_s(CRM, "R0uhwcyB2+gIlEhvmVT8ZCQ0Yzo=");
 _c = CRM;
 exports.default = CRM;
 var _c;
@@ -64736,7 +64840,20 @@ $RefreshReg$(_c, "CRM");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}]},["9Y5CW","1xC6H","b6HaR"], "b6HaR", "parcelRequire10c2")
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq","../Context":"49Q86","axios":"jo6P5","./crm_company_list":"59GHX","./crm_company_detail":"1uOmN","./crm_order_list":"hxvsZ","./crm_order_detail":"ckKKW"}],"59GHX":[function(require,module,exports) {
+
+},{}],"1uOmN":[function(require,module,exports) {
+// crm.js
+// crm_company_list.js
+// crm_company_detail.js
+// crm_order_list.js
+// crm_order_detail.js
+
+},{}],"hxvsZ":[function(require,module,exports) {
+
+},{}],"ckKKW":[function(require,module,exports) {
+
+},{}]},["9Y5CW","1xC6H","b6HaR"], "b6HaR", "parcelRequire10c2")
 
 </script>
 </body>
