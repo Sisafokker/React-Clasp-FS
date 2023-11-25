@@ -5,21 +5,23 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 5000;
 
-const UserManager = require('./UserManager');
-const CompanyManager = require('./CompanyManager'); 
-const ContactManager = require('./ContactManager'); 
-const IntermediaryManager = require('./IntermediaryManager'); 
-
-
 const appExp = express();
 appExp.use(cors());
 appExp.use(bodyParser.json());
 
+const UserManager = require('./UserManager');
+const CompanyManager = require('./CompanyManager'); 
+const ContactManager = require('./ContactManager'); 
+const OrderManager = require('./OrderManager'); 
+const ItemManager = require('./ItemManager'); 
+const IntermediaryManager = require('./IntermediaryManager'); 
+
 const userManager = new UserManager();
 const companyManager = new CompanyManager();
 const contactManager = new ContactManager();
+const orderManager = new OrderManager();
+const itemManager = new ItemManager();
 const intermediaryManager = new IntermediaryManager();
-
 
 // SignUp endpoint
 appExp.post('/api/signup', async (req, res) => {
@@ -115,6 +117,103 @@ appExp.get('/api/contacts', async (req, res) => {
   }
 });
 
+
+// Get Order 📦
+appExp.get('/api/orders', async (req, res) => {
+  try {
+    const orders = await orderManager.getOrders();
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error('Get Orders Error:', error);
+    res.status(500).json({ error: 'Get Orders Error: ' + error.message });
+  }
+});
+
+// Add Order 📦
+appExp.post('/api/orders', async (req, res) => {
+  const { companyId, userId, status } = req.body;
+  try {
+    await orderManager.addOrder(companyId, userId, status);
+    res.status(201).json({ message: 'New order added successfully' });
+  } catch (error) {
+    console.error('Add Order Error:', error);
+    res.status(500).json({ error: 'Add Order Error: ' + error.message });
+  }
+});
+
+// Update Order 📦
+appExp.patch('/api/orders/:orderId', async (req, res) => {
+  const orderId = req.params.orderId;
+  const { companyId, userId, status } = req.body;
+  try {
+    await orderManager.updateOrder(orderId, companyId, userId, status);
+    res.status(200).json({ message: 'Order updated successfully' });
+  } catch (error) {
+    console.error('Update Order Error:', error);
+    res.status(500).json({ error: 'Update Order Error: ' + error.message });
+  }
+});
+
+// Delete Order 📦
+appExp.delete('/api/orders/:orderId', async (req, res) => {
+  const orderId = req.params.orderId;
+  try {
+    await orderManager.deleteOrder(orderId);
+    res.status(200).json({ message: 'Order deleted successfully' });
+  } catch (error) {
+    console.error('Delete Order Error:', error);
+    res.status(500).json({ error: 'Delete Order Error: ' + error.message });
+  }
+});
+
+// Get Items 🍸
+appExp.get('/api/items', async (req, res) => {
+  try {
+    const items = await itemManager.getItems();
+    res.status(200).json(items);
+  } catch (error) {
+    console.error('Get Items Error:', error);
+    res.status(500).json({ error: 'Get Items Error: ' + error.message });
+  }
+});
+
+// Add Item 🍸
+appExp.post('/api/items', async (req, res) => {
+  const { name, description, unitprice_usd, available, userId } = req.body;
+  try {
+    await itemManager.addItem(name, description, unitprice_usd, available, userId);
+    res.status(201).json({ message: 'New item added successfully' });
+  } catch (error) {
+    console.error('Add Item Error:', error);
+    res.status(500).json({ error: 'Add Item Error: ' + error.message });
+  }
+});
+
+// Update Item 🍸
+appExp.patch('/api/items/:itemId', async (req, res) => {
+  const itemId = req.params.itemId;
+  const { name, description, unitprice_usd, available, userId } = req.body;
+  try {
+    await itemManager.updateItem(itemId, name, description, unitprice_usd, available, userId); 
+    res.status(200).json({ message: 'Item updated successfully' });
+  } catch (error) {
+    console.error('Update Item Error:', error);
+    res.status(500).json({ error: 'Update Item Error: ' + error.message });
+  }
+});
+
+// Delete Item 🍸
+appExp.delete('/api/items/:itemId', async (req, res) => {
+  const itemId = req.params.itemId;
+  try {
+    await itemManager.deleteItem(itemId); // Implement deleteItem in your itemManager
+    res.status(200).json({ message: 'Item deleted successfully' });
+  } catch (error) {
+    console.error('Delete Item Error:', error);
+    res.status(500).json({ error: 'Delete Item Error: ' + error.message });
+  }
+});
+
 // Get IntCompanyUser
 appExp.get('/api/intCompanyUser', async (req, res) => {
   try {
@@ -157,6 +256,51 @@ appExp.delete('/api/intCompanyUser', async (req, res) => {
     res.status(500).json({ error: 'Delete IntCompanyUser Error: ' + error.message });
   }
 });
+
+// Get IntOrderItem
+appExp.get('/api/intOrderItem', async (req, res) => {
+  try {
+    const values = await intermediaryManager.getIntOrderItem();
+    res.status(200).json(values);
+  } catch (error) {
+    console.error('Get IntOrderItem Error:', error);
+    res.status(500).json({ error: 'Get IntOrderItem Error: ' + error.message });
+  }
+});
+
+// Add IntOrderItem relation
+appExp.post('/api/intOrderItem', async (req, res) => {
+  try {
+    const { orderId, itemId } = req.body;
+    if (!orderId || !itemId) {
+      throw new Error('Missing orderId or itemId');
+    }
+    await intermediaryManager.addIntOrderItem(orderId, itemId);
+    console.log('intOrderItem_Post: success');
+    res.status(201).json({ message: 'intOrderItem_Post: success' });
+  } catch (error) {
+    console.error('Add IntOrderItem Error:', error);
+    res.status(500).json({ error: 'Add IntOrderItem Error: ' + error.message });
+  }
+});
+
+// Delete IntOrderItem relation
+appExp.delete('/api/intOrderItem', async (req, res) => {
+  try {
+    const { orderId, itemId } = req.body;
+    if (!orderId || !itemId) {
+      throw new Error('Missing orderId or itemId');
+    }
+    await intermediaryManager.deleteIntOrderItem(orderId, itemId);
+    console.log('intOrderItem_Delete: Relationship deleted successfully');
+    res.status(200).json({ message: 'intOrderItem_Delete: Relationship deleted successfully' });
+  } catch (error) {
+    console.error('Delete IntOrderItem Error:', error);
+    res.status(500).json({ error: 'Delete IntOrderItem Error: ' + error.message });
+  }
+});
+
+
 
 // Start Server
 appExp.listen(PORT, () => {

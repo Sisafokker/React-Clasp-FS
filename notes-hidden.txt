@@ -7,6 +7,17 @@ Github Repository: https://github.com/Sisafokker/React-Clasp-FS
     git commit -m "laptop"
     git push
 
+    Reverting a push:
+    git log (to see past commits)
+    git revert <commit-hash>  ( long string of numbers/letters of the commit before the one you want to undo!!)
+    git push
+
+    Change the Last Commit Message
+    git commit --amend -m "New commit message"
+    git push --force
+
+
+
 Cloud CLI: commands
     europe-west-4
     $ gcloud cheat-sheet
@@ -66,3 +77,4 @@ node Log_Frontend_ScssFiles.js
 node Log_Frontend_CompFiles.js
 node Log_Frontend_Src_Only.js
 node Log_Backend.js
+node Log_SelectedFiles.js

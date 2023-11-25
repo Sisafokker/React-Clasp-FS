@@ -19,7 +19,7 @@ const InfoVersion = () => {
       <Popup 
         isOpen={showPopup} 
         closePopup={() => setShowPopup(false)} 
-        title={`${latestNote.version} - ${latestNote.description}`}
+        title={`${latestNote.version} - ${latestNote.title}`}
       >
         <ul>
           {latestNote.details.map((detail, index) => (

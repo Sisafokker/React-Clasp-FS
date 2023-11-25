@@ -13,6 +13,7 @@ import "./styles/main.scss";
 // Components
 import { ContextProvider } from './Context';
 import OAuth from "./OAuth";
+import Crm from "./components/crm";
 import Home from "./components/home";
 import Customers from "./components/customers";
 import POs from "./components/pos";
@@ -71,12 +72,36 @@ function App() {
         console.error("❌get_contacts", error);
       });
 
+      axios.get(`${url}/api/orders`)
+      .then(response => {
+        setData(response.data);
+        console.log("👍get_orders")//, response.data)
+      }).catch(error => {
+        console.error("❌get_orders", error);
+      });
+
+      axios.get(`${url}/api/items`)
+      .then(response => {
+        setData(response.data);
+        console.log("👍get_items")//, response.data)
+      }).catch(error => {
+        console.error("❌get_items", error);
+      });
+
       axios.get(`${url}/api/intCompanyUser`)
       .then(response => {
         setData(response.data);
         console.log("👍get_intCompanyUser")//, response.data)
       }).catch(error => {
         console.error("❌get_intCompanyUser", error);
+      });
+
+      axios.get(`${url}/api/intOrderItem`)
+      .then(response => {
+        setData(response.data);
+        console.log("👍get_intOrderItem")//, response.data)
+      }).catch(error => {
+        console.error("❌get_intOrderItem", error);
       });
   }
 
@@ -92,14 +117,15 @@ function App() {
       return (
         <Routes>
           {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/" element={<Customers />} />
+          <Route path="/" element={<Crm />} />
+          <Route path="crm" element={<Crm />} />
           <Route path="customers" element={<Customers />} />
           <Route path="home" element={<Home />} />
           <Route path="pos" element={<POs />} />
           <Route path="inventory" element={<Inventory />} />
           <Route path="appusers" element={<AppUsers />} />
           <Route path="tutorials" element={<Tutorials />} />
-          <Route path="*" element={<Navigate to="/customers" />} />
+          <Route path="*" element={<Navigate to="/crm" />} />
         </Routes>
       );
     } else {

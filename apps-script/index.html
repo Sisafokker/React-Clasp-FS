@@ -31748,6 +31748,8 @@ var _mainScss = require("./styles/main.scss");
 var _context = require("./Context");
 var _oauth = require("./OAuth");
 var _oauthDefault = parcelHelpers.interopDefault(_oauth);
+var _crm = require("./components/crm");
+var _crmDefault = parcelHelpers.interopDefault(_crm);
 var _home = require("./components/home");
 var _homeDefault = parcelHelpers.interopDefault(_home);
 var _customers = require("./components/customers");
@@ -31781,7 +31783,7 @@ function App() {
     }, []);
     const allGetRequests = ()=>{
         // All API Fetch Requests from SQL Backend
-        const url = "https://reactfscloudsql.nw.r.appspot.com";
+        const url = "http://localhost:5000";
         (0, _axiosDefault.default).get(`${url}/api/users`).then((response)=>{
             setData(response.data);
             console.log("\uD83D\uDC4Dget_users") //, response.data)
@@ -31803,12 +31805,33 @@ function App() {
         }).catch((error)=>{
             console.error("\u274Cget_contacts", error);
         });
+        (0, _axiosDefault.default).get(`${url}/api/orders`).then((response)=>{
+            setData(response.data);
+            console.log("\uD83D\uDC4Dget_orders") //, response.data)
+            ;
+        }).catch((error)=>{
+            console.error("\u274Cget_orders", error);
+        });
+        (0, _axiosDefault.default).get(`${url}/api/items`).then((response)=>{
+            setData(response.data);
+            console.log("\uD83D\uDC4Dget_items") //, response.data)
+            ;
+        }).catch((error)=>{
+            console.error("\u274Cget_items", error);
+        });
         (0, _axiosDefault.default).get(`${url}/api/intCompanyUser`).then((response)=>{
             setData(response.data);
             console.log("\uD83D\uDC4Dget_intCompanyUser") //, response.data)
             ;
         }).catch((error)=>{
             console.error("\u274Cget_intCompanyUser", error);
+        });
+        (0, _axiosDefault.default).get(`${url}/api/intOrderItem`).then((response)=>{
+            setData(response.data);
+            console.log("\uD83D\uDC4Dget_intOrderItem") //, response.data)
+            ;
+        }).catch((error)=>{
+            console.error("\u274Cget_intOrderItem", error);
         });
     };
     const renderRoutes = ()=>{
@@ -31823,10 +31846,18 @@ function App() {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                         path: "/",
-                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _customersDefault.default), {}, void 0, false, void 0, void 0)
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _crmDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 95,
+                        lineNumber: 120,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                        path: "crm",
+                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _crmDefault.default), {}, void 0, false, void 0, void 0)
+                    }, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 121,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31834,7 +31865,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _customersDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 96,
+                        lineNumber: 122,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31842,7 +31873,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 97,
+                        lineNumber: 123,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31850,7 +31881,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _posDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 98,
+                        lineNumber: 124,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31858,7 +31889,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _inventoryDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 99,
+                        lineNumber: 125,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31866,7 +31897,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appusersDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 100,
+                        lineNumber: 126,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31874,23 +31905,23 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _tutorialsDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 101,
+                        lineNumber: 127,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                         path: "*",
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
-                            to: "/customers"
+                            to: "/crm"
                         }, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 102,
+                        lineNumber: 128,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/App.js",
-                lineNumber: 93,
+                lineNumber: 118,
                 columnNumber: 9
             }, this);
         } else {
@@ -31903,7 +31934,7 @@ function App() {
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 110,
+                        lineNumber: 136,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -31913,13 +31944,13 @@ function App() {
                         }, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 111,
+                        lineNumber: 137,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/App.js",
-                lineNumber: 109,
+                lineNumber: 135,
                 columnNumber: 9
             }, this);
         }
@@ -31931,19 +31962,19 @@ function App() {
                 prop_renderRoutes: renderRoutes
             }, void 0, false, {
                 fileName: "src/App.js",
-                lineNumber: 119,
+                lineNumber: 145,
                 columnNumber: 9
             }, this),
             renderRoutes(),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _footerDefault.default), {}, void 0, false, {
                 fileName: "src/App.js",
-                lineNumber: 121,
+                lineNumber: 147,
                 columnNumber: 5
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/App.js",
-        lineNumber: 118,
+        lineNumber: 144,
         columnNumber: 5
     }, this);
 }
@@ -31958,7 +31989,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","axios":"jo6P5","./Context":"49Q86","./OAuth":"4rTZc","./components/home":"l90Qn","./components/customers":"4fr12","./components/pos":"a5zFZ","./components/inventory":"dN4Ui","./components/appusers":"9eCzN","./components/tutorials":"kz8Tg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./styles/main.scss":"bo7w8","./components/footer":"bjsug"}],"jo6P5":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","axios":"jo6P5","./Context":"49Q86","./OAuth":"4rTZc","./components/home":"l90Qn","./components/customers":"4fr12","./components/pos":"a5zFZ","./components/inventory":"dN4Ui","./components/appusers":"9eCzN","./components/tutorials":"kz8Tg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./styles/main.scss":"bo7w8","./components/footer":"bjsug","./components/crm":"pJdFm"}],"jo6P5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _axiosJsDefault.default));
@@ -36821,12 +36852,21 @@ function Nav() {
         className: "nav-wrapper",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.NavLink), {
+                to: "/crm",
+                className: ({ isActive })=>isActive ? "nav-link active-link" : "nav-link",
+                children: "CRM"
+            }, void 0, false, {
+                fileName: "src/components/nav.js",
+                lineNumber: 8,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.NavLink), {
                 to: "/customers",
                 className: ({ isActive })=>isActive ? "nav-link active-link" : "nav-link",
                 children: "Customers"
             }, void 0, false, {
                 fileName: "src/components/nav.js",
-                lineNumber: 8,
+                lineNumber: 9,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.NavLink), {
@@ -36835,7 +36875,7 @@ function Nav() {
                 children: "POs"
             }, void 0, false, {
                 fileName: "src/components/nav.js",
-                lineNumber: 9,
+                lineNumber: 10,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.NavLink), {
@@ -36844,7 +36884,7 @@ function Nav() {
                 children: "AppUsers"
             }, void 0, false, {
                 fileName: "src/components/nav.js",
-                lineNumber: 10,
+                lineNumber: 11,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.NavLink), {
@@ -36853,7 +36893,7 @@ function Nav() {
                 children: "Inventory"
             }, void 0, false, {
                 fileName: "src/components/nav.js",
-                lineNumber: 11,
+                lineNumber: 12,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.NavLink), {
@@ -36862,7 +36902,7 @@ function Nav() {
                 children: "Tutorials"
             }, void 0, false, {
                 fileName: "src/components/nav.js",
-                lineNumber: 12,
+                lineNumber: 13,
                 columnNumber: 7
             }, this)
         ]
@@ -36936,7 +36976,7 @@ const OAuth_Form = ()=>{
             password: formData.password
         };
         //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/${isSignUp ? 'signup' : 'login'}`;
-        const url = `${"https://reactfscloudsql.nw.r.appspot.com"}/api/${isSignUp ? "signup" : "login"}`;
+        const url = `${"http://localhost:5000"}/api/${isSignUp ? "signup" : "login"}`;
         try {
             const response = await (0, _axiosDefault.default).post(url, requestData);
             console.log("Success!");
@@ -37352,7 +37392,7 @@ var _appusersTableScss = require("../styles/appusers-table.scss");
 var _s = $RefreshSig$();
 const Customers = ()=>{
     _s();
-    const url = `${"https://reactfscloudsql.nw.r.appspot.com"}/api/companies`;
+    const url = `${"http://localhost:5000"}/api/companies`;
     const [customers, setCustomers] = (0, _react.useState)([]);
     (0, _react.useEffect)(()=>{
         (0, _axiosDefault.default).get(url).then((response)=>{
@@ -63195,7 +63235,7 @@ function Appusers() {
     }); // keep track of current sorting
     const [companies, setCompanies] = (0, _react.useState)([]);
     const [intCompUser, setIntCompUser] = (0, _react.useState)([]);
-    const url = "https://reactfscloudsql.nw.r.appspot.com";
+    const url = "http://localhost:5000";
     (0, _react.useEffect)(()=>{
         fetchAppUsers();
         fetchCompanies();
@@ -63683,7 +63723,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
     _s();
     console.log("\uD83D\uDE80ACTION Prop: ", prop_userAction.action);
     //console.log('❓Received companies:', prop_companies);
-    const url = "https://reactfscloudsql.nw.r.appspot.com";
+    const url = "http://localhost:5000";
     const [formUser, setFormUser] = (0, _react.useState)({
         id: null,
         firstName: "",
@@ -64424,7 +64464,7 @@ const InfoVersion = ()=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _popupDefault.default), {
                 isOpen: showPopup,
                 closePopup: ()=>setShowPopup(false),
-                title: `${latestNote.version} - ${latestNote.description}`,
+                title: `${latestNote.version} - ${latestNote.title}`,
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
                     children: latestNote.details.map((detail, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                             children: detail
@@ -64471,24 +64511,34 @@ const Info = Object.freeze({
         version: {
             major: 0,
             minor: 6,
-            patch: 0,
+            patch: 1,
             toString () {
                 return `${this.major}.${this.minor}.${this.patch}`;
             }
         }
     },
     notes: [
-        //{ version: "v0.5.X", description: "TBD", details: ["1", "2", "3",],  },
+        //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+        {
+            version: "v0.6.1",
+            title: "New SQL tables, classes, etc",
+            details: [
+                "New Orders tables",
+                "New Items tables",
+                "New IntOrderItem table",
+                "OrderManager and ItemManager into backend"
+            ]
+        },
         {
             version: "v0.6.0",
-            description: "Backend OPP Refactoring",
+            title: "Backend OPP Refactoring",
             details: [
                 "Refactored Entire Backend- ServerOPP.js"
             ]
         },
         {
             version: "v0.5.1",
-            description: "MultiCompany",
+            title: "MultiCompany",
             details: [
                 "Edit AppUser with Multi Select Companies",
                 "Solved small State status issues"
@@ -64496,7 +64546,7 @@ const Info = Object.freeze({
         },
         {
             version: "v0.5.0",
-            description: "MultiCompany",
+            title: "MultiCompany",
             details: [
                 "Multi Select Companies in AppUsers (Available for Add and Remove",
                 "Customers: [4] counter",
@@ -64505,7 +64555,7 @@ const Info = Object.freeze({
         },
         {
             version: "v0.4.1",
-            description: "Footer Visual Changes",
+            title: "Footer Visual Changes",
             details: [
                 "Added Logo to Footer",
                 "Added 3rd column to footer"
@@ -64513,7 +64563,7 @@ const Info = Object.freeze({
         },
         {
             version: "v0.4.0",
-            description: "SQL Updates",
+            title: "SQL Updates",
             details: [
                 "Added SQL Intermediary Table intCompanyUsers",
                 "Added IntCompanyUsers to Server.js",
@@ -64524,28 +64574,28 @@ const Info = Object.freeze({
         },
         {
             version: "v0.3.0",
-            description: "UI/UX Improvements",
+            title: "UI/UX Improvements",
             details: [
                 "Nightmare SCSS with Login Section"
             ]
         },
         {
             version: "v0.2.0",
-            description: "Styling Updates",
+            title: "Styling Updates",
             details: [
                 "Nightmare with SCSS"
             ]
         },
         {
             version: "v0.1.0",
-            description: "Feature Introduction",
+            title: "Feature Introduction",
             details: [
                 "Displaying Version Data"
             ]
         },
         {
             version: "v0.0.0",
-            description: "Initial Release",
+            title: "Initial Release",
             details: [
                 "Initial release (if this info section)"
             ]
@@ -64554,7 +64604,7 @@ const Info = Object.freeze({
     getLatestNote () {
         const latestNote = this.notes[0];
         return latestNote;
-    //return `${latestNote.version} - ${latestNote.description}: ${latestNote.details.join(", ")}`;
+    //return `${latestNote.version} - ${latestNote.title}: ${latestNote.details.join(", ")}`;
     },
     getVersion () {
         return this.project.version.toString();
@@ -64628,7 +64678,65 @@ $RefreshReg$(_c, "Popup");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bsbIO":[function() {},{}]},["9Y5CW","1xC6H","b6HaR"], "b6HaR", "parcelRequire0bdc")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bsbIO":[function() {},{}],"pJdFm":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$d47b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$d47b.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+function CRM() {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "container",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                children: "CRM"
+            }, void 0, false, {
+                fileName: "src/components/crm.js",
+                lineNumber: 3,
+                columnNumber: 8
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                children: "Ideas:"
+            }, void 0, false, {
+                fileName: "src/components/crm.js",
+                lineNumber: 4,
+                columnNumber: 8
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                    children: "CRUD Google Cloud SQL Database"
+                }, void 0, false, {
+                    fileName: "src/components/crm.js",
+                    lineNumber: 6,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "src/components/crm.js",
+                lineNumber: 5,
+                columnNumber: 8
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/crm.js",
+        lineNumber: 2,
+        columnNumber: 12
+    }, this);
+}
+_c = CRM;
+exports.default = CRM;
+var _c;
+$RefreshReg$(_c, "CRM");
+
+  $parcel$ReactRefreshHelpers$d47b.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}]},["9Y5CW","1xC6H","b6HaR"], "b6HaR", "parcelRequire10c2")
 
 </script>
 </body>
