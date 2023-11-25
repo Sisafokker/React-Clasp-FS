@@ -31781,7 +31781,7 @@ function App() {
     }, []);
     const allGetRequests = ()=>{
         // All API Fetch Requests from SQL Backend
-        const url = "http://localhost:5000";
+        const url = "https://reactfscloudsql.nw.r.appspot.com";
         (0, _axiosDefault.default).get(`${url}/api/users`).then((response)=>{
             setData(response.data);
             console.log("\uD83D\uDC4Dget_users") //, response.data)
@@ -36936,7 +36936,7 @@ const OAuth_Form = ()=>{
             password: formData.password
         };
         //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/${isSignUp ? 'signup' : 'login'}`;
-        const url = `${"http://localhost:5000"}/api/${isSignUp ? "signup" : "login"}`;
+        const url = `${"https://reactfscloudsql.nw.r.appspot.com"}/api/${isSignUp ? "signup" : "login"}`;
         try {
             const response = await (0, _axiosDefault.default).post(url, requestData);
             console.log("Success!");
@@ -37352,7 +37352,7 @@ var _appusersTableScss = require("../styles/appusers-table.scss");
 var _s = $RefreshSig$();
 const Customers = ()=>{
     _s();
-    const url = `${"http://localhost:5000"}/api/companies`;
+    const url = `${"https://reactfscloudsql.nw.r.appspot.com"}/api/companies`;
     const [customers, setCustomers] = (0, _react.useState)([]);
     (0, _react.useEffect)(()=>{
         (0, _axiosDefault.default).get(url).then((response)=>{
@@ -63195,30 +63195,36 @@ function Appusers() {
     }); // keep track of current sorting
     const [companies, setCompanies] = (0, _react.useState)([]);
     const [intCompUser, setIntCompUser] = (0, _react.useState)([]);
-    const url = "http://localhost:5000";
+    const url = "https://reactfscloudsql.nw.r.appspot.com";
     (0, _react.useEffect)(()=>{
         fetchAppUsers();
         fetchCompanies();
         fetchIntCompanyUser();
     }, []); // Fetch data on initial component mount
-    const fetchCompanies = ()=>{
-        (0, _axiosDefault.default).get(`${url}/api/companies`).then((response)=>{
-            setCompanies(response.data);
-            console.log("Companies: ", response.data);
-        }).catch(console.error);
-    };
-    const fetchIntCompanyUser = ()=>{
-        (0, _axiosDefault.default).get(`${url}/api/intCompanyUSer`).then((response)=>{
-            setIntCompUser(response.data);
-            console.log("IntCompUser: ", response.data);
-        }).catch(console.error);
-    };
+    // Fetches all users
     const fetchAppUsers = (0, _react.useCallback)(()=>{
         (0, _axiosDefault.default).get(`${url}/api/users`).then((response)=>{
             setAppUsers(response.data);
-            console.log("Fetched app users");
         }).catch(console.error);
-    }, []);
+    }, [
+        url
+    ]);
+    // Fetches all companies
+    const fetchCompanies = (0, _react.useCallback)(()=>{
+        (0, _axiosDefault.default).get(`${url}/api/companies`).then((response)=>{
+            setCompanies(response.data);
+        }).catch(console.error);
+    }, [
+        url
+    ]);
+    // Fetches all company-user relationships
+    const fetchIntCompanyUser = (0, _react.useCallback)(()=>{
+        (0, _axiosDefault.default).get(`${url}/api/intCompanyUser`).then((response)=>{
+            setIntCompUser(response.data);
+        }).catch(console.error);
+    }, [
+        url
+    ]);
     // After a new user is added / edited / removed
     const handleUserAction = (0, _react.useCallback)(()=>{
         fetchAppUsers();
@@ -63643,7 +63649,7 @@ function Appusers() {
         columnNumber: 12
     }, this);
 }
-_s(Appusers, "Ll6Vt/ak9/kT5Zkbon7hYQdbgVI=");
+_s(Appusers, "BmF77tt3azdB+7OGM4nRUZKDBfQ=");
 _c = Appusers;
 exports.default = Appusers;
 var _c;
@@ -63677,7 +63683,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
     _s();
     console.log("\uD83D\uDE80ACTION Prop: ", prop_userAction.action);
     //console.log('❓Received companies:', prop_companies);
-    const url = "http://localhost:5000";
+    const url = "https://reactfscloudsql.nw.r.appspot.com";
     const [formUser, setFormUser] = (0, _react.useState)({
         id: null,
         firstName: "",
@@ -64464,7 +64470,7 @@ const Info = Object.freeze({
         name: "Bottega Final Project: Hoakeen",
         version: {
             major: 0,
-            minor: 5,
+            minor: 6,
             patch: 0,
             toString () {
                 return `${this.major}.${this.minor}.${this.patch}`;
@@ -64473,6 +64479,13 @@ const Info = Object.freeze({
     },
     notes: [
         //{ version: "v0.5.X", description: "TBD", details: ["1", "2", "3",],  },
+        {
+            version: "v0.6.0",
+            description: "Backend OPP Refactoring",
+            details: [
+                "Refactored Entire Backend- ServerOPP.js"
+            ]
+        },
         {
             version: "v0.5.1",
             description: "MultiCompany",
@@ -64535,17 +64548,6 @@ const Info = Object.freeze({
             description: "Initial Release",
             details: [
                 "Initial release (if this info section)"
-            ]
-        },
-        {
-            version: "v0.5.X",
-            description: "TBD",
-            details: [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5"
             ]
         }
     ],

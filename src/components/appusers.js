@@ -29,32 +29,32 @@ function Appusers() {
         fetchIntCompanyUser();
     }, []); // Fetch data on initial component mount
     
-      const fetchCompanies = () => {
-        axios.get(`${url}/api/companies`)
-            .then(response => {
-                setCompanies(response.data);
-                console.log('Companies: ', response.data);
-            })
-            .catch(console.error);
-      };
-
-      const fetchIntCompanyUser = () => {
-        axios.get(`${url}/api/intCompanyUSer`)
-            .then(response => {
-                setIntCompUser(response.data);
-                console.log('IntCompUser: ', response.data);
-            })
-            .catch(console.error);
-      };
-
-    const fetchAppUsers = useCallback(() => {  // useCallback => React Hook that lets you cache a function definition between re-renders.
+    // Fetches all users
+    const fetchAppUsers = useCallback(() => {
         axios.get(`${url}/api/users`)
-            .then(response => {
-                setAppUsers(response.data);
-                console.log("Fetched app users");
-            })
-            .catch(console.error);
-    }, []);
+        .then(response => {
+            setAppUsers(response.data);
+        })
+      .catch(console.error);
+    }, [url]);
+
+    // Fetches all companies
+    const fetchCompanies = useCallback(() => {
+        axios.get(`${url}/api/companies`)
+        .then(response => {
+            setCompanies(response.data);
+        })
+        .catch(console.error);
+    }, [url]);
+
+    // Fetches all company-user relationships
+    const fetchIntCompanyUser = useCallback(() => {
+        axios.get(`${url}/api/intCompanyUser`)
+        .then(response => {
+            setIntCompUser(response.data);
+        })
+        .catch(console.error);
+    }, [url]);
 
      // After a new user is added / edited / removed
      const handleUserAction = useCallback(() => {

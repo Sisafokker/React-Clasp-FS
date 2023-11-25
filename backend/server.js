@@ -1,247 +1,164 @@
-// TO START: node server.js
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '.env') });  // .env backend
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const express = require('express');
-const mysql = require('mysql');
-const cors = require('cors'); // When your React app running on http://localhost:1234 tries to make a request to your Node.js server running on http://localhost:3001, the browser blocks the request due to CORS policy.
+const cors = require('cors');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
 const PORT = process.env.PORT || 5000;
 
-// Initializes your Express application
+const UserManager = require('./UserManager');
+const CompanyManager = require('./CompanyManager'); 
+const ContactManager = require('./ContactManager'); 
+const IntermediaryManager = require('./IntermediaryManager'); 
+
+
 const appExp = express();
-
-// Enable CORS for all routes
 appExp.use(cors());
-
-// Use body-parser middleware to parse JSON requests
 appExp.use(bodyParser.json());
 
-/* LOCAL EVERYTHING ⌛⌛DEVELOPMENT ENVIRONMENT⌛⌛*/ 
-const pool = mysql.createPool({
-  host: process.env.SQL_HOST,
-  user: process.env.SQL_USER,
-  password: process.env.SQL_PASSWORD,
-  database: process.env.SQL_DATABASE
-});
-
-/* LOCAL BACKEND - CLOUD SQL*/ 
-// const pool = mysql.createPool({
-//   host: process.env.GOOGLE_SQL_DB_HOST_LOCAL_BACKEND,
-//   user: process.env.GOOGLE_SQL_USER,
-//   password: process.env.GOOGLE_SQL_PASSWORD,
-//   database: process.env.GOOGLE_SQL_DATABASE,
-// });
+const userManager = new UserManager();
+const companyManager = new CompanyManager();
+const contactManager = new ContactManager();
+const intermediaryManager = new IntermediaryManager();
 
 
-/* CLOUD BACKEND && CLOUD SQL 🚩🚩USE THESE ONLY WHEN UPDATING CLOUD ENGINE🚩🚩 */ 
-// const pool = mysql.createPool({
-//   user: process.env.GOOGLE_SQL_USER,
-//   password: process.env.GOOGLE_SQL_PASSWORD,
-//   database: process.env.GOOGLE_SQL_DATABASE,
-//   socketPath: process.env.GOOGLE_SQL_DB_HOST
-// });
-
-// DEFINE API ENDPOINTS // --------------------------------------------------------------------------------------------------
-// SignUp
+// SignUp endpoint
 appExp.post('/api/signup', async (req, res) => {
-  const { firstName, lastName, email, password} = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const INSERT_USER_QUERY = 'INSERT INTO users (firstName, lastName, email, password, type, status) VALUES (?, ?, ?, ?, ? ,?)';
-
-  pool.query(INSERT_USER_QUERY, [firstName, lastName, email, hashedPassword, 'usuario', 'active'], (error, results) => {
-    if (error) {
-      if (error.code === 'ER_DUP_ENTRY') {
-        return res.status(409).json({ error: '❌ Email already registered' });
-      }
-      console.error("SignUp Error", error);
-      return res.status(500).json({ error: '❌ SignUp Error: Internal server error' });
-    }
-    const user = {};
-    return res.status(201).json({ 
-      message: 'User registered successfully', 
-      user: { firstName: firstName, lastName: lastName, email: email , password: undefined }  
-    });
-  });
+  const { firstName, lastName, email, password } = req.body;
+  try {
+    await userManager.addUser(firstName, lastName, email, password);
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (error) {
+    console.error('Signup Error:', error);
+    res.status(500).json({ error: 'SignUp Error: ' + error.message });
+  }
 });
 
-// Login
-appExp.post('/api/login', (req, res) => {
+// Login endpoint
+appExp.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
-
-  const FIND_USER_QUERY = 'SELECT * FROM users WHERE email = ?';
-
-  pool.query(FIND_USER_QUERY, [email], async (error, results) => {
-    if (error) {
-      console.error(error);
-      return res.status(500).json({ error: '❌ Login Error: Internal server error' });
-    }
-    if (results.length === 0) {
-      return res.status(401).json({ error: '❌ Login Error: User not found' });
-    }
-
-    const user = results[0];
-    console.log("Usuario: ",user)
-
-    // Check passwords
-    const match = await bcrypt.compare(password, user.password);
-    if (match) {
-      return res.status(200).json({ message: '👍 Logged in successfully', user: { ...user, password: undefined } });
-    } else {
-      return res.status(401).json({ error: '❌ Invalid credentials' });
-    }
-  });
+  try {
+    const user = await userManager.validateLogin(email, password);
+    res.status(200).json({ message: 'Logged in successfully', user });
+  } catch (error) {
+    console.error('Login Error:', error);
+    res.status(401).json({ error: 'Login Error: ' + error.message });
+  }
 });
 
-
-appExp.get('/api/users', (req, res) => {
-  pool.query('SELECT * FROM users', (error, results) => {
-    if (error) {
-      throw error;
-    }
-    res.status(200).json(results);
-  });
+// Get Users
+appExp.get('/api/users', async (req, res) => {
+  try {
+    const values = await userManager.getUsers();
+    res.status(200).json(values);
+  } catch (error) {
+    console.error('Get Users Error:', error);
+    res.status(500).json({ error: 'Get Users Error: ' + error.message });
+  }
 });
 
+// Add User
 appExp.post('/api/users', async (req, res) => {
-  const { firstName, lastName, email, password, type } = req.body; // Destructure from the request body
-  const hashedPassword = await bcrypt.hash("app_generated", 10);
-  const INSERT_USER_QUERY = 'INSERT INTO users (firstName, lastName, email, password, type) VALUES (?, ?, ?, ?, ?)';
-
-  // Validate data & handle errors
-
-  pool.query(INSERT_USER_QUERY, [firstName, lastName, email, hashedPassword, type], (error, results) => {
-    logDbConnectionStatus(error)
-    if (error) {
-      console.error('users_Post:', error);
-      return res.status(500).json({ error: 'users_Post: Internal server error' });
-    }
-    console.log("users Post Results: ", results)
-    console.log("Result id: ",results.insertId)
-    return res.status(201).json({ message: 'users_Post: success', id: results.insertId});
-  });
+  const { firstName, lastName, email, password, type } = req.body;
+  try {
+    await userManager.addUser(firstName, lastName, email, password, type);
+    res.status(201).json({ message: 'New user added successfully' });
+  } catch (error) {
+    console.error('Add User Error:', error);
+    res.status(500).json({ error: 'Add User Error: ' + error.message });
+  }
 });
 
-appExp.patch('/api/users/:id', (req, res) => {
+// Update User
+appExp.patch('/api/users/:id', async (req, res) => {
   const id = req.params.id;
   const { firstName, lastName, email, type, status } = req.body;
-  const UPDATE_USER_QUERY = 'UPDATE users SET firstName=?, lastName=?, email=?, type=?, status=? WHERE id=?';
-
-  // Validate data & handle errors
-
-  pool.query(UPDATE_USER_QUERY, [firstName, lastName, email, type, status, id], (error, results) => {
-    logDbConnectionStatus(error)
-    if (error) {
-      console.error('users_Patch:', error);
-      return res.status(500).json({ error: 'users_Patch: Internal server error' });
-    }
-    return res.status(200).json({ message: 'users_Patch: success!' });
-  });
+  try {
+    await userManager.updateUser(id, firstName, lastName, email, type, status);
+    res.status(200).json({ message: 'User updated successfully' });
+  } catch (error) {
+    console.error('Update User Error:', error);
+    res.status(500).json({ error: 'Update User Error: ' + error.message });
+  }
 });
 
-appExp.delete('/api/users/:id', (req, res) => {
+// Delete User
+appExp.delete('/api/users/:id', async (req, res) => {
   const id = req.params.id;
-  const DELETE_USER_QUERY = 'DELETE FROM users WHERE id=?';
-
-  // Validate data & handle errors
-
-  pool.query(DELETE_USER_QUERY, [id], (error, results) => {
-    logDbConnectionStatus(error)
-    if (error) {
-      console.error('users_Delete:', error);
-      return res.status(500).json({ error: 'users_Delete: Internal server error' });
-    }
-    return res.status(200).json({ message: 'users_Delete: success' });
-  });
-});
-
-appExp.get('/api/contacts', (req, res) => {
-  pool.query('SELECT * FROM contacts', (error, results) => {
-    logDbConnectionStatus(error)
-    if (error) {
-      throw error;
-    }
-    res.status(200).json(results);
-  });
-});
-
-appExp.get('/api/companies', (req, res) => {
-  pool.query('SELECT * FROM companies', (error, results) => {
-    logDbConnectionStatus(error)
-    if (error) {
-      throw error;
-    }
-    res.status(200).json(results);
-  });
-});
-
-
-/*Intermediary Tables:
-Many-To-Many: No need for a rowId. The combo of two foreign keys (companyId & userId) serves as a primary key. 
-This composite key identifies each row and ensures that the same combo of company & user will not be added more than once.
-In this scenario, you do not PATCH rows, you just delete it and set a new one with the new relationship.
-*/
-
-appExp.get('/api/intCompanyUser', (req, res) => {
-  pool.query('SELECT * FROM intCompanyUser', (error, results) => {
-    if (error) {
-      throw error;
-    }
-    res.status(200).json(results);
-  });
-});
-
-
-appExp.post('/api/intCompanyUser', (req, res) => {
-  console.log("Adding to intCompanyUser...")
-  const { companyId , userId } = req.body; 
-  if (!companyId || !userId) {
-    return res.status(400).json({ error: 'intCompanyUser_Post: Missing companyId or userId' });
+  try {
+    await userManager.deleteUser(id);
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (error) {
+    console.error('Delete User Error:', error);
+    res.status(500).json({ error: 'Delete User Error: ' + error.message });
   }
-  const INSERT_USER_QUERY = 'INSERT INTO intCompanyUser (companyId , userId ) VALUES (?, ?)';
-
-  pool.query(INSERT_USER_QUERY, [companyId , userId], (error, results) => {
-    logDbConnectionStatus(error)
-    if (error) {
-      console.error('intCompanyUser_Post:', error);
-      return res.status(500).json({ error: 'intCompanyUser_Post: Internal server error' });
-    }
-    console.log('intCompanyUser_Post: success')
-    return res.status(201).json({ message: 'intCompanyUser_Post: success' });
-  });
 });
 
-appExp.delete('/api/intCompanyUser', (req, res) => {
-  const { companyId, userId } = req.body;
-  if (!companyId || !userId) {
-      return res.status(400).json({ error: 'intCompanyUser_Delete: Missing companyId or userId' });
+// Get Companies
+appExp.get('/api/companies', async (req, res) => {
+  try {
+    const values = await companyManager.getCompanies();
+    res.status(200).json(values);
+  } catch (error) {
+    console.error('Get Companies Error:', error);
+    res.status(500).json({ error: 'Get Companies Error: ' + error.message });
   }
-  const DELETE_RELATIONSHIP_QUERY = 'DELETE FROM intCompanyUser WHERE companyId = ? AND userId = ?';
-
-  pool.query(DELETE_RELATIONSHIP_QUERY, [companyId, userId], (error, results) => {
-      if (error) {
-          console.error('Deleted intCompanyUser:', error);
-          return res.status(500).json({ error: 'intCompanyUser_Delete: Internal server error' });
-      }
-      return res.status(200).json({ message: 'intCompanyUser_Delete: Relationship deleted successfully' });
-  });
 });
 
+// Get Contacts
+appExp.get('/api/contacts', async (req, res) => {
+  try {
+    const values = await contactManager.getContacts();
+    res.status(200).json(values);
+  } catch (error) {
+    console.error('Get Contacts Error:', error);
+    res.status(500).json({ error: 'Get Contacts Error: ' + error.message });
+  }
+});
 
+// Get IntCompanyUser
+appExp.get('/api/intCompanyUser', async (req, res) => {
+  try {
+    const values = await intermediaryManager.getIntCompanyUser();
+    res.status(200).json(values);
+  } catch (error) {
+    console.error('Get IntCompanyUser Error:', error);
+    res.status(500).json({ error: 'Get IntCompanyUser Error: ' + error.message });
+  }
+});
 
-//Start the Server for specified PORT
+// Add IntCompanyUser relation
+appExp.post('/api/intCompanyUser', async (req, res) => {
+  try {
+    const { companyId, userId } = req.body;
+    if (!companyId || !userId) {
+      throw new Error('Missing companyId or userId');
+    }
+    await intermediaryManager.addIntCompanyUser(companyId, userId);
+    console.log('intCompanyUser_Post: success');
+    res.status(201).json({ message: 'intCompanyUser_Post: success' });
+  } catch (error) {
+    console.error('Add IntCompanyUser Error:', error);
+    res.status(500).json({ error: 'Add IntCompanyUser Error: ' + error.message });
+  }
+});
+
+// Delete IntCompanyUser relation
+appExp.delete('/api/intCompanyUser', async (req, res) => {
+  try {
+    const { companyId, userId } = req.body;
+    if (!companyId || !userId) {
+      throw new Error('Missing companyId or userId');
+    }
+    await intermediaryManager.deleteIntCompanyUser(companyId, userId);
+    console.log('intCompanyUser_Delete: Relationship deleted successfully');
+    res.status(200).json({ message: 'intCompanyUser_Delete: Relationship deleted successfully' });
+  } catch (error) {
+    console.error('Delete IntCompanyUser Error:', error);
+    res.status(500).json({ error: 'Delete IntCompanyUser Error: ' + error.message });
+  }
+});
+
+// Start Server
 appExp.listen(PORT, () => {
-  console.log(`Connection_AppEngine: 👍 - Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
-
-
-// Helper to log SQL_DB connection status
-function logDbConnectionStatus(error) {
-  if (error) {
-    console.log(`Connection_CloudSQL: ❌ - Error: ${error.message}`);
-    console.log(`Connection_CloudSQL: ❌ - Using: ${process.env.GOOGLE_SQL_DB_HOST}`);
-  } else {
-    console.log('Connection_CloudSQL: 👍');
-  }
-}

@@ -18,6 +18,7 @@ SCSS Compiler:
     npm run compile-scss
 
 Deploy Cloud FrontEnd: In frontEnd Directory: 
+    🚩 (1) Redirect REACT_APP_Backend_URL in: .env file 🚩
     SCSS Compiler:          $ npm run compile-scss  (Needed only if I made modifications to the Styles. Remember, you did this compiling for CLASP)
     Build App:              $ npm run build
     Deploy FrontEnd:        $ gcloud app deploy
@@ -25,6 +26,8 @@ Deploy Cloud FrontEnd: In frontEnd Directory:
     View app in browser:    $ gcloud app browse -s frontend
 
 Deploy Cloud Backend: In backend directory: 
+    🚩 First redirect pool in: backend/Database.js file 🚩
+    🚩 run in frontEnd: $ npm run build 🚩
     $ gcloud app deploy
     $ gcloud app logs tail -s default
     europe-west-2
@@ -59,5 +62,7 @@ BACKEND: AppEngine Info
 
 Log Commands - from Root:
 node Log_AppStructure.js
-node Log_ScssFiles.js
-node Log_CompFiles.js
+node Log_Frontend_ScssFiles.js
+node Log_Frontend_CompFiles.js
+node Log_Frontend_Src_Only.js
+node Log_Backend.js

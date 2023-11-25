@@ -20,6 +20,10 @@ app.yaml
 /apps-script/styles_compiled/
 
 #Other Logs
+Log_All.js
 Log_AppStructure.js
-Log_ScssFiles.js
-Log_CompFiles.js
+Log_Frontend_ScssFiles.js
+Log_Frontend_CompFiles.js
+Log_Frontend_Src_Only.js
+Log_Backend.js
+Log_SelectedFiles.js
