@@ -1,0 +1,59 @@
+// CRM_COMPANY_LIST.scss
+@import "variables.scss";
+@import "mixins.scss";
+
+.crm-company-list {
+  .section-title {
+    margin-bottom: 8px;
+    margin-top: 4px;
+    text-align: center;
+  }
+
+  .company-filter {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 8px;
+
+    .filter {
+      flex-basis: 50%; // Adjust the width as needed
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        text-align: center;
+      }
+
+      select {
+        @include inputSelectStyle;
+        width: 100%;
+      }
+    }
+
+    .section-btns {
+      flex-basis: 10%; // Adjust the width as needed
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .btn {
+        @include buttonStyle;
+        }
+    }
+  }
+
+  .filtered-companies {
+    .company-item {
+      cursor: pointer;
+      padding: 5px;
+      border-bottom: 1px solid #ccc;
+
+      p {
+        color: $primaryColor;
+      }
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  }
+}

@@ -1,3 +1,5 @@
+// AVAILABLE GLOBALY
+
 // Variables and mixins
 @import "variables.scss";
 @import "mixins.scss";
@@ -8,10 +10,10 @@
 // Shared for mobile
 @import 'view_mobile.scss';
 
-// Component-specific styles
-@import "auth.scss";
+// Non-Component-specific styles
 @import "nav.scss";
-@import "home.scss";
-@import "footer.scss";
 @import "popup.scss";
+
+// Component-specific styles
+// Imported within the specific component, not here.
 

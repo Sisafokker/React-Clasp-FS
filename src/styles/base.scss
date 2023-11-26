@@ -1,3 +1,4 @@
+// Bases.scss Global Styles
 @import "variables.scss";
 @import "mixins.scss"; 
 
@@ -68,6 +69,15 @@ p { @include textStyle(14px, $secondaryColor); }
     @include responsiveFontSize(12px);
     margin-left: 15px;
 }
+
+input, select {
+    @include inputSelectStyle;
+}
+
+select {
+    padding: 4px;
+    border: 1px solid $teal;
+  }
 
 .successWarning {
     color: $success;

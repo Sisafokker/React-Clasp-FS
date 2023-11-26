@@ -1,0 +1,50 @@
+//crm.scss
+@import "variables.scss";
+@import "mixins.scss"; 
+
+.input, select{
+    @include inputSelectStyle;
+    // width: 100%;          // input to fill width of label
+    // padding: 5px;
+    // margin-top: 2px; 
+    // border: 1px solid $lightgrey;
+  }
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 995%;
+  }
+  
+  .crm-main {
+    display: flex;
+    flex-grow: 1; // Takes remaining space after header and footer
+    margin: 0px;
+  }
+  
+  .crm-companies {
+    flex-basis: 33.33%;
+    display: flex;
+    flex-direction: column; //Stack vertically
+    background-color: red;
+  }
+  
+  .crm-orders {
+    flex-basis: 66.67%;
+    display: flex;
+    flex-direction: column;
+    background-color: blue;
+  }
+  
+  .crm-company-list, .crm-company-details {
+    flex-grow: 1; // Expand so each to take half of available vertical space within crm-companies
+  }
+  .crm-order-list, .crm-order-detail {
+    flex-grow: 1; // Expand so each to take half of available vertical space within crm-companies
+  }
+
+
+
+  
+
+  

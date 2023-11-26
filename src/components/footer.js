@@ -1,5 +1,5 @@
+// footer.js
 import React from "react";
-import { Link } from "react-router-dom";
 
 import FooterInfoVersion from "./footer_infoversion";
 

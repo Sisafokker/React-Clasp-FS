@@ -31787,52 +31787,52 @@ function App() {
         const url = "http://localhost:5000";
         (0, _axiosDefault.default).get(`${url}/api/users`).then((response)=>{
             setData(response.data);
-            console.log("\uD83D\uDC4Dget_users") //, response.data)
+            console.log("App \uD83D\uDC4Dget_users") //, response.data)
             ;
         }).catch((error)=>{
-            console.error("\u274Cget_users", error);
+            console.error("App \u274Cget_users", error);
         });
         (0, _axiosDefault.default).get(`${url}/api/companies`).then((response)=>{
             setData(response.data);
-            console.log("\uD83D\uDC4Dget_companies") //, response.data)
+            console.log("App \uD83D\uDC4Dget_companies") //, response.data)
             ;
         }).catch((error)=>{
-            console.error("\u274Cget_companies", error);
+            console.error("App \u274Cget_companies", error);
         });
         (0, _axiosDefault.default).get(`${url}/api/contacts`).then((response)=>{
             setData(response.data);
-            console.log("\uD83D\uDC4Dget_contacts") //, response.data)
+            console.log("App \uD83D\uDC4Dget_contacts") //, response.data)
             ;
         }).catch((error)=>{
-            console.error("\u274Cget_contacts", error);
+            console.error("App \u274Cget_contacts", error);
         });
         (0, _axiosDefault.default).get(`${url}/api/orders`).then((response)=>{
             setData(response.data);
-            console.log("\uD83D\uDC4Dget_orders") //, response.data)
+            console.log("App \uD83D\uDC4Dget_orders") //, response.data)
             ;
         }).catch((error)=>{
-            console.error("\u274Cget_orders", error);
+            console.error("App \u274Cget_orders", error);
         });
         (0, _axiosDefault.default).get(`${url}/api/items`).then((response)=>{
             setData(response.data);
-            console.log("\uD83D\uDC4Dget_items") //, response.data)
+            console.log("App \uD83D\uDC4Dget_items") //, response.data)
             ;
         }).catch((error)=>{
-            console.error("\u274Cget_items", error);
+            console.error("App \u274Cget_items", error);
         });
         (0, _axiosDefault.default).get(`${url}/api/intCompanyUser`).then((response)=>{
             setData(response.data);
-            console.log("\uD83D\uDC4Dget_intCompanyUser") //, response.data)
+            console.log("App \uD83D\uDC4Dget_intCompanyUser") //, response.data)
             ;
         }).catch((error)=>{
-            console.error("\u274Cget_intCompanyUser", error);
+            console.error("App \u274Cget_intCompanyUser", error);
         });
         (0, _axiosDefault.default).get(`${url}/api/intOrderItem`).then((response)=>{
             setData(response.data);
-            console.log("\uD83D\uDC4Dget_intOrderItem") //, response.data)
+            console.log("App \uD83D\uDC4Dget_intOrderItem") //, response.data)
             ;
         }).catch((error)=>{
-            console.error("\u274Cget_intOrderItem", error);
+            console.error("App \u274Cget_intOrderItem", error);
         });
     };
     const renderRoutes = ()=>{
@@ -36553,6 +36553,7 @@ var _jwtDecode = require("jwt-decode");
 var _reactRouterDom = require("react-router-dom"); // useNavigate Hook
 // Styles
 var _mainScss = require("./styles/main.scss");
+var _authScss = require("./styles/auth.scss");
 // Compiled CSS Styles files
 //import "../apps-script/styles_compiled/main.css";
 // Components
@@ -36685,18 +36686,18 @@ function OAuth({ prop_renderRoutes }) {
                         className: "google-login"
                     }, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 169,
+                        lineNumber: 170,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _oauthFormDefault.default), {}, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 170,
+                        lineNumber: 171,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/OAuth.js",
-                lineNumber: 168,
+                lineNumber: 169,
                 columnNumber: 17
             }, this),
             user && Object.keys(user).length !== 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36713,7 +36714,7 @@ function OAuth({ prop_renderRoutes }) {
                                     alt: "User"
                                 }, void 0, false, {
                                     fileName: "src/OAuth.js",
-                                    lineNumber: 177,
+                                    lineNumber: 178,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36723,14 +36724,14 @@ function OAuth({ prop_renderRoutes }) {
                                             children: user.name
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 179,
+                                            lineNumber: 180,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                             children: user.email
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 180,
+                                            lineNumber: 181,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36741,46 +36742,46 @@ function OAuth({ prop_renderRoutes }) {
                                                 children: "Sign Out"
                                             }, void 0, false, {
                                                 fileName: "src/OAuth.js",
-                                                lineNumber: 182,
+                                                lineNumber: 183,
                                                 columnNumber: 37
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "src/OAuth.js",
-                                            lineNumber: 181,
+                                            lineNumber: 182,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/OAuth.js",
-                                    lineNumber: 178,
+                                    lineNumber: 179,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/OAuth.js",
-                            lineNumber: 176,
+                            lineNumber: 177,
                             columnNumber: 25
                         }, this)
                     }, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 175,
+                        lineNumber: 176,
                         columnNumber: 21
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navDefault.default), {}, void 0, false, {
                         fileName: "src/OAuth.js",
-                        lineNumber: 187,
+                        lineNumber: 188,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/OAuth.js",
-                lineNumber: 174,
+                lineNumber: 175,
                 columnNumber: 17
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/OAuth.js",
-        lineNumber: 166,
+        lineNumber: 167,
         columnNumber: 9
     }, this);
 }
@@ -36799,7 +36800,7 @@ $RefreshReg$(_c, "OAuth");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Context":"49Q86","jwt-decode":"EeAxo","react-router-dom":"9xmpe","./components/nav":"kefMG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./styles/main.scss":"bo7w8","./components/oauth_form":"1iJRs","axios":"jo6P5"}],"EeAxo":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Context":"49Q86","jwt-decode":"EeAxo","react-router-dom":"9xmpe","./components/nav":"kefMG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./styles/main.scss":"bo7w8","./components/oauth_form":"1iJRs","axios":"jo6P5","./styles/auth.scss":"20Xhl"}],"EeAxo":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "InvalidTokenError", ()=>InvalidTokenError);
@@ -37320,13 +37321,14 @@ $RefreshReg$(_c, "OAuth_Form");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../Context":"49Q86","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/oauth_form.scss":"laB9J"}],"laB9J":[function() {},{}],"l90Qn":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","../Context":"49Q86","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/oauth_form.scss":"laB9J"}],"laB9J":[function() {},{}],"20Xhl":[function() {},{}],"l90Qn":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$f362 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
 $parcel$ReactRefreshHelpers$f362.prelude(module);
 
 try {
+// home.js
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
@@ -37349,14 +37351,14 @@ function Home() {
                 children: "Welcome to React_Clasp Project"
             }, void 0, false, {
                 fileName: "src/components/home.js",
-                lineNumber: 16,
+                lineNumber: 17,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                 children: 'Please "Log-In" or "Sign-Up" to continue'
             }, void 0, false, {
                 fileName: "src/components/home.js",
-                lineNumber: 17,
+                lineNumber: 18,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
@@ -37365,20 +37367,20 @@ function Home() {
                 alt: "Hoakeen"
             }, void 0, false, {
                 fileName: "src/components/home.js",
-                lineNumber: 18,
+                lineNumber: 19,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                 children: "Built by Joaquin Pagliettini"
             }, void 0, false, {
                 fileName: "src/components/home.js",
-                lineNumber: 22,
+                lineNumber: 23,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/home.js",
-        lineNumber: 14,
+        lineNumber: 15,
         columnNumber: 5
     }, this);
 }
@@ -37400,6 +37402,7 @@ var prevRefreshSig = window.$RefreshSig$;
 $parcel$ReactRefreshHelpers$81db.prelude(module);
 
 try {
+// customers.js
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
@@ -37451,7 +37454,7 @@ const Customers = ()=>{
                 children: "Customers..."
             }, void 0, false, {
                 fileName: "src/components/customers.js",
-                lineNumber: 43,
+                lineNumber: 44,
                 columnNumber: 5
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37463,7 +37466,7 @@ const Customers = ()=>{
                                 children: "Ideas:"
                             }, void 0, false, {
                                 fileName: "src/components/customers.js",
-                                lineNumber: 46,
+                                lineNumber: 47,
                                 columnNumber: 9
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
@@ -37472,33 +37475,33 @@ const Customers = ()=>{
                                         children: "CRUD Google Cloud SQL Database"
                                     }, void 0, false, {
                                         fileName: "src/components/customers.js",
-                                        lineNumber: 48,
+                                        lineNumber: 49,
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                         children: "Action buttons (send email, etc) "
                                     }, void 0, false, {
                                         fileName: "src/components/customers.js",
-                                        lineNumber: 49,
+                                        lineNumber: 50,
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                         children: "List of PO's"
                                     }, void 0, false, {
                                         fileName: "src/components/customers.js",
-                                        lineNumber: 50,
+                                        lineNumber: 51,
                                         columnNumber: 17
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/customers.js",
-                                lineNumber: 47,
+                                lineNumber: 48,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/customers.js",
-                        lineNumber: 45,
+                        lineNumber: 46,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37507,44 +37510,44 @@ const Customers = ()=>{
                                 children: "Pending:"
                             }, void 0, false, {
                                 fileName: "src/components/customers.js",
-                                lineNumber: 54,
+                                lineNumber: 55,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {}, void 0, false, {
                                         fileName: "src/components/customers.js",
-                                        lineNumber: 56,
+                                        lineNumber: 57,
                                         columnNumber: 21
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {}, void 0, false, {
                                         fileName: "src/components/customers.js",
-                                        lineNumber: 57,
+                                        lineNumber: 58,
                                         columnNumber: 21
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/customers.js",
-                                lineNumber: 55,
+                                lineNumber: 56,
                                 columnNumber: 17
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/customers.js",
-                        lineNumber: 53,
+                        lineNumber: 54,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/customers.js",
-                lineNumber: 44,
+                lineNumber: 45,
                 columnNumber: 5
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                 children: "Customers SQL"
             }, void 0, false, {
                 fileName: "src/components/customers.js",
-                lineNumber: 61,
+                lineNumber: 62,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("table", {
@@ -37556,53 +37559,53 @@ const Customers = ()=>{
                                     children: "ID"
                                 }, void 0, false, {
                                     fileName: "src/components/customers.js",
-                                    lineNumber: 65,
+                                    lineNumber: 66,
                                     columnNumber: 21
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                     children: "Name"
                                 }, void 0, false, {
                                     fileName: "src/components/customers.js",
-                                    lineNumber: 66,
+                                    lineNumber: 67,
                                     columnNumber: 21
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                     children: "Address"
                                 }, void 0, false, {
                                     fileName: "src/components/customers.js",
-                                    lineNumber: 67,
+                                    lineNumber: 68,
                                     columnNumber: 21
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                     children: "Industry"
                                 }, void 0, false, {
                                     fileName: "src/components/customers.js",
-                                    lineNumber: 68,
+                                    lineNumber: 69,
                                     columnNumber: 21
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                     children: "Edit"
                                 }, void 0, false, {
                                     fileName: "src/components/customers.js",
-                                    lineNumber: 69,
+                                    lineNumber: 70,
                                     columnNumber: 21
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                     children: "Delete"
                                 }, void 0, false, {
                                     fileName: "src/components/customers.js",
-                                    lineNumber: 70,
+                                    lineNumber: 71,
                                     columnNumber: 21
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/customers.js",
-                            lineNumber: 64,
+                            lineNumber: 65,
                             columnNumber: 17
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/customers.js",
-                        lineNumber: 63,
+                        lineNumber: 64,
                         columnNumber: 13
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tbody", {
@@ -37612,28 +37615,28 @@ const Customers = ()=>{
                                         children: customer.companyId
                                     }, void 0, false, {
                                         fileName: "src/components/customers.js",
-                                        lineNumber: 76,
+                                        lineNumber: 77,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
                                         children: customer.companyName
                                     }, void 0, false, {
                                         fileName: "src/components/customers.js",
-                                        lineNumber: 77,
+                                        lineNumber: 78,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
                                         children: customer.companyAddress
                                     }, void 0, false, {
                                         fileName: "src/components/customers.js",
-                                        lineNumber: 78,
+                                        lineNumber: 79,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
                                         children: customer.industry
                                     }, void 0, false, {
                                         fileName: "src/components/customers.js",
-                                        lineNumber: 79,
+                                        lineNumber: 80,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -37645,14 +37648,14 @@ const Customers = ()=>{
                                                 onClick: ()=>handleAction(u, "Edit")
                                             }, void 0, false, {
                                                 fileName: "src/components/customers.js",
-                                                lineNumber: 80,
+                                                lineNumber: 81,
                                                 columnNumber: 30
                                             }, undefined),
                                             " "
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/customers.js",
-                                        lineNumber: 80,
+                                        lineNumber: 81,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -37664,37 +37667,37 @@ const Customers = ()=>{
                                                 onClick: ()=>handleAction(u, "Remove")
                                             }, void 0, false, {
                                                 fileName: "src/components/customers.js",
-                                                lineNumber: 81,
+                                                lineNumber: 82,
                                                 columnNumber: 30
                                             }, undefined),
                                             " "
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/customers.js",
-                                        lineNumber: 81,
+                                        lineNumber: 82,
                                         columnNumber: 25
                                     }, undefined)
                                 ]
                             }, customer.companyId, true, {
                                 fileName: "src/components/customers.js",
-                                lineNumber: 75,
+                                lineNumber: 76,
                                 columnNumber: 21
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/customers.js",
-                        lineNumber: 73,
+                        lineNumber: 74,
                         columnNumber: 13
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/customers.js",
-                lineNumber: 62,
+                lineNumber: 63,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/customers.js",
-        lineNumber: 42,
+        lineNumber: 43,
         columnNumber: 12
     }, undefined);
 };
@@ -63060,6 +63063,7 @@ var prevRefreshSig = window.$RefreshSig$;
 $parcel$ReactRefreshHelpers$9f3b.prelude(module);
 
 try {
+// pos.js
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
@@ -63071,14 +63075,14 @@ function POs() {
                 children: "Purchase Orders..."
             }, void 0, false, {
                 fileName: "src/components/pos.js",
-                lineNumber: 3,
+                lineNumber: 4,
                 columnNumber: 8
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                 children: "Ideas:"
             }, void 0, false, {
                 fileName: "src/components/pos.js",
-                lineNumber: 4,
+                lineNumber: 5,
                 columnNumber: 8
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
@@ -63086,18 +63090,18 @@ function POs() {
                     children: "CRUD Google Cloud SQL Database"
                 }, void 0, false, {
                     fileName: "src/components/pos.js",
-                    lineNumber: 6,
+                    lineNumber: 7,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "src/components/pos.js",
-                lineNumber: 5,
+                lineNumber: 6,
                 columnNumber: 8
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/pos.js",
-        lineNumber: 2,
+        lineNumber: 3,
         columnNumber: 12
     }, this);
 }
@@ -63118,6 +63122,7 @@ var prevRefreshSig = window.$RefreshSig$;
 $parcel$ReactRefreshHelpers$fb67.prelude(module);
 
 try {
+// inventory.js
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
@@ -63138,7 +63143,7 @@ function Inventory() {
                 children: "Using 'Context' for Global Variables"
             }, void 0, false, {
                 fileName: "src/components/inventory.js",
-                lineNumber: 13,
+                lineNumber: 14,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -63148,7 +63153,7 @@ function Inventory() {
                 ]
             }, void 0, true, {
                 fileName: "src/components/inventory.js",
-                lineNumber: 14,
+                lineNumber: 15,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -63156,7 +63161,7 @@ function Inventory() {
                 children: "Change User"
             }, void 0, false, {
                 fileName: "src/components/inventory.js",
-                lineNumber: 15,
+                lineNumber: 16,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -63165,37 +63170,37 @@ function Inventory() {
                         children: "Inventory..."
                     }, void 0, false, {
                         fileName: "src/components/inventory.js",
-                        lineNumber: 17,
+                        lineNumber: 18,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                         children: "Ideas:"
                     }, void 0, false, {
                         fileName: "src/components/inventory.js",
-                        lineNumber: 18,
+                        lineNumber: 19,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {}, void 0, false, {
                             fileName: "src/components/inventory.js",
-                            lineNumber: 20,
+                            lineNumber: 21,
                             columnNumber: 17
                         }, this)
                     }, void 0, false, {
                         fileName: "src/components/inventory.js",
-                        lineNumber: 19,
+                        lineNumber: 20,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/inventory.js",
-                lineNumber: 16,
+                lineNumber: 17,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/inventory.js",
-        lineNumber: 12,
+        lineNumber: 13,
         columnNumber: 12
     }, this);
 // return <div>
@@ -63239,11 +63244,9 @@ var _freeSolidSvgIcons = require("@fortawesome/free-solid-svg-icons");
 var _appusersform = require("./appusersform");
 var _appusersformDefault = parcelHelpers.interopDefault(_appusersform);
 // styles
-var _mainScss = require("../styles/main.scss");
 var _appusersTableScss = require("../styles/appusers-table.scss");
 var _s = $RefreshSig$();
 // Compiled CSS Styles files
-// import "../../apps-script/styles_compiled/main.css";
 // import "../../apps-script/styles_compiled/appusers-table.css";
 function Appusers() {
     _s();
@@ -63350,35 +63353,35 @@ function Appusers() {
                     children: u.lastName
                 }, void 0, false, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 124,
+                    lineNumber: 122,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
                     children: u.firstName
                 }, void 0, false, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 125,
+                    lineNumber: 123,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
                     children: u.email
                 }, void 0, false, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 126,
+                    lineNumber: 124,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
                     children: u.type
                 }, void 0, false, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 128,
+                    lineNumber: 126,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
                     children: u.status
                 }, void 0, false, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 129,
+                    lineNumber: 127,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -63389,7 +63392,7 @@ function Appusers() {
                     ]
                 }, void 0, true, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 132,
+                    lineNumber: 130,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -63401,14 +63404,14 @@ function Appusers() {
                             onClick: ()=>handleAction(u, "Edit")
                         }, void 0, false, {
                             fileName: "src/components/appusers.js",
-                            lineNumber: 133,
+                            lineNumber: 131,
                             columnNumber: 18
                         }, this),
                         " "
                     ]
                 }, void 0, true, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 133,
+                    lineNumber: 131,
                     columnNumber: 13
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -63420,20 +63423,20 @@ function Appusers() {
                             onClick: ()=>handleAction(u, "Remove")
                         }, void 0, false, {
                             fileName: "src/components/appusers.js",
-                            lineNumber: 134,
+                            lineNumber: 132,
                             columnNumber: 18
                         }, this),
                         " "
                     ]
                 }, void 0, true, {
                     fileName: "src/components/appusers.js",
-                    lineNumber: 134,
+                    lineNumber: 132,
                     columnNumber: 13
                 }, this)
             ]
         }, u.id, true, {
             fileName: "src/components/appusers.js",
-            lineNumber: 123,
+            lineNumber: 121,
             columnNumber: 9
         }, this));
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -63443,7 +63446,7 @@ function Appusers() {
                 children: "AppUsers Page..."
             }, void 0, false, {
                 fileName: "src/components/appusers.js",
-                lineNumber: 139,
+                lineNumber: 137,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -63455,7 +63458,7 @@ function Appusers() {
                                 children: "Methods:"
                             }, void 0, false, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 142,
+                                lineNumber: 140,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
@@ -63464,26 +63467,26 @@ function Appusers() {
                                         children: "Google API admin console"
                                     }, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 144,
+                                        lineNumber: 142,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                         children: "CRUD Google Workspace Users"
                                     }, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 145,
+                                        lineNumber: 143,
                                         columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 143,
+                                lineNumber: 141,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 141,
+                        lineNumber: 139,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -63492,37 +63495,37 @@ function Appusers() {
                                 children: "Pending:"
                             }, void 0, false, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 149,
+                                lineNumber: 147,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {}, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 151,
+                                        lineNumber: 149,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {}, void 0, false, {
                                         fileName: "src/components/appusers.js",
-                                        lineNumber: 152,
+                                        lineNumber: 150,
                                         columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 150,
+                                lineNumber: 148,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 148,
+                        lineNumber: 146,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/appusers.js",
-                lineNumber: 140,
+                lineNumber: 138,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -63534,14 +63537,14 @@ function Appusers() {
                         prop_intCompUser: intCompUser
                     }, void 0, false, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 157,
+                        lineNumber: 155,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                         children: "[SQL] Signed-Up Users:"
                     }, void 0, false, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 163,
+                        lineNumber: 161,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("table", {
@@ -63560,14 +63563,14 @@ function Appusers() {
                                                     children: getSortDirectionText("lastName")
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusers.js",
-                                                    lineNumber: 167,
+                                                    lineNumber: 165,
                                                     columnNumber: 117
                                                 }, this),
                                                 " "
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 167,
+                                            lineNumber: 165,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -63581,14 +63584,14 @@ function Appusers() {
                                                     children: getSortDirectionText("firstName")
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusers.js",
-                                                    lineNumber: 168,
+                                                    lineNumber: 166,
                                                     columnNumber: 119
                                                 }, this),
                                                 " "
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 168,
+                                            lineNumber: 166,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -63602,14 +63605,14 @@ function Appusers() {
                                                     children: getSortDirectionText("email")
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusers.js",
-                                                    lineNumber: 169,
+                                                    lineNumber: 167,
                                                     columnNumber: 110
                                                 }, this),
                                                 " "
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 169,
+                                            lineNumber: 167,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -63623,14 +63626,14 @@ function Appusers() {
                                                     children: getSortDirectionText("type")
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusers.js",
-                                                    lineNumber: 171,
+                                                    lineNumber: 169,
                                                     columnNumber: 108
                                                 }, this),
                                                 " "
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 171,
+                                            lineNumber: 169,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -63644,71 +63647,71 @@ function Appusers() {
                                                     children: getSortDirectionText("status")
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusers.js",
-                                                    lineNumber: 172,
+                                                    lineNumber: 170,
                                                     columnNumber: 112
                                                 }, this),
                                                 " "
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 172,
+                                            lineNumber: 170,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                             children: "Customers"
                                         }, void 0, false, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 175,
+                                            lineNumber: 173,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                             children: "Edit"
                                         }, void 0, false, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 176,
+                                            lineNumber: 174,
                                             columnNumber: 25
                                         }, this),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                             children: "Del"
                                         }, void 0, false, {
                                             fileName: "src/components/appusers.js",
-                                            lineNumber: 177,
+                                            lineNumber: 175,
                                             columnNumber: 25
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusers.js",
-                                    lineNumber: 166,
+                                    lineNumber: 164,
                                     columnNumber: 21
                                 }, this)
                             }, void 0, false, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 165,
+                                lineNumber: 163,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tbody", {
                                 children: renderTableRows
                             }, void 0, false, {
                                 fileName: "src/components/appusers.js",
-                                lineNumber: 180,
+                                lineNumber: 178,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/appusers.js",
-                        lineNumber: 164,
+                        lineNumber: 162,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/appusers.js",
-                lineNumber: 156,
+                lineNumber: 154,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/appusers.js",
-        lineNumber: 138,
+        lineNumber: 136,
         columnNumber: 12
     }, this);
 }
@@ -63723,7 +63726,7 @@ $RefreshReg$(_c, "Appusers");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@fortawesome/react-fontawesome":"clIT3","@fortawesome/free-solid-svg-icons":"5lkdy","./appusersform":"37Jh8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/main.scss":"bo7w8","../styles/appusers-table.scss":"gXQPt"}],"37Jh8":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@fortawesome/react-fontawesome":"clIT3","@fortawesome/free-solid-svg-icons":"5lkdy","./appusersform":"37Jh8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/appusers-table.scss":"gXQPt"}],"37Jh8":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$2897 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -64261,13 +64264,14 @@ $RefreshReg$(_c, "AppusersForm");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/appusers-form.scss":"8PYMb"}],"8PYMb":[function() {},{}],"bo7w8":[function() {},{}],"gXQPt":[function() {},{}],"kz8Tg":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/appusers-form.scss":"8PYMb"}],"8PYMb":[function() {},{}],"gXQPt":[function() {},{}],"kz8Tg":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$0b6a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
 $parcel$ReactRefreshHelpers$0b6a.prelude(module);
 
 try {
+// tutorials.js
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
@@ -64279,14 +64283,14 @@ function Tutorials() {
                 children: "Tutorials Page..."
             }, void 0, false, {
                 fileName: "src/components/tutorials.js",
-                lineNumber: 3,
+                lineNumber: 4,
                 columnNumber: 8
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                 children: "Ideas:"
             }, void 0, false, {
                 fileName: "src/components/tutorials.js",
-                lineNumber: 4,
+                lineNumber: 5,
                 columnNumber: 8
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
@@ -64295,33 +64299,33 @@ function Tutorials() {
                         children: "Build simple API with script.google.com"
                     }, void 0, false, {
                         fileName: "src/components/tutorials.js",
-                        lineNumber: 6,
+                        lineNumber: 7,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                         children: "Form to GET / POST / PATCH options"
                     }, void 0, false, {
                         fileName: "src/components/tutorials.js",
-                        lineNumber: 7,
+                        lineNumber: 8,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                         children: "Display in HTML table"
                     }, void 0, false, {
                         fileName: "src/components/tutorials.js",
-                        lineNumber: 8,
+                        lineNumber: 9,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/tutorials.js",
-                lineNumber: 5,
+                lineNumber: 6,
                 columnNumber: 8
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/tutorials.js",
-        lineNumber: 2,
+        lineNumber: 3,
         columnNumber: 12
     }, this);
 }
@@ -64342,12 +64346,12 @@ var prevRefreshSig = window.$RefreshSig$;
 $parcel$ReactRefreshHelpers$f161.prelude(module);
 
 try {
+// footer.js
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reactRouterDom = require("react-router-dom");
 var _footerInfoversion = require("./footer_infoversion");
 var _footerInfoversionDefault = parcelHelpers.interopDefault(_footerInfoversion);
 // Styles
@@ -64430,7 +64434,7 @@ $RefreshReg$(_c, "Footer");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","./footer_infoversion":"klmN0","../styles/footer.scss":"bsbIO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"klmN0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./footer_infoversion":"klmN0","../styles/footer.scss":"bsbIO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"klmN0":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$efd1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -64532,9 +64536,9 @@ const Info = Object.freeze({
     project: {
         name: "Bottega Final Project: Hoakeen",
         version: {
-            major: 0,
-            minor: 6,
-            patch: 1,
+            major: 1,
+            minor: 0,
+            patch: 0,
             toString () {
                 return `${this.major}.${this.minor}.${this.patch}`;
             }
@@ -64542,6 +64546,24 @@ const Info = Object.freeze({
     },
     notes: [
         //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+        {
+            version: "v1.0.0",
+            title: "CRM Components & Scss structure",
+            details: [
+                "CRM Parent component and children",
+                "Cleaning SCSS imports",
+                "Expanding Mixins"
+            ]
+        },
+        {
+            version: "v0.6.2",
+            title: "User Type & Status",
+            details: [
+                "Verifying Type & Status on both Logins",
+                "Started CRM Components",
+                "Backend hopefully ready..."
+            ]
+        },
         {
             version: "v0.6.1",
             title: "New SQL tables, classes, etc",
@@ -64708,6 +64730,7 @@ var prevRefreshSig = window.$RefreshSig$;
 $parcel$ReactRefreshHelpers$d47b.prelude(module);
 
 try {
+// crm.js parent-component
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
@@ -64724,9 +64747,12 @@ var _crmOrderList = require("./crm_order_list");
 var _crmOrderListDefault = parcelHelpers.interopDefault(_crmOrderList);
 var _crmOrderDetail = require("./crm_order_detail");
 var _crmOrderDetailDefault = parcelHelpers.interopDefault(_crmOrderDetail);
+// styles
+var _crmScss = require("../styles/crm.scss");
 var _s = $RefreshSig$();
 const CRM = ()=>{
     _s();
+    const url = "http://localhost:5000";
     const { user } = (0, _react.useContext)((0, _context.Context));
     const [companies, setCompanies] = (0, _react.useState)([]);
     const [selectedCompany, setSelectedCompany] = (0, _react.useState)(null);
@@ -64737,95 +64763,123 @@ const CRM = ()=>{
     }, []);
     const fetchCompanies = async ()=>{
         try {
-            const response = await (0, _axiosDefault.default).get("api/companies");
-            // Filter companies based on TYPE of user
-            const filteredCompanies = userType === "usuario" ? response.data.filter((company)=>company.userId === userId) : response.data;
-            setCompanies(filteredCompanies);
+            const response = await (0, _axiosDefault.default).get(`${url}/api/companies`);
+            console.log("CRM\uD83D\uDC4Dget_companies: ", response);
+            // Filter companies based User.type  🚩🚩 => pending user.status. What to do if status unverified or inactive?
+            // Think... Should I create a filter fx for every SQL? 
+            let filteredCompanies;
+            if (response.status === 200) {
+                if (user && user.userType === "usuario") filteredCompanies = response.data.filter((company)=>company.userId === userId);
+                else filteredCompanies = response.data;
+                setCompanies(filteredCompanies);
+                console.log("User\uD83D\uDC4DProp_Companies: ", companies);
+            } else {
+                console.error("CRM \u274C");
+                setCompanies(null);
+            }
         } catch (error) {
             console.error("Error fetching companies:", error);
+            setCompanies(null);
         }
     };
     const handleCompanySelect = async (companyId)=>{
-        setSelectedCompany(companyId);
-    // Fetch orders for the selected company
-    // ...
-    // ...
-    // ...
-    // ...
+        setSelectedCompany(companyId); // Changes state of companyClicked in child <CRMCompanyList>
+    // Get Order_List of selected Company
     };
     const handleOrderSelect = (orderId)=>{
-        setSelectedOrder(orderId);
-    // Fetch order details
-    // ...
-    // ...
-    // ...
-    // ...
+        setSelectedOrder(orderId); // Changes state of orderClicked in child <CRMOrderList>
+    // Get crm_order_details of selected Order
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                children: "CRM Dashboard"
-            }, void 0, false, {
-                fileName: "src/components/crm.js",
-                lineNumber: 55,
-                columnNumber: 13
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                        children: "Companies"
-                    }, void 0, false, {
-                        fileName: "src/components/crm.js",
-                        lineNumber: 57,
-                        columnNumber: 17
-                    }, undefined),
-                    companies.map((company)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            onClick: ()=>handleCompanySelect(company.id),
-                            children: company.name
-                        }, company.id, false, {
-                            fileName: "src/components/crm.js",
-                            lineNumber: 60,
-                            columnNumber: 21
-                        }, undefined))
-                ]
-            }, void 0, true, {
-                fileName: "src/components/crm.js",
-                lineNumber: 56,
-                columnNumber: 13
-            }, undefined),
-            selectedCompany && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+        className: "container",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            className: "crm-main",
+            children: [
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "crm-companies",
                     children: [
-                        "Orders for ",
-                        selectedCompany
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "crm-company-list",
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _crmCompanyListDefault.default), {
+                                props_companies: companies,
+                                props_companySelect: handleCompanySelect
+                            }, void 0, false, {
+                                fileName: "src/components/crm.js",
+                                lineNumber: 67,
+                                columnNumber: 25
+                            }, undefined)
+                        }, void 0, false, {
+                            fileName: "src/components/crm.js",
+                            lineNumber: 66,
+                            columnNumber: 21
+                        }, undefined),
+                        selectedCompany && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "crm-company-details",
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _crmCompanyDetailDefault.default), {
+                                props_companyId: selectedCompany
+                            }, void 0, false, {
+                                fileName: "src/components/crm.js",
+                                lineNumber: 71,
+                                columnNumber: 29
+                            }, undefined)
+                        }, void 0, false, {
+                            fileName: "src/components/crm.js",
+                            lineNumber: 70,
+                            columnNumber: 25
+                        }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/crm.js",
-                    lineNumber: 68,
-                    columnNumber: 21
-                }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/crm.js",
-                lineNumber: 67,
-                columnNumber: 17
-            }, undefined),
-            selectedOrder && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                    children: "Order Details"
-                }, void 0, false, {
+                    lineNumber: 65,
+                    columnNumber: 17
+                }, undefined),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "crm-orders",
+                    children: [
+                        selectedCompany && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "crm-order-list",
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _crmOrderListDefault.default), {
+                                props_companyId: selectedCompany,
+                                prop_OrderSelect: handleOrderSelect
+                            }, void 0, false, {
+                                fileName: "src/components/crm.js",
+                                lineNumber: 78,
+                                columnNumber: 29
+                            }, undefined)
+                        }, void 0, false, {
+                            fileName: "src/components/crm.js",
+                            lineNumber: 77,
+                            columnNumber: 25
+                        }, undefined),
+                        selectedOrder && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "crm-order-detail",
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _crmOrderDetailDefault.default), {
+                                props_orderId: selectedOrder
+                            }, void 0, false, {
+                                fileName: "src/components/crm.js",
+                                lineNumber: 83,
+                                columnNumber: 29
+                            }, undefined)
+                        }, void 0, false, {
+                            fileName: "src/components/crm.js",
+                            lineNumber: 82,
+                            columnNumber: 25
+                        }, undefined)
+                    ]
+                }, void 0, true, {
                     fileName: "src/components/crm.js",
-                    lineNumber: 78,
-                    columnNumber: 21
+                    lineNumber: 75,
+                    columnNumber: 17
                 }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/crm.js",
-                lineNumber: 77,
-                columnNumber: 17
-            }, undefined)
-        ]
-    }, void 0, true, {
+            ]
+        }, void 0, true, {
+            fileName: "src/components/crm.js",
+            lineNumber: 64,
+            columnNumber: 13
+        }, undefined)
+    }, void 0, false, {
         fileName: "src/components/crm.js",
-        lineNumber: 54,
+        lineNumber: 62,
         columnNumber: 9
     }, undefined);
 };
@@ -64840,20 +64894,407 @@ $RefreshReg$(_c, "CRM");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq","../Context":"49Q86","axios":"jo6P5","./crm_company_list":"59GHX","./crm_company_detail":"1uOmN","./crm_order_list":"hxvsZ","./crm_order_detail":"ckKKW"}],"59GHX":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq","../Context":"49Q86","axios":"jo6P5","./crm_company_list":"59GHX","./crm_company_detail":"1uOmN","./crm_order_list":"hxvsZ","./crm_order_detail":"ckKKW","../styles/crm.scss":"gSwJ3"}],"59GHX":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$add4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$add4.prelude(module);
 
-},{}],"1uOmN":[function(require,module,exports) {
-// crm.js
-// crm_company_list.js
+try {
+// crm_company_list.js child-component
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+// styles
+var _crmCompanyListScss = require("../styles/crm_company_list.scss");
+var _s = $RefreshSig$();
+// The child does NOT manage state, it just informs the parent about user interactions
+// The parent then manages the state as needed.
+const CRMCompanyList = ({ props_companies, props_companySelect })=>{
+    _s();
+    const [selectedStatus, setSelectedStatus] = (0, _react.useState)("All");
+    const [selectedIndustry, setSelectedIndustry] = (0, _react.useState)("All");
+    const [industries, setIndustries] = (0, _react.useState)([]);
+    (0, _react.useEffect)(()=>{
+        // Unique Comp.Industry for Dropdown options
+        const uniqueIndustries = [
+            "All",
+            ...new Set(props_companies.map((company)=>company.industry))
+        ];
+        console.log("uniqueIndustries: ", uniqueIndustries);
+        setIndustries(uniqueIndustries);
+    }, [
+        props_companies,
+        props_companySelect
+    ]);
+    // Filter by multiple conditions
+    const filteredCompanies = props_companies.filter((company)=>{
+        let statusMatch = selectedStatus === "All" || company.status === selectedStatus;
+        let industryMatch = selectedIndustry === "All" || company.industry === selectedIndustry;
+        return statusMatch && industryMatch;
+    });
+    const resetFilters = ()=>{
+        setSelectedStatus("All");
+        setSelectedIndustry("All");
+    };
+    const handleCompanyClick = (companyId)=>{
+        props_companySelect(companyId); // Invokes handleCompanySelect() in crm.js & passing companyId as argument.
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "crm-company-list",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "section-title",
+                children: "Customers"
+            }, void 0, false, {
+                fileName: "src/components/crm_company_list.js",
+                lineNumber: 40,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "company-filter",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "filter",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                children: "Status filter"
+                            }, void 0, false, {
+                                fileName: "src/components/crm_company_list.js",
+                                lineNumber: 43,
+                                columnNumber: 21
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
+                                value: selectedStatus,
+                                onChange: (e)=>setSelectedStatus(e.target.value),
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "active",
+                                        children: "Active"
+                                    }, void 0, false, {
+                                        fileName: "src/components/crm_company_list.js",
+                                        lineNumber: 45,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "inactive",
+                                        children: "Inactive"
+                                    }, void 0, false, {
+                                        fileName: "src/components/crm_company_list.js",
+                                        lineNumber: 46,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "All",
+                                        children: "All"
+                                    }, void 0, false, {
+                                        fileName: "src/components/crm_company_list.js",
+                                        lineNumber: 47,
+                                        columnNumber: 25
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/crm_company_list.js",
+                                lineNumber: 44,
+                                columnNumber: 21
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/crm_company_list.js",
+                        lineNumber: 42,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "filter",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                children: "Industry filter"
+                            }, void 0, false, {
+                                fileName: "src/components/crm_company_list.js",
+                                lineNumber: 51,
+                                columnNumber: 21
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
+                                value: selectedIndustry,
+                                onChange: (e)=>setSelectedIndustry(e.target.value),
+                                children: industries.map((industry)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: industry,
+                                        children: industry
+                                    }, industry, false, {
+                                        fileName: "src/components/crm_company_list.js",
+                                        lineNumber: 53,
+                                        columnNumber: 53
+                                    }, undefined))
+                            }, void 0, false, {
+                                fileName: "src/components/crm_company_list.js",
+                                lineNumber: 52,
+                                columnNumber: 21
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/crm_company_list.js",
+                        lineNumber: 50,
+                        columnNumber: 17
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/crm_company_list.js",
+                lineNumber: 41,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "section-btns",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: "btn",
+                        onClick: resetFilters,
+                        children: "Reset Filters"
+                    }, void 0, false, {
+                        fileName: "src/components/crm_company_list.js",
+                        lineNumber: 59,
+                        columnNumber: 21
+                    }, undefined)
+                }, void 0, false, {
+                    fileName: "src/components/crm_company_list.js",
+                    lineNumber: 58,
+                    columnNumber: 17
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/crm_company_list.js",
+                lineNumber: 57,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "filtered-companies",
+                children: filteredCompanies.map((company)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "company-item",
+                        onClick: ()=>handleCompanyClick(company.companyId),
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                            children: `${company.companyName} | ${company.industry} [${company.status}]`
+                        }, void 0, false, {
+                            fileName: "src/components/crm_company_list.js",
+                            lineNumber: 65,
+                            columnNumber: 25
+                        }, undefined)
+                    }, company.companyId, false, {
+                        fileName: "src/components/crm_company_list.js",
+                        lineNumber: 64,
+                        columnNumber: 21
+                    }, undefined))
+            }, void 0, false, {
+                fileName: "src/components/crm_company_list.js",
+                lineNumber: 62,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/crm_company_list.js",
+        lineNumber: 39,
+        columnNumber: 9
+    }, undefined);
+};
+_s(CRMCompanyList, "Ml4zNpGylp5Ot+a3Y8PTBODxYJA=");
+_c = CRMCompanyList;
+exports.default = CRMCompanyList;
+var _c;
+$RefreshReg$(_c, "CRMCompanyList");
+
+  $parcel$ReactRefreshHelpers$add4.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../styles/crm_company_list.scss":"kPOKO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"kPOKO":[function() {},{}],"1uOmN":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$fba9 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$fba9.prelude(module);
+
+try {
 // crm_company_detail.js
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const CRMCompanyDetail = ({ props_selectedCompany })=>{
+    if (!props_selectedCompany) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: "Select a company to see details"
+    }, void 0, false, {
+        fileName: "src/components/crm_company_detail.js",
+        lineNumber: 5,
+        columnNumber: 40
+    }, undefined);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+            children: "Company Details"
+        }, void 0, false, {
+            fileName: "src/components/crm_company_detail.js",
+            lineNumber: 9,
+            columnNumber: 13
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/crm_company_detail.js",
+        lineNumber: 8,
+        columnNumber: 9
+    }, undefined);
+};
+_c = CRMCompanyDetail;
+exports.default = CRMCompanyDetail;
+var _c;
+$RefreshReg$(_c, "CRMCompanyDetail");
+
+  $parcel$ReactRefreshHelpers$fba9.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"hxvsZ":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$61f3 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$61f3.prelude(module);
+
+try {
 // crm_order_list.js
-// crm_order_detail.js
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _s = $RefreshSig$();
+const CRMOrderList = ({ prop_companyId, prop_OrderSelect })=>{
+    _s();
+    const [orders, setOrders] = (0, _react.useState)([]);
+    (0, _react.useEffect)(()=>{
+        const fetchOrders = async ()=>{
+            try {
+                const response = await (0, _axiosDefault.default).get(`api/orders/${prop_companyId}`);
+                setOrders(response.data);
+            } catch (error) {
+                console.error("Error fetching orders:", error);
+            }
+        };
+        fetchOrders();
+    }, [
+        prop_companyId
+    ]);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                children: "Orders"
+            }, void 0, false, {
+                fileName: "src/components/crm_order_list.js",
+                lineNumber: 23,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+                children: orders.map((order)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                        onClick: ()=>prop_OrderSelect(order.orderId),
+                        children: [
+                            order.orderDate,
+                            " - ",
+                            order.status,
+                            " - ",
+                            order.userId
+                        ]
+                    }, order.orderId, true, {
+                        fileName: "src/components/crm_order_list.js",
+                        lineNumber: 26,
+                        columnNumber: 21
+                    }, undefined))
+            }, void 0, false, {
+                fileName: "src/components/crm_order_list.js",
+                lineNumber: 24,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/crm_order_list.js",
+        lineNumber: 22,
+        columnNumber: 9
+    }, undefined);
+};
+_s(CRMOrderList, "FvMuVccH6DXI6fqfhJiN/VsjZaw=");
+_c = CRMOrderList;
+exports.default = CRMOrderList;
+var _c;
+$RefreshReg$(_c, "CRMOrderList");
 
-},{}],"hxvsZ":[function(require,module,exports) {
+  $parcel$ReactRefreshHelpers$61f3.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"ckKKW":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$0a84 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$0a84.prelude(module);
 
-},{}],"ckKKW":[function(require,module,exports) {
+try {
+// crm_company_detail.js
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _s = $RefreshSig$();
+const CRMOrderDetail = ({ prop_orderId })=>{
+    _s();
+    const [orderDetails, setOrderDetails] = (0, _react.useState)(null);
+    (0, _react.useEffect)(()=>{
+        const fetchOrderDetails = async ()=>{
+            try {
+                const response = await (0, _axiosDefault.default).get(`api/orderDetails/${prop_orderId}`);
+                setOrderDetails(response.data);
+            } catch (error) {
+                console.error("Error fetching order details:", error);
+            }
+        };
+        fetchOrderDetails();
+    }, [
+        prop_orderId
+    ]);
+    if (!orderDetails) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: "Select an order to see details"
+    }, void 0, false, {
+        fileName: "src/components/crm_order_detail.js",
+        lineNumber: 21,
+        columnNumber: 31
+    }, undefined);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+            children: "Order Details"
+        }, void 0, false, {
+            fileName: "src/components/crm_order_detail.js",
+            lineNumber: 25,
+            columnNumber: 13
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/crm_order_detail.js",
+        lineNumber: 24,
+        columnNumber: 9
+    }, undefined);
+};
+_s(CRMOrderDetail, "aFaa/tqk8gMg1o5fKFQansjABac=");
+_c = CRMOrderDetail;
+exports.default = CRMOrderDetail;
+var _c;
+$RefreshReg$(_c, "CRMOrderDetail");
 
-},{}]},["9Y5CW","1xC6H","b6HaR"], "b6HaR", "parcelRequire10c2")
+  $parcel$ReactRefreshHelpers$0a84.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"gSwJ3":[function() {},{}]},["9Y5CW","1xC6H","b6HaR"], "b6HaR", "parcelRequire10c2")
 
 </script>
 </body>

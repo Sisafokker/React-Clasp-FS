@@ -1,3 +1,4 @@
+// pos.js
 function POs() {
     return <div className='container'>
        <h1>Purchase Orders...</h1>

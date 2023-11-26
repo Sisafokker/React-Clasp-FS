@@ -1,6 +1,7 @@
 // mixins.scss
+@import "variables.scss";
 
-@mixin textStyle($size, $color: $primaryColor) { 
+@mixin textStyle($size, $color: $primaryColor) {
     @include responsiveFontSize($size);
     color: $color;
 }
@@ -41,7 +42,7 @@
     }
 }
 
-@mixin buttonStyle ($background-color: $teal, $color: $offwhite, $hover-color: $dark-teal, $width: auto){
+@mixin buttonStyle ($background-color: $teal, $color: $offwhite, $hover-color: $dark-teal, $width: auto) {
     background-color: $background-color;
     color: $color;
     padding: 10px 20px;
@@ -53,7 +54,9 @@
     transition: background-color 0.2s ease;
     cursor: pointer;
 
-    &:hover { background-color: $hover-color; }
+    &:hover {
+        background-color: $hover-color;
+    }
 
     &:disabled {
         background-color: $lightgrey;
@@ -63,9 +66,26 @@
     }
 }
 
+@mixin inputSelectStyle {
+    width: 100%; // Full width of the container
+    padding: 5px;
+    margin-top: 2px;
+    border: 1px solid $lightgrey;
+
+    &:focus {
+        outline: none;
+        border-color: $primaryColor;
+    }
+}
 
 @mixin responsiveFontSize($size: 14px) {
     font-size: $size;
-    @media screen and (max-width: $tablet) { font-size: $size * 0.85;  }
-    @media screen and (max-width: $mobile) { font-size: $size * 0.75;  }
+
+    @media screen and (max-width: $tablet) {
+        font-size: $size * 0.85;
+    }
+
+    @media screen and (max-width: $mobile) {
+        font-size: $size * 0.75;
+    }
 }

@@ -1,4 +1,7 @@
-@import "./variables.scss";
+// home.scss
+@import "variables.scss";
+@import "mixins.scss";
+
 
 .home-wrapper {
     position: relative;

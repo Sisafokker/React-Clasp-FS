@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"; // useNavigate Hook
 
 // Styles
 import "./styles/main.scss";
+import "./styles/auth.scss";
 // Compiled CSS Styles files
 //import "../apps-script/styles_compiled/main.css";
 

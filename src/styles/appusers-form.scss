@@ -1,7 +1,6 @@
 // appusers-form.scss
-
 @import "variables.scss";
-@import "base.scss";
+@import "mixins.scss";
 
 .form-container {
   width: 80%;
@@ -26,12 +25,12 @@
     flex-direction: column; // Stack label text above the input
     margin-bottom: 8px;
 
-    input, select{
-      width: 100%;          // input to fill width of label
-      padding: 5px;
-      margin-top: 2px; 
-      border: 1px solid $lightgrey;
-    }
+    // input, select{
+    //   width: 100%;          // input to fill width of label
+    //   padding: 5px;
+    //   margin-top: 2px; 
+    //   border: 1px solid $lightgrey;
+    // }
 
     select {
       padding: 4px;

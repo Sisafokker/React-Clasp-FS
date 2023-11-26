@@ -1,3 +1,4 @@
+// home.js
 import React, { useContext } from "react";
 import { Context } from "../Context";
 

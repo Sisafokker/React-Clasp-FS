@@ -51,57 +51,57 @@ function App() {
     axios.get(`${url}/api/users`)
       .then(response => {
         setData(response.data);
-        console.log("👍get_users")//, response.data)
+        console.log("App 👍get_users")//, response.data)
       }).catch(error => {
-        console.error("❌get_users", error);
+        console.error("App ❌get_users", error);
       });
 
       axios.get(`${url}/api/companies`)
       .then(response => {
         setData(response.data);
-        console.log("👍get_companies")//, response.data)
+        console.log("App 👍get_companies")//, response.data)
       }).catch(error => {
-        console.error("❌get_companies", error);
+        console.error("App ❌get_companies", error);
       });
 
       axios.get(`${url}/api/contacts`)
       .then(response => {
         setData(response.data);
-        console.log("👍get_contacts")//, response.data)
+        console.log("App 👍get_contacts")//, response.data)
       }).catch(error => {
-        console.error("❌get_contacts", error);
+        console.error("App ❌get_contacts", error);
       });
 
       axios.get(`${url}/api/orders`)
       .then(response => {
         setData(response.data);
-        console.log("👍get_orders")//, response.data)
+        console.log("App 👍get_orders")//, response.data)
       }).catch(error => {
-        console.error("❌get_orders", error);
+        console.error("App ❌get_orders", error);
       });
 
       axios.get(`${url}/api/items`)
       .then(response => {
         setData(response.data);
-        console.log("👍get_items")//, response.data)
+        console.log("App 👍get_items")//, response.data)
       }).catch(error => {
-        console.error("❌get_items", error);
+        console.error("App ❌get_items", error);
       });
 
       axios.get(`${url}/api/intCompanyUser`)
       .then(response => {
         setData(response.data);
-        console.log("👍get_intCompanyUser")//, response.data)
+        console.log("App 👍get_intCompanyUser")//, response.data)
       }).catch(error => {
-        console.error("❌get_intCompanyUser", error);
+        console.error("App ❌get_intCompanyUser", error);
       });
 
       axios.get(`${url}/api/intOrderItem`)
       .then(response => {
         setData(response.data);
-        console.log("👍get_intOrderItem")//, response.data)
+        console.log("App 👍get_intOrderItem")//, response.data)
       }).catch(error => {
-        console.error("❌get_intOrderItem", error);
+        console.error("App ❌get_intOrderItem", error);
       });
   }
 

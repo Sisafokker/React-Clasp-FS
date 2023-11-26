@@ -6,12 +6,10 @@ import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import AppusersForm from "./appusersform";
 
 // styles
-import "../styles/main.scss";
 import "../styles/appusers-table.scss";
 
 
 // Compiled CSS Styles files
-// import "../../apps-script/styles_compiled/main.css";
 // import "../../apps-script/styles_compiled/appusers-table.css";
 
 
