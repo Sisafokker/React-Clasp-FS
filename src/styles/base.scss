@@ -8,16 +8,15 @@
     flex-direction: column;
     padding: 0px;
     min-height: 100vh; // Viewheight for full height
-    min-width: 100%;
     width: 100%;
 }
 
 // Styles for Content Area
 .container {
-    width: 90%;
+    padding-top: 140px;
+    width: 100%;
     max-width: 100%;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 0 auto; // Center the container
     flex: 1;   // Allows container to expand and push the footer down
 }
 
@@ -36,7 +35,7 @@
         background-color: yellow;
         max-width: $tablet;
         margin: 0 auto;
-        padding: 10px;
+        padding: 0px;
     }
 }
 

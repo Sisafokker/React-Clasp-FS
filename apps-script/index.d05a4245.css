@@ -1,7 +1,6 @@
 .app-wrapper {
   flex-direction: column;
   width: 100%;
-  min-width: 100%;
   min-height: 100vh;
   padding: 0;
   display: flex;
@@ -9,10 +8,10 @@
 
 .container {
   flex: 1;
-  width: 90%;
+  width: 100%;
   max-width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding-top: 140px;
 }
 
 @media screen and (width <= 768px) {
@@ -30,7 +29,7 @@
     background-color: #ff0;
     max-width: 768px;
     margin: 0 auto;
-    padding: 10px;
+    padding: 0;
   }
 }
 
@@ -459,22 +458,26 @@ select {
   }
 }
 
-.userNav-wrapper {
+.auth-wrapper {
   width: 100%;
 }
 
-.auth-wrapper {
+.auth-wrapper .userNav-wrapper {
   box-sizing: border-box;
+  z-index: 1000;
   background-color: #f6f6f6;
   border-radius: 5px;
+  width: 100%;
   min-width: 75%;
   max-width: 100%;
   margin: 0;
   padding: 10px 20px;
+  position: fixed;
+  top: 0;
   box-shadow: 0 0 5px #00000019;
 }
 
-.google-login {
+.auth-wrapper .google-login {
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -482,11 +485,11 @@ select {
   display: flex;
 }
 
-.user-wrapper {
+.auth-wrapper .user-wrapper {
   text-align: center;
 }
 
-.user-wrapper .sign-out-button {
+.auth-wrapper .user-wrapper .sign-out-button {
   color: #f6f6f6;
   text-align: center;
   cursor: pointer;
@@ -502,47 +505,47 @@ select {
 }
 
 @media screen and (width <= 768px) {
-  .user-wrapper .sign-out-button {
+  .auth-wrapper .user-wrapper .sign-out-button {
     font-size: 10.2px;
   }
 }
 
 @media screen and (width <= 600px) {
-  .user-wrapper .sign-out-button {
+  .auth-wrapper .user-wrapper .sign-out-button {
     font-size: 9px;
   }
 }
 
-.user-wrapper .sign-out-button:disabled {
+.auth-wrapper .user-wrapper .sign-out-button:disabled {
   color: #424242;
   cursor: not-allowed;
   opacity: .5;
   background-color: #ddd;
 }
 
-.user-wrapper .sign-out-button:hover {
+.auth-wrapper .user-wrapper .sign-out-button:hover {
   background-color: #ff3030;
 }
 
-.user-wrapper .user-details {
+.auth-wrapper .user-wrapper .user-details {
   justify-content: center;
   align-items: center;
   margin-top: 5px;
   display: flex;
 }
 
-.user-wrapper .user-details .user-avatar {
+.auth-wrapper .user-wrapper .user-details .user-avatar {
   border-radius: 50%;
   width: 75px;
   height: 75px;
   margin-right: 10px;
 }
 
-.user-wrapper .user-details .user-text {
+.auth-wrapper .user-wrapper .user-details .user-text {
   text-align: center;
 }
 
-.user-wrapper .user-details .user-text h3, .user-wrapper .user-details .user-text p {
+.auth-wrapper .user-wrapper .user-details .user-text h3, .auth-wrapper .user-wrapper .user-details .user-text p {
   margin: 0;
 }
 
@@ -663,37 +666,31 @@ table tr:hover {
 
 .footer-container {
   background-color: #f6f6f6;
-  padding: 5px 20px;
+  width: 100%;
 }
 
-.footer-wrapper {
-  background-color: #f6f6f6;
-  border-radius: 5px;
+.footer-container .footer-wrapper {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   justify-content: center;
   align-items: center;
   gap: 20px;
-  min-width: 75%;
-  max-width: 100%;
   min-height: 75px;
-  margin: 8px 0 0;
-  padding: 10px 20px;
+  margin-top: 8px;
   display: grid;
-  box-shadow: 0 0 5px #00000019;
 }
 
-.footer-wrapper .footer-Col {
+.footer-container .footer-wrapper .footer-Col {
   text-align: center;
   max-width: 350px;
   margin: 0 auto;
 }
 
 @media screen and (width <= 768px) {
-  .footer-wrapper {
+  .footer-container .footer-wrapper {
     grid-template-columns: 1fr;
   }
 
-  .footer-wrapper .footer {
+  .footer-container .footer-wrapper .footer {
     max-width: 100%;
   }
 }
@@ -791,7 +788,7 @@ table tr:hover {
 
 .container {
   flex-direction: column;
-  width: 995%;
+  width: 99%;
   height: 100%;
   display: flex;
 }

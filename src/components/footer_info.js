@@ -5,7 +5,7 @@ const Info = Object.freeze({
     version: {
       major: 1,
       minor: 0,
-      patch: 0,
+      patch: 1,
       toString() { 
         return `${this.major}.${this.minor}.${this.patch}`;
       }
@@ -14,6 +14,7 @@ const Info = Object.freeze({
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+    { version: "v1.0.1", title: "Solved Width discrepancies", details: ["Solved ANNOYING width problems",],  },
     { version: "v1.0.0", title: "CRM Components & Scss structure", details: ["CRM Parent component and children", "Cleaning SCSS imports", "Expanding Mixins",], },
     { version: "v0.6.2", title: "User Type & Status", details: ["Verifying Type & Status on both Logins","Started CRM Components","Backend hopefully ready...",] },
     { version: "v0.6.1", title: "New SQL tables, classes, etc", details: ["New Orders tables","New Items tables","New IntOrderItem table","OrderManager and ItemManager into backend",] },
