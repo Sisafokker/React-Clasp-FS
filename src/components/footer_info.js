@@ -1,19 +1,15 @@
 // footer_info.js
 const Info = Object.freeze({
   project: {
-    name: 'Bottega Final Project: Hoakeen',
-    version: {
-      major: 1,
-      minor: 0,
-      patch: 1,
-      toString() { 
-        return `${this.major}.${this.minor}.${this.patch}`;
-      }
+    name: 'FS Bottega Final Project: Hoakeen',
+    version: { major: 1, minor: 0,  patch: 1, 
+      toString() { return `${this.major}.${this.minor}.${this.patch}`; }
     }
   },
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+    { version: "v1.1.0", title: "CRM. CompanyList + CompanyDetails + OrderList showing", details: ["These appear to be showing correctly", "A FRICKING", "NIGHTMARE",],  },
     { version: "v1.0.1", title: "Solved Width discrepancies", details: ["Solved ANNOYING width problems",],  },
     { version: "v1.0.0", title: "CRM Components & Scss structure", details: ["CRM Parent component and children", "Cleaning SCSS imports", "Expanding Mixins",], },
     { version: "v0.6.2", title: "User Type & Status", details: ["Verifying Type & Status on both Logins","Started CRM Components","Backend hopefully ready...",] },

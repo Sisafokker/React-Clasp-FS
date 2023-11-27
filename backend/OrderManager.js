@@ -11,6 +11,11 @@ class OrderManager {
     return this.db.query(GET_QUERY, false, `GET ${this.table}`);
   }
 
+  async getOrdersByCompanyId(companyId) {
+    const GET_QUERY = `SELECT * FROM ${this.table} WHERE companyId = ?`;
+    return this.db.query(GET_QUERY, [companyId], `GET ${this.table} for CompanyId`);
+  }
+  
   async addOrder(companyId, userId, status) {
     const INSERT_QUERY = `INSERT INTO ${this.table} (companyId, userId, status) VALUES (?, ?, ?)`;
     return this.db.query(INSERT_QUERY, [companyId, userId, status], `ADD ${this.table}`);

@@ -159,7 +159,7 @@ function Appusers() {
                 prop_intCompUser={intCompUser}
             />
             <h2>[SQL] Signed-Up Users:</h2>
-            <table>
+            <table className='horizontal-table'>
                 <thead>
                     <tr>
                         <th className="sortable" title="Click to Sort" onClick={() => onSort('lastName')}>Last Name <span className="sort-indicator">{getSortDirectionText('lastName')}</span> </th>

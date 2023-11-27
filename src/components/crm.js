@@ -1,4 +1,4 @@
-// crm.js parent-component
+// CRM.js parent-component
 import React, { useEffect, useState, useContext } from "react";
 import { Context } from "../Context";
 import axios from 'axios';
@@ -16,19 +16,27 @@ const CRM = () => {
     const { user } = useContext(Context);
     const [companies, setCompanies] = useState([]);
     const [selectedCompany, setSelectedCompany] = useState(null);
-    const [orders, setOrders] = useState([]);
-    const [selectedOrder, setSelectedOrder] = useState(null);
+    // const [orders, setOrders] = useState([]);
+    // const [selectedOrder, setSelectedOrder] = useState(null);
+    const [selectedCompanyDetails, setSelectedCompanyDetails] = useState(null);
 
     useEffect(() => {
         fetchCompanies();
     }, []);
 
+    useEffect(() => {
+        if (selectedCompany) {
+            const selectedDetails = companies.find(company => company.companyId === selectedCompany);
+            setSelectedCompanyDetails(selectedDetails);
+        } else {
+            setSelectedCompanyDetails(null);
+        }
+    }, [selectedCompany, companies]);
+
     const fetchCompanies = async () => {
         try {
             const response = await axios.get(`${url}/api/companies`);
-                console.log("CRM👍get_companies: ",response)
-            // Filter companies based User.type  🚩🚩 => pending user.status. What to do if status unverified or inactive?
-            // Think... Should I create a filter fx for every SQL? 
+            console.log("CRM👍get_companies: ",response)
             let filteredCompanies;
             if (response.status === 200) {
                 if (user && user.userType === 'usuario') {
@@ -37,7 +45,7 @@ const CRM = () => {
                     filteredCompanies = response.data;
                 }  
                 setCompanies(filteredCompanies);
-                console.log("User👍Prop_Companies: ",companies)
+                console.log("User👍Props_Companies: ",companies)
             } else {
                 console.error("CRM ❌")
                 setCompanies(null);
@@ -49,40 +57,51 @@ const CRM = () => {
     };
 
     const handleCompanySelect = async (companyId) => {
-        setSelectedCompany(companyId); // Changes state of companyClicked in child <CRMCompanyList>
-        // Get Order_List of selected Company
+        console.log("CRM - Clicked in companyId:", companyId);
+        setSelectedCompany(companyId);
+        const selected = companies.find(company => company.companyId === companyId);
+        if (selected) {
+            setCompanies([selected]);
+        } else{
+            console.error("❌crm.js selected is BLANK")
+        }
     };
 
     const handleOrderSelect = (orderId) => {
-        setSelectedOrder(orderId); // Changes state of orderClicked in child <CRMOrderList>
-        // Get crm_order_details of selected Order
+        setSelectedOrder(orderId);
+        console.log("crm.js 🚩selectedOrder🚩: ", orderId);
+    };
+
+    const resetCompanyList = async () => {
+        await fetchCompanies();     // Fetch & reset companylist
+        setSelectedCompany(null);   // Reset the selected company
+        setSelectedCompanyDetails(null); // Clear companydetails
     };
 
     return (
         <div className='container'>
-            {/* <h1>CRM Dashboard</h1> */}
             <div className="crm-main">
                 <div className="crm-companies">
                     <div className="crm-company-list">
-                        <CRMCompanyList props_companies={companies} props_companySelect={handleCompanySelect} />
+                        <CRMCompanyList props_companies={companies} props_companySelect={handleCompanySelect} props_resetCompanyList={resetCompanyList} />
                     </div>
                     {selectedCompany && (
                         <div className="crm-company-details">
-                            <CRMCompanyDetail props_companyId={selectedCompany}/>
+                            <CRMCompanyDetail props_companyDetails={selectedCompanyDetails} />
                         </div>
                     )}
                 </div>
                 <div className="crm-orders">
                     {selectedCompany && (
                         <div className="crm-order-list">
-                            <CRMOrderList props_companyId={selectedCompany} prop_OrderSelect={handleOrderSelect} />
+                            <CRMOrderList props_companyId={selectedCompany} props_OrderSelect={handleOrderSelect} />
                         </div>
                     )}
-                    {selectedOrder && (
+                    {/* {selectedOrder && (
                         <div className="crm-order-detail">
                             <CRMOrderDetail props_orderId={selectedOrder} />
                         </div>
-                    )}
+                    )} */}
                 </div>
             </div>
         </div>

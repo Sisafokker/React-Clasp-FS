@@ -110,7 +110,8 @@ appExp.delete('/api/users/:id', async (req, res) => {
 // Get Companies
 appExp.get('/api/companies', async (req, res) => {
   try {
-    const values = await companyManager.getCompanies();
+    let values = await companyManager.getCompanies();
+    values = sortArrayByProperty(values, 'companyName', true);
     res.status(200).json(values);
   } catch (error) {
     console.error('Get Companies Error:', error);
@@ -121,7 +122,8 @@ appExp.get('/api/companies', async (req, res) => {
 // Get Contacts
 appExp.get('/api/contacts', async (req, res) => {
   try {
-    const values = await contactManager.getContacts();
+    let values = await contactManager.getContacts();
+    values = sortArrayByProperty(values, 'lastName', true);
     res.status(200).json(values);
   } catch (error) {
     console.error('Get Contacts Error:', error);
@@ -130,14 +132,27 @@ appExp.get('/api/contacts', async (req, res) => {
 });
 
 
-// Get Order 📦
+// Get All Orders 📦
 appExp.get('/api/orders', async (req, res) => {
   try {
-    const orders = await orderManager.getOrders();
-    res.status(200).json(orders);
+    let values = await orderManager.getOrders();
+    values = sortArrayByProperty(values, 'orderDate', false);
+    res.status(200).json(values);
   } catch (error) {
     console.error('Get Orders Error:', error);
     res.status(500).json({ error: 'Get Orders Error: ' + error.message });
+  }
+});
+
+// Get Orders for Specific Company
+appExp.get('/api/orders/company/:companyId', async (req, res) => {
+  const companyId = req.params.companyId;
+  try {
+    const values = await orderManager.getOrdersByCompanyId(companyId);
+    res.status(200).json(values);
+  } catch (error) {
+    console.error(`Get Orders for Company ${companyId} Error:`, error);
+    res.status(500).json({ error: `Get Orders for Company ${companyId} Error: ` + error.message });
   }
 });
 
@@ -181,8 +196,8 @@ appExp.delete('/api/orders/:orderId', async (req, res) => {
 // Get Items 🍸
 appExp.get('/api/items', async (req, res) => {
   try {
-    const items = await itemManager.getItems();
-    res.status(200).json(items);
+    const values = await itemManager.getItems();
+    res.status(200).json(values);
   } catch (error) {
     console.error('Get Items Error:', error);
     res.status(500).json({ error: 'Get Items Error: ' + error.message });
@@ -318,3 +333,17 @@ appExp.delete('/api/intOrderItem', async (req, res) => {
 appExp.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+
+// Helper function for Sorting an ArrayOfObjects
+const sortArrayByProperty = (array, property, isAscending = true) => {
+  return array.sort((a, b) => {
+    if (a[property] < b[property]) {
+      return isAscending ? -1 : 1;
+    }
+    if (a[property] > b[property]) {
+      return isAscending ? 1 : -1;
+    }
+    return 0;
+  });
+};

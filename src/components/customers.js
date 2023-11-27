@@ -60,7 +60,7 @@ const Customers = () => {
         </div>
     </div>
         <h2>Customers SQL</h2>
-        <table>
+        <table className='horizontal-table'>
             <thead>
                 <tr>
                     <th>ID</th>

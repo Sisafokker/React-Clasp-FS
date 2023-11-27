@@ -10,9 +10,9 @@
     background-color: $offwhite;
     padding: 10px 20px; //  top&Bottom left&Right // top, right, bottom, left 
     border-radius: 5px;
-    box-shadow: 0 0 5px $boxshadow;
+    box-shadow: 0 0 15px $boxshadow;
     max-width: 100%;
-    min-width: 75%;
+    min-width: 90%;
     margin: 0; // The "0 auto" was generating a lot of trouble.
 }
 
@@ -28,19 +28,45 @@
     justify-content: left; // Horiz.
 }
 
-@mixin responsiveTable {
-    width: 80%;
+@mixin responsiveTable_Horizontal {
+    width: 98%;
     border-collapse: collapse;
     margin: 0 auto;
 
-    th,
-    td {
+    th, td {
         @include responsiveFontSize(14px);
         padding: 8px;
         text-align: left;
         border-bottom: 1px solid $lightgrey;
     }
 }
+
+
+@mixin responsiveTable_Vertical {
+    width: 98%; 
+    border-collapse: collapse;
+    margin: 0 auto;
+
+    tr {
+        th, td {
+            @include responsiveFontSize(14px);
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid $lightgrey;
+        }
+
+        th {
+            background-color: $headerColor; // Background color for the keys column
+        }
+
+        td {
+            background-color: $valueColor; // Different background color for the values column
+        }
+    }
+}
+
+
+
 
 @mixin buttonStyle ($background-color: $teal, $color: $offwhite, $hover-color: $dark-teal, $width: auto) {
     background-color: $background-color;

@@ -1,0 +1,25 @@
+// crm_order_list.scss
+@import "variables.scss";
+@import "mixins.scss";
+
+.crm-order-list {
+    .horizontal-table {
+        @include responsiveTable_Horizontal;
+    }
+    width: 100%;
+
+    table {
+        width: 100%; // table stretches to fill the .crm-order-list div
+        .horizontal-table {
+            @include responsiveTable_Horizontal;
+        }
+    }
+
+    th, td {
+        cursor: pointer;
+    }
+
+    tr:hover {
+        background-color: $lightgrey;
+    }
+}

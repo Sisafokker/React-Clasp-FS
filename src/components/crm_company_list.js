@@ -1,5 +1,7 @@
 // crm_company_list.js child-component
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 // styles
 import "../styles/crm_company_list.scss";
@@ -7,7 +9,7 @@ import "../styles/crm_company_list.scss";
 
 // The child does NOT manage state, it just informs the parent about user interactions
 // The parent then manages the state as needed.
-const CRMCompanyList = ({ props_companies, props_companySelect }) => {
+const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompanyList  }) => {
     const [selectedStatus, setSelectedStatus] = useState('All');
     const [selectedIndustry, setSelectedIndustry] = useState('All');
     const [industries, setIndustries] = useState([]);
@@ -32,6 +34,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect }) => {
     };
 
     const handleCompanyClick = (companyId) => {
+        console.log("CRM_company_list - Clicked in companyId: ", companyId)
         props_companySelect(companyId); // Invokes handleCompanySelect() in crm.js & passing companyId as argument.
     };
 
@@ -40,7 +43,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect }) => {
             <div className='section-title'>Customers</div>
             <div className='company-filter'>
                 <div className='filter'>
-                    <label>Status filter</label>
+                    <label><FontAwesomeIcon icon={faFilter}/> Status </label>
                     <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
@@ -48,7 +51,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect }) => {
                     </select>
                 </div>
                 <div className='filter'>
-                    <label>Industry filter</label>
+                    <label><FontAwesomeIcon icon={faFilter}/>Industry</label>
                     <select value={selectedIndustry} onChange={(e) => setSelectedIndustry(e.target.value)}>
                         {industries.map(industry => <option key={industry} value={industry}>{industry}</option>)}
                     </select>
@@ -57,6 +60,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect }) => {
             <div className='section-btns'>
                 <div>
                     <button className='btn' onClick={resetFilters}>Reset Filters</button>
+                    <button className='btn' onClick={props_resetCompanyList}>Show All</button> 
                 </div>
             </div>
             <div className='filtered-companies'>

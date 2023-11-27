@@ -7,11 +7,13 @@
 }
 
 .container {
+  background-color: pink;
   flex: 1;
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
   padding-top: 140px;
+  padding-bottom: 10px;
 }
 
 @media screen and (width <= 768px) {
@@ -236,12 +238,12 @@ select {
   border-radius: 5px;
   justify-content: space-evenly;
   width: 98%;
-  min-width: 75%;
+  min-width: 90%;
   max-width: 100%;
   margin: 20px 0 0;
   padding: 10px 20px;
   display: flex;
-  box-shadow: 0 0 5px #00000019;
+  box-shadow: 0 0 15px #00000019;
 }
 
 .nav-wrapper .nav-link {
@@ -319,7 +321,7 @@ select {
 }
 
 .oauth-form-container {
-  box-shadow: 0 0 5px #00000019;
+  box-shadow: 0 0 15px #00000019;
   box-shadow: none;
   background-color: #f6f6f6;
   border: 1px solid #ddd;
@@ -327,7 +329,7 @@ select {
   justify-content: center;
   align-items: center;
   width: 95%;
-  min-width: 75%;
+  min-width: 90%;
   max-width: 95%;
   margin: 5px auto;
   padding: 10px 20px;
@@ -468,13 +470,13 @@ select {
   background-color: #f6f6f6;
   border-radius: 5px;
   width: 100%;
-  min-width: 75%;
+  min-width: 90%;
   max-width: 100%;
   margin: 0;
   padding: 10px 20px;
   position: fixed;
   top: 0;
-  box-shadow: 0 0 5px #00000019;
+  box-shadow: 0 0 15px #00000019;
 }
 
 .auth-wrapper .google-login {
@@ -618,13 +620,13 @@ h3 {
   padding: 4px;
 }
 
-table {
+table .horizontal-table {
   border-collapse: collapse;
-  width: 80%;
+  width: 98%;
   margin: 0 auto;
 }
 
-table th, table td {
+table .horizontal-table th, table .horizontal-table td {
   text-align: left;
   border-bottom: 1px solid #ddd;
   padding: 8px;
@@ -632,13 +634,13 @@ table th, table td {
 }
 
 @media screen and (width <= 768px) {
-  table th, table td {
+  table .horizontal-table th, table .horizontal-table td {
     font-size: 11.9px;
   }
 }
 
 @media screen and (width <= 600px) {
-  table th, table td {
+  table .horizontal-table th, table .horizontal-table td {
     font-size: 10.5px;
   }
 }
@@ -670,13 +672,19 @@ table tr:hover {
 }
 
 .footer-container .footer-wrapper {
+  background-color: #f6f6f6;
+  border-radius: 5px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   justify-content: center;
   align-items: center;
   gap: 20px;
+  min-width: 90%;
+  max-width: 100%;
   min-height: 75px;
-  margin-top: 8px;
+  margin: 8px 0 0;
+  padding: 10px 20px;
   display: grid;
+  box-shadow: 0 0 15px #00000019;
 }
 
 .footer-container .footer-wrapper .footer-Col {
@@ -772,6 +780,72 @@ table tr:hover {
 
 .crm-company-list .filtered-companies .company-item:hover {
   background-color: #f0f0f0;
+}
+
+.crm-order-list {
+  width: 100%;
+}
+
+.crm-order-list .horizontal-table {
+  border-collapse: collapse;
+  width: 98%;
+  margin: 0 auto;
+}
+
+.crm-order-list .horizontal-table th, .crm-order-list .horizontal-table td {
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  font-size: 14px;
+}
+
+@media screen and (width <= 768px) {
+  .crm-order-list .horizontal-table th, .crm-order-list .horizontal-table td {
+    font-size: 11.9px;
+  }
+}
+
+@media screen and (width <= 600px) {
+  .crm-order-list .horizontal-table th, .crm-order-list .horizontal-table td {
+    font-size: 10.5px;
+  }
+}
+
+.crm-order-list table {
+  width: 100%;
+}
+
+.crm-order-list table .horizontal-table {
+  border-collapse: collapse;
+  width: 98%;
+  margin: 0 auto;
+}
+
+.crm-order-list table .horizontal-table th, .crm-order-list table .horizontal-table td {
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  font-size: 14px;
+}
+
+@media screen and (width <= 768px) {
+  .crm-order-list table .horizontal-table th, .crm-order-list table .horizontal-table td {
+    font-size: 11.9px;
+  }
+}
+
+@media screen and (width <= 600px) {
+  .crm-order-list table .horizontal-table th, .crm-order-list table .horizontal-table td {
+    font-size: 10.5px;
+  }
+}
+
+.crm-order-list th, .crm-order-list td {
+  cursor: pointer;
+}
+
+.crm-order-list tr:hover {
+  background-color: #ddd;
 }
 
 .input, select {

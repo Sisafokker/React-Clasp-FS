@@ -9,7 +9,7 @@
   //@include cardStyle;
 
   .footer-wrapper {
-    //@include cardStyle;
+    @include cardStyle;
     margin-top: 8px;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));

@@ -29,9 +29,9 @@ class IntermediaryManager {
     return this.db.query(GET_QUERY, false, `GET ${this.orderItemTable}`);
   }
 
-  async addIntOrderItem(orderId, itemId) {
-    const INSERT_QUERY = `INSERT INTO ${this.orderItemTable} (orderId, itemId) VALUES (?, ?)`;
-    return this.db.query(INSERT_QUERY, [orderId, itemId], `ADD ${this.orderItemTable}`);
+  async addIntOrderItem(orderId, itemId, quantity, unitPrice_usd) {
+    const INSERT_QUERY = `INSERT INTO ${this.orderItemTable} (orderId, itemId, quantity, unitPrice_usd) VALUES (?, ?, ?, ?)`;
+    return this.db.query(INSERT_QUERY, [orderId, itemId, quantity, unitPrice_usd], `ADD ${this.orderItemTable}`);
   }
 
   async deleteIntOrderItem(orderId, itemId) {
