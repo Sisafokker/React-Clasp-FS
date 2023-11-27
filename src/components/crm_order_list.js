@@ -50,7 +50,7 @@ const CRMOrderList = ({ props_companyId, props_OrderSelect}) => {
     };
 
     return (
-        <div className="crm-order-list2">
+        <div className="list">
             <h3>Orders</h3>
             {orders && orders.length > 0 ? (
                 <table className='horizontal-table'>

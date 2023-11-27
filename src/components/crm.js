@@ -59,6 +59,7 @@ const CRM = () => {
     const handleCompanySelect = async (companyId) => {
         console.log("CRM - Clicked in companyId:", companyId);
         setSelectedCompany(companyId);
+        setSelectedOrder(null); // Reset the selected order
         const selected = companies.find(company => company.companyId === companyId);
         if (selected) {
             setCompanies([selected]);
@@ -73,9 +74,10 @@ const CRM = () => {
     };
 
     const resetCompanyList = async () => {
-        await fetchCompanies();     // Fetch & reset companylist
-        setSelectedCompany(null);   // Reset the selected company
+        await fetchCompanies();     // Get companylist
+        setSelectedCompany(null);   // Clear the selected company
         setSelectedCompanyDetails(null); // Clear companydetails
+        setSelectedOrder(null);     // Clear the selected order
     };
 
     return (
