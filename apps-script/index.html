@@ -64549,6 +64549,15 @@ const Info = Object.freeze({
     notes: [
         //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
         {
+            version: "v1.1.0",
+            title: "CRM. CompanyList + CompanyDetails + OrderList showing",
+            details: [
+                "These appear to be showing correctly",
+                "A FRICKING",
+                "NIGHTMARE"
+            ]
+        },
+        {
             version: "v1.0.1",
             title: "Solved Width discrepancies",
             details: [
@@ -64766,7 +64775,7 @@ const CRM = ()=>{
     const [companies, setCompanies] = (0, _react.useState)([]);
     const [selectedCompany, setSelectedCompany] = (0, _react.useState)(null);
     // const [orders, setOrders] = useState([]);
-    // const [selectedOrder, setSelectedOrder] = useState(null);
+    const [selectedOrder, setSelectedOrder] = (0, _react.useState)(null);
     const [selectedCompanyDetails, setSelectedCompanyDetails] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
         fetchCompanies();
@@ -64863,22 +64872,38 @@ const CRM = ()=>{
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                     className: "crm-orders",
-                    children: selectedCompany && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "crm-order-list",
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _crmOrderListDefault.default), {
-                            props_companyId: selectedCompany,
-                            props_OrderSelect: handleOrderSelect
+                    children: [
+                        selectedCompany && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "crm-order-list",
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _crmOrderListDefault.default), {
+                                props_companyId: selectedCompany,
+                                props_OrderSelect: handleOrderSelect
+                            }, void 0, false, {
+                                fileName: "src/components/crm.js",
+                                lineNumber: 97,
+                                columnNumber: 29
+                            }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/crm.js",
-                            lineNumber: 97,
-                            columnNumber: 29
+                            lineNumber: 96,
+                            columnNumber: 25
+                        }, undefined),
+                        selectedOrder && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "crm-order-detail",
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _crmOrderDetailDefault.default), {
+                                props_orderId: selectedOrder
+                            }, void 0, false, {
+                                fileName: "src/components/crm.js",
+                                lineNumber: 102,
+                                columnNumber: 25
+                            }, undefined)
+                        }, void 0, false, {
+                            fileName: "src/components/crm.js",
+                            lineNumber: 101,
+                            columnNumber: 21
                         }, undefined)
-                    }, void 0, false, {
-                        fileName: "src/components/crm.js",
-                        lineNumber: 96,
-                        columnNumber: 25
-                    }, undefined)
-                }, void 0, false, {
+                    ]
+                }, void 0, true, {
                     fileName: "src/components/crm.js",
                     lineNumber: 94,
                     columnNumber: 17
@@ -64895,7 +64920,7 @@ const CRM = ()=>{
         columnNumber: 9
     }, undefined);
 };
-_s(CRM, "vllkQT7Xn6jYKeejyMge2G07buU=");
+_s(CRM, "b0Kj9eVnm8ifLytUbg7KeulvumI=");
 _c = CRM;
 exports.default = CRM;
 var _c;
@@ -65293,7 +65318,7 @@ const CRMOrderList = ({ props_companyId, props_OrderSelect })=>{
         props_OrderSelect(orderId); // Invokes handleOrderSelect() in crm.js & passing orderId as argument.
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "crm-order-list",
+        className: "crm-order-list2",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                 children: "Orders"
@@ -65427,7 +65452,7 @@ var prevRefreshSig = window.$RefreshSig$;
 $parcel$ReactRefreshHelpers$0a84.prelude(module);
 
 try {
-// crm_company_detail.js
+// crm_order_detail.js
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
@@ -65435,17 +65460,20 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
+// styles
+var _crmOrderDetailScss = require("../styles/crm_order_detail.scss");
 var _s = $RefreshSig$();
 const CRMOrderDetail = ({ props_orderId })=>{
     _s();
     const url = "http://localhost:5000";
     const [orderDetails, setOrderDetails] = (0, _react.useState)(null);
-    console.log("crm_company_detail.js \uD83D\uDEA9props_orderId\uD83D\uDEA9", props_orderId);
+    console.log("crm_order_detail.js \uD83D\uDEA9props_orderId\uD83D\uDEA9", props_orderId);
     (0, _react.useEffect)(()=>{
         const fetchOrderDetails = async ()=>{
             try {
-                const response = await (0, _axiosDefault.default).get(`${url}/api/orderDetails/${props_orderId}`);
+                const response = await (0, _axiosDefault.default).get(`${url}/api/intOrderItem/${props_orderId}`);
                 setOrderDetails(response.data);
+                console.log("crm_order_detail.js \uD83D\uDD34inOrderItems\uD83D\uDD34", response.data);
             } catch (error) {
                 console.error("Error fetching order details:", error);
             }
@@ -65458,27 +65486,128 @@ const CRMOrderDetail = ({ props_orderId })=>{
         children: "Select an order to see details"
     }, void 0, false, {
         fileName: "src/components/crm_order_detail.js",
-        lineNumber: 25,
+        lineNumber: 29,
         columnNumber: 31
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "crm-order-detail2",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                 children: "Order Details"
             }, void 0, false, {
                 fileName: "src/components/crm_order_detail.js",
-                lineNumber: 29,
+                lineNumber: 33,
                 columnNumber: 13
             }, undefined),
-            orderDetails && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, void 0, false, {
+            orderDetails && orderDetails.length > 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("table", {
+                className: "horizontal-table",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("thead", {
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tr", {
+                            children: [
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
+                                    children: "Item ID"
+                                }, void 0, false, {
+                                    fileName: "src/components/crm_order_detail.js",
+                                    lineNumber: 38,
+                                    columnNumber: 29
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
+                                    children: "Quantity"
+                                }, void 0, false, {
+                                    fileName: "src/components/crm_order_detail.js",
+                                    lineNumber: 39,
+                                    columnNumber: 29
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
+                                    children: "Unit Price (USD)"
+                                }, void 0, false, {
+                                    fileName: "src/components/crm_order_detail.js",
+                                    lineNumber: 40,
+                                    columnNumber: 29
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
+                                    children: "Total Price (USD)"
+                                }, void 0, false, {
+                                    fileName: "src/components/crm_order_detail.js",
+                                    lineNumber: 41,
+                                    columnNumber: 29
+                                }, undefined)
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/components/crm_order_detail.js",
+                            lineNumber: 37,
+                            columnNumber: 25
+                        }, undefined)
+                    }, void 0, false, {
+                        fileName: "src/components/crm_order_detail.js",
+                        lineNumber: 36,
+                        columnNumber: 21
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tbody", {
+                        children: orderDetails.map((detail)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tr", {
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
+                                        children: detail.itemId
+                                    }, void 0, false, {
+                                        fileName: "src/components/crm_order_detail.js",
+                                        lineNumber: 47,
+                                        columnNumber: 33
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
+                                        children: detail.quantity
+                                    }, void 0, false, {
+                                        fileName: "src/components/crm_order_detail.js",
+                                        lineNumber: 48,
+                                        columnNumber: 33
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
+                                        children: [
+                                            "$",
+                                            detail.unitPrice_usd.toFixed(2)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/crm_order_detail.js",
+                                        lineNumber: 49,
+                                        columnNumber: 33
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
+                                        children: [
+                                            "$",
+                                            (detail.quantity * detail.unitPrice_usd).toFixed(2)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/crm_order_detail.js",
+                                        lineNumber: 50,
+                                        columnNumber: 33
+                                    }, undefined)
+                                ]
+                            }, detail.itemId, true, {
+                                fileName: "src/components/crm_order_detail.js",
+                                lineNumber: 46,
+                                columnNumber: 29
+                            }, undefined))
+                    }, void 0, false, {
+                        fileName: "src/components/crm_order_detail.js",
+                        lineNumber: 44,
+                        columnNumber: 21
+                    }, undefined)
+                ]
+            }, void 0, true, {
                 fileName: "src/components/crm_order_detail.js",
-                lineNumber: 32,
+                lineNumber: 35,
                 columnNumber: 17
+            }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                children: "No order details available."
+            }, void 0, false, {
+                fileName: "src/components/crm_order_detail.js",
+                lineNumber: 55,
+                columnNumber: 19
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/crm_order_detail.js",
-        lineNumber: 28,
+        lineNumber: 32,
         columnNumber: 9
     }, undefined);
 };
@@ -65493,7 +65622,7 @@ $RefreshReg$(_c, "CRMOrderDetail");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"gSwJ3":[function() {},{}]},["9Y5CW","1xC6H","b6HaR"], "b6HaR", "parcelRequire10c2")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/crm_order_detail.scss":"dLimL"}],"dLimL":[function() {},{}],"gSwJ3":[function() {},{}]},["9Y5CW","1xC6H","b6HaR"], "b6HaR", "parcelRequire10c2")
 
 </script>
 </body>

@@ -848,6 +848,72 @@ table tr:hover {
   background-color: #ddd;
 }
 
+.crm-order-detail {
+  width: 100%;
+}
+
+.crm-order-detail .horizontal-table {
+  border-collapse: collapse;
+  width: 98%;
+  margin: 0 auto;
+}
+
+.crm-order-detail .horizontal-table th, .crm-order-detail .horizontal-table td {
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  font-size: 14px;
+}
+
+@media screen and (width <= 768px) {
+  .crm-order-detail .horizontal-table th, .crm-order-detail .horizontal-table td {
+    font-size: 11.9px;
+  }
+}
+
+@media screen and (width <= 600px) {
+  .crm-order-detail .horizontal-table th, .crm-order-detail .horizontal-table td {
+    font-size: 10.5px;
+  }
+}
+
+.crm-order-detail table {
+  width: 100%;
+}
+
+.crm-order-detail table .horizontal-table {
+  border-collapse: collapse;
+  width: 98%;
+  margin: 0 auto;
+}
+
+.crm-order-detail table .horizontal-table th, .crm-order-detail table .horizontal-table td {
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  font-size: 14px;
+}
+
+@media screen and (width <= 768px) {
+  .crm-order-detail table .horizontal-table th, .crm-order-detail table .horizontal-table td {
+    font-size: 11.9px;
+  }
+}
+
+@media screen and (width <= 600px) {
+  .crm-order-detail table .horizontal-table th, .crm-order-detail table .horizontal-table td {
+    font-size: 10.5px;
+  }
+}
+
+.crm-order-detail th, .crm-order-detail td {
+  cursor: pointer;
+}
+
+.crm-order-detail tr:hover {
+  background-color: #ddd;
+}
+
 .input, select {
   border: 1px solid #ddd;
   width: 100%;

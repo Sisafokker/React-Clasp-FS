@@ -295,6 +295,18 @@ appExp.get('/api/intOrderItem', async (req, res) => {
   }
 });
 
+// Get IntOrderItem by orderId
+appExp.get('/api/intOrderItem/:orderId', async (req, res) => {
+  const orderId = req.params.orderId;
+  try {
+    const values = await intermediaryManager.getIntOrderItemsByOrderId(orderId);
+    res.status(200).json(values);
+  } catch (error) {
+    console.error(`Get IntOrderItem by orderId ${orderId} Error:`, error);
+    res.status(500).json({ error: `IntOrderItem by orderId ${orderId} Error: ` + error.message });
+  }
+});
+
 // Add IntOrderItem relation
 appExp.post('/api/intOrderItem', async (req, res) => {
   try {

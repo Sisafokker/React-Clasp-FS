@@ -1,3 +1,4 @@
+// IntermediaryManager.js
 const Database = require('./Database');
 
 class IntermediaryManager {
@@ -27,6 +28,11 @@ class IntermediaryManager {
   async getIntOrderItem() {
     const GET_QUERY = `SELECT * FROM ${this.orderItemTable}`;
     return this.db.query(GET_QUERY, false, `GET ${this.orderItemTable}`);
+  }
+
+  async getIntOrderItemsByOrderId(orderId) {
+    const GET_QUERY = `SELECT * FROM ${this.orderItemTable} WHERE orderId = ?`;
+    return this.db.query(GET_QUERY, [orderId], `GET ${this.orderItemTable} for orderId: ${orderId}`);
   }
 
   async addIntOrderItem(orderId, itemId, quantity, unitPrice_usd) {

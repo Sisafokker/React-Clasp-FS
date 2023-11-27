@@ -17,7 +17,7 @@ const CRM = () => {
     const [companies, setCompanies] = useState([]);
     const [selectedCompany, setSelectedCompany] = useState(null);
     // const [orders, setOrders] = useState([]);
-    // const [selectedOrder, setSelectedOrder] = useState(null);
+    const [selectedOrder, setSelectedOrder] = useState(null);
     const [selectedCompanyDetails, setSelectedCompanyDetails] = useState(null);
 
     useEffect(() => {
@@ -97,11 +97,11 @@ const CRM = () => {
                             <CRMOrderList props_companyId={selectedCompany} props_OrderSelect={handleOrderSelect} />
                         </div>
                     )}
-                    {/* {selectedOrder && (
-                        <div className="crm-order-detail">
-                            <CRMOrderDetail props_orderId={selectedOrder} />
-                        </div>
-                    )} */}
+                    {selectedOrder && (
+                    <div className="crm-order-detail">
+                        <CRMOrderDetail props_orderId={selectedOrder} />
+                    </div>
+                )}
                 </div>
             </div>
         </div>
