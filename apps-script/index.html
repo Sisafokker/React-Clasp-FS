@@ -64544,8 +64544,8 @@ const Info = Object.freeze({
         name: "FS Bottega Final Project: Hoakeen",
         version: {
             major: 1,
-            minor: 1,
-            patch: 1,
+            minor: 2,
+            patch: 0,
             toString () {
                 return `${this.major}.${this.minor}.${this.patch}`;
             }
@@ -64553,6 +64553,15 @@ const Info = Object.freeze({
     },
     notes: [
         //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+        {
+            version: "v1.2.0",
+            title: "Improved CSS & Return Class Structures",
+            details: [
+                "Visual Improvements",
+                "ClassNames for most CRM Child components",
+                "verticalTable working"
+            ]
+        },
         {
             version: "v1.1.2",
             title: "CRM ALL SHOWING AND INTERACTING",
@@ -64839,11 +64848,16 @@ const CRM = ()=>{
         ]);
         else console.error("\u274Ccrm.js selected is BLANK");
     };
+    function removeClassSelected() {
+        const previouslySelectedElement = document.querySelector(".company-item.selected-company");
+        if (previouslySelectedElement) previouslySelectedElement.classList.remove("selected-company");
+    }
     const handleOrderSelect = (orderId)=>{
         setSelectedOrder(orderId);
         console.log("crm.js \uD83D\uDEA9selectedOrder\uD83D\uDEA9: ", orderId);
     };
     const resetCompanyList = async ()=>{
+        removeClassSelected();
         await fetchCompanies(); // Get companylist
         setSelectedCompany(null); // Clear the selected company
         setSelectedCompanyDetails(null); // Clear companydetails
@@ -64865,12 +64879,12 @@ const CRM = ()=>{
                                 props_resetCompanyList: resetCompanyList
                             }, void 0, false, {
                                 fileName: "src/components/crm.js",
-                                lineNumber: 88,
+                                lineNumber: 95,
                                 columnNumber: 25
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/crm.js",
-                            lineNumber: 87,
+                            lineNumber: 94,
                             columnNumber: 21
                         }, undefined),
                         selectedCompany && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -64879,18 +64893,18 @@ const CRM = ()=>{
                                 props_companyDetails: selectedCompanyDetails
                             }, void 0, false, {
                                 fileName: "src/components/crm.js",
-                                lineNumber: 92,
+                                lineNumber: 99,
                                 columnNumber: 29
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/crm.js",
-                            lineNumber: 91,
+                            lineNumber: 98,
                             columnNumber: 25
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/crm.js",
-                    lineNumber: 86,
+                    lineNumber: 93,
                     columnNumber: 17
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -64903,12 +64917,12 @@ const CRM = ()=>{
                                 props_OrderSelect: handleOrderSelect
                             }, void 0, false, {
                                 fileName: "src/components/crm.js",
-                                lineNumber: 99,
+                                lineNumber: 106,
                                 columnNumber: 29
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/crm.js",
-                            lineNumber: 98,
+                            lineNumber: 105,
                             columnNumber: 25
                         }, undefined),
                         selectedOrder && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -64917,29 +64931,29 @@ const CRM = ()=>{
                                 props_orderId: selectedOrder
                             }, void 0, false, {
                                 fileName: "src/components/crm.js",
-                                lineNumber: 104,
+                                lineNumber: 111,
                                 columnNumber: 25
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/crm.js",
-                            lineNumber: 103,
+                            lineNumber: 110,
                             columnNumber: 21
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/crm.js",
-                    lineNumber: 96,
+                    lineNumber: 103,
                     columnNumber: 17
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/crm.js",
-            lineNumber: 85,
+            lineNumber: 92,
             columnNumber: 13
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/crm.js",
-        lineNumber: 84,
+        lineNumber: 91,
         columnNumber: 9
     }, undefined);
 };
@@ -65005,6 +65019,9 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
     const handleCompanyClick = (companyId)=>{
         console.log("CRM_company_list - Clicked in companyId: ", companyId);
         props_companySelect(companyId); // Invokes handleCompanySelect() in crm.js & passing companyId as argument.
+        // Add 'selected-company' class to clicked company!
+        const selectedElement = document.querySelector(`.company-item[data-company-id="${companyId}"]`);
+        if (selectedElement) selectedElement.classList.add("selected-company");
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "crm-company-list",
@@ -65014,7 +65031,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                 children: "Customers"
             }, void 0, false, {
                 fileName: "src/components/crm_company_list.js",
-                lineNumber: 44,
+                lineNumber: 51,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -65029,14 +65046,14 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                                         icon: (0, _freeSolidSvgIcons.faFilter)
                                     }, void 0, false, {
                                         fileName: "src/components/crm_company_list.js",
-                                        lineNumber: 47,
+                                        lineNumber: 54,
                                         columnNumber: 28
                                     }, undefined),
                                     " Status "
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/crm_company_list.js",
-                                lineNumber: 47,
+                                lineNumber: 54,
                                 columnNumber: 21
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -65048,7 +65065,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                                         children: "Active"
                                     }, void 0, false, {
                                         fileName: "src/components/crm_company_list.js",
-                                        lineNumber: 49,
+                                        lineNumber: 56,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -65056,7 +65073,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                                         children: "Inactive"
                                     }, void 0, false, {
                                         fileName: "src/components/crm_company_list.js",
-                                        lineNumber: 50,
+                                        lineNumber: 57,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -65064,19 +65081,19 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                                         children: "All"
                                     }, void 0, false, {
                                         fileName: "src/components/crm_company_list.js",
-                                        lineNumber: 51,
+                                        lineNumber: 58,
                                         columnNumber: 25
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/crm_company_list.js",
-                                lineNumber: 48,
+                                lineNumber: 55,
                                 columnNumber: 21
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/crm_company_list.js",
-                        lineNumber: 46,
+                        lineNumber: 53,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -65088,14 +65105,14 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                                         icon: (0, _freeSolidSvgIcons.faFilter)
                                     }, void 0, false, {
                                         fileName: "src/components/crm_company_list.js",
-                                        lineNumber: 55,
+                                        lineNumber: 62,
                                         columnNumber: 28
                                     }, undefined),
                                     "Industry"
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/crm_company_list.js",
-                                lineNumber: 55,
+                                lineNumber: 62,
                                 columnNumber: 21
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -65106,24 +65123,24 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                                         children: industry
                                     }, industry, false, {
                                         fileName: "src/components/crm_company_list.js",
-                                        lineNumber: 57,
+                                        lineNumber: 64,
                                         columnNumber: 53
                                     }, undefined))
                             }, void 0, false, {
                                 fileName: "src/components/crm_company_list.js",
-                                lineNumber: 56,
+                                lineNumber: 63,
                                 columnNumber: 21
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/crm_company_list.js",
-                        lineNumber: 54,
+                        lineNumber: 61,
                         columnNumber: 17
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/crm_company_list.js",
-                lineNumber: 45,
+                lineNumber: 52,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -65133,58 +65150,59 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                             className: "btn",
                             onClick: resetFilters,
-                            children: "Reset Filters"
+                            children: "Reset All Filters"
                         }, void 0, false, {
                             fileName: "src/components/crm_company_list.js",
-                            lineNumber: 63,
+                            lineNumber: 70,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                             className: "btn",
                             onClick: props_resetCompanyList,
-                            children: "Show All"
+                            children: "Show All Customers"
                         }, void 0, false, {
                             fileName: "src/components/crm_company_list.js",
-                            lineNumber: 64,
+                            lineNumber: 71,
                             columnNumber: 21
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/crm_company_list.js",
-                    lineNumber: 62,
+                    lineNumber: 69,
                     columnNumber: 17
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/crm_company_list.js",
-                lineNumber: 61,
+                lineNumber: 68,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "filtered-companies",
                 children: filteredCompanies.map((company)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        "data-company-id": company.companyId,
                         className: "company-item",
                         onClick: ()=>handleCompanyClick(company.companyId),
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                             children: `${company.companyName} | ${company.industry} [${company.status}]`
                         }, void 0, false, {
                             fileName: "src/components/crm_company_list.js",
-                            lineNumber: 71,
+                            lineNumber: 80,
                             columnNumber: 25
                         }, undefined)
                     }, company.companyId, false, {
                         fileName: "src/components/crm_company_list.js",
-                        lineNumber: 69,
+                        lineNumber: 76,
                         columnNumber: 21
                     }, undefined))
             }, void 0, false, {
                 fileName: "src/components/crm_company_list.js",
-                lineNumber: 67,
+                lineNumber: 74,
                 columnNumber: 13
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/crm_company_list.js",
-        lineNumber: 43,
+        lineNumber: 50,
         columnNumber: 9
     }, undefined);
 };
@@ -65499,7 +65517,7 @@ const CRMOrderList = ({ props_companyId, props_OrderSelect })=>{
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                         className: "btn",
                         onClick: resetFilters,
-                        children: "Show All"
+                        children: "Show All Orders"
                     }, void 0, false, {
                         fileName: "src/components/crm_order_list.js",
                         lineNumber: 94,

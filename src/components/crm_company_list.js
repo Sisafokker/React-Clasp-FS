@@ -37,6 +37,13 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
     const handleCompanyClick = (companyId) => {
         console.log("CRM_company_list - Clicked in companyId: ", companyId)
         props_companySelect(companyId); // Invokes handleCompanySelect() in crm.js & passing companyId as argument.
+
+        // Add 'selected-company' class to clicked company!
+        const selectedElement = document.querySelector(`.company-item[data-company-id="${companyId}"]`);
+        if (selectedElement) {
+            selectedElement.classList.add('selected-company');
+        }
+
     };
 
     return (
@@ -60,14 +67,16 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
             </div>
             <div className='section-btns'>
                 <div>
-                    <button className='btn' onClick={resetFilters}>Reset Filters</button>
-                    <button className='btn' onClick={props_resetCompanyList}>Show All</button> 
+                    <button className='btn' onClick={resetFilters}>Reset All Filters</button>
+                    <button className='btn' onClick={props_resetCompanyList}>Show All Customers</button> 
                 </div>
             </div>
             <div className='filtered-companies'>
                 {filteredCompanies.map((company) => (
-                    <div key={company.companyId} 
-                    className="company-item" onClick={() => handleCompanyClick(company.companyId)} >
+                    <div key={company.companyId}
+                        data-company-id={company.companyId}
+                        className="company-item" 
+                        onClick={() => handleCompanyClick(company.companyId)} >
                         <p>{`${company.companyName} | ${company.industry} [${company.status}]`}</p>
                     </div>
                 ))}

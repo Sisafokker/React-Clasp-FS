@@ -1,4 +1,4 @@
-// CRM_COMPANY_LIST.scss
+// crm_COMPANY_list.scss
 @import "variables.scss";
 @import "mixins.scss";
 
@@ -15,7 +15,7 @@
     margin-bottom: 8px;
 
     .filter {
-      flex-basis: 50%; // Adjust the width as needed
+      flex-basis: 50%; // Adjust the width!!
 
       label {
         display: block;
@@ -30,39 +30,51 @@
     }
 
     .section-btns {
-      flex-basis: 10%; // Adjust the width as needed
+      flex-basis: 10%; // Adjust the width!!
       display: flex;
       justify-content: center;
       align-items: center;
 
-      .btn {
-        @include buttonStyle;
-        }
     }
+  }
+
+  .crm-company-list .section-btns {
+    @include flexCenter;
+    margin-bottom: 5px;
+    .btn {
+      @include buttonStyle(
+            $height: 25px, $width: 100%, $padT:0px, $padB: 0px,
+            $background-color: $primaryColor);
+    }
+
   }
 
   .filtered-companies {
     .company-item {
       cursor: pointer;
-      padding: 5px;
+      padding: 2px;
       border-bottom: 1px solid #ccc;
+      transition: background-color 0.3s;
 
       p {
         color: $primaryColor;
         text-align: center;
       }
 
-      .selected-company {
-        background-color: red; // Style for selected company
-      }
-
-      &:hover {
+      
+      &:hover:not(.selected-company) { // .selected-company is NOT present
         background-color: #f0f0f0;
       }
-    }
-  }
 
-  .selected-company {
-    background-color: red; // Style for selected company
+      
+      &.selected-company { // when .selected-company IS present
+        background-color: $teal; 
+        color: $offwhite;
+
+        // &:hover {
+        //   background-color: darken(red, 10%);
+        // }
+      }
+    }
   }
 }

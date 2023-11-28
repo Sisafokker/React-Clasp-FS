@@ -9,6 +9,7 @@ const Info = Object.freeze({
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+    { version: "v1.2.1", title: "CSS Improvement", details: ["Mixin improves", "Solved Btn's issues", "Change Table styling",],  },
     { version: "v1.2.0", title: "Improved CSS & Return Class Structures", details: ["Visual Improvements", "ClassNames for most CRM Child components", "verticalTable working",],  },
     { version: "v1.1.2", title: "CRM ALL SHOWING AND INTERACTING", details: ["Starting Combining SQL data in different crm child components",],  },
     { version: "v1.1.1", title: "CRM. OrderDetails now showing", details: ["New Server Endpoint", "Also added into IntermediaryManager.js", "Pending resetting all when SelectedCompany changes",],  },

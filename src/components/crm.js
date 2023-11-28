@@ -58,6 +58,7 @@ const CRM = () => {
 
     const handleCompanySelect = async (companyId) => {
         console.log("CRM - Clicked in companyId:", companyId);
+        
         setSelectedCompany(companyId);
         setSelectedOrder(null); // Reset the selected order
         const selected = companies.find(company => company.companyId === companyId);
@@ -68,12 +69,18 @@ const CRM = () => {
         }
     };
 
+    function removeClassSelected(){   // Remove 'selected-company' class from all
+        const previouslySelectedElement = document.querySelector('.company-item.selected-company');
+        if (previouslySelectedElement) { previouslySelectedElement.classList.remove('selected-company'); }
+   }
+
     const handleOrderSelect = (orderId) => {
         setSelectedOrder(orderId);
         console.log("crm.js 🚩selectedOrder🚩: ", orderId);
     };
 
     const resetCompanyList = async () => {
+        removeClassSelected();
         await fetchCompanies();     // Get companylist
         setSelectedCompany(null);   // Clear the selected company
         setSelectedCompanyDetails(null); // Clear companydetails

@@ -60,13 +60,13 @@ h2 { @include textStyle(20px, $secondaryColor); }
 h3 { @include textStyle(18px); }
 p { @include textStyle(14px, $secondaryColor); }
 
-.button, input[type="submit"] {
+button, input[type="submit"] {
     @include responsiveFontSize(12px);
     @include buttonStyle;
     margin-top: 5px;
 }
 
-.button.cancel {
+button.cancel {
     @include buttonStyle($hover-color: $warning);
     @include responsiveFontSize(12px);
     margin-left: 15px;

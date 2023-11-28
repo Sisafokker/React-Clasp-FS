@@ -34,12 +34,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
-            .btn {
-                @include buttonStyle;
-            }
         }
     }
+
+    .crm-order-list .section-btns {
+        @include flexCenter;
+        margin-bottom: 5px;
+        .btn {
+          @include buttonStyle(
+                $height: 25px, $width: 100%, $padT:0px, $padB: 0px,
+                $background-color: $primaryColor);
+        }
+    
+      }
 
     .filtered-orders {
         .order-item {

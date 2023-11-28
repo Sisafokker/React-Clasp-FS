@@ -91,7 +91,7 @@ const CRMOrderList = ({ props_companyId, props_OrderSelect}) => {
             </div>
             <div className='section-btns'>
                 <div>
-                    <button className='btn' onClick={resetFilters}>Show All</button>
+                    <button className='btn' onClick={resetFilters}>Show All Orders</button>
                     {/* <button className='btn' onClick={props_resetCompanyList}>Show All</button>  */}
                 </div>
             </div>

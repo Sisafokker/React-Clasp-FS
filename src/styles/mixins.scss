@@ -39,6 +39,11 @@
         text-align: left;
         border-bottom: 1px solid $lightgrey;
     }
+
+    th {
+        color: $offwhite;
+        font-weight: none;
+    }
 }
 
 
@@ -60,7 +65,7 @@
         td {
             &:first-child {
                 background-color: $tableheader;
-                font-weight: 600;
+                color: $offwhite;
                 text-align: right;
             }
             
@@ -79,15 +84,21 @@
 
 
 
-@mixin buttonStyle ($background-color: $teal, $color: $offwhite, $hover-color: $dark-teal, $width: auto) {
+@mixin buttonStyle (
+            $background-color: $teal, $color: $offwhite, $hover-color: $dark-teal, 
+            $width: auto, $font-weight: 600, $height: auto, $text-align: center,
+            $padT: 10px, $padR: 20px, $padB: 10px, $padL: 20px, 
+            $border: none, $border-r: 4px) {
+    
     background-color: $background-color;
     color: $color;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-weight: 600;
+    padding: $padT $padR $padB $padL;
+    border: $border;
+    border-radius: $border-r;
+    font-weight: $font-weight;
     width: $width;
-    text-align: center;
+    height: $height;
+    text-align: $text-align;
     transition: background-color 0.2s ease;
     cursor: pointer;
 
