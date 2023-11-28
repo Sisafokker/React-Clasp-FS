@@ -13,7 +13,7 @@
     box-shadow: 0 0 15px $boxshadow;
     max-width: 100%;
     min-width: 90%;
-    margin: 0; // The "0 auto" was generating a lot of trouble.
+    margin: 0; // 🚩The "0 auto" was generating a lot of trouble.
 }
 
 @mixin flexCenter {
@@ -51,17 +51,28 @@
         th, td {
             @include responsiveFontSize(14px);
             padding: 8px;
-            text-align: left;
             border-bottom: 1px solid $lightgrey;
+            //background-color: $tableheader;
+            font-weight: 600;
         }
 
-        th {
-            background-color: $headerColor; // Background color for the keys column
-        }
 
         td {
-            background-color: $valueColor; // Different background color for the values column
+            &:first-child {
+                background-color: $tableheader;
+                font-weight: 600;
+                text-align: right;
+            }
+            
+            &:nth-child(even) {
+                text-align: center;
+            }
+
+            &:nth-child(even):hover {
+                background-color: $rowhover;
+            }
         }
+
     }
 }
 

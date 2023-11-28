@@ -1,6 +1,9 @@
 // crm_company_detail.js
 import React from 'react';
 
+// styles
+import "../styles/crm_company_detail.scss";
+
 const CRMCompanyDetail = ({ props_companyDetails }) => {
     console.log("crm_company_details.js props_companyDetails", props_companyDetails )
     if (!props_companyDetails) {
@@ -11,18 +14,18 @@ const CRMCompanyDetail = ({ props_companyDetails }) => {
     const detailsArray = Object.entries(props_companyDetails);
 
     return (
-        <div>
-            <h3>Company Details</h3>
-            <table className='vertical-table'>
-                <tbody>
-                    {detailsArray.map(([key, value]) => (
-                        <tr key={key}>
-                            <td>{key}</td>
-                            <td>{value}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div className="crm-company-details">
+            <div className='section-title'>Customer Details</div>
+                <table className='vertical-table'>
+                    <tbody>
+                        {detailsArray.map(([key, value]) => (
+                            <tr key={key}>
+                                <td>{key}</td>
+                                <td>{value}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
         </div>
     );
 };

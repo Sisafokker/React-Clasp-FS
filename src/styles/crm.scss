@@ -20,27 +20,33 @@
     display: flex;
     flex-grow: 1; // Takes remaining space after header and footer
     margin: 0px;
+    gap: 5px;
   }
   
   .crm-companies {
     flex-basis: 33.33%;
     display: flex;
     flex-direction: column; //Stack vertically
-    background-color: red;
+    //background-color: #4A4D49; // red;
+    border: 1px solid red;
+
   }
   
   .crm-orders {
     flex-basis: 66.67%;
     display: flex;
     flex-direction: column;
-    background-color: blue;
+    //background-color: #777D75; // blue;
+    border: 1px solid red;
   }
   
   .crm-company-list, .crm-company-details {
     flex-grow: 1; // Expand so each to take half of available vertical space within crm-companies
+    border: 1px solid black;
   }
   .crm-order-list, .crm-order-detail {
     flex-grow: 1; // Expand so each to take half of available vertical space within crm-companies
+    border: 1px solid black;
   }
 
 

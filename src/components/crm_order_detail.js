@@ -48,8 +48,9 @@ const CRMOrderDetail = ({ props_orderId }) => {
     if (!orderDetails) return <div>Select an order to see details</div>;
 
     return (
-        <div className="detail">
-            <h3>Order Details</h3>
+        <div className="crm-order-details">
+            <div className='section-title'>Order Details</div>
+            <div className='order-details'>
             {orderDetails && orderDetails.length > 0 ? (
                 <table className='horizontal-table'>
                     <thead>
@@ -74,6 +75,7 @@ const CRMOrderDetail = ({ props_orderId }) => {
                     </tbody>
                 </table>
             ) : ( <p>No order details available.</p> )}
+        </div>
         </div>
     );
 };

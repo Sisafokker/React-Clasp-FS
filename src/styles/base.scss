@@ -13,14 +13,15 @@
 
 // Styles for Content Area
 .container {
-    padding-top: 140px;
+    padding-top: 160px;
     padding-bottom: 10px;
     width: 100%;
     max-width: 100%;
     margin: 0 auto; // Center the container
     flex: 1;   // Allows container to expand and push the footer down
-    background-color: pink;
+    border: 1px solid blue;
 }
+
 
 @media screen and (max-width: $tablet) {
     .app-wrapper {

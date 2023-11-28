@@ -2,13 +2,15 @@
 const Info = Object.freeze({
   project: {
     name: 'FS Bottega Final Project: Hoakeen',
-    version: { major: 1, minor: 1,  patch: 1, 
+    version: { major: 1, minor: 2,  patch: 0, 
       toString() { return `${this.major}.${this.minor}.${this.patch}`; }
     }
   },
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+    { version: "v1.2.0", title: "Improved CSS & Return Class Structures", details: ["Visual Improvements", "ClassNames for most CRM Child components", "verticalTable working",],  },
+    { version: "v1.1.2", title: "CRM ALL SHOWING AND INTERACTING", details: ["Starting Combining SQL data in different crm child components",],  },
     { version: "v1.1.1", title: "CRM. OrderDetails now showing", details: ["New Server Endpoint", "Also added into IntermediaryManager.js", "Pending resetting all when SelectedCompany changes",],  },
     { version: "v1.1.0", title: "CRM. CompanyList + CompanyDetails + OrderList showing", details: ["These appear to be showing correctly", "A FRICKING", "NIGHTMARE",],  },
     { version: "v1.0.1", title: "Solved Width discrepancies", details: ["Solved ANNOYING width problems",],  },

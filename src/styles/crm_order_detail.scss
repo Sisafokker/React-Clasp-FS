@@ -1,26 +1,83 @@
-// crm_order_details.scss
+// crm_ORDER_details.scss
 @import "variables.scss";
 @import "mixins.scss";
 
 .crm-order-detail {
-    .horizontal-table {
-        @include responsiveTable_Horizontal;
-        
+    .section-title {
+        margin-bottom: 8px;
+        margin-top: 4px;
+        text-align: center;
     }
-    width: 100%;
 
-    table {
-        width: 100%; // table stretches to fill the .crm-order-list div
-        .horizontal-table {
-            @include responsiveTable_Horizontal;
+    .order-filter {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 8px;
+
+        .filter {
+            flex-basis: 50%; // Adjust the width as needed
+
+            label {
+                display: block;
+                margin-bottom: 5px;
+                text-align: center;
+            }
+
+            select {
+                @include inputSelectStyle;
+                width: 100%;
+            }
+        }
+
+        .section-btns {
+            flex-basis: 10%; // Adjust the width as needed
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .btn {
+                @include buttonStyle;
+            }
         }
     }
 
-    th, td {
-        cursor: pointer;
+    .filtered-orders {
+        .order-item {
+            cursor: pointer;
+            padding: 5px;
+            border-bottom: 1px solid #ccc;
+
+            p {
+                color: $primaryColor;
+            }
+
+            &:hover {
+                background-color: #f0f0f0;
+            }
+        }
     }
 
-    tr:hover {
-        background-color: $lightgrey;
+    .horizontal-table {
+        @include responsiveTable_Horizontal;
+
+    }
+
+    //width: 100%;
+
+    table {
+        width: 100%; // table stretches to fill the .crm-order-list div
+
+        .horizontal-table {
+            @include responsiveTable_Horizontal;
+        }
+
+        th,
+        td {
+            cursor: pointer;
+        }
+
+        tr:hover {
+            background-color: $lightgrey;
+        }
     }
 }

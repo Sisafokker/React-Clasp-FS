@@ -10,6 +10,7 @@ import "../styles/crm_company_list.scss";
 // The child does NOT manage state, it just informs the parent about user interactions
 // The parent then manages the state as needed.
 const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompanyList  }) => {
+    // For Filters
     const [selectedStatus, setSelectedStatus] = useState('All');
     const [selectedIndustry, setSelectedIndustry] = useState('All');
     const [industries, setIndustries] = useState([]);
@@ -65,7 +66,8 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
             </div>
             <div className='filtered-companies'>
                 {filteredCompanies.map((company) => (
-                    <div key={company.companyId} className="company-item" onClick={() => handleCompanyClick(company.companyId)} >
+                    <div key={company.companyId} 
+                    className="company-item" onClick={() => handleCompanyClick(company.companyId)} >
                         <p>{`${company.companyName} | ${company.industry} [${company.status}]`}</p>
                     </div>
                 ))}

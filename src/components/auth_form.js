@@ -1,12 +1,12 @@
-// OAuth_Form.js
+// Auth_Form.js
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Context } from '../Context';
 
 // Styles
-import '../styles/oauth_form.scss';
+import '../styles/auth_form.scss';
 
-const OAuth_Form = () => {
+const Auth_Form = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const { setUser } = useContext(Context);
   const [formData, setFormData] = useState({
@@ -134,4 +134,4 @@ const OAuth_Form = () => {
 
 };
 
-export default OAuth_Form;
+export default Auth_Form;

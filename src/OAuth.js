@@ -14,7 +14,7 @@ import "./styles/auth.scss";
 
 // Components
 import Nav from "./components/nav";
-import OAuth_Form from "./components/oauth_form";
+import Auth_Form from "./components/auth_form";
 
 
 const SCOPES = "https://www.googleapis.com/auth/drive";
@@ -139,21 +139,26 @@ function OAuth({ prop_renderRoutes }) {
 
     // Function to handle user sign-out
     function handleSignOut(e) {
+        window.location.reload(); // Force Tab reload
+
         console.log("👍handleSignOut")
-        localStorage.removeItem("local_user");  // Clear user from local storage
+        localStorage.removeItem("local_user");  // Clear user local storage
         setUser({});                            // Clear user state
-        navigate("/home");                      // Move to:        
+        
+        
+        //navigate("/home");
+        // // Show SignIn Div and Prompt
+        // const allLoginElement = document.getElementById("allLogin");
+        // if (allLoginElement) {
+        //     allLoginElement.style.display = "block";
+        // }
+        // //window.google.accounts.id.prompt();
 
-        // Show SignIn Div and Prompt
-        const allLoginElement = document.getElementById("allLogin");
-        if (allLoginElement) {
-            allLoginElement.style.display = "block";
-        }
-        //window.google.accounts.id.prompt();
+        // if (window.google && window.google.accounts) {
+        //     window.google.accounts.id.prompt();
+        // }
 
-        if (window.google && window.google.accounts) {
-            window.google.accounts.id.prompt();
-        }
+
     }
 
     // Function to create a file in Google Drive when the user clicks the "Create File" button
@@ -168,7 +173,7 @@ function OAuth({ prop_renderRoutes }) {
             {!user || Object.keys(user).length === 0 && (
                 <div className="allLogin">
                     <div id="googleLogIn" className="google-login" ></div> 
-                    <OAuth_Form />
+                    <Auth_Form />
                 </div>
             )}
             {user && Object.keys(user).length !== 0 && (                

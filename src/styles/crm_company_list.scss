@@ -49,11 +49,20 @@
 
       p {
         color: $primaryColor;
+        text-align: center;
+      }
+
+      .selected-company {
+        background-color: red; // Style for selected company
       }
 
       &:hover {
         background-color: #f0f0f0;
       }
     }
+  }
+
+  .selected-company {
+    background-color: red; // Style for selected company
   }
 }

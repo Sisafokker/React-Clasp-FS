@@ -88,7 +88,7 @@ const CRM = () => {
                         <CRMCompanyList props_companies={companies} props_companySelect={handleCompanySelect} props_resetCompanyList={resetCompanyList} />
                     </div>
                     {selectedCompany && (
-                        <div className="crm-company-details">
+                        <div className="crm-company-detail">
                             <CRMCompanyDetail props_companyDetails={selectedCompanyDetails} />
                         </div>
                     )}
