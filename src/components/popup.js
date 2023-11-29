@@ -7,11 +7,11 @@ const Popup = ({ isOpen, closePopup, title, children }) => {
   return (
     <div className="popup-container">
       <div className="popup-wrapper">
-        <button className="close-btn" onClick={closePopup}>Close</button>
         {title && <h3>{title}</h3>}
         <div className="popup-content">
           {children}
         </div>
+        <button className="btn" onClick={closePopup}>Close</button>
       </div>
     </div>
   );

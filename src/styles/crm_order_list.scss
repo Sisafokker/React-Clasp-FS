@@ -40,9 +40,10 @@
     .crm-order-list .section-btns {
         @include flexCenter;
         margin-bottom: 5px;
+        gap: 20px;
         .btn {
           @include buttonStyle(
-                $height: 25px, $width: 100%, $padT:0px, $padB: 0px,
+                $height: 25px, $width: 25%, $padT:0px, $padB: 0px,
                 $background-color: $primaryColor);
         }
     

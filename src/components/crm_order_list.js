@@ -4,11 +4,14 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
+// Components
+import Download from "./download";
+
 // styles
 import "../styles/crm_order_list.scss";
 
 
-const CRMOrderList = ({ props_companyId, props_OrderSelect}) => {
+const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect}) => {
     const url = process.env.REACT_APP_Backend_URL
     const [orders, setOrders] = useState([]);
     const [users, setUsers] = useState({});
@@ -17,6 +20,13 @@ const CRMOrderList = ({ props_companyId, props_OrderSelect}) => {
     const [selectedStatus, setSelectedStatus] = useState('All');
     const [selectedUserEmail, setSelectedUserEmail] = useState('All');
     const [userEmail, setUserEmail] = useState([]);
+
+    let downloadName, companyDetails
+    if (props_companyDetails) {
+        companyDetails = Object.entries(props_companyDetails);
+        downloadName = `ReactApp_${props_companyDetails.companyName} ${(new Date()).toLocaleDateString()}`;
+        console.log("downloadName", downloadName);
+    }
 
     useEffect(() => {
         // Unique OrderUserEmails for Dropdown options
@@ -68,15 +78,24 @@ const CRMOrderList = ({ props_companyId, props_OrderSelect}) => {
         props_OrderSelect(orderId); // Invokes handleOrderSelect() in crm.js & passing orderId as argument.
     };
 
-    if (!orders) return <div>Select an order to see details</div>;
+    const tableHeaders = ["OrderId", "Order Status", "Order Creation", "Order Creator"];
+    const ordersForDownload = orders.map(order => [
+        order.orderId,
+        order.status,
+        new Date(order.orderDate).toLocaleDateString(),
+        users[order.userId]
+    ])
+    if (ordersForDownload && ordersForDownload.length > 0)  { ordersForDownload.unshift(tableHeaders); }
+
+    //if (!orders) return <div>Select an order to see details</div>;
 
     return (
         <div className="crm-order-list">
-            <div className='section-title'>Orders</div>
+            <div className='section-title'>List of Orders</div>
             <div className='order-filter'>
                 <div className='filter'>
                     <label><FontAwesomeIcon icon={faFilter}/> Status </label>
-                    <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
+                    <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)} disabled={!orders || orders.length === 0}>
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
                         <option value="All">All</option>
@@ -84,19 +103,19 @@ const CRMOrderList = ({ props_companyId, props_OrderSelect}) => {
                 </div>
                 <div className='filter'>
                     <label><FontAwesomeIcon icon={faFilter}/>User</label>
-                    <select value={selectedUserEmail} onChange={(e) => setSelectedUserEmail(e.target.value)}>
+                    <select value={selectedUserEmail} onChange={(e) => setSelectedUserEmail(e.target.value)} disabled={!orders || orders.length === 0}>
                         {userEmail.map(email => <option key={email} value={email}>{email}</option>)}
                     </select>
                 </div>
             </div>
-            <div className='section-btns'>
-                <div>
-                    <button className='btn' onClick={resetFilters}>Show All Orders</button>
+            {orders && orders.length > 0 ? (
+                <>
+                <div className='section-btns'>
+                    <button className='btn' title="Show All Orders" onClick={resetFilters} >Show All Orders</button>
+                    <Download prop_btnName="Save Orders" props_array={ordersForDownload} props_fileName={downloadName} props_sheetName="Orders"/>
                     {/* <button className='btn' onClick={props_resetCompanyList}>Show All</button>  */}
                 </div>
-            </div>
-            <div className='filtered-orders'>
-            {orders && orders.length > 0 ? (
+                <div className='filtered-orders'>
                 <table className='horizontal-table'>
                     <thead>
                         <tr>
@@ -117,8 +136,10 @@ const CRMOrderList = ({ props_companyId, props_OrderSelect}) => {
                         ))}
                     </tbody>
                 </table>
-            ) : ( <p>No orders available.</p> )}
-            </div>
+                </div>
+                </>
+            ) : ( <p>No orders available for this customer</p> )}
+            
         </div>
     );
 };

@@ -7,6 +7,7 @@
     margin-bottom: 8px;
     margin-top: 4px;
     text-align: center;
+    font-weight: 600;
   }
 
   .company-filter {
@@ -29,21 +30,23 @@
       }
     }
 
-    .section-btns {
-      flex-basis: 10%; // Adjust the width!!
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    // .section-btns {
+    //   flex-basis: 10%; // Adjust the width!!
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
 
-    }
+    // }
   }
 
   .crm-company-list .section-btns {
     @include flexCenter;
     margin-bottom: 5px;
+    gap: 20px;
+
     .btn {
       @include buttonStyle(
-            $height: 25px, $width: 100%, $padT:0px, $padB: 0px,
+            $height: 25px, $width: 45%, $padT:0px, $padB: 0px,
             $background-color: $primaryColor);
     }
 
