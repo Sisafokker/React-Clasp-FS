@@ -1,0 +1,25 @@
+.home-wrapper {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 18px;
+  color: black;
+}
+
+.custom-image {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 10px;
+}/*# sourceMappingURL=home.css.map */

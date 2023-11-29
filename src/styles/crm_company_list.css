@@ -1,0 +1,76 @@
+.crm-company-list .section-title {
+  margin-bottom: 8px;
+  margin-top: 4px;
+  text-align: center;
+  font-weight: 600;
+}
+.crm-company-list .company-filter {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 8px;
+}
+.crm-company-list .company-filter .filter {
+  flex-basis: 50%;
+}
+.crm-company-list .company-filter .filter label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: center;
+}
+.crm-company-list .company-filter .filter select {
+  width: 100%;
+  padding: 5px;
+  margin-top: 2px;
+  border: 1px solid #ddd;
+  width: 100%;
+}
+.crm-company-list .company-filter .filter select:focus {
+  outline: none;
+  border-color: black;
+}
+.crm-company-list .crm-company-list .section-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  gap: 20px;
+}
+.crm-company-list .crm-company-list .section-btns .btn {
+  background-color: black;
+  color: #f6f6f6;
+  padding: 0px 20px 0px 20px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  width: 45%;
+  height: 25px;
+  text-align: center;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+.crm-company-list .crm-company-list .section-btns .btn:hover {
+  background-color: #026F7E;
+}
+.crm-company-list .crm-company-list .section-btns .btn:disabled {
+  background-color: #ddd;
+  color: #424242;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.crm-company-list .filtered-companies .company-item {
+  cursor: pointer;
+  padding: 2px;
+  border-bottom: 1px solid #ccc;
+  transition: background-color 0.3s;
+}
+.crm-company-list .filtered-companies .company-item p {
+  color: black;
+  text-align: center;
+}
+.crm-company-list .filtered-companies .company-item:hover:not(.selected-company) {
+  background-color: #f0f0f0;
+}
+.crm-company-list .filtered-companies .company-item.selected-company {
+  background-color: #26bfd4;
+  color: #f6f6f6;
+}/*# sourceMappingURL=crm_company_list.css.map */

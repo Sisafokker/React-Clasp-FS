@@ -1192,21 +1192,18 @@ table tr:hover {
 }
 
 .crm-companies {
-  border: 1px solid red;
   flex-direction: column;
   flex-basis: 33.33%;
   display: flex;
 }
 
 .crm-orders {
-  border: 1px solid red;
   flex-direction: column;
   flex-basis: 66.67%;
   display: flex;
 }
 
 .crm-company-list, .crm-company-details, .crm-order-list, .crm-order-detail {
-  border: 1px solid #000;
   flex-grow: 1;
 }
 

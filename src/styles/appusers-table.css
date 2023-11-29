@@ -1,0 +1,42 @@
+table .horizontal-table {
+  width: 98%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+table .horizontal-table th, table .horizontal-table td {
+  font-size: 14px;
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+@media screen and (max-width: 768px) {
+  table .horizontal-table th, table .horizontal-table td {
+    font-size: 11.9px;
+  }
+}
+@media screen and (max-width: 600px) {
+  table .horizontal-table th, table .horizontal-table td {
+    font-size: 10.5px;
+  }
+}
+table .horizontal-table th {
+  color: #f6f6f6;
+  font-weight: none;
+}
+table th.sortable {
+  cursor: pointer;
+}
+table th {
+  background-color: #464646;
+  color: #f6f6f6;
+}
+table .sort-indicator {
+  font-size: 0.8em;
+  color: #f6f6f6;
+}
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+table tr:hover {
+  background-color: #f5f5f5;
+}/*# sourceMappingURL=appusers-table.css.map */

@@ -60,7 +60,7 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
                 setOrders(response.data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
-                setOrders([]); // Orders set to an empty array
+                setOrders([]); // empty
             }
         };
 
@@ -132,6 +132,7 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
                             <th>Status</th>
                             <th>Date</th>
                             <th>User</th>
+                            <th>Total Price (USD)</th>
                         </tr>
                     </thead>
                     <tbody>

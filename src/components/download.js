@@ -3,7 +3,7 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from 'axios';
 import { Context } from '../Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileExport, faCircleDown, faFile, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faFileExport, faFile, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 // styles
 import "../styles/crm_order_list.scss";
@@ -186,17 +186,17 @@ function Download({ props_ssPayload }) {
     };
 
     return (
-        <>
+        <>  
             <button className="btn downloader" onClick={handleCreateFileClick} title="Save to Google Spreadsheet" disabled={!disableDownload()}>
-                <FontAwesomeIcon icon={faFileExport} /> { (props_ssPayload && props_ssPayload.btnName) || "Save to Drive"} <FontAwesomeIcon />
+                <FontAwesomeIcon icon={faFileExport} /> { (props_ssPayload && props_ssPayload.btnName) || "Save to Drive" } 
             </button>
+                    
             {isDownloadComplete && (
-                <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="btn-fileReady" title={`Open ${props_ssPayload.ssName}`}>
-                    <FontAwesomeIcon icon={faFile} />
-                </a>
+                <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="btn-fileReady" title={`Open ${props_fileName}`}> <FontAwesomeIcon icon={faFile} /> </a>
             )}
-            {isProcessing && (
-                <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
+
+           {isProcessing && (
+                <FontAwesomeIcon icon={faSpinner} className="fa-spin"/>
             )}
         </>
     );

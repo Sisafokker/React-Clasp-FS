@@ -9,6 +9,8 @@ const CRMOrderDetail = ({ props_orderId }) => {
     const url = process.env.REACT_APP_Backend_URL;
     const [orderDetails, setOrderDetails] = useState(null);
     const [items, setItems] = useState({});
+    const [totalQuantity, setTotalQuantity] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     console.log("crm_order_detail.js 🚩props_orderId🚩",props_orderId)
     
@@ -16,7 +18,7 @@ const CRMOrderDetail = ({ props_orderId }) => {
         const fetchItems = async () => {
             try {
                 const response = await axios.get(`${url}/api/items`);
-                console.log("crm_order_detail.js 🔵Items Response:", response);
+                // console.log("crm_order_detail.js 🔵Items Response:", response);
                 const itemMap = {};
                 response.data.forEach(item => {
                     itemMap[item.itemId] = item.name; // Corrected from item.itemName to item.name
@@ -25,9 +27,23 @@ const CRMOrderDetail = ({ props_orderId }) => {
             } catch (error) {
                 console.error('Error fetching items:', error);
             }
+            console.log(totalQuantity + " || " +totalPrices)
         };
         fetchItems();
     }, []);
+
+    useEffect(() => { // totals calculations on orderChange
+        let quantitySum = 0;
+        let priceSum = 0;
+        if (orderDetails) {
+            orderDetails.forEach(detail => {
+                quantitySum += detail.quantity;
+                priceSum += detail.quantity * detail.unitPrice_usd;
+            });
+            setTotalQuantity(quantitySum);
+            setTotalPrice(priceSum);
+        }
+    }, [props_orderId]);
 
     useEffect(() => {
         const fetchOrderDetails = async () => {
@@ -73,6 +89,14 @@ const CRMOrderDetail = ({ props_orderId }) => {
                             </tr>
                         ))}
                     </tbody>
+                    <tfoot>
+                        <tr className='totals-row'>
+                            <td colSpan="2">Total:</td>
+                            <td>{totalQuantity}</td>
+                            <td></td> 
+                            <td>${totalPrice.toFixed(2)}</td>
+                        </tr>
+                        </tfoot>
                 </table>
             ) : ( <p>No order details available.</p> )}
         </div>
