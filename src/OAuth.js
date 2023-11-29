@@ -15,19 +15,19 @@ import "./styles/auth.scss";
 // Components
 import Nav from "./components/nav";
 import Auth_Form from "./components/auth_form";
+const SCOPES = "https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/spreadsheets";
 
-
-const SCOPES = "https://www.googleapis.com/auth/drive";
+export const AuthContext = React.createContext();
 
 function OAuth({ prop_renderRoutes }) {
-    const { user, setUser } = useContext(Context);
-    const [tokenClient, setTokenClient] = useState({});
+    const { user, setUser, setTokenClient } = useContext(Context);
+    //const [tokenClient, setTokenClient] = useState({});
     const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
     const navigate = useNavigate();
 
     // useEffect hook to handle component initialization and cleanup
     useEffect(() => {
-        console.log("CLIENT_ID",CLIENT_ID);
+        //console.log("CLIENT_ID",CLIENT_ID);
         const initializeGoogleSignIn = () => {
             if (window.google && window.google.accounts) {
                 // Google API is loaded, proceed with initialization
@@ -53,27 +53,6 @@ function OAuth({ prop_renderRoutes }) {
                     width: 250
                 });
 
-                setTokenClient(
-                    window.google.accounts.oauth2.initTokenClient({
-                        client_id: CLIENT_ID,
-                        scope: SCOPES,
-                        callback: tokenResponse => {
-                            if (tokenResponse && tokenResponse.access_token) {
-                                fetch("https://www.googleapis.com/drive/v3/files", {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                        Authorization: `Bearer ${tokenResponse.access_token}`
-                                    },
-                                    body: JSON.stringify({
-                                        name: "ReactAppFile",
-                                        mimeType: "text/plain"
-                                    })
-                                });
-                            }
-                        }
-                    })
-                );
             } else {
                 setTimeout(initializeGoogleSignIn, 100); // Wait and try initializeGoogleSignIn again
             }
@@ -81,10 +60,6 @@ function OAuth({ prop_renderRoutes }) {
 
         // Initialize the entire process
         initializeGoogleSignIn();
-
-        return () => {
-            // Clean-up logic when the component is unmounted
-        };
     }, []); // The empty dependency array ensures that this effect runs once after the initial render
     
     function decodeJwtResponse(token) {
@@ -144,8 +119,8 @@ function OAuth({ prop_renderRoutes }) {
         console.log("👍handleSignOut")
         localStorage.removeItem("local_user");  // Clear user local storage
         setUser({});                            // Clear user state
-        
-        
+        setTokenClient({});
+            
         //navigate("/home");
         // // Show SignIn Div and Prompt
         // const allLoginElement = document.getElementById("allLogin");
@@ -158,13 +133,6 @@ function OAuth({ prop_renderRoutes }) {
         //     window.google.accounts.id.prompt();
         // }
 
-
-    }
-
-    // Function to create a file in Google Drive when the user clicks the "Create File" button
-    function createDriveFile() {
-        console.log("👍createDriveFile")
-        tokenClient.requestAccessToken();
     }
 
     // Render the OAuth component
@@ -178,6 +146,7 @@ function OAuth({ prop_renderRoutes }) {
             )}
             {user && Object.keys(user).length !== 0 && (                
                 <div className="userNav-wrapper">
+                    {/* <input type="submit" onClick={createDriveFile} value="🔴Create File🔴" /> */}
                     <div className="user-wrapper">
                         <div className="user-details">
                             <img className="user-avatar" src={user.picture || "https://use.fontawesome.com/releases/v5.15.4/svgs/solid/user.svg"} alt="User" />
@@ -191,9 +160,6 @@ function OAuth({ prop_renderRoutes }) {
                         </div>
                     </div>
                     <Nav />
-                    {/*              <div className="others">
-                    <input className="create-file-button" type="submit" onClick={createDriveFile} value="Create File" />
-                </div> */}
                 </div>
             )}
         </div>

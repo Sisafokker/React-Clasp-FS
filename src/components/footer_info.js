@@ -2,13 +2,14 @@
 const Info = Object.freeze({
   project: {
     name: 'FS Bottega Final Project: Hoakeen',
-    version: { major: 1, minor: 2,  patch: 0, 
+    version: { major: 1, minor: 3,  patch: 0, 
       toString() { return `${this.major}.${this.minor}.${this.patch}`; }
     }
   },
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+    { version: "v1.3.0", title: "Create Google Sheet!", details: ["Able to create sheet and pass data into it", "Pending passing data dynamically through other components",],  },
     { version: "v1.2.1", title: "CSS Improvement", details: ["Mixin improves", "Solved Btn's issues", "Change Table styling",],  },
     { version: "v1.2.0", title: "Improved CSS & Return Class Structures", details: ["Visual Improvements", "ClassNames for most CRM Child components", "verticalTable working",],  },
     { version: "v1.1.2", title: "CRM ALL SHOWING AND INTERACTING", details: ["Starting Combining SQL data in different crm child components",],  },

@@ -16,7 +16,7 @@ import OAuth from "./OAuth";
 import Crm from "./components/crm";
 import Home from "./components/home";
 import Customers from "./components/customers";
-import POs from "./components/pos";
+import Download from "./components/download";
 import Inventory from "./components/inventory";
 import AppUsers from "./components/appusers";
 import Tutorials from "./components/tutorials";
@@ -121,7 +121,7 @@ function App() {
           <Route path="crm" element={<Crm />} />
           <Route path="customers" element={<Customers />} />
           <Route path="home" element={<Home />} />
-          <Route path="pos" element={<POs />} />
+          <Route path="download" element={<Download />} />
           <Route path="inventory" element={<Inventory />} />
           <Route path="appusers" element={<AppUsers />} />
           <Route path="tutorials" element={<Tutorials />} />

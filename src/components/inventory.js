@@ -13,7 +13,7 @@ function Inventory() {
     return <div className='container'>
         <h1>Using 'Context' for Global Variables</h1>
         <p>"User:" {user.name}</p>
-        <button onClick={clickHandler_2}>Change User</button>
+        {/* <button onClick={clickHandler_2}>Change User</button> */}
         <div>
             <h1>Inventory...</h1>
             <h3>Ideas:</h3>
