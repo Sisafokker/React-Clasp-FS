@@ -2,13 +2,14 @@
 const Info = Object.freeze({
   project: {
     name: 'FS Bottega Final Project: Hoakeen',
-    version: { major: 1, minor: 4,  patch: 0, 
+    version: { major: 1, minor: 5,  patch: 0, 
       toString() { return `${this.major}.${this.minor}.${this.patch}`; }
     }
   },
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+    { version: "v1.5.0", title: "Download Refactoring & Improved functionality", details: ["Refactoring props", "Allowing exports of multiple sheets per file", "Improved Icons",],  },
     { version: "v1.4.0", title: "Improving Google Download", details: ["Downloading Orders List", "Pending Applying filter to orders & download",],  },
     { version: "v1.3.0", title: "Create Google Sheet!", details: ["Able to create sheet and pass data into it", "Pending passing data dynamically through other components",],  },
     { version: "v1.2.1", title: "CSS Improvement", details: ["Mixin improves", "Solved Btn's issues", "Change Table styling",],  },

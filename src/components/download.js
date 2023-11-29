@@ -11,18 +11,14 @@ import "../styles/crm_order_list.scss";
 const SCOPES = "https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/spreadsheets";
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 
-function Download({ prop_btnName, props_array, props_fileName, props_sheetName }) {
+function Download({ props_ssPayload }) {
     const { user } = useContext(Context);
     const [fileUrl, setFileUrl] = useState('');
     const [isDownloadComplete, setIsDownloadComplete] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
 
-    var prop_btnName = prop_btnName || "Save to Drive"
-    //const [tokenClient, setTokenClient] = useState({});
-    //const array = [["Name", "LastName", "Age"], ["Joa", "Pag", "45"]];
-
-    function disableDownload() {
-        return isGoogleSignedIn() && !isProcessing // && hasDataCondition && otherConditions
+    const disableDownload = () => {
+        return isGoogleSignedIn() && !isProcessing;
     }
 
     const isGoogleSignedIn = () => {
@@ -30,10 +26,8 @@ function Download({ prop_btnName, props_array, props_fileName, props_sheetName }
     };
 
     useEffect(() => {
-        console.log("Download User", user)
-        console.log("User.Iss", user.iss)
+        console.log("Download User", user);
     }, []);
-
 
     const createDriveFile = async () => {
         setIsProcessing(true);
@@ -45,9 +39,8 @@ function Download({ prop_btnName, props_array, props_fileName, props_sheetName }
                     console.log("Token response: ", tokenResponse);
                     if (tokenResponse && tokenResponse.access_token) {
                         try {
-                            console.log("POS.JS: Creating the file...");
                             const fileResponse = await axios.post("https://www.googleapis.com/drive/v3/files", {
-                                name: props_fileName,
+                                name: props_ssPayload.ssName,
                                 mimeType: "application/vnd.google-apps.spreadsheet"
                             }, {
                                 headers: {
@@ -55,44 +48,46 @@ function Download({ prop_btnName, props_array, props_fileName, props_sheetName }
                                 }
                             });
 
-                            console.log("POS.JS: File response:", fileResponse);
+                            console.log("File response:", fileResponse);
                             resolve({ accessToken: tokenResponse.access_token, fileId: fileResponse.data.id, fileUrl: `https://docs.google.com/spreadsheets/d/${fileResponse.data.id}` });
                         } catch (error) {
-                            console.error("POS.JS: Error in creating file ❌:", error);
+                            console.error("Error in creating file:", error);
                             reject(error);
                         }
                     } else {
-                        setIsProcessing(false); // ⛔⛔
-                        setIsDownloadComplete(true); // ⛔⛔
+                        setIsProcessing(false);
+                        setIsDownloadComplete(false);
                         reject('No access token received');
                     }
                 }
             });
 
-            initTokenClient.requestAccessToken(); // token request
+            initTokenClient.requestAccessToken();
         });
     };
 
-
     const handleCreateFileClick = async () => {
         try {
-
-            let response = await createDriveFile(); // Step 1: Create the file and get its ID
-            console.log("POS.JS: CreateDriveFile response: ", response);
-
+            let response = await createDriveFile();
             if (response) {
                 let fileId = response.fileId;
                 let fileUrl = response.fileUrl;
-                // console.log("File created, ID:", fileId);
-                // console.log("File created, URL:", fileUrl);
                 setFileUrl(fileUrl);
-
                 const accessToken = response.accessToken;
 
-                // Step 2: Update the created spreadsheet with the array data
-                await updateSpreadsheet(accessToken, fileId, props_array, props_fileName, props_sheetName);
-            } else {
-                console.error("No response from createDriveFile");
+                // Add additional WS (if necesarry)
+                for (let n = 1; n < props_ssPayload.data.length; n++) { 
+                    await addNewSheet(accessToken, fileId, props_ssPayload.data[n].swName);
+                }
+
+                // Update each WS with its data
+                for (let i = 0; i < props_ssPayload.data.length; i++) { 
+                    let data = props_ssPayload.data[i];
+                    let sheetNum = i;
+                    await updateSpreadsheet(accessToken, fileId, sheetNum, data.values, data.swName);
+                }
+                setIsProcessing(false);
+                setIsDownloadComplete(true);
             }
         } catch (error) {
             console.error("Error in file creation or updating:", error);
@@ -109,19 +104,19 @@ function Download({ prop_btnName, props_array, props_fileName, props_sheetName }
         return colLetter;
     };
 
-
-    const updateSpreadsheet = async (accessToken, fileId, values, fileName, sheetName) => {
-        // Calculate the range based on the values array
+    const updateSpreadsheet = async (accessToken, fileId, sheetNum, values, sheetName) => {
         const rows = values.length;
-        const qty_columns = values[0].length; // Assuming all rows have the same number of columns
+        const qty_columns = values[0].length;
         const endColumnLetter = columnToLetter(qty_columns);
         const range = `A1:${endColumnLetter}${rows}`;
-        console.log(range)
 
-        await update_ws_name(accessToken, fileId, sheetName);
+        if (sheetNum == 0) {
+            await update_ws_name(accessToken, fileId, sheetNum, sheetName);
+        }
+        
 
         try {
-            const response = await axios.put(`https://sheets.googleapis.com/v4/spreadsheets/${fileId}/values/${range}`, {
+            await axios.put(`https://sheets.googleapis.com/v4/spreadsheets/${fileId}/values/${sheetName}!${range}`, {
                 values: values,
             }, {
                 headers: {
@@ -132,18 +127,34 @@ function Download({ prop_btnName, props_array, props_fileName, props_sheetName }
                     valueInputOption: 'RAW',
                 },
             });
-
-            console.log('SS updated:', response.data);
-            setIsProcessing(false);
-            setIsDownloadComplete(true);
         } catch (error) {
-            console.error('SS Error updating:', error);
+            console.error('Error updating spreadsheet:', error);
         }
     };
 
+    const addNewSheet = async (accessToken, fileId, sheetName) => {
+        try {
+            await axios.post(`https://sheets.googleapis.com/v4/spreadsheets/${fileId}:batchUpdate`, {
+                requests: [{
+                    addSheet: {
+                        properties: {
+                            title: sheetName,
+                        },
+                    },
+                }],
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            console.log(`New sheet added: ${sheetName}`);
+        } catch (error) {
+            console.error(`Error adding new sheet (${sheetName}):`, error);
+        }
+    };
 
-    // Helper: change WSName
-    const update_ws_name = async (accessToken, fileId, sheetName) => {
+    const update_ws_name = async (accessToken, fileId, sheetNum, sheetName) => {
         try {
             const response = await axios.get(`https://sheets.googleapis.com/v4/spreadsheets/${fileId}`, {
                 headers: {
@@ -151,8 +162,7 @@ function Download({ prop_btnName, props_array, props_fileName, props_sheetName }
                 },
             });
 
-            // Sheet[0]
-            const sheetId = response.data.sheets[0].properties.sheetId;
+            const sheetId = response.data.sheets[sheetNum].properties.sheetId;
 
             await axios.post(`https://sheets.googleapis.com/v4/spreadsheets/${fileId}:batchUpdate`, {
                 requests: [{
@@ -170,30 +180,26 @@ function Download({ prop_btnName, props_array, props_fileName, props_sheetName }
                     'Content-Type': 'application/json',
                 },
             });
-            console.log('WS name updated to:', sheetName);
         } catch (error) {
-            console.error('Error updating WS name:', error);
+            console.error('Error updating worksheet name:', error);
         }
     };
-
-
 
     return (
         <>
             <button className="btn downloader" onClick={handleCreateFileClick} title="Save to Google Spreadsheet" disabled={!disableDownload()}>
-                <FontAwesomeIcon icon={faFileExport} /> {prop_btnName} <FontAwesomeIcon icon={faCircleDown} />
+                <FontAwesomeIcon icon={faFileExport} /> { (props_ssPayload && props_ssPayload.btnName) || "Save to Drive"} <FontAwesomeIcon />
             </button>
             {isDownloadComplete && (
-                <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="btn-fileReady" title={`Open ${props_fileName}`}>
-                <FontAwesomeIcon icon={faFile} />
+                <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="btn-fileReady" title={`Open ${props_ssPayload.ssName}`}>
+                    <FontAwesomeIcon icon={faFile} />
                 </a>
             )}
             {isProcessing && (
-                <FontAwesomeIcon icon={faSpinner} className="fa-spin"/>
+                <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
             )}
         </>
     );
 }
 
 export default Download;
-

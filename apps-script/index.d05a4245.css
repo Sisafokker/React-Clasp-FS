@@ -232,6 +232,10 @@ select {
   display: grid;
 }
 
+.svg-inline--fa {
+  margin-right: 5px;
+}
+
 .auth-wrapper {
   width: 100%;
 }

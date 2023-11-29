@@ -88,6 +88,15 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
     if (ordersForDownload && ordersForDownload.length > 0)  { ordersForDownload.unshift(tableHeaders); }
 
     //if (!orders) return <div>Select an order to see details</div>;
+    const payload = { 
+        btnName: "Save Orders", 
+        ssName: downloadName, 
+        data: [ 
+            { swName: "Orders_original", values: ordersForDownload },
+            { swName: "Orders_second", values: ordersForDownload },
+            { swName: "Orders_third", values: ordersForDownload }, 
+            ], 
+        }
 
     return (
         <div className="crm-order-list">
@@ -112,7 +121,7 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
                 <>
                 <div className='section-btns'>
                     <button className='btn' title="Show All Orders" onClick={resetFilters} >Show All Orders</button>
-                    <Download prop_btnName="Save Orders" props_array={ordersForDownload} props_fileName={downloadName} props_sheetName="Orders"/>
+                    <Download props_ssPayload={payload}/>
                     {/* <button className='btn' onClick={props_resetCompanyList}>Show All</button>  */}
                 </div>
                 <div className='filtered-orders'>
