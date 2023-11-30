@@ -101,16 +101,18 @@ const CRM = () => {
                     )}
                 </div>
                 <div className="crm-orders">
-                    {selectedCompany && (
+                    
                         <div className="crm-order-list">
                             <CRMOrderList props_companyId={selectedCompany} props_companyDetails={selectedCompanyDetails} props_OrderSelect={handleOrderSelect} />
                         </div>
-                    )}
+                    
                     {selectedOrder && (
                     <div className="crm-order-detail">
                         <CRMOrderDetail props_orderId={selectedOrder} />
                     </div>
-                )}
+                    )}
+
+
                 </div>
             </div>
         </div>

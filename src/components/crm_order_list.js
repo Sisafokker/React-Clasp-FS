@@ -18,8 +18,11 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
 
     // For Filters
     const [selectedStatus, setSelectedStatus] = useState('All');
-    const [selectedUserEmail, setSelectedUserEmail] = useState('All');
+    const [selectedUserFilter, setSelectedUserFilter] = useState('All');
     const [userEmail, setUserEmail] = useState([]);
+
+    // For totals
+    const [orderTotals, setOrderTotals] = useState({});
 
     let downloadName, companyDetails
     if (props_companyDetails) {
@@ -29,49 +32,95 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
     }
 
     useEffect(() => {
-        // Unique OrderUserEmails for Dropdown options
-        const uniqueUserEmails = ['All', ...new Set(orders.map(order => order.userId))];
-        console.log("uniqueUserEmails: ", uniqueUserEmails)
-        setUserEmail(uniqueUserEmails);
+        console.log("🟡🟡crm_order_list.js props_companyId: ", props_companyId)
+        const fetchOrders = async () => {
+            try {
+                const response = await axios.get(`${url}/api/orders/company/${props_companyId}`);
+                setOrders(response.data);
+            } catch (error) {
+                console.error('🟡Error fetching orders:', error);
+                setOrders([]);
+            }
+        };
+    
+        if (props_companyId) {
+            fetchOrders();
+        } else {
+            setOrders([]);
+        }
     }, [props_companyId]);
-
+    
     useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get(`${url}/api/users`);
-                const userMap = {};
-                response.data.forEach(user => {
-                    userMap[user.id] = user.email; // Store emails by userId
-                });
+                const userMap = response.data.reduce((map, user) => {
+                    map[user.id] = user.email;
+                    return map;
+                }, {});
                 setUsers(userMap);
+                console.log("🟡 ALL SQL USERS: ", userMap)
             } catch (error) {
-                console.error('Error fetching users:', error);
+                console.error('🟡Error fetching users:', error);
             }
         };
+    
         fetchUsers();
     }, []);
-
+    
     useEffect(() => {
-        console.log("crm_order_list.js props_companyId: ", props_companyId)
-        const fetchOrders = async () => {
-            try {
-                const response = await axios.get(`${url}/api/orders/company/${props_companyId}`);
-                console.log("crm_order_list.js OrderList: ", response.data)
-                setOrders(response.data);
-            } catch (error) {
-                console.error('Error fetching orders:', error);
-                setOrders([]); // empty
+        const userEmailObjects = orders.reduce((acc, order) => {
+            if (!acc.some(user => user.id === order.userId)) {
+                acc.push({ id: order.userId, email: users[order.userId] });
             }
-        };
+            return acc;
+        }, [{ id: 'All', email: 'All' }]);
+        setUserEmail(userEmailObjects);
+        console.log("🟡 userEmailObjects: ",userEmailObjects )
 
-        if (props_companyId) {
-            fetchOrders();
+
+        // Fetch and calculate totals for each order
+        const fetchAndCalculateTotals = async () => {
+            let newOrderTotals = {};
+            for (const order of orders) {
+                const orderDetails = await fetchOrderDetails(order.orderId);
+                let total = orderDetails.reduce((acc, detail) => acc + detail.quantity * detail.unitPrice_usd, 0);
+                newOrderTotals[order.orderId] = total.toFixed(2);
+            }
+            setOrderTotals(newOrderTotals);
+        };
+    
+        if (orders.length > 0) {
+            fetchAndCalculateTotals();
         }
-    }, [props_companyId]);
+    }, [orders]);
+    
+   
+    
+    // Helper function to fetch order details
+    const fetchOrderDetails = async (orderId) => {
+        try {
+            const response = await axios.get(`${url}/api/intOrderItem/${orderId}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching order details:', error);
+            return [];
+        }
+    };
+
+    // Create a reverse map from emails to userIds
+    const emailToUserId = Object.fromEntries(Object.entries(users).map(([id, email]) => [email, id]));
+
+    // Filter by multiple conditions
+    const filteredOrders = orders.filter(order => {
+        let statusMatch = selectedStatus === 'All' || order.status === selectedStatus;
+        let userMatch = selectedUserFilter === 'All' || order.userId === userEmail.find(u => u.email === selectedUserFilter)?.id;
+        return statusMatch && userMatch;
+    });
 
     const resetFilters = () => {
         setSelectedStatus('All');
-        setSelectedUserEmail('All');
+        setSelectedUserFilter('All');
     };
 
     const handleOrderClick = orderId => {
@@ -79,7 +128,7 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
     };
 
     const tableHeaders = ["OrderId", "Order Status", "Order Creation", "Order Creator"];
-    const ordersForDownload = orders.map(order => [
+    const ordersForDownload = filteredOrders.map(order => [
         order.orderId,
         order.status,
         new Date(order.orderDate).toLocaleDateString(),
@@ -89,12 +138,13 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
 
     //if (!orders) return <div>Select an order to see details</div>;
     const payload = { 
-        btnName: "Save Orders", 
+        btnName: "Download Orders",
+        btnTitle: "Download VISIBLE Orders to Drive",
         ssName: downloadName, 
         data: [ 
-            { swName: "Orders_original", values: ordersForDownload },
-            { swName: "Orders_second", values: ordersForDownload },
-            { swName: "Orders_third", values: ordersForDownload }, 
+            { swName: "Orders", values: ordersForDownload },
+/*             { swName: "Orders_second", values: ordersForDownload },
+            { swName: "Orders_third", values: ordersForDownload },  */
             ], 
         }
 
@@ -105,24 +155,28 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
                 <div className='filter'>
                     <label><FontAwesomeIcon icon={faFilter}/> Status </label>
                     <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)} disabled={!orders || orders.length === 0}>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
+                        <option value="valid">Valid</option>
+                        <option value="invalid">Invalid</option>
                         <option value="All">All</option>
                     </select>
                 </div>
                 <div className='filter'>
                     <label><FontAwesomeIcon icon={faFilter}/>User</label>
-                    <select value={selectedUserEmail} onChange={(e) => setSelectedUserEmail(e.target.value)} disabled={!orders || orders.length === 0}>
-                        {userEmail.map(email => <option key={email} value={email}>{email}</option>)}
+                    <select value={selectedUserFilter} onChange={(e) => setSelectedUserFilter(e.target.value)} disabled={!orders || orders.length === 0}>
+                    {userEmail.map(user => <option key={user.id} value={user.email}>{user.email}</option>)}
                     </select>
                 </div>
             </div>
             {orders && orders.length > 0 ? (
                 <>
                 <div className='section-btns'>
-                    <button className='btn' title="Show All Orders" onClick={resetFilters} >Show All Orders</button>
+                    <button className='btn' title="Reset all filters"
+                        onClick={resetFilters} disabled={selectedStatus === "All" && selectedUserFilter === "All"}>
+                        <FontAwesomeIcon icon={faFilter}/> Reset Filters 
+                    </button>
+   {/*                  <button className='btn' title="Show All Orders" disabled={selectedStatus === "All" && selectedUserFilter === "All"}
+                        onClick={resetFilters} >All Orders</button> */}
                     <Download props_ssPayload={payload}/>
-                    {/* <button className='btn' onClick={props_resetCompanyList}>Show All</button>  */}
                 </div>
                 <div className='filtered-orders'>
                 <table className='horizontal-table'>
@@ -136,12 +190,13 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
                         </tr>
                     </thead>
                     <tbody>
-                        {orders.map(order => (
+                        {filteredOrders.map(order => (
                             <tr key={order.orderId} className="order-item" onClick={() => handleOrderClick(order.orderId)}>
                                 <td>{order.orderId}</td>
                                 <td>{order.status}</td>
                                 <td>{new Date(order.orderDate).toLocaleDateString()}</td>
                                 <td>{users[order.userId]}</td>
+                                <td>${orderTotals[order.orderId]}</td>
                             </tr>
                         ))}
                     </tbody>

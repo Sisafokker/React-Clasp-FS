@@ -45,6 +45,31 @@
           @include buttonStyle(
                 $height: 25px, $width: 25%, $padT:0px, $padB: 0px,
                 $background-color: $primaryColor);
+
+        }
+
+        .downloader {
+            width: 20%;
+            color: $dark-teal;
+            background-color: white;
+            border: 1px solid black; // This adds a black border
+            transition: color 0.2s ease;
+        
+            &:hover { 
+                color: $warning;
+                background-color: white;
+            }
+        }
+
+        a {
+            color: $dark-teal;
+            background-color: none;
+            @include responsiveFontSize(16px);
+        }
+
+        span {
+            color: $dark-teal;
+            @include responsiveFontSize(16px);
         }
     
       }

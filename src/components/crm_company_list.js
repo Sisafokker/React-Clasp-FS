@@ -15,13 +15,21 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
     const [selectedIndustry, setSelectedIndustry] = useState('All');
     const [selectedCompany, setSelectedCompany] = useState(null);
     const [industries, setIndustries] = useState([]);
+    const [disableFilters, setDisableFilters] = useState(null);
 
     useEffect(() => {
         // Unique Comp.Industry for Dropdown options
-        const uniqueIndustries = ['All', ...new Set(props_companies.map(company => company.industry))];
+        // const uniqueIndustries = ['All', ...new Set(props_companies.map(company => company.industry))];
+        // console.log("uniqueIndustries: ", uniqueIndustries)
+        // setIndustries(uniqueIndustries);
+        uniqueInd()
+    }, [props_companies, props_companySelect]);
+
+    function uniqueInd() {
+        const uniqueIndustries = ['All', ...new Set(filteredCompanies.map(company => company.industry))];
         console.log("uniqueIndustries: ", uniqueIndustries)
         setIndustries(uniqueIndustries);
-    }, [props_companies, props_companySelect]);
+    }
 
     // Filter by multiple conditions
     const filteredCompanies = props_companies.filter(company => {
@@ -29,6 +37,16 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
         let industryMatch = selectedIndustry === 'All' || company.industry === selectedIndustry;
         return statusMatch && industryMatch;
     });
+
+
+    useEffect(() => { 
+        if (!selectedCompany) {
+            resetFilters()
+            setDisableFilters(false)
+        } else {
+            setDisableFilters(true)
+        }
+     }, [selectedCompany]);
 
     const resetFilters = () => {
         setSelectedStatus('All');
@@ -54,7 +72,8 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
             <div className='company-filter'>
                 <div className='filter'>
                     <label><FontAwesomeIcon icon={faFilter}/> Status </label>
-                    <select value={selectedStatus} onChange={(e) => { setSelectedStatus(e.target.value) , props_resetCompanyList()}}>
+                    <select value={selectedStatus} disabled={disableFilters} 
+                        onChange={(e) => { setSelectedStatus(e.target.value) , props_resetCompanyList()}}>
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
                         <option value="All">All</option>
@@ -62,19 +81,20 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                 </div>
                 <div className='filter'>
                     <label><FontAwesomeIcon icon={faFilter}/>Industry</label>
-                    <select value={selectedIndustry} onChange={(e) => {setSelectedIndustry(e.target.value), props_resetCompanyList()}}>
+                    <select value={selectedIndustry} disabled={disableFilters} 
+                        onChange={(e) => {setSelectedIndustry(e.target.value), props_resetCompanyList()}}>
                         {industries.map(industry => <option key={industry} value={industry}>{industry}</option>)}
                     </select>
                 </div>
             </div>
             <div className='section-btns'>
                     <button className='btn' title="Reset all filters"
-                        onClick={resetFilters} disabled={selectedStatus === "All" && selectedIndustry === "All"}>
+                        onClick={resetFilters} disabled={(selectedStatus === "All" && selectedIndustry === "All") || selectedCompany}>
                         <FontAwesomeIcon icon={faFilter}/> Reset Filters 
                         </button>
-                    <button className='btn' title="Expand Customer's list"
-                        onClick={() => { props_resetCompanyList(); setSelectedCompany(null); }} disabled={!selectedCompany} >
-                        Show All Customers
+                    <button className='btn' title="Expand Customer's list" disabled={ !selectedCompany }
+                        onClick={() => { props_resetCompanyList(); setSelectedCompany(null); }} >
+                        All Customers
                     </button>
             </div>
             <div className='filtered-companies'>

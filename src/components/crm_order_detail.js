@@ -12,54 +12,59 @@ const CRMOrderDetail = ({ props_orderId }) => {
     const [totalQuantity, setTotalQuantity] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
 
-    console.log("crm_order_detail.js 🚩props_orderId🚩",props_orderId)
+    console.log("crm_order_detail.js 🟢props_orderId🟢",props_orderId)
     
     useEffect(() => {
         const fetchItems = async () => {
             try {
                 const response = await axios.get(`${url}/api/items`);
-                // console.log("crm_order_detail.js 🔵Items Response:", response);
+                // console.log("crm_order_detail.js 🟢Items Response:", response);
                 const itemMap = {};
                 response.data.forEach(item => {
                     itemMap[item.itemId] = item.name; // Corrected from item.itemName to item.name
                 });
                 setItems(itemMap);
             } catch (error) {
-                console.error('Error fetching items:', error);
+                console.error('🟢Error fetching items:', error);
             }
-            console.log(totalQuantity + " || " +totalPrices)
+            
+            if (totalQuantity && totalPrice) {
+                console.log(totalQuantity + " || " + totalPrice)
+            } else {
+                console.log(totalQuantity)
+            }
+            
         };
         fetchItems();
     }, []);
-
-    useEffect(() => { // totals calculations on orderChange
-        let quantitySum = 0;
-        let priceSum = 0;
-        if (orderDetails) {
-            orderDetails.forEach(detail => {
-                quantitySum += detail.quantity;
-                priceSum += detail.quantity * detail.unitPrice_usd;
-            });
-            setTotalQuantity(quantitySum);
-            setTotalPrice(priceSum);
-        }
-    }, [props_orderId]);
 
     useEffect(() => {
         const fetchOrderDetails = async () => {
             try {
                 const response = await axios.get(`${url}/api/intOrderItem/${props_orderId}`);
-                setOrderDetails(response.data);
-                console.log("crm_order_detail.js 🔴inOrderItems🔴", response.data)
+                const details = response.data;
+                console.log("crm_order_detail.js 🟢inOrderItems🟢", details);
+    
+                let quantitySum = 0;
+                let priceSum = 0;
+                details.forEach(detail => {
+                    quantitySum += detail.quantity;
+                    priceSum += detail.quantity * detail.unitPrice_usd;
+                });
+    
+                setOrderDetails(details);
+                setTotalQuantity(quantitySum);
+                setTotalPrice(priceSum);
             } catch (error) {
-                console.error('Error fetching order details:', error);
+                console.error('🟢Error fetching order details:', error);
             }
         };
-
+    
         if (props_orderId) { 
             fetchOrderDetails(); 
         }
     }, [props_orderId]);
+
 
     if (!orderDetails) return <div>Select an order to see details</div>;
 

@@ -927,6 +927,54 @@ table tr:hover {
   background-color: #ddd;
 }
 
+.crm-order-list .crm-order-list .section-btns .downloader {
+  color: #026f7e;
+  background-color: #fff;
+  border: 1px solid #000;
+  width: 20%;
+  transition: color .2s;
+}
+
+.crm-order-list .crm-order-list .section-btns .downloader:hover {
+  color: #ff3030;
+  background-color: #fff;
+}
+
+.crm-order-list .crm-order-list .section-btns a {
+  color: #026f7e;
+  background-color: none;
+  font-size: 16px;
+}
+
+@media screen and (width <= 768px) {
+  .crm-order-list .crm-order-list .section-btns a {
+    font-size: 13.6px;
+  }
+}
+
+@media screen and (width <= 600px) {
+  .crm-order-list .crm-order-list .section-btns a {
+    font-size: 12px;
+  }
+}
+
+.crm-order-list .crm-order-list .section-btns span {
+  color: #026f7e;
+  font-size: 16px;
+}
+
+@media screen and (width <= 768px) {
+  .crm-order-list .crm-order-list .section-btns span {
+    font-size: 13.6px;
+  }
+}
+
+@media screen and (width <= 600px) {
+  .crm-order-list .crm-order-list .section-btns span {
+    font-size: 12px;
+  }
+}
+
 .crm-order-list .filtered-orders .order-item {
   cursor: pointer;
   border-bottom: 1px solid #ccc;
@@ -1195,16 +1243,25 @@ table tr:hover {
   flex-direction: column;
   flex-basis: 33.33%;
   display: flex;
+  box-shadow: 0 0 15px #00000019;
 }
 
 .crm-orders {
   flex-direction: column;
   flex-basis: 66.67%;
   display: flex;
+  box-shadow: 0 0 15px #00000019;
 }
 
 .crm-company-list, .crm-company-details, .crm-order-list, .crm-order-detail {
   flex-grow: 1;
+  box-shadow: 0 0 15px #00000019;
+}
+
+.custom-image img {
+  width: 60%;
+  max-width: 600px;
+  margin-top: 10px;
 }
 
 /*# sourceMappingURL=index.d05a4245.css.map */

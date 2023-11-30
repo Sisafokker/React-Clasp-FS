@@ -32,6 +32,7 @@
     
     
     //border: 1px solid red;
+    box-shadow: 0 0 15px $boxshadow;
   }
   
   .crm-orders {
@@ -42,6 +43,7 @@
     
     
     //border: 1px solid red;
+    box-shadow: 0 0 15px $boxshadow;
   }
   
   .crm-company-list, .crm-company-details {
@@ -49,16 +51,21 @@
     
     
     //border: 1px solid black;
+    box-shadow: 0 0 15px $boxshadow;
   }
 
   .crm-order-list, .crm-order-detail {
     flex-grow: 1; // Expand so each to take half of available vertical space within crm-companies
-  
+    box-shadow: 0 0 15px $boxshadow;
   
     //border: 1px solid black;
   }
 
-
+  .custom-image img{
+    width: 60%;
+    max-width: 600px;
+    margin-top: 10px;
+}
 
   
 

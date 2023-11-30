@@ -187,16 +187,16 @@ function Download({ props_ssPayload }) {
 
     return (
         <>  
-            <button className="btn downloader" onClick={handleCreateFileClick} title="Save to Google Spreadsheet" disabled={!disableDownload()}>
+            <button className="btn downloader" onClick={handleCreateFileClick} title={props_ssPayload.btnTitle} disabled={!disableDownload()}>
                 <FontAwesomeIcon icon={faFileExport} /> { (props_ssPayload && props_ssPayload.btnName) || "Save to Drive" } 
             </button>
                     
             {isDownloadComplete && (
-                <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="btn-fileReady" title={`Open ${props_fileName}`}> <FontAwesomeIcon icon={faFile} /> </a>
+                <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="btn-fileReady" title={`Open ${props_ssPayload.ssName}`}> <FontAwesomeIcon icon={faFile} /> </a>
             )}
 
            {isProcessing && (
-                <FontAwesomeIcon icon={faSpinner} className="fa-spin"/>
+                <span> <FontAwesomeIcon icon={faSpinner} className="fa-spin"/> </span>
             )}
         </>
     );
