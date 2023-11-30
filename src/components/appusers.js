@@ -1,32 +1,35 @@
-// appusers.js
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+// src/components/appusers.js
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faTrash, faSort } from '@fortawesome/free-solid-svg-icons';
 import AppusersForm from "./appusersform";
+
+// Hooks
+import { useSortableData } from '../actions/sortingTables';
 
 // styles
 import "../styles/appusers-table.scss";
-
-
 // Compiled CSS Styles files
 // import "../../apps-script/styles_compiled/appusers-table.css";
-
 
 function Appusers() {
     const [appUsers, setAppUsers] = useState([]);
     const [userAction, setUserAction] = useState({ user: null, action: "Add" });
-    const [sortConfig, setSortConfig] = useState({ key: 'lastName', direction: 'ascending' });  // keep track of current sorting
     const [companies, setCompanies] = useState([]);
     const [intCompUser, setIntCompUser] = useState([]);
     const url = process.env.REACT_APP_Backend_URL
 
+    const { items: sortedAppUsers, requestSort, sortConfig } = useSortableData(appUsers, { key: 'lastName', direction: 'ascending' }); // Hooks Passing the data array for sorting. 
+
+    // initial mount
     useEffect(() => {
         fetchAppUsers();
         fetchCompanies();
         fetchIntCompanyUser();
-    }, []); // Fetch data on initial component mount
+    }, []); 
     
+
     // Fetches all users
     const fetchAppUsers = useCallback(() => {
         axios.get(`${url}/api/users`)
@@ -36,6 +39,7 @@ function Appusers() {
       .catch(console.error);
     }, [url]);
 
+    
     // Fetches all companies
     const fetchCompanies = useCallback(() => {
         axios.get(`${url}/api/companies`)
@@ -45,14 +49,16 @@ function Appusers() {
         .catch(console.error);
     }, [url]);
 
-    // Fetches all company-user relationships
+    
+    // Fetches all company-user intermediary relations
     const fetchIntCompanyUser = useCallback(() => {
         axios.get(`${url}/api/intCompanyUser`)
         .then(response => {
             setIntCompUser(response.data);
         })
         .catch(console.error);
-    }, [url]);
+    }, [url]);   
+
 
      // After a new user is added / edited / removed
      const handleUserAction = useCallback(() => {
@@ -64,57 +70,21 @@ function Appusers() {
         setUserAction({ user, action });
     };
 
-    // Sorting
-    // const sortedAppUsers = useMemo(() => {
-    //     // useMemo hook: used to version of sorted appUsers array, recalculated only when appUsers changes. Better for performance.
-    //     return [...appUsers].sort((a, b) => a.lastName.localeCompare(b.lastName));
-    // }, [appUsers]);
-
-    const onSort = (key) => {
-        let direction = 'ascending';
-        if (sortConfig.key === key && sortConfig.direction === 'ascending') {
-            direction = 'descending';
-        }
-        setSortConfig({ key, direction });
-    };
-
-    const getSortDirectionText = (key) => {
-        if (sortConfig.key === key) {
-            return sortConfig.direction === 'ascending' ? ' ⬇⬇' : ' ⬆⬆';
-        }
-        return '';
-    };
-
-    const sortedAppUsers = useMemo(() => {
-        let sortableUsers = [...appUsers];
-        if (sortConfig !== null) {
-            sortableUsers.sort((a, b) => {
-                if (a[sortConfig.key] < b[sortConfig.key]) {
-                    return sortConfig.direction === 'ascending' ? -1 : 1;
-                }
-                if (a[sortConfig.key] > b[sortConfig.key]) {
-                    return sortConfig.direction === 'ascending' ? 1 : -1;
-                }
-                return 0;
-            });
-        }
-        return sortableUsers;
-    }, [appUsers, sortConfig]);
-
-        const getCompanyNamesForUser = (userId) => {
+    const getCompanyNamesForUser = (userId) => {
+        
         // Find all company-user relationships for this user
         const userCompanies = intCompUser.filter(rowObj => rowObj.userId === userId);
-      
+        
         // Map the company IDs to company names
         const companyNames = userCompanies.map(rowObj => {
-          const company = companies.find(company => company.companyId === rowObj.companyId);
-          return company ? company.companyName : '';
+            const company = companies.find(company => company.companyId === rowObj.companyId);
+            return company ? company.companyName : '';
         });
         
         const result = companyNames.join(', ');
         console.log("RES: ", result)
         return result;
-      };
+    };
       
 
     const renderTableRows = sortedAppUsers.map(u => (
@@ -151,7 +121,7 @@ function Appusers() {
                 </ul>
             </div>
         </div>
-        <div>
+        <div className='users-wrapper'>
             <AppusersForm 
                 prop_handleUserAction={handleUserAction} 
                 prop_userAction={userAction} 
@@ -162,14 +132,11 @@ function Appusers() {
             <table className='horizontal-table'>
                 <thead>
                     <tr>
-                        <th className="sortable" title="Click to Sort" onClick={() => onSort('lastName')}>Last Name <span className="sort-indicator">{getSortDirectionText('lastName')}</span> </th>
-                        <th className="sortable" title="Click to Sort" onClick={() => onSort('firstName')}>First Name <span className="sort-indicator">{getSortDirectionText('firstName')}</span> </th>
-                        <th className="sortable" title="Click to Sort" onClick={() => onSort('email')}>Email <span className="sort-indicator">{getSortDirectionText('email')}</span> </th>
-                        {/* <th>Password</th> */}
-                        <th className="sortable" title="Click to Sort" onClick={() => onSort('type')}>Type <span className="sort-indicator">{getSortDirectionText('type')}</span> </th>
-                        <th className="sortable" title="Click to Sort" onClick={() => onSort('status')}>Status <span className="sort-indicator">{getSortDirectionText('status')}</span> </th>
-                        {/* <th>Created</th> */}
-                        {/*  <th>Updated</th> */}
+                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('lastName')}>Last Name <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
+                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('firstName')}>First Name <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
+                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('email')}>Email <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
+                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('type')}>Type <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
+                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('status')}>Status <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
                         <th>Customers</th>
                         <th>Edit</th>
                         <th>Del</th>

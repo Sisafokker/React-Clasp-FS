@@ -6,7 +6,6 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
 // styles
 import "../styles/crm_company_list.scss";
 
-
 // The child does NOT manage state, it just informs the parent about user interactions
 // The parent then manages the state as needed.
 const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompanyList  }) => {
@@ -19,15 +18,12 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
 
     useEffect(() => {
         // Unique Comp.Industry for Dropdown options
-        // const uniqueIndustries = ['All', ...new Set(props_companies.map(company => company.industry))];
-        // console.log("uniqueIndustries: ", uniqueIndustries)
-        // setIndustries(uniqueIndustries);
-        uniqueInd()
+        uniqueIndustry()
     }, [props_companies, props_companySelect]);
 
-    function uniqueInd() {
+    function uniqueIndustry() {
         const uniqueIndustries = ['All', ...new Set(filteredCompanies.map(company => company.industry))];
-        console.log("uniqueIndustries: ", uniqueIndustries)
+        console.log("🔵 uniqueIndustries: ", uniqueIndustries)
         setIndustries(uniqueIndustries);
     }
 
@@ -54,7 +50,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
     };
 
     const handleCompanyClick = (companyId) => {
-        console.log("CRM_company_list - Clicked in companyId: ", companyId)
+        console.log("🔵 CRM_company_list - Clicked in companyId: ", companyId)
         props_companySelect(companyId); // Invokes handleCompanySelect() in crm.js & passing companyId as argument.
         setSelectedCompany(true)
 

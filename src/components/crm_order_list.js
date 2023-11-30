@@ -2,10 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faSort } from '@fortawesome/free-solid-svg-icons';
 
 // Components
 import Download from "./download";
+
+// Hooks
+import { useSortableData } from '../actions/sortingTables';
 
 // styles
 import "../styles/crm_order_list.scss";
@@ -23,6 +26,21 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
 
     // For totals
     const [orderTotals, setOrderTotals] = useState({});
+
+    // Enrich AND filter orders
+    const enrichedAndFilteredOrders = orders.map(order => ({
+        ...order,
+        userEmail: users[order.userId] || '',
+        totalPrice: orderTotals[order.orderId] || 0
+    })).filter(order => {
+        let statusMatch = selectedStatus === 'All' || order.status === selectedStatus;
+        let userMatch = selectedUserFilter === 'All' || order.userId === userEmail.find(u => u.email === selectedUserFilter)?.id;
+        return statusMatch && userMatch;
+    });
+
+    // Apply sorting hook on enrichedFilteredOrders
+    const { items: sortedFilteredOrders, requestSort, sortConfig } = useSortableData(enrichedAndFilteredOrders, { key: 'orderId', direction: 'ascending' });
+  
 
     let downloadName, companyDetails
     if (props_companyDetails) {
@@ -95,7 +113,6 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
         }
     }, [orders]);
     
-   
     
     // Helper function to fetch order details
     const fetchOrderDetails = async (orderId) => {
@@ -117,6 +134,14 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
         let userMatch = selectedUserFilter === 'All' || order.userId === userEmail.find(u => u.email === selectedUserFilter)?.id;
         return statusMatch && userMatch;
     });
+
+    // Sorting logic
+    const getSortDirectionText = (key) => {
+        if (sortConfig.key === key) {
+            return sortConfig.direction === 'ascending' ? ' ⬇⬇' : ' ⬆⬆';
+        }
+        return '';
+    };
 
     const resetFilters = () => {
         setSelectedStatus('All');
@@ -142,11 +167,20 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
         btnTitle: "Download VISIBLE Orders to Drive",
         ssName: downloadName, 
         data: [ 
-            { swName: "Orders", values: ordersForDownload },
-/*             { swName: "Orders_second", values: ordersForDownload },
-            { swName: "Orders_third", values: ordersForDownload },  */
+            { swName: "Orders", values: ordersForDownload },  
+            //{ swName: "Orders_second", values: ordersForDownload }, // One of these objs for each sheet of data
             ], 
         }
+
+    const renderTableRows = sortedFilteredOrders.map(order => (
+        <tr key={order.orderId} className="order-item" onClick={() => handleOrderClick(order.orderId)}>
+            <td>{order.orderId}</td>
+            <td>{order.status}</td>
+            <td>{new Date(order.orderDate).toLocaleDateString()}</td>
+            <td>{users[order.userId]}</td>
+            <td>${orderTotals[order.orderId]}</td>
+        </tr>
+    ));
 
     return (
         <div className="crm-order-list">
@@ -181,24 +215,16 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
                 <div className='filtered-orders'>
                 <table className='horizontal-table'>
                     <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                            <th>User</th>
-                            <th>Total Price (USD)</th>
-                        </tr>
+                    <tr>
+                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('orderId')}>Order ID <span className="sort-indicator"> <FontAwesomeIcon icon={faSort}/></span></th>
+                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('status')}>Status <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
+                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('orderDate')}>Date <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
+                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('userEmail')}>User <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
+                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('totalPrice')}>Total Price (USD) <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {filteredOrders.map(order => (
-                            <tr key={order.orderId} className="order-item" onClick={() => handleOrderClick(order.orderId)}>
-                                <td>{order.orderId}</td>
-                                <td>{order.status}</td>
-                                <td>{new Date(order.orderDate).toLocaleDateString()}</td>
-                                <td>{users[order.userId]}</td>
-                                <td>${orderTotals[order.orderId]}</td>
-                            </tr>
-                        ))}
+                        {renderTableRows}
                     </tbody>
                 </table>
                 </div>

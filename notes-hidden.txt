@@ -37,7 +37,7 @@ Deploy Cloud FrontEnd: In frontEnd Directory:
     Stream logs:            $ gcloud app logs tail -s frontend
     View app in browser:    $ gcloud app browse -s frontend
 
-Deploy Cloud Backend: In backend directory: 
+Deploy Cloud Backend: In BAAAACKENDDDDDD directory: 
     🚩 First redirect pool in: backend/Database.js file 🚩
     🚩 run in frontEnd: $ npm run build 🚩
     $ gcloud app deploy
