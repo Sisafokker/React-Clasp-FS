@@ -1,32 +1,32 @@
-// InfoVersion.js
+// src/components/InfoVersion.js
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import FooterInfo from './footer_info';
-import Popup from './popup';
+import PopupFooter from './popupFooter';
 
 const InfoVersion = () => {
-  const [showPopup, setShowPopup] = useState(false);
+  const [showPopupFooter, setShowPopupFooter] = useState(false);
   const latestNote = FooterInfo.getLatestNote();
 
   return (
     <div className="info-version">
       <div>
         <span>v. {FooterInfo.getVersion()} | Dev's Notes: </span>
-        <FontAwesomeIcon icon={faCircleInfo} onClick={() => setShowPopup(true)} />
+        <FontAwesomeIcon icon={faCircleInfo} onClick={() => setShowPopupFooter(true)} />
       </div>
 
-      <Popup 
-        isOpen={showPopup} 
-        closePopup={() => setShowPopup(false)} 
-        title={`${latestNote.version} - ${latestNote.title}`}
+      <PopupFooter 
+        props_isOpen={showPopupFooter} 
+        props_closePopup={() => setShowPopupFooter(false)} 
+        props_title={`${latestNote.version} - ${latestNote.title}`}
       >
         <ul>
           {latestNote.details.map((detail, index) => (
             <li key={index}>{detail}</li>
           ))}
         </ul>
-      </Popup>
+      </PopupFooter>
     </div>
   );
 };

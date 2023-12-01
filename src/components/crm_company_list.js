@@ -76,7 +76,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                     </select>
                 </div>
                 <div className='filter'>
-                    <label><FontAwesomeIcon icon={faFilter}/>Industry</label>
+                    <label><FontAwesomeIcon icon={faFilter}/>Indus.</label>
                     <select value={selectedIndustry} disabled={disableFilters} 
                         onChange={(e) => {setSelectedIndustry(e.target.value), props_resetCompanyList()}}>
                         {industries.map(industry => <option key={industry} value={industry}>{industry}</option>)}

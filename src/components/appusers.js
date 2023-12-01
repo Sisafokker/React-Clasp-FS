@@ -9,7 +9,7 @@ import AppusersForm from "./appusersform";
 import { useSortableData } from '../actions/sortingTables';
 
 // styles
-import "../styles/appusers-table.scss";
+import "../styles/appusers.scss";
 // Compiled CSS Styles files
 // import "../../apps-script/styles_compiled/appusers-table.css";
 
@@ -27,41 +27,41 @@ function Appusers() {
         fetchAppUsers();
         fetchCompanies();
         fetchIntCompanyUser();
-    }, []); 
-    
+    }, []);
+
 
     // Fetches all users
     const fetchAppUsers = useCallback(() => {
         axios.get(`${url}/api/users`)
-        .then(response => {
-            setAppUsers(response.data);
-        })
-      .catch(console.error);
+            .then(response => {
+                setAppUsers(response.data);
+            })
+            .catch(console.error);
     }, [url]);
 
-    
+
     // Fetches all companies
     const fetchCompanies = useCallback(() => {
         axios.get(`${url}/api/companies`)
-        .then(response => {
-            setCompanies(response.data);
-        })
-        .catch(console.error);
+            .then(response => {
+                setCompanies(response.data);
+            })
+            .catch(console.error);
     }, [url]);
 
-    
+
     // Fetches all company-user intermediary relations
     const fetchIntCompanyUser = useCallback(() => {
         axios.get(`${url}/api/intCompanyUser`)
-        .then(response => {
-            setIntCompUser(response.data);
-        })
-        .catch(console.error);
-    }, [url]);   
+            .then(response => {
+                setIntCompUser(response.data);
+            })
+            .catch(console.error);
+    }, [url]);
 
 
-     // After a new user is added / edited / removed
-     const handleUserAction = useCallback(() => {
+    // After a new user is added / edited / removed
+    const handleUserAction = useCallback(() => {
         fetchAppUsers();
         fetchIntCompanyUser();
     }, [fetchAppUsers]);
@@ -71,24 +71,26 @@ function Appusers() {
     };
 
     const getCompanyNamesForUser = (userId) => {
-        
+
         // Find all company-user relationships for this user
         const userCompanies = intCompUser.filter(rowObj => rowObj.userId === userId);
-        
+
         // Map the company IDs to company names
         const companyNames = userCompanies.map(rowObj => {
             const company = companies.find(company => company.companyId === rowObj.companyId);
             return company ? company.companyName : '';
         });
-        
+
         const result = companyNames.join(', ');
         console.log("RES: ", result)
         return result;
     };
-      
+
 
     const renderTableRows = sortedAppUsers.map(u => (
         <tr key={u.id}>
+            <td> <FontAwesomeIcon icon={faPenToSquare} className='clickable' onClick={() => handleAction(u, 'Edit')} /> </td>
+            <td> <FontAwesomeIcon icon={faTrash} className='clickable' onClick={() => handleAction(u, 'Remove')} /> </td>
             <td>{u.lastName}</td>
             <td>{u.firstName}</td>
             <td>{u.email}</td>
@@ -98,56 +100,60 @@ function Appusers() {
             {/* <td>{u.createdAt}</td> */}
             {/* <td>{u.updatedAt}</td> */}
             <td> {getCompanyNamesForUser(u.id)} </td>
-            <td> <FontAwesomeIcon icon={faPenToSquare} className='clickable'onClick={() => handleAction(u, 'Edit')} /> </td>
-            <td> <FontAwesomeIcon icon={faTrash} className='clickable' onClick={() => handleAction(u, 'Remove')} /> </td>
         </tr>
     ));
 
-    return <div className='container'>
-        <h1>AppUsers Page...</h1>
-        <div className='tasks-wrapper'>
-            <div>
-                <h3>Methods:</h3>
-                <ul>
-                    <li>Google API admin console</li>
-                    <li>CRUD Google Workspace Users</li>
-                </ul>
+    return (
+        <div className='container'>
+            <div className='section-title'>Users - Admin-Only Page</div>
+            <div className='tasks-wrapper'>
+                <div>
+                    <h3>Methods:</h3>
+                    <ul>
+                        <li>Google API admin console</li>
+                        <li>CRUD Google Workspace Users</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Pending:</h3>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
             </div>
-            <div>
-                <h3>Pending:</h3>
-                <ul>
-                    <li></li>
-                    <li></li>
-                </ul>
+            <div className='component-wrapper'>
+                <div className='form-container'>
+                    <AppusersForm
+                        prop_handleUserAction={handleUserAction}
+                        prop_userAction={userAction}
+                        prop_companies={companies}
+                        prop_intCompUser={intCompUser}
+                    />
+                </div>
+                <div className='horizontal-table-container'>
+                    <div className='section-title'>Users</div>
+                    <table className='horizontal-table'>
+                        <thead>
+                            <tr>
+                                <th>Edit</th>
+                                <th>Del</th>
+                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('lastName')}>Last Name <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('firstName')}>First Name <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('email')}>Email <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('type')}>Type <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('status')}>Status <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                <th>Customers</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {renderTableRows}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <div className='users-wrapper'>
-            <AppusersForm 
-                prop_handleUserAction={handleUserAction} 
-                prop_userAction={userAction} 
-                prop_companies={companies}
-                prop_intCompUser={intCompUser}
-            />
-            <h2>[SQL] Signed-Up Users:</h2>
-            <table className='horizontal-table'>
-                <thead>
-                    <tr>
-                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('lastName')}>Last Name <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
-                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('firstName')}>First Name <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
-                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('email')}>Email <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
-                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('type')}>Type <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
-                        <th className="sortable" title="Click to Sort" onClick={() => requestSort('status')}>Status <span className="sort-indicator"><FontAwesomeIcon icon={faSort}/></span></th>
-                        <th>Customers</th>
-                        <th>Edit</th>
-                        <th>Del</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {renderTableRows}
-                </tbody>
-            </table>
-        </div>
-    </div>
+    )
 }
 
 export default Appusers

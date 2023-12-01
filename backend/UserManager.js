@@ -1,3 +1,4 @@
+// backend/UserManager.js
 const bcrypt = require('bcrypt');
 const Database = require('./Database');
 
@@ -44,10 +45,10 @@ class UserManager {
     return this.db.query(GET_QUERY, false, `GET ${this.table}`);
   }
 
-  async addUser(firstName, lastName, email, password) {
-    const hashedPassword = await this.hashPassword(password);
+  async addUser(firstName, lastName, email, password, type) {
+    const hashedPassword = await this.hashPassword(password || "admin_generated");
     const INSERT_QUERY = `INSERT INTO ${this.table} (firstName, lastName, email, password, type, status) VALUES (?, ?, ?, ?, 'usuario', 'active')`;
-    return this.db.query(INSERT_QUERY, [firstName, lastName, email, hashedPassword], `ADD ${this.table}`);
+    return this.db.query(INSERT_QUERY, [firstName, lastName, email, hashedPassword, type], `ADD ${this.table}`);
   }
 
   async updateUser(id, firstName, lastName, email, type, status) {

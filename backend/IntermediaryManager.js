@@ -1,4 +1,4 @@
-// IntermediaryManager.js
+// backend/IntermediaryManager.js
 const Database = require('./Database');
 
 class IntermediaryManager {

@@ -2,13 +2,14 @@
 const Info = Object.freeze({
   project: {
     name: 'FS Bottega Final Project: Hoakeen',
-    version: { major: 1, minor: 6,  patch: 0, 
+    version: { major: 1, minor: 7,  patch: 0, 
       toString() { return `${this.major}.${this.minor}.${this.patch}`; }
     }
   },
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+    { version: "v1.7.0", title: "Added / Refactored Many things",  details: ["Many CSS improvements", "Reduced CSS overlaps", "Item view from Order_details","Added Images to Items","Customers Updated partially", "Mixins updates","AppUser visuals","Solved AppUsers Form glitch",],  },
     { version: "v1.6.0", title: "Refactored Sorting making it Shared Hook, enrich/expand tables", details: ["Sorting for all tables", "Expand & Sort", "Sorting via Fontawesome","Cleaner CompanyDetails render",],  },
     { version: "v1.5.2", title: "CRM & Totals & useEffects", details: ["Improved hooks","Added and corrected totals", "Solved CSS & CSSmaps files appearing out of the blue", "Improved buttons and filter interaction"],  },
     { version: "v1.5.1", title: "Adding Table Totals", details: ["in construction",],  },

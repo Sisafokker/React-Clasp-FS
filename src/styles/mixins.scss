@@ -36,18 +36,34 @@
     th, td {
         @include responsiveFontSize(14px);
         padding: 8px;
-        text-align: left;
+        text-align: center;
         border-bottom: 1px solid $lightgrey;
     }
 
     th {
         color: $offwhite;
+        background-color: $tableheader; 
         font-weight: none;
     } 
 
+    tr:nth-child(even) {
+        background-color: $alternativerow;
+    }
+
+    th.sortable {
+        cursor: pointer;
+    }
+
+    
+    tr:hover {
+        background-color: $lightgrey;
+    }
+
+    .sort-indicator {
+        font-size: 0.8em;
+        color: $offwhite;
+    }
 }
-
-
 
 @mixin responsiveTable_Vertical {
     width: 98%; 
@@ -61,29 +77,36 @@
             border-bottom: 1px solid $lightgrey;
             //background-color: $tableheader;
             font-weight: 600;
+            word-wrap: break-word;     // Words wrap within cell (like in Sheets)
+            overflow-wrap: break-word; // Breaks long words to wrap
         }
 
 
         td {
-            &:first-child {
+            &:first-child {  // First Col.
                 background-color: $tableheader;
                 color: $offwhite;
                 text-align: right;
             }
             
-            &:nth-child(even) {
-                text-align: center;
+            &:nth-child(even) { // 2nd col plus+ 
+                text-align: left;
+                padding-left: 10px; 
             }
 
             &:nth-child(even):hover {
                 background-color: $rowhover;
             }
         }
-
     }
+
+    tfoot .totals-row td {
+        background-color: #666666 !important;
+        color: red !important;
+        font-size: 80% !important;
+      }
+
 }
-
-
 
 
 @mixin buttonStyle (
@@ -116,11 +139,17 @@
     }
 }
 
-@mixin inputSelectStyle {
-    width: 100%; // Full width of the container
-    padding: 5px;
-    margin-top: 2px;
+@mixin inputSelectStyle($width: 98%, $padding: 5px, 
+                        $margin-top:2px, $margin-bottom:0px ,
+                        $margin-left:0px, $margin-right:0px  ) {
+    width: calc(#{$width} - #{$margin-left});
+    padding: $padding;
+    margin-top: $margin-top;
+    margin-bottom: $margin-bottom;
+    margin-left: $margin-left;
+    margin-right: $margin-right;
     border: 1px solid $lightgrey;
+    text-align: center;
 
     &:focus {
         outline: none;

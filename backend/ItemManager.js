@@ -11,14 +11,14 @@ class ItemManager {
     return this.db.query(GET_QUERY, false, `GET ${this.table}`);
   }
 
-  async addItem(name, description, unitprice_usd, available, userId) {
-    const INSERT_QUERY = `INSERT INTO ${this.table} (name, description, unitprice_usd, available, userId) VALUES (?, ?, ?, ?, ?)`;
-    return this.db.query(INSERT_QUERY, [name, description, unitprice_usd, available, userId], `ADD ${this.table}`);
+  async addItem(name, description, unitprice_usd, available, userId, itemImage) {
+    const INSERT_QUERY = `INSERT INTO ${this.table} (name, description, unitprice_usd, available, userId) VALUES (?, ?, ?, ?, ?, ?)`;
+    return this.db.query(INSERT_QUERY, [name, description, unitprice_usd, available, userId, itemImage], `ADD ${this.table}`);
   }
 
-  async updateItem(itemId, name, description, unitprice_usd, available, userId) {
-    const UPDATE_QUERY = `UPDATE ${this.table} SET name=?, description=?, unitprice_usd=?, available=?, userId=? WHERE itemId=?`;
-    return this.db.query(UPDATE_QUERY, [name, description, unitprice_usd, available, userId, itemId], `PATCH ${this.table}`);
+  async updateItem(itemId, name, description, unitprice_usd, available, userId, itemImage) {
+    const UPDATE_QUERY = `UPDATE ${this.table} SET name=?, description=?, unitprice_usd=?, available=?, userId=? itemImage=? WHERE itemId=?`;
+    return this.db.query(UPDATE_QUERY, [name, description, unitprice_usd, available, userId, itemId, itemImage], `PATCH ${this.table}`);
   }
 
   async deleteItem(itemId) {

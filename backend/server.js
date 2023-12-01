@@ -30,7 +30,7 @@ appExp.post('/api/signup', async (req, res) => {
     await userManager.addUser(firstName, lastName, email, password);
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
-    console.error('Signup Error:', error);
+    console.error('❌Signup Error:', error);
     res.status(500).json({ error: 'SignUp Error: ' + error.message });
   }
 });
@@ -42,7 +42,7 @@ appExp.post('/api/login', async (req, res) => {
     const user = await userManager.validateLogin(email, password);
     res.status(200).json({ message: 'Logged in successfully', user });
   } catch (error) {
-    console.error('Login Error:', error);
+    console.error('❌Login Error:', error);
     res.status(401).json({ error: 'Login Error: ' + error.message });
   }
 });
@@ -54,7 +54,7 @@ appExp.post('/api/verifyUser', async (req, res) => {
     const user = await userManager.verifyUser(email);
     res.status(200).json({ message: 'User Verified Successfully', user });
   } catch (error) {
-    console.error('Login Error:', error);
+    console.error('❌Login Error:', error);
     res.status(401).json({ error: 'User Verification Error: ' + error.message });
   }
 });
@@ -65,7 +65,7 @@ appExp.get('/api/users', async (req, res) => {
     const values = await userManager.getUsers();
     res.status(200).json(values);
   } catch (error) {
-    console.error('Get Users Error:', error);
+    console.error('❌Get Users Error:', error);
     res.status(500).json({ error: 'Get Users Error: ' + error.message });
   }
 });
@@ -74,10 +74,11 @@ appExp.get('/api/users', async (req, res) => {
 appExp.post('/api/users', async (req, res) => {
   const { firstName, lastName, email, password, type } = req.body;
   try {
-    await userManager.addUser(firstName, lastName, email, password, type);
-    res.status(201).json({ message: 'New user added successfully' });
+    const values = await userManager.addUser(firstName, lastName, email, password, type);
+    const userId = values.insertId;
+    res.status(201).json({ message: 'New user added successfully', id: userId });
   } catch (error) {
-    console.error('Add User Error:', error);
+    console.error('❌Add User Error:', error);
     res.status(500).json({ error: 'Add User Error: ' + error.message });
   }
 });
@@ -90,7 +91,7 @@ appExp.patch('/api/users/:id', async (req, res) => {
     await userManager.updateUser(id, firstName, lastName, email, type, status);
     res.status(200).json({ message: 'User updated successfully' });
   } catch (error) {
-    console.error('Update User Error:', error);
+    console.error('❌Update User Error:', error);
     res.status(500).json({ error: 'Update User Error: ' + error.message });
   }
 });
@@ -102,7 +103,7 @@ appExp.delete('/api/users/:id', async (req, res) => {
     await userManager.deleteUser(id);
     res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
-    console.error('Delete User Error:', error);
+    console.error('❌Delete User Error:', error);
     res.status(500).json({ error: 'Delete User Error: ' + error.message });
   }
 });
@@ -114,7 +115,7 @@ appExp.get('/api/companies', async (req, res) => {
     values = sortArrayByProperty(values, 'companyName', true);
     res.status(200).json(values);
   } catch (error) {
-    console.error('Get Companies Error:', error);
+    console.error('❌Get Companies Error:', error);
     res.status(500).json({ error: 'Get Companies Error: ' + error.message });
   }
 });
@@ -126,7 +127,7 @@ appExp.get('/api/contacts', async (req, res) => {
     values = sortArrayByProperty(values, 'lastName', true);
     res.status(200).json(values);
   } catch (error) {
-    console.error('Get Contacts Error:', error);
+    console.error('❌Get Contacts Error:', error);
     res.status(500).json({ error: 'Get Contacts Error: ' + error.message });
   }
 });
@@ -139,7 +140,7 @@ appExp.get('/api/orders', async (req, res) => {
     values = sortArrayByProperty(values, 'orderDate', false);
     res.status(200).json(values);
   } catch (error) {
-    console.error('Get Orders Error:', error);
+    console.error('❌Get Orders Error:', error);
     res.status(500).json({ error: 'Get Orders Error: ' + error.message });
   }
 });
@@ -151,7 +152,7 @@ appExp.get('/api/orders/company/:companyId', async (req, res) => {
     const values = await orderManager.getOrdersByCompanyId(companyId);
     res.status(200).json(values);
   } catch (error) {
-    console.error(`Get Orders for Company ${companyId} Error:`, error);
+    console.error(`❌Get Orders for Company ${companyId} Error:`, error);
     res.status(500).json({ error: `Get Orders for Company ${companyId} Error: ` + error.message });
   }
 });
@@ -163,7 +164,7 @@ appExp.post('/api/orders', async (req, res) => {
     await orderManager.addOrder(companyId, userId, status);
     res.status(201).json({ message: 'New order added successfully' });
   } catch (error) {
-    console.error('Add Order Error:', error);
+    console.error('❌Add Order Error:', error);
     res.status(500).json({ error: 'Add Order Error: ' + error.message });
   }
 });
@@ -176,7 +177,7 @@ appExp.patch('/api/orders/:orderId', async (req, res) => {
     await orderManager.updateOrder(orderId, companyId, userId, status);
     res.status(200).json({ message: 'Order updated successfully' });
   } catch (error) {
-    console.error('Update Order Error:', error);
+    console.error('❌Update Order Error:', error);
     res.status(500).json({ error: 'Update Order Error: ' + error.message });
   }
 });
@@ -188,7 +189,7 @@ appExp.delete('/api/orders/:orderId', async (req, res) => {
     await orderManager.deleteOrder(orderId);
     res.status(200).json({ message: 'Order deleted successfully' });
   } catch (error) {
-    console.error('Delete Order Error:', error);
+    console.error('❌Delete Order Error:', error);
     res.status(500).json({ error: 'Delete Order Error: ' + error.message });
   }
 });
@@ -199,7 +200,7 @@ appExp.get('/api/items', async (req, res) => {
     const values = await itemManager.getItems();
     res.status(200).json(values);
   } catch (error) {
-    console.error('Get Items Error:', error);
+    console.error('❌Get Items Error:', error);
     res.status(500).json({ error: 'Get Items Error: ' + error.message });
   }
 });
@@ -211,7 +212,7 @@ appExp.post('/api/items', async (req, res) => {
     await itemManager.addItem(name, description, unitprice_usd, available, userId);
     res.status(201).json({ message: 'New item added successfully' });
   } catch (error) {
-    console.error('Add Item Error:', error);
+    console.error('❌Add Item Error:', error);
     res.status(500).json({ error: 'Add Item Error: ' + error.message });
   }
 });
@@ -224,7 +225,7 @@ appExp.patch('/api/items/:itemId', async (req, res) => {
     await itemManager.updateItem(itemId, name, description, unitprice_usd, available, userId); 
     res.status(200).json({ message: 'Item updated successfully' });
   } catch (error) {
-    console.error('Update Item Error:', error);
+    console.error('❌Update Item Error:', error);
     res.status(500).json({ error: 'Update Item Error: ' + error.message });
   }
 });
@@ -236,7 +237,7 @@ appExp.delete('/api/items/:itemId', async (req, res) => {
     await itemManager.deleteItem(itemId); // Implement deleteItem in your itemManager
     res.status(200).json({ message: 'Item deleted successfully' });
   } catch (error) {
-    console.error('Delete Item Error:', error);
+    console.error('❌Delete Item Error:', error);
     res.status(500).json({ error: 'Delete Item Error: ' + error.message });
   }
 });
@@ -247,7 +248,7 @@ appExp.get('/api/intCompanyUser', async (req, res) => {
     const values = await intermediaryManager.getIntCompanyUser();
     res.status(200).json(values);
   } catch (error) {
-    console.error('Get IntCompanyUser Error:', error);
+    console.error('❌Get IntCompanyUser Error:', error);
     res.status(500).json({ error: 'Get IntCompanyUser Error: ' + error.message });
   }
 });
@@ -256,14 +257,18 @@ appExp.get('/api/intCompanyUser', async (req, res) => {
 appExp.post('/api/intCompanyUser', async (req, res) => {
   try {
     const { companyId, userId } = req.body;
-    if (!companyId || !userId) {
-      throw new Error('Missing companyId or userId');
+    if (!companyId && !userId ) {
+      throw new Error('Missing both companyId & userId');
+    } else if (!companyId) {
+      throw new Error('Missing companyId');
+    } else if( !userId) {
+      throw new Error('Missing userId');
     }
     await intermediaryManager.addIntCompanyUser(companyId, userId);
     console.log('intCompanyUser_Post: success');
     res.status(201).json({ message: 'intCompanyUser_Post: success' });
   } catch (error) {
-    console.error('Add IntCompanyUser Error:', error);
+    console.error('❌Add IntCompanyUser Error:', error);
     res.status(500).json({ error: 'Add IntCompanyUser Error: ' + error.message });
   }
 });
@@ -279,7 +284,7 @@ appExp.delete('/api/intCompanyUser', async (req, res) => {
     console.log('intCompanyUser_Delete: Relationship deleted successfully');
     res.status(200).json({ message: 'intCompanyUser_Delete: Relationship deleted successfully' });
   } catch (error) {
-    console.error('Delete IntCompanyUser Error:', error);
+    console.error('❌Delete IntCompanyUser Error:', error);
     res.status(500).json({ error: 'Delete IntCompanyUser Error: ' + error.message });
   }
 });
@@ -290,7 +295,7 @@ appExp.get('/api/intOrderItem', async (req, res) => {
     const values = await intermediaryManager.getIntOrderItem();
     res.status(200).json(values);
   } catch (error) {
-    console.error('Get IntOrderItem Error:', error);
+    console.error('❌Get IntOrderItem Error:', error);
     res.status(500).json({ error: 'Get IntOrderItem Error: ' + error.message });
   }
 });
@@ -302,7 +307,7 @@ appExp.get('/api/intOrderItem/:orderId', async (req, res) => {
     const values = await intermediaryManager.getIntOrderItemsByOrderId(orderId);
     res.status(200).json(values);
   } catch (error) {
-    console.error(`Get IntOrderItem by orderId ${orderId} Error:`, error);
+    console.error(`❌Get IntOrderItem by orderId ${orderId} Error:`, error);
     res.status(500).json({ error: `IntOrderItem by orderId ${orderId} Error: ` + error.message });
   }
 });
@@ -312,13 +317,13 @@ appExp.post('/api/intOrderItem', async (req, res) => {
   try {
     const { orderId, itemId } = req.body;
     if (!orderId || !itemId) {
-      throw new Error('Missing orderId or itemId');
+      throw new Error('❌Missing orderId or itemId');
     }
     await intermediaryManager.addIntOrderItem(orderId, itemId);
     console.log('intOrderItem_Post: success');
     res.status(201).json({ message: 'intOrderItem_Post: success' });
   } catch (error) {
-    console.error('Add IntOrderItem Error:', error);
+    console.error('❌Add IntOrderItem Error:', error);
     res.status(500).json({ error: 'Add IntOrderItem Error: ' + error.message });
   }
 });
@@ -334,7 +339,7 @@ appExp.delete('/api/intOrderItem', async (req, res) => {
     console.log('intOrderItem_Delete: Relationship deleted successfully');
     res.status(200).json({ message: 'intOrderItem_Delete: Relationship deleted successfully' });
   } catch (error) {
-    console.error('Delete IntOrderItem Error:', error);
+    console.error('❌Delete IntOrderItem Error:', error);
     res.status(500).json({ error: 'Delete IntOrderItem Error: ' + error.message });
   }
 });

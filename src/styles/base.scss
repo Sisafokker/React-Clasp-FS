@@ -2,6 +2,9 @@
 @import "variables.scss";
 @import "mixins.scss"; 
 
+// * {
+//     box-sizing: border-box;
+// }
 
 .app-wrapper {
     display: flex;
@@ -58,12 +61,13 @@ body {
 h1 { @include textStyle(24px); }
 h2 { @include textStyle(20px, $secondaryColor); }
 h3 { @include textStyle(18px); }
-p { @include textStyle(14px, $secondaryColor); }
+p  { @include textStyle(14px, $secondaryColor); }
 
 button, input[type="submit"] {
     @include responsiveFontSize(12px);
     @include buttonStyle;
     margin-top: 5px;
+    box-sizing: border-box;
 }
 
 button.cancel {
@@ -103,9 +107,17 @@ select {
     grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-items: center; // Horiz
-
 }
 
 .svg-inline--fa {
     margin-right: 5px; // Adjust the 8px to your preference
+}
+
+
+.horizontal-table {
+    @include responsiveTable_Horizontal;
+}
+
+.vertical-table {
+    @include responsiveTable_Vertical;
 }

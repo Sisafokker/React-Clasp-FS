@@ -57,31 +57,20 @@
         }
     }
 
-    .horizontal-table {
-        @include responsiveTable_Horizontal;
-
-    }
-
-    
-
-    //width: 100%;
-
     table {
-        width: 100%; // table stretches to fill the .crm-order-list div
-
-        .horizontal-table {
-            @include responsiveTable_Horizontal;
-        }
-
-        th,
-        td {
+        th, td {
             cursor: pointer;
         }
 
-        tr:hover {
-            background-color: $lightgrey;
-        }
-
         
+        tfoot .totals-row td {
+            background-color: $secondaryColor;
+            color: $primaryColor;
+            font-size: 80%;
+            font-weight: 900;
+            padding: none;
+            margin: none;
+          }
+      
     }
 }

@@ -1,7 +1,8 @@
+// popup.scss
 @import "variables.scss";
 @import "mixins.scss";
 
-.popup-container {
+.fpopup-container {
     @include flexCenter;
     position: fixed; //Fixed relative to viewport
     top: 0;
@@ -10,28 +11,34 @@
     bottom: 0;
     background: $blurred;
     z-index: 1000; // High z-index so it goes above all other content.
-  }
-  
-  .popup-wrapper {
-    background: $offwhite;
-    padding: 20px;
-    border-radius: 5px;
-    position: relative; // Position relative: for close button positioning
-    z-index: 1001; // Even higher
-  }
 
-  .popup-content {
-    text-align: left;
-    padding: 5px 20px 5px 5px;  // top, right, bottom, left
+    .fpopup-header {
+      background: $offwhite;
+      padding: 20px;
+      border-radius: 10px;
+      position: relative; // Position relative: for close button
+      z-index: 1001; // Even higher
+    }
+  
+    .fpopup-content {
+      text-align: left;
+      padding: 5px 20px 5px 5px;  // top, right, bottom, left
+      background-color: $secondaryColor;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      background: none;
+      font-size: 20px;
+      border: 1px solid $lightgrey;
+    }
+  
   }
   
-  .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    background: none;
-    font-size: 20px;
-    border: 1px solid $lightgrey;
-  }
+
   

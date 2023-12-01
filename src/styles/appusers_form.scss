@@ -1,0 +1,35 @@
+// appusers-form.scss
+@import "variables.scss";
+@import "mixins.scss";
+
+.form-container {
+  width: 100%;
+  margin: 0 auto;
+
+  .buttons-and-warnings {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -4px;
+    margin-bottom: 15px;
+
+  }
+
+  label {
+    @include responsiveFontSize(14px);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+    margin-right: 5px;
+    margin-left: 5px;
+
+    input[type="text"], select {
+      margin-left: 5px;
+      padding: 4px;
+      border: 1px solid $teal;
+      width: 100%;            // 🚩Changing this values does NOTHING! 
+      box-sizing: border-box; // 🚩Changing this values does NOTHING! 
+    }
+  }
+}
+

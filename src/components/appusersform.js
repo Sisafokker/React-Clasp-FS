@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // styles
-import "../styles/appusers-form.scss";
+import "../styles/appusers_form.scss";
 
 // Compiled CSS Styles files
 //import "../../apps-script/styles_compiled/appusers-form.css";
 
 
 const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, prop_intCompUser }) => { 
-  console.log("🚀ACTION Prop: ",prop_userAction.action)
+  console.log("👤ACTION Prop: ",prop_userAction.action)
   //console.log('❓Received companies:', prop_companies);
   const url = process.env.REACT_APP_Backend_URL;
   const [formUser, setFormUser] = useState({
@@ -21,7 +21,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
   });
 
    useEffect(() => {
-    console.log("🚀prop_Action: ", prop_userAction.action)
+    console.log("👤prop_Action: ", prop_userAction.action)
     console.log("👤prop_User: ", prop_userAction.user)
     if (prop_userAction.user) {
       setFormUser({ ...prop_userAction.user });
@@ -52,24 +52,32 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
     }
   }, [prop_userAction]);
 
+  const handleCancel = () => {
+    console.log("👤Action Canceled");
+    clearForm(true);
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
+    console.log("1 - Form Submit Initiated");
+
     if (cancelled) {
-      console.log("Action Canceled");
-      clearForm(true);
       return;
     }
+
+    console.log("2 - Processing Form: ", formUser);
 
     setVisuals(i => ({ ...i, showButton: false }));
 
     const userPayload = { ...formUser };
-    console.log("userPayload: ", userPayload);
+    console.log("👤userPayload: ", userPayload);
 
     if (prop_userAction.action === "Add") {
+      console.log("3.1 Adding User...");
       axios.post(`${url}/api/users`, userPayload)
         .then(response => {
-          console.log('User added successfully:', response.data);
+          console.log('👤User added successfully:', response.data);
           
           // Process intCompanyUser DB Action
           if (userPayload.companyId && userPayload.companyId.length > 0) {
@@ -78,7 +86,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
             const companyAssignments = userPayload.companyId.map(companyId => 
               processCompanyToUserAssignment("Add", companyId, userId)
               );
-              console.log('STAGE ONE REACHED!');
+              console.log('👤STAGE ONE REACHED!');
               return Promise.all(companyAssignments); // Wait for ALL assignments
 
             // 👉Process Single intCompanyUser DB 
@@ -89,29 +97,30 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
           return Promise.resolve(); // If no company assignment is needed, resolve the promise chain
         })
         .then(() => {
-          console.log('STAGE TWO REACHED!');
+          console.log('👤STAGE TWO REACHED!');
           if (userPayload.companyId && userPayload.companyId.length > 0) {
-            console.log('User && CompanyUser success.');
+            console.log('👤User && CompanyUser success.');
           } else {
-            console.log('User success (withouth CompanyUser)');
+            console.log('👤User success (withouth CompanyUser)');
           }
-          console.log('STAGE THREE REACHED!');
+          console.log('👤STAGE THREE REACHED!');
           prop_handleUserAction(prop_userAction.action); // Refresh the users list
           clearForm(); // Clear form
         })
         .catch(error => {
-          console.log('STAGE FOUR REACHED!');
-          console.error('Add Failed: ', error);
-          console.error('Error:', error.response ? error.response.data : error.message);
+          console.log('👤STAGE FOUR REACHED!');
+          console.error('👤Add Failed: ', error);
+          console.error('👤Error:', error.response ? error.response.data : error.message);
           setVisuals(i => ({ ...i, formError: 'Add Failed', showButton: true }));
         });
 
 
     } 
       else if (prop_userAction.action === "Edit" && formUser.id) {
+        console.log("3.2 Editing User...");
         axios.patch(`${url}/api/users/${prop_userAction.user.id}`, userPayload)
           .then(response => {
-            console.log('User edited successfully:', response.data);
+            console.log('👤User edited successfully:', response.data);
     
           // Remove company-user relationships for this user
           const deletePromises = prop_intCompUser
@@ -128,12 +137,12 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
           return Promise.all(addPromises);
         })
         .then(() => {
-          console.log('CompanyUser relationships updated successfully');
+          console.log('👤CompanyUser relationships updated successfully');
           prop_handleUserAction(prop_userAction.action); // Refresh the users list
           clearForm();
         })
         .catch(error => {
-          console.error("Edit Failed", error);
+          console.error("👤Edit Failed", error);
           setVisuals(i => ({ ...i, formError: 'Edit Failed', showButton: true }));
         });
     }
@@ -141,30 +150,32 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
     // else if (prop_userAction.action === "Edit" && formUser.id) {
     //   axios.patch(`${url}/api/users/${prop_userAction.user.id}`, userPayload)
     //     .then(response => {
-    //       console.log('User edited successfully:', response.data);
+    //       console.log('👤User edited successfully:', response.data);
     //       prop_handleUserAction(prop_userAction.action);
     //       clearForm();
     //     })
     //     .catch(error => {
-    //       console.error("Edit Failed", error);
+    //       console.error("👤Edit Failed", error);
     //       setVisuals(i => ({ ...i, formError: 'Edit Failed', showButton: true }));
     //     });
 
     // } 
     
     else if (prop_userAction.action === "Remove" && formUser.id) {
+      console.log("3.3 Deleting User...");
       axios.delete(`${url}/api/users/${prop_userAction.user.id}`)
         .then(response => {
-          console.log('User removed successfully:', response.data);
+          console.log('👤User removed successfully:', response.data);
           prop_handleUserAction(prop_userAction.action);
           clearForm();
         })
         .catch(error => {
-          console.error('Remove Failed', error);
+          console.error('👤Remove Failed', error);
           setVisuals(i => ({ ...i, formError: 'Remove Failed', showButton: true }));
         });
     } else {
-      console.error("prop_userAction.action???: ", prop_userAction.action)
+      console.log("3.❌ Unknown action...");
+      console.error("👤prop_userAction.action???: ", prop_userAction.action)
       setVisuals(i => ({ ...i, formError: 'Add Failed', showButton: true }));
     }
   };
@@ -175,25 +186,25 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
   if (backendAction === "Add" && companyId) {
     return axios.post(endpoint, { companyId, userId }) // Return promise
         .then(response => {
-          console.log('intCompanyUser added successfully:', response.data);
+          console.log('👤intCompanyUser added successfully:', response.data);
         })
         .catch(error => {
-          console.error('Error adding intCompanyUser:', error);
+          console.error('👤Error adding intCompanyUser:', error);
           throw error; // Need to propagate the error
         });
   } else if (backendAction === "Remove" && companyId) {
     return axios.delete(endpoint, { data: { companyId, userId } }) // Return promise
     .then(response => {
-        console.log('Relationship deleted successfully:', response.data);
+        console.log('👤Relationship deleted successfully:', response.data);
         // Update UI or state as necessary
     })
     .catch(error => {
-      console.error('Error adding intCompanyUser:', error);
+      console.error('👤Error adding intCompanyUser:', error);
       throw error; // Need to propagate the error
     });
 
   }else {
-    console.log("Only ADD actions have been setup for now.");
+    console.log("👤Only ADD actions have been setup for now.");
     return Promise.reject('Missing companyId?? or invalid action??'); // Reject to propagate
   }
 };
@@ -207,7 +218,7 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
 
   // Function to clear form and reset state
   const clearForm = (wasCancelled) => {
-    console.log("Clearing Form ----------")
+    console.log("👤Clearing Form ----------")
     setFormUser({
       id: null,
       firstName: '',
@@ -248,9 +259,19 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
   return (
     <div>
       {/* <h1>{formUser.type} {formUser.status} </h1> */}
-      <h2>[SQL] CRUD User</h2>
       <div className="form-container">
+        <div className='section-title'> CRUD Users</div>
         <form onSubmit={handleFormSubmit}>
+          <div className="buttons-and-warnings">
+            <div className="buttons-container">
+            {visuals.showButton && <button className='button advance' type="submit" disabled={!canSubmitForm()} onClick={() => setCancelled(false)} >{visuals.btnText}</button>}
+            {visuals.showButton && <button className='button cancel' type="button" onClick={handleCancel}>Cancel</button>}
+            </div>
+            <div className="warnings-container">
+              {visuals.formError && <div className='errorWarning'>{visuals.formError}</div>}
+              {visuals.formSuccess && <div className='successWarning'>{visuals.formSuccess}</div>}
+            </div>
+          </div>
           <div className="input-group">
             <label>First Name: <input type="text" value={formUser.firstName} onChange={(e) => setFormUser({ ...formUser, firstName: e.target.value })} /> </label>
             <label>Last Name: <input type="text" value={formUser.lastName} onChange={(e) => setFormUser({ ...formUser, lastName: e.target.value })} /> </label>
@@ -258,22 +279,22 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
             {/* <label>Type: <input type="text" value={formUser.type} onChange={(e) => setFormUser({ ...formUser, type: e.target.value })} /> </label>
             <label>Status: <input type="text" value={formUser.status} onChange={(e) => setFormUser({ ...formUser, status: e.target.value })} /> </label> */}
             <label>Type: <select value={formUser.type} onChange={(e) => setFormUser({ ...formUser, type: e.target.value })}>
-                            <option value="">Select type</option>
-                            <option value="admin">admin</option>
-                            <option value="usuario">usuario</option>
-                          </select>
+              <option value="">Select type</option>
+              <option value="admin">admin</option>
+              <option value="usuario">usuario</option>
+            </select>
             </label>
             <label>Status: <select value={formUser.status} onChange={(e) => setFormUser({ ...formUser, status: e.target.value })}>
-                            <option value="">Select status</option>
-                            <option value="active">active</option>
-                            <option value="inactive">inactive</option>
-                          </select>
+              <option value="">Select status</option>
+              <option value="active">active</option>
+              <option value="inactive">inactive</option>
+            </select>
             </label>
             {/* <label>Company: <select value={formUser.companyId} onChange={(e) => setFormUser({ ...formUser, companyId: e.target.value })} 
                             disabled={formUser.type === '' || formUser.status === 'inactive'}>
                             <option value="">Select a company</option>
                             {prop_companies.map(company => {
-                              //console.log('Mapping company:', company); // Debug!
+                              //console.log('👤Mapping company:', company); // Debug!
                               return (
                                 <option key={company.companyId} value={company.companyId}>
                                   {company.companyName}
@@ -283,26 +304,25 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
                             </select>
             </label> */}
             <label>Customers: [{formUser.companyId ? formUser.companyId.length : 0}] <select multiple value={formUser.companyId} // 'multiple' make this an array
-                            onChange={(e) => { const selectedCompanyIds = Array.from(e.target.selectedOptions, option => option.value);
-                              setFormUser({ ...formUser, companyId: selectedCompanyIds });
-                              console.log("Selected Companies❓: ", selectedCompanyIds);
-                            }}
-                            disabled={formUser.type === '' || formUser.status === 'inactive'} >
-                            {prop_companies.map(company => {
-                              return (
-                                <option key={company.companyId} value={company.companyId}>
-                                  {company.companyName}
-                                </option>
-                                  );
-                            })}
-                            </select>
+              onChange={(e) => {
+                const selectedCompanyIds = Array.from(e.target.selectedOptions, option => option.value);
+                setFormUser({ ...formUser, companyId: selectedCompanyIds });
+                console.log("👤Selected Companies❓: ", selectedCompanyIds);
+              }}
+              disabled={formUser.type === '' || formUser.status === 'inactive'} >
+              {prop_companies.map(company => {
+                return (
+                  <option key={company.companyId} value={company.companyId}>
+                    {company.companyName}
+                  </option>
+                );
+              })}
+            </select>
             </label>
           </div>
           <div>
-            {visuals.formError && <div className='errorWarning'>{visuals.formError}</div>}
-            {visuals.formSuccess && <div className='successWarning'>{visuals.formSuccess}</div>}
-            {visuals.showButton && <button className='button advance' type="submit" disabled={!canSubmitForm()} onClick={() => setCancelled(false)} >{visuals.btnText}</button>}
-            {visuals.showButton && <button className='button cancel' type="submit" onClick={() => setCancelled(true)}  >Cancel</button>}
+
+
           </div>
         </form>
       </div>
