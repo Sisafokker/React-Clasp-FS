@@ -133,7 +133,7 @@ function Appusers() {
                 </div>
                 <div className='horizontal-table-container'>
                     <div className='section-title'>Users</div>
-                    <table className='horizontal-table'>
+                    <table className='horizontal-table appusers-table'>
                         <thead>
                             <tr>
                                 <th>Edit</th>

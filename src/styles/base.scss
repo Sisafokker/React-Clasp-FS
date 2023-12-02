@@ -22,28 +22,28 @@
     max-width: 100%;
     margin: 0 auto; // Center the container
     flex: 1;   // Allows container to expand and push the footer down
-    border: 1px solid blue;
-}
+    border: 2px solid blue;
 
-
-@media screen and (max-width: $tablet) {
-    .app-wrapper {
-        background-color: lightblue;
-        max-width: $tablet;
-        margin: 0 auto;
-    }
-
-    .navUser-wrapper {
-        background-color: black;
-    }
-    
-    .container {
-        background-color: yellow;
-        max-width: $tablet;
-        margin: 0 auto;
-        padding: 0px;
+    @media screen and (max-width: $mobile) {
+        padding-top: 155px;          // Reduced padding
+        background-color: grey;
+        border: 2px solid red;
     }
 }
+
+
+// @media screen and (max-width: $mobile) {
+//     .app-wrapper {
+//         background-color: lightblue;
+//         max-width: $mobile;
+//         margin: 0 auto;
+//     }
+
+//     .navUser-wrapper {
+//         background-color: black;
+//     }
+
+// }
 
 
 #signInDiv {

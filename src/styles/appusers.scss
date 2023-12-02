@@ -30,6 +30,14 @@
         .horizontal-table-container {
             flex: 1; // Takes the remaining space
             box-shadow: 0 0 15px $boxshadow;
+
+            .appusers-table { // for appusers only
+                @include responsiveTable_Horizontal(3, 4);
+            }
+
+            .customers-table { // for appusers only
+                @include responsiveTable_Horizontal;
+            }
         }
 
     }

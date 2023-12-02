@@ -9,31 +9,35 @@ import "../styles/crm_company_list.scss";
 // The child does NOT manage state, it just informs the parent about user interactions
 // The parent then manages the state as needed.
 const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompanyList  }) => {
+    const [selectedCompany, setSelectedCompany] = useState(null);
+    
     // For Filters
     const [selectedStatus, setSelectedStatus] = useState('All');
     const [selectedIndustry, setSelectedIndustry] = useState('All');
-    const [selectedCompany, setSelectedCompany] = useState(null);
-    const [industries, setIndustries] = useState([]);
+    const [allIndustries, setAllIndustries] = useState([]);
+    const [industriesFiltered, setIndustriesFiltered] = useState([]);
+    const [filteredCompanies, setFilteredCompanies] = useState([]);
     const [disableFilters, setDisableFilters] = useState(null);
 
     useEffect(() => {
-        // Unique Comp.Industry for Dropdown options
-        uniqueIndustry()
-    }, [props_companies, props_companySelect]);
+        const newFilteredCompanies = props_companies.filter(company => {
+            let statusMatch = selectedStatus === 'All' || company.status === selectedStatus;
+            let industryMatch = selectedIndustry === 'All' || company.industry === selectedIndustry;
+            return statusMatch && industryMatch;
+        });
+        setFilteredCompanies(newFilteredCompanies);
+    }, [props_companies, props_companySelect, selectedIndustry]);
+
+    useEffect(() => {
+        const uniqueAllIndustries = ['All', ...new Set(props_companies.map(company => company.industry))];
+        setAllIndustries(uniqueAllIndustries);
+        uniqueIndustry();
+    }, [filteredCompanies]);
 
     function uniqueIndustry() {
         const uniqueIndustries = ['All', ...new Set(filteredCompanies.map(company => company.industry))];
-        console.log("🔵 uniqueIndustries: ", uniqueIndustries)
-        setIndustries(uniqueIndustries);
+        setIndustriesFiltered(uniqueIndustries);
     }
-
-    // Filter by multiple conditions
-    const filteredCompanies = props_companies.filter(company => {
-        let statusMatch = selectedStatus === 'All' || company.status === selectedStatus;
-        let industryMatch = selectedIndustry === 'All' || company.industry === selectedIndustry;
-        return statusMatch && industryMatch;
-    });
-
 
     useEffect(() => { 
         if (!selectedCompany) {
@@ -78,8 +82,10 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                 <div className='filter'>
                     <label><FontAwesomeIcon icon={faFilter}/>Indus.</label>
                     <select value={selectedIndustry} disabled={disableFilters} 
-                        onChange={(e) => {setSelectedIndustry(e.target.value), props_resetCompanyList()}}>
-                        {industries.map(industry => <option key={industry} value={industry}>{industry}</option>)}
+                        onChange={(e) => { setSelectedIndustry(e.target.value), props_resetCompanyList() }}>
+                        {selectedStatus === 'All'
+                            ?  allIndustries.map(industry => <option key={industry} value={industry}>{industry}</option>) 
+                            : industriesFiltered.map(industry => <option key={industry} value={industry}>{industry}</option>)}
                     </select>
                 </div>
             </div>
@@ -94,14 +100,18 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                     </button>
             </div>
             <div className='filtered-companies'>
-                {filteredCompanies.map((company) => (
-                    <div key={company.companyId}
-                        data-company-id={company.companyId}
-                        className="company-item" 
-                        onClick={() => handleCompanyClick(company.companyId)} >
-                        <p>{`${company.companyName} | ${company.industry} [${company.status}]`}</p>
-                    </div>
-                ))}
+                {filteredCompanies.map((company) => {
+                    const inactiveClass = company.status === 'inactive' ? 'inactive-company' : '';
+
+                    return (
+                        <div key={company.companyId}
+                            data-company-id={company.companyId}
+                            className={`company-item ${inactiveClass}`} // Add the additional class here
+                            onClick={() => handleCompanyClick(company.companyId)} >
+                            <p>{`${company.companyName} | ${company.industry} [${company.status}]`}</p>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

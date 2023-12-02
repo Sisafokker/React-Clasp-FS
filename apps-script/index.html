@@ -37402,7 +37402,7 @@ function Home() {
         children: [
             " ",
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                children: "Welcome to React_Clasp Project"
+                children: "React_Clasp CRM Project"
             }, void 0, false, {
                 fileName: "src/components/home.js",
                 lineNumber: 17,
@@ -37422,13 +37422,6 @@ function Home() {
             }, void 0, false, {
                 fileName: "src/components/home.js",
                 lineNumber: 19,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
-                children: "Beatriz"
-            }, void 0, false, {
-                fileName: "src/components/home.js",
-                lineNumber: 23,
                 columnNumber: 7
             }, this)
         ]
@@ -37474,7 +37467,7 @@ var _appusersScss = require("../styles/appusers.scss");
 var _s = $RefreshSig$();
 const Customers = ()=>{
     _s();
-    const url = `${"http://localhost:5000"}/api/companies`;
+    const url = `${"https://reactfscloudsql.nw.r.appspot.com"}/api/companies`;
     const [customers, setCustomers] = (0, _react.useState)([]);
     // Hooks Passing the data array for sorting. 
     const { items: sortedCustomers, requestSort, sortConfig } = (0, _sortingTables.useSortableData)(customers, {
@@ -37707,8 +37700,9 @@ const Customers = ()=>{
                                 lineNumber: 99,
                                 columnNumber: 21
                             }, undefined),
+                            "                        ",
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("table", {
-                                className: "horizontal-table",
+                                className: "horizontal-table customers-table",
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("thead", {
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tr", {
@@ -37717,15 +37711,15 @@ const Customers = ()=>{
                                                     children: "Edit"
                                                 }, void 0, false, {
                                                     fileName: "src/components/customers.js",
-                                                    lineNumber: 103,
-                                                    columnNumber: 33
+                                                    lineNumber: 104,
+                                                    columnNumber: 37
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                                     children: "Delete"
                                                 }, void 0, false, {
                                                     fileName: "src/components/customers.js",
-                                                    lineNumber: 104,
-                                                    columnNumber: 33
+                                                    lineNumber: 105,
+                                                    columnNumber: 37
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                                     className: "sortable",
@@ -37733,32 +37727,6 @@ const Customers = ()=>{
                                                     onClick: ()=>requestSort("companyId"),
                                                     children: [
                                                         "Corp. Id ",
-                                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                                            className: "sort-indicator",
-                                                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactFontawesome.FontAwesomeIcon), {
-                                                                icon: (0, _freeSolidSvgIcons.faSort)
-                                                            }, void 0, false, {
-                                                                fileName: "src/components/customers.js",
-                                                                lineNumber: 105,
-                                                                columnNumber: 163
-                                                            }, undefined)
-                                                        }, void 0, false, {
-                                                            fileName: "src/components/customers.js",
-                                                            lineNumber: 105,
-                                                            columnNumber: 130
-                                                        }, undefined)
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "src/components/customers.js",
-                                                    lineNumber: 105,
-                                                    columnNumber: 33
-                                                }, undefined),
-                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
-                                                    className: "sortable",
-                                                    title: "Click to Sort",
-                                                    onClick: ()=>requestSort("companyName"),
-                                                    children: [
-                                                        "Corp. Name ",
                                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                                             className: "sort-indicator",
                                                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactFontawesome.FontAwesomeIcon), {
@@ -37777,7 +37745,33 @@ const Customers = ()=>{
                                                 }, void 0, true, {
                                                     fileName: "src/components/customers.js",
                                                     lineNumber: 106,
-                                                    columnNumber: 33
+                                                    columnNumber: 37
+                                                }, undefined),
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
+                                                    className: "sortable",
+                                                    title: "Click to Sort",
+                                                    onClick: ()=>requestSort("companyName"),
+                                                    children: [
+                                                        "Corp. Name ",
+                                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                            className: "sort-indicator",
+                                                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactFontawesome.FontAwesomeIcon), {
+                                                                icon: (0, _freeSolidSvgIcons.faSort)
+                                                            }, void 0, false, {
+                                                                fileName: "src/components/customers.js",
+                                                                lineNumber: 107,
+                                                                columnNumber: 171
+                                                            }, undefined)
+                                                        }, void 0, false, {
+                                                            fileName: "src/components/customers.js",
+                                                            lineNumber: 107,
+                                                            columnNumber: 138
+                                                        }, undefined)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "src/components/customers.js",
+                                                    lineNumber: 107,
+                                                    columnNumber: 37
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                                     className: "sortable",
@@ -37791,19 +37785,19 @@ const Customers = ()=>{
                                                                 icon: (0, _freeSolidSvgIcons.faSort)
                                                             }, void 0, false, {
                                                                 fileName: "src/components/customers.js",
-                                                                lineNumber: 107,
-                                                                columnNumber: 167
+                                                                lineNumber: 108,
+                                                                columnNumber: 171
                                                             }, undefined)
                                                         }, void 0, false, {
                                                             fileName: "src/components/customers.js",
-                                                            lineNumber: 107,
-                                                            columnNumber: 134
+                                                            lineNumber: 108,
+                                                            columnNumber: 138
                                                         }, undefined)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "src/components/customers.js",
-                                                    lineNumber: 107,
-                                                    columnNumber: 33
+                                                    lineNumber: 108,
+                                                    columnNumber: 37
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                                     className: "sortable",
@@ -37817,43 +37811,43 @@ const Customers = ()=>{
                                                                 icon: (0, _freeSolidSvgIcons.faSort)
                                                             }, void 0, false, {
                                                                 fileName: "src/components/customers.js",
-                                                                lineNumber: 108,
-                                                                columnNumber: 162
+                                                                lineNumber: 109,
+                                                                columnNumber: 166
                                                             }, undefined)
                                                         }, void 0, false, {
                                                             fileName: "src/components/customers.js",
-                                                            lineNumber: 108,
-                                                            columnNumber: 129
+                                                            lineNumber: 109,
+                                                            columnNumber: 133
                                                         }, undefined)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "src/components/customers.js",
-                                                    lineNumber: 108,
-                                                    columnNumber: 33
+                                                    lineNumber: 109,
+                                                    columnNumber: 37
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/customers.js",
-                                            lineNumber: 102,
-                                            columnNumber: 29
+                                            lineNumber: 103,
+                                            columnNumber: 33
                                         }, undefined)
                                     }, void 0, false, {
                                         fileName: "src/components/customers.js",
-                                        lineNumber: 101,
-                                        columnNumber: 25
+                                        lineNumber: 102,
+                                        columnNumber: 29
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tbody", {
                                         children: renderTableRows
                                     }, void 0, false, {
                                         fileName: "src/components/customers.js",
-                                        lineNumber: 111,
-                                        columnNumber: 25
+                                        lineNumber: 112,
+                                        columnNumber: 29
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/customers.js",
-                                lineNumber: 100,
-                                columnNumber: 21
+                                lineNumber: 101,
+                                columnNumber: 29
                             }, undefined)
                         ]
                     }, void 0, true, {
@@ -63432,7 +63426,7 @@ function Appusers() {
     });
     const [companies, setCompanies] = (0, _react.useState)([]);
     const [intCompUser, setIntCompUser] = (0, _react.useState)([]);
-    const url = "http://localhost:5000";
+    const url = "https://reactfscloudsql.nw.r.appspot.com";
     const { items: sortedAppUsers, requestSort, sortConfig } = (0, _sortingTables.useSortableData)(appUsers, {
         key: "lastName",
         direction: "ascending"
@@ -63706,7 +63700,7 @@ function Appusers() {
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("table", {
-                                className: "horizontal-table",
+                                className: "horizontal-table appusers-table",
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("thead", {
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tr", {
@@ -64912,7 +64906,7 @@ const Info = Object.freeze({
         name: "FS Bottega Final Project: Hoakeen",
         version: {
             major: 1,
-            minor: 7,
+            minor: 8,
             patch: 0,
             toString () {
                 return `${this.major}.${this.minor}.${this.patch}`;
@@ -64921,6 +64915,16 @@ const Info = Object.freeze({
     },
     notes: [
         //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+        {
+            version: "v1.8.0",
+            title: "Multiple things",
+            details: [
+                "Download Included Order List and Details",
+                "\uD83D\uDEA7 CSV Dowload for non Google users",
+                "New OAuth.js but not convinced",
+                "CSS Modif to CRM & CRM_Order_Details"
+            ]
+        },
         {
             version: "v1.7.0",
             title: "Added / Refactored Many things",
@@ -65250,7 +65254,7 @@ var _crmScss = require("../styles/crm.scss");
 var _s = $RefreshSig$();
 const CRM = ()=>{
     _s();
-    const url = "http://localhost:5000";
+    const url = "https://reactfscloudsql.nw.r.appspot.com";
     const { user } = (0, _react.useContext)((0, _context.Context));
     const [companies, setCompanies] = (0, _react.useState)([]);
     const [selectedCompany, setSelectedCompany] = (0, _react.useState)(null);
@@ -65371,13 +65375,13 @@ const CRM = ()=>{
                                 props_OrderSelect: handleOrderSelect
                             }, void 0, false, {
                                 fileName: "src/components/crm.js",
-                                lineNumber: 110,
+                                lineNumber: 109,
                                 columnNumber: 29
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/crm.js",
-                            lineNumber: 109,
-                            columnNumber: 25
+                            lineNumber: 108,
+                            columnNumber: 21
                         }, undefined),
                         selectedOrder && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                             className: "crm-order-detail",
@@ -65385,12 +65389,12 @@ const CRM = ()=>{
                                 props_orderId: selectedOrder
                             }, void 0, false, {
                                 fileName: "src/components/crm.js",
-                                lineNumber: 115,
+                                lineNumber: 114,
                                 columnNumber: 25
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/crm.js",
-                            lineNumber: 114,
+                            lineNumber: 113,
                             columnNumber: 21
                         }, undefined)
                     ]
@@ -65444,33 +65448,43 @@ var _s = $RefreshSig$();
 // The parent then manages the state as needed.
 const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompanyList })=>{
     _s();
+    const [selectedCompany, setSelectedCompany] = (0, _react.useState)(null);
     // For Filters
     const [selectedStatus, setSelectedStatus] = (0, _react.useState)("All");
     const [selectedIndustry, setSelectedIndustry] = (0, _react.useState)("All");
-    const [selectedCompany, setSelectedCompany] = (0, _react.useState)(null);
-    const [industries, setIndustries] = (0, _react.useState)([]);
+    const [allIndustries, setAllIndustries] = (0, _react.useState)([]);
+    const [industriesFiltered, setIndustriesFiltered] = (0, _react.useState)([]);
+    const [filteredCompanies, setFilteredCompanies] = (0, _react.useState)([]);
     const [disableFilters, setDisableFilters] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
-        // Unique Comp.Industry for Dropdown options
-        uniqueIndustry();
+        const newFilteredCompanies = props_companies.filter((company)=>{
+            let statusMatch = selectedStatus === "All" || company.status === selectedStatus;
+            let industryMatch = selectedIndustry === "All" || company.industry === selectedIndustry;
+            return statusMatch && industryMatch;
+        });
+        setFilteredCompanies(newFilteredCompanies);
     }, [
         props_companies,
-        props_companySelect
+        props_companySelect,
+        selectedIndustry
+    ]);
+    (0, _react.useEffect)(()=>{
+        const uniqueAllIndustries = [
+            "All",
+            ...new Set(props_companies.map((company)=>company.industry))
+        ];
+        setAllIndustries(uniqueAllIndustries);
+        uniqueIndustry();
+    }, [
+        filteredCompanies
     ]);
     function uniqueIndustry() {
         const uniqueIndustries = [
             "All",
             ...new Set(filteredCompanies.map((company)=>company.industry))
         ];
-        console.log("\uD83D\uDD35 uniqueIndustries: ", uniqueIndustries);
-        setIndustries(uniqueIndustries);
+        setIndustriesFiltered(uniqueIndustries);
     }
-    // Filter by multiple conditions
-    const filteredCompanies = props_companies.filter((company)=>{
-        let statusMatch = selectedStatus === "All" || company.status === selectedStatus;
-        let industryMatch = selectedIndustry === "All" || company.industry === selectedIndustry;
-        return statusMatch && industryMatch;
-    });
     (0, _react.useEffect)(()=>{
         if (!selectedCompany) {
             resetFilters();
@@ -65499,7 +65513,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                 children: "Customers"
             }, void 0, false, {
                 fileName: "src/components/crm_company_list.js",
-                lineNumber: 67,
+                lineNumber: 71,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -65514,14 +65528,14 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                                         icon: (0, _freeSolidSvgIcons.faFilter)
                                     }, void 0, false, {
                                         fileName: "src/components/crm_company_list.js",
-                                        lineNumber: 70,
+                                        lineNumber: 74,
                                         columnNumber: 28
                                     }, undefined),
                                     " Status "
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/crm_company_list.js",
-                                lineNumber: 70,
+                                lineNumber: 74,
                                 columnNumber: 21
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -65536,7 +65550,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                                         children: "Active"
                                     }, void 0, false, {
                                         fileName: "src/components/crm_company_list.js",
-                                        lineNumber: 73,
+                                        lineNumber: 77,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -65544,7 +65558,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                                         children: "Inactive"
                                     }, void 0, false, {
                                         fileName: "src/components/crm_company_list.js",
-                                        lineNumber: 74,
+                                        lineNumber: 78,
                                         columnNumber: 25
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -65552,19 +65566,19 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                                         children: "All"
                                     }, void 0, false, {
                                         fileName: "src/components/crm_company_list.js",
-                                        lineNumber: 75,
+                                        lineNumber: 79,
                                         columnNumber: 25
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/crm_company_list.js",
-                                lineNumber: 71,
+                                lineNumber: 75,
                                 columnNumber: 21
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/crm_company_list.js",
-                        lineNumber: 69,
+                        lineNumber: 73,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -65576,14 +65590,14 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                                         icon: (0, _freeSolidSvgIcons.faFilter)
                                     }, void 0, false, {
                                         fileName: "src/components/crm_company_list.js",
-                                        lineNumber: 79,
+                                        lineNumber: 83,
                                         columnNumber: 28
                                     }, undefined),
                                     "Indus."
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/crm_company_list.js",
-                                lineNumber: 79,
+                                lineNumber: 83,
                                 columnNumber: 21
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -65592,29 +65606,36 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                                 onChange: (e)=>{
                                     setSelectedIndustry(e.target.value), props_resetCompanyList();
                                 },
-                                children: industries.map((industry)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                children: selectedStatus === "All" ? allIndustries.map((industry)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
                                         value: industry,
                                         children: industry
                                     }, industry, false, {
                                         fileName: "src/components/crm_company_list.js",
-                                        lineNumber: 82,
-                                        columnNumber: 53
+                                        lineNumber: 87,
+                                        columnNumber: 62
+                                    }, undefined)) : industriesFiltered.map((industry)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: industry,
+                                        children: industry
+                                    }, industry, false, {
+                                        fileName: "src/components/crm_company_list.js",
+                                        lineNumber: 88,
+                                        columnNumber: 66
                                     }, undefined))
                             }, void 0, false, {
                                 fileName: "src/components/crm_company_list.js",
-                                lineNumber: 80,
+                                lineNumber: 84,
                                 columnNumber: 21
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/crm_company_list.js",
-                        lineNumber: 78,
+                        lineNumber: 82,
                         columnNumber: 17
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/crm_company_list.js",
-                lineNumber: 68,
+                lineNumber: 72,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -65630,14 +65651,14 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                                 icon: (0, _freeSolidSvgIcons.faFilter)
                             }, void 0, false, {
                                 fileName: "src/components/crm_company_list.js",
-                                lineNumber: 89,
+                                lineNumber: 95,
                                 columnNumber: 25
                             }, undefined),
                             " Reset Filters"
                         ]
                     }, void 0, true, {
                         fileName: "src/components/crm_company_list.js",
-                        lineNumber: 87,
+                        lineNumber: 93,
                         columnNumber: 21
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -65651,46 +65672,49 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                         children: "All Customers"
                     }, void 0, false, {
                         fileName: "src/components/crm_company_list.js",
-                        lineNumber: 91,
+                        lineNumber: 97,
                         columnNumber: 21
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/crm_company_list.js",
-                lineNumber: 86,
+                lineNumber: 92,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "filtered-companies",
-                children: filteredCompanies.map((company)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: filteredCompanies.map((company)=>{
+                    const inactiveClass = company.status === "inactive" ? "inactive-company" : "";
+                    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         "data-company-id": company.companyId,
-                        className: "company-item",
+                        className: `company-item ${inactiveClass}`,
                         onClick: ()=>handleCompanyClick(company.companyId),
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                             children: `${company.companyName} | ${company.industry} [${company.status}]`
                         }, void 0, false, {
                             fileName: "src/components/crm_company_list.js",
-                            lineNumber: 102,
-                            columnNumber: 25
+                            lineNumber: 111,
+                            columnNumber: 29
                         }, undefined)
                     }, company.companyId, false, {
                         fileName: "src/components/crm_company_list.js",
-                        lineNumber: 98,
-                        columnNumber: 21
-                    }, undefined))
+                        lineNumber: 107,
+                        columnNumber: 25
+                    }, undefined);
+                })
             }, void 0, false, {
                 fileName: "src/components/crm_company_list.js",
-                lineNumber: 96,
+                lineNumber: 102,
                 columnNumber: 13
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/crm_company_list.js",
-        lineNumber: 66,
+        lineNumber: 70,
         columnNumber: 9
     }, undefined);
 };
-_s(CRMCompanyList, "ftNa01RROIEMFzsKdsdLy+mam50=");
+_s(CRMCompanyList, "9MR6MMWyvJYH7Ms9rq9/AP7chW0=");
 _c = CRMCompanyList;
 exports.default = CRMCompanyList;
 var _c;

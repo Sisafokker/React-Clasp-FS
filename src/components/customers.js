@@ -97,21 +97,23 @@ const Customers = () => {
                 </div>
                 <div className='horizontal-table-container'>
                     <div className='section-title'>Customers</div>
-                    <table className='horizontal-table'>
-                        <thead>
-                            <tr>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('companyId')}>Corp. Id <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
-                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('companyName')}>Corp. Name <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
-                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('companyAddress')}>Address <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
-                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('industry')}>Industry <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {renderTableRows}
-                        </tbody>
-                    </table>
+{/*                     <div className='mobile-scroll-table'>
+ */}                        <table className='horizontal-table customers-table'>
+                            <thead>
+                                <tr>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                    <th className="sortable" title="Click to Sort" onClick={() => requestSort('companyId')}>Corp. Id <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                    <th className="sortable" title="Click to Sort" onClick={() => requestSort('companyName')}>Corp. Name <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                    <th className="sortable" title="Click to Sort" onClick={() => requestSort('companyAddress')}>Address <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                    <th className="sortable" title="Click to Sort" onClick={() => requestSort('industry')}>Industry <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {renderTableRows}
+                            </tbody>
+                        </table>
+{/*                     </div> */}
                 </div>
             </div>
         </div >

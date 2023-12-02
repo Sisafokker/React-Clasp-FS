@@ -105,8 +105,7 @@ const CRM = () => {
                     )}
                 </div>
                 <div className="crm-orders">
-                    
-                        <div className="crm-order-list">
+                    <div className="crm-order-list">
                             <CRMOrderList props_companyId={selectedCompany} props_companyDetails={selectedCompanyDetails} props_OrderSelect={handleOrderSelect} />
                         </div>
                     

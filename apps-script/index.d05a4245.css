@@ -7,7 +7,7 @@
 }
 
 .container {
-  border: 1px solid #00f;
+  border: 2px solid #00f;
   flex: 1;
   width: 100%;
   max-width: 100%;
@@ -16,22 +16,11 @@
   padding-bottom: 10px;
 }
 
-@media screen and (width <= 768px) {
-  .app-wrapper {
-    background-color: #add8e6;
-    max-width: 768px;
-    margin: 0 auto;
-  }
-
-  .navUser-wrapper {
-    background-color: #000;
-  }
-
+@media screen and (width <= 600px) {
   .container {
-    background-color: #ff0;
-    max-width: 768px;
-    margin: 0 auto;
-    padding: 0;
+    background-color: gray;
+    border: 2px solid red;
+    padding-top: 155px;
   }
 }
 
@@ -51,15 +40,9 @@ h1 {
   font-size: 24px;
 }
 
-@media screen and (width <= 768px) {
-  h1 {
-    font-size: 20.4px;
-  }
-}
-
 @media screen and (width <= 600px) {
   h1 {
-    font-size: 18px;
+    font-size: 21.6px;
   }
 }
 
@@ -68,15 +51,9 @@ h2 {
   font-size: 20px;
 }
 
-@media screen and (width <= 768px) {
-  h2 {
-    font-size: 17px;
-  }
-}
-
 @media screen and (width <= 600px) {
   h2 {
-    font-size: 15px;
+    font-size: 18px;
   }
 }
 
@@ -85,15 +62,9 @@ h3 {
   font-size: 18px;
 }
 
-@media screen and (width <= 768px) {
-  h3 {
-    font-size: 15.3px;
-  }
-}
-
 @media screen and (width <= 600px) {
   h3 {
-    font-size: 13.5px;
+    font-size: 16.2px;
   }
 }
 
@@ -102,15 +73,9 @@ p {
   font-size: 14px;
 }
 
-@media screen and (width <= 768px) {
-  p {
-    font-size: 11.9px;
-  }
-}
-
 @media screen and (width <= 600px) {
   p {
-    font-size: 10.5px;
+    font-size: 12.6px;
   }
 }
 
@@ -131,15 +96,9 @@ button, input[type="submit"] {
   transition: background-color .2s;
 }
 
-@media screen and (width <= 768px) {
-  button, input[type="submit"] {
-    font-size: 10.2px;
-  }
-}
-
 @media screen and (width <= 600px) {
   button, input[type="submit"] {
-    font-size: 9px;
+    font-size: 10.8px;
   }
 }
 
@@ -181,15 +140,9 @@ button.cancel:disabled {
   background-color: #ddd;
 }
 
-@media screen and (width <= 768px) {
-  button.cancel {
-    font-size: 10.2px;
-  }
-}
-
 @media screen and (width <= 600px) {
   button.cancel {
-    font-size: 9px;
+    font-size: 10.8px;
   }
 }
 
@@ -250,15 +203,9 @@ select {
   font-size: 14px;
 }
 
-@media screen and (width <= 768px) {
-  .horizontal-table th, .horizontal-table td {
-    font-size: 11.9px;
-  }
-}
-
 @media screen and (width <= 600px) {
   .horizontal-table th, .horizontal-table td {
-    font-size: 10.5px;
+    font-size: 12.6px;
   }
 }
 
@@ -285,6 +232,12 @@ select {
   font-size: .8em;
 }
 
+@media screen and (width <= 600px) {
+  .horizontal-table th:nth-child(100), .horizontal-table th:nth-child(100), .horizontal-table th:nth-child(100), .horizontal-table td:nth-child(100), .horizontal-table td:nth-child(100), .horizontal-table td:nth-child(100) {
+    display: none;
+  }
+}
+
 .vertical-table {
   border-collapse: collapse;
   width: 98%;
@@ -300,15 +253,9 @@ select {
   font-weight: 600;
 }
 
-@media screen and (width <= 768px) {
-  .vertical-table tr th, .vertical-table tr td {
-    font-size: 11.9px;
-  }
-}
-
 @media screen and (width <= 600px) {
   .vertical-table tr th, .vertical-table tr td {
-    font-size: 10.5px;
+    font-size: 12.6px;
   }
 }
 
@@ -352,15 +299,9 @@ select {
   transition: color .3s;
 }
 
-@media screen and (width <= 768px) {
-  .nav-wrapper .nav-link {
-    font-size: 14.45px;
-  }
-}
-
 @media screen and (width <= 600px) {
   .nav-wrapper .nav-link {
-    font-size: 12.75px;
+    font-size: 15.3px;
   }
 }
 
@@ -368,7 +309,7 @@ select {
   color: #026f7e;
 }
 
-@media screen and (width <= 768px) {
+@media screen and (width <= 600px) {
   .nav-wrapper .nav-link:not(:last-child) {
     margin-right: 10px;
   }
@@ -379,7 +320,7 @@ select {
   font-weight: 700;
 }
 
-@media screen and (width <= 768px) {
+@media screen and (width <= 600px) {
   .nav-wrapper {
     background-color: #ff3030;
   }
@@ -468,15 +409,9 @@ select {
   transition: background-color .2s;
 }
 
-@media screen and (width <= 768px) {
-  .auth-wrapper .user-wrapper .sign-out-button {
-    font-size: 10.2px;
-  }
-}
-
 @media screen and (width <= 600px) {
   .auth-wrapper .user-wrapper .sign-out-button {
-    font-size: 9px;
+    font-size: 10.8px;
   }
 }
 
@@ -547,15 +482,9 @@ select {
   font-size: 14px;
 }
 
-@media screen and (width <= 768px) {
-  .oauth-form-container form .input-group label {
-    font-size: 11.9px;
-  }
-}
-
 @media screen and (width <= 600px) {
   .oauth-form-container form .input-group label {
-    font-size: 10.5px;
+    font-size: 12.6px;
   }
 }
 
@@ -608,15 +537,9 @@ select {
   font-size: 14px;
 }
 
-@media screen and (width <= 768px) {
-  .oauth-form-container .error, .oauth-form-container .success {
-    font-size: 11.9px;
-  }
-}
-
 @media screen and (width <= 600px) {
   .oauth-form-container .error, .oauth-form-container .success {
-    font-size: 10.5px;
+    font-size: 12.6px;
   }
 }
 
@@ -625,15 +548,9 @@ select {
   font-size: 14px;
 }
 
-@media screen and (width <= 768px) {
-  .oauth-form-container .error {
-    font-size: 11.9px;
-  }
-}
-
 @media screen and (width <= 600px) {
   .oauth-form-container .error {
-    font-size: 10.5px;
+    font-size: 12.6px;
   }
 }
 
@@ -642,15 +559,9 @@ select {
   font-size: 14px;
 }
 
-@media screen and (width <= 768px) {
-  .oauth-form-container .success {
-    font-size: 11.9px;
-  }
-}
-
 @media screen and (width <= 600px) {
   .oauth-form-container .success {
-    font-size: 10.5px;
+    font-size: 12.6px;
   }
 }
 
@@ -707,6 +618,102 @@ h3 {
   box-shadow: 0 0 15px #00000019;
 }
 
+.container .component-wrapper .horizontal-table-container .appusers-table {
+  border-collapse: collapse;
+  width: 98%;
+  margin: 0 auto;
+}
+
+.container .component-wrapper .horizontal-table-container .appusers-table th, .container .component-wrapper .horizontal-table-container .appusers-table td {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  font-size: 14px;
+}
+
+@media screen and (width <= 600px) {
+  .container .component-wrapper .horizontal-table-container .appusers-table th, .container .component-wrapper .horizontal-table-container .appusers-table td {
+    font-size: 12.6px;
+  }
+}
+
+.container .component-wrapper .horizontal-table-container .appusers-table th {
+  color: #f6f6f6;
+  font-weight: none;
+  background-color: #464646;
+}
+
+.container .component-wrapper .horizontal-table-container .appusers-table tr:nth-child(2n) {
+  background-color: #f2f2f2;
+}
+
+.container .component-wrapper .horizontal-table-container .appusers-table th.sortable {
+  cursor: pointer;
+}
+
+.container .component-wrapper .horizontal-table-container .appusers-table tr:hover {
+  background-color: #ddd;
+}
+
+.container .component-wrapper .horizontal-table-container .appusers-table .sort-indicator {
+  color: #f6f6f6;
+  font-size: .8em;
+}
+
+@media screen and (width <= 600px) {
+  .container .component-wrapper .horizontal-table-container .appusers-table th:nth-child(3), .container .component-wrapper .horizontal-table-container .appusers-table th:nth-child(4), .container .component-wrapper .horizontal-table-container .appusers-table th:nth-child(100), .container .component-wrapper .horizontal-table-container .appusers-table td:nth-child(3), .container .component-wrapper .horizontal-table-container .appusers-table td:nth-child(4), .container .component-wrapper .horizontal-table-container .appusers-table td:nth-child(100) {
+    display: none;
+  }
+}
+
+.container .component-wrapper .horizontal-table-container .customers-table {
+  border-collapse: collapse;
+  width: 98%;
+  margin: 0 auto;
+}
+
+.container .component-wrapper .horizontal-table-container .customers-table th, .container .component-wrapper .horizontal-table-container .customers-table td {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  font-size: 14px;
+}
+
+@media screen and (width <= 600px) {
+  .container .component-wrapper .horizontal-table-container .customers-table th, .container .component-wrapper .horizontal-table-container .customers-table td {
+    font-size: 12.6px;
+  }
+}
+
+.container .component-wrapper .horizontal-table-container .customers-table th {
+  color: #f6f6f6;
+  font-weight: none;
+  background-color: #464646;
+}
+
+.container .component-wrapper .horizontal-table-container .customers-table tr:nth-child(2n) {
+  background-color: #f2f2f2;
+}
+
+.container .component-wrapper .horizontal-table-container .customers-table th.sortable {
+  cursor: pointer;
+}
+
+.container .component-wrapper .horizontal-table-container .customers-table tr:hover {
+  background-color: #ddd;
+}
+
+.container .component-wrapper .horizontal-table-container .customers-table .sort-indicator {
+  color: #f6f6f6;
+  font-size: .8em;
+}
+
+@media screen and (width <= 600px) {
+  .container .component-wrapper .horizontal-table-container .customers-table th:nth-child(100), .container .component-wrapper .horizontal-table-container .customers-table th:nth-child(100), .container .component-wrapper .horizontal-table-container .customers-table th:nth-child(100), .container .component-wrapper .horizontal-table-container .customers-table td:nth-child(100), .container .component-wrapper .horizontal-table-container .customers-table td:nth-child(100), .container .component-wrapper .horizontal-table-container .customers-table td:nth-child(100) {
+    display: none;
+  }
+}
+
 .form-container {
   width: 100%;
   margin: 0 auto;
@@ -729,15 +736,9 @@ h3 {
   display: flex;
 }
 
-@media screen and (width <= 768px) {
-  .form-container label {
-    font-size: 11.9px;
-  }
-}
-
 @media screen and (width <= 600px) {
   .form-container label {
-    font-size: 10.5px;
+    font-size: 12.6px;
   }
 }
 
@@ -776,7 +777,12 @@ h3 {
   margin: 0 auto;
 }
 
-@media screen and (width <= 768px) {
+@media screen and (width <= 600px) {
+  .footer-container .footer-wrapper .footer-Col:nth-child(2) {
+    margin-top: -25px;
+    margin-bottom: -20px;
+  }
+
   .footer-container .footer-wrapper {
     grid-template-columns: 1fr;
   }
@@ -878,7 +884,30 @@ h3 {
 }
 
 .crm-company-list .filtered-companies .company-item.selected-company {
-  background-color: #26bfd4;
+  background-color: #3d9900;
+}
+
+.crm-company-list .filtered-companies .company-item.selected-company p {
+  color: #f6f6f6;
+}
+
+.crm-company-list .filtered-companies .inactive-company p {
+  color: #ff6868;
+  font-style: italic;
+}
+
+@media screen and (width <= 600px) {
+  .crm-company-list .filtered-companies .inactive-company p {
+    color: #f6f6f6;
+  }
+}
+
+.crm-company-list .filtered-companies .company-item.inactive-company.selected-company {
+  background-color: #ff6868;
+}
+
+.crm-company-list .filtered-companies .company-item.inactive-company.selected-company p {
+  color: #f6f6f6;
 }
 
 .crm-company-detail .section-title {
@@ -903,15 +932,9 @@ h3 {
   font-weight: 600;
 }
 
-@media screen and (width <= 768px) {
-  .crm-company-detail .vertical-table tr th, .crm-company-detail .vertical-table tr td {
-    font-size: 11.9px;
-  }
-}
-
 @media screen and (width <= 600px) {
   .crm-company-detail .vertical-table tr th, .crm-company-detail .vertical-table tr td {
-    font-size: 10.5px;
+    font-size: 12.6px;
   }
 }
 
@@ -1028,15 +1051,9 @@ h3 {
   font-size: 16px;
 }
 
-@media screen and (width <= 768px) {
-  .crm-order-list .crm-order-list .section-btns a {
-    font-size: 13.6px;
-  }
-}
-
 @media screen and (width <= 600px) {
   .crm-order-list .crm-order-list .section-btns a {
-    font-size: 12px;
+    font-size: 14.4px;
   }
 }
 
@@ -1045,15 +1062,9 @@ h3 {
   font-size: 16px;
 }
 
-@media screen and (width <= 768px) {
-  .crm-order-list .crm-order-list .section-btns span {
-    font-size: 13.6px;
-  }
-}
-
 @media screen and (width <= 600px) {
   .crm-order-list .crm-order-list .section-btns span {
-    font-size: 12px;
+    font-size: 14.4px;
   }
 }
 
@@ -1181,7 +1192,13 @@ h3 {
   align-items: center;
   display: flex;
   position: fixed;
-  inset: 0;
+  inset: 70px 0 0;
+}
+
+@media screen and (width <= 600px) {
+  .popup-container {
+    top: 90px;
+  }
 }
 
 .popup-container .popup-header {
@@ -1196,19 +1213,9 @@ h3 {
   font-size: 1.2em;
 }
 
-.popup-container .popup-header button {
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 1.2em;
-}
-
-.popup-container .popup-header button:hover {
-  color: #e0e0e0;
-}
-
 .popup-container .popup-content {
   background-color: #f6f6f6;
+  border: 5px solid #026f7e;
   border-radius: 8px;
   width: 100%;
   max-width: 500px;
@@ -1240,12 +1247,24 @@ h3 {
 }
 
 .popup-container .popup-content .product-image img {
+  border: 1px solid #026f7e;
+  border-radius: 10px;
   width: auto;
-  max-width: 350px;
+  max-width: 500px;
   height: auto;
   max-height: 350px;
-  margin: 0 auto;
+  margin: 5px auto 0;
   display: block;
+}
+
+@media screen and (width <= 600px) {
+  .popup-container .popup-content .product-image img {
+    max-height: 250px;
+  }
+
+  .popup-container .popup-content {
+    max-width: 85%;
+  }
 }
 
 .input, select {
@@ -1274,6 +1293,12 @@ h3 {
   display: flex;
 }
 
+@media screen and (width <= 600px) {
+  .crm-main {
+    flex-direction: column;
+  }
+}
+
 .crm-companies {
   flex-direction: column;
   flex-basis: 25%;
@@ -1288,15 +1313,23 @@ h3 {
   box-shadow: 0 0 15px #00000019;
 }
 
+@media screen and (width <= 600px) {
+  .crm-companies, .crm-orders {
+    flex-basis: auto;
+    width: 100%;
+  }
+}
+
 .crm-company-list, .crm-company-details, .crm-order-list, .crm-order-detail {
-  min-height: 150px;
+  min-height: 200px;
   box-shadow: 0 0 15px #00000019;
 }
 
-.custom-image img {
-  width: 60%;
-  max-width: 600px;
-  margin-top: 10px;
+@media screen and (width <= 600px) {
+  .crm-company-list, .crm-company-details, .crm-order-list, .crm-order-detail {
+    width: 100%;
+    min-height: auto;
+  }
 }
 
 .label {

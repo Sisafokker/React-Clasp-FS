@@ -70,8 +70,28 @@
 
       
       &.selected-company { // when .selected-company IS present
-        background-color: $teal; 
+        background-color: $success; 
+        p {
+          color: $offwhite;
+        }
+      }
+
+    }
+
+    .inactive-company p {
+      color: $inactiveColor;
+      font-style: italic;
+      @media screen and (max-width: $mobile) {
+        color: $offwhite;
+       }
+    }
+
+    .company-item.inactive-company.selected-company {
+      background-color: $inactiveColor;
+      p {
+        color: $offwhite;
       }
     }
+
   }
 }

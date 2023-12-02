@@ -28,7 +28,7 @@
     justify-content: left; // Horiz.
 }
 
-@mixin responsiveTable_Horizontal {
+@mixin responsiveTable_Horizontal ($hideCol1: 100, $hideCol2: 100, $hideCol3: 100){
     width: 98%;
     border-collapse: collapse;
     margin: 0 auto;
@@ -63,6 +63,16 @@
         font-size: 0.8em;
         color: $offwhite;
     }
+
+    @media screen and (max-width: $mobile) {
+        th, td {
+            &:nth-child(#{$hideCol1}), 
+            &:nth-child(#{$hideCol2}),
+            &:nth-child(#{$hideCol3}) {
+                display: none;
+            }
+        }
+    }
 }
 
 @mixin responsiveTable_Vertical {
@@ -77,8 +87,8 @@
             border-bottom: 1px solid $lightgrey;
             //background-color: $tableheader;
             font-weight: 600;
-            word-wrap: break-word;     // Words wrap within cell (like in Sheets)
-            overflow-wrap: break-word; // Breaks long words to wrap
+            word-wrap: break-word;     // Words wrap incell (like in Sheets)
+            overflow-wrap: break-word; // Forces long words to wrap incell
         }
 
 
@@ -154,11 +164,7 @@
 @mixin responsiveFontSize($size: 14px) {
     font-size: $size;
 
-    @media screen and (max-width: $tablet) {
-        font-size: $size * 0.85;
-    }
-
     @media screen and (max-width: $mobile) {
-        font-size: $size * 0.75;
+        font-size: $size * 0.90;
     }
 }
