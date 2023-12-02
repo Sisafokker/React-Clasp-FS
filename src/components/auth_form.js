@@ -44,14 +44,14 @@ const Auth_Form = () => {
     const url = `${process.env.REACT_APP_Backend_URL}/api/${isSignUp ? 'signup' : 'login'}`;
     try {
       const response = await axios.post(url, requestData);
-      console.log("Success!")
-      console.log(response.data.user)
+      //console.log("Success!: ", response.data.user)
       
       const userObj = {
         name: response.data.user.firstName + " " +response.data.user.lastName,
         email: response.data.user.email,
         type: response.data.user.type,
         status: response.data.user.status,
+        id: response.data.user.id,
         iss: "Not-Google"
       };
 

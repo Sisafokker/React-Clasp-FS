@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faSort } from '@fortawesome/free-solid-svg-icons';
 
 // Components
-import Download from "./download";
+import Download from "../actions/download";
 
 // Hooks
 import { useSortableData } from '../actions/sortingTables';
@@ -24,8 +24,9 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
     const [selectedUserFilter, setSelectedUserFilter] = useState('All');
     const [userEmail, setUserEmail] = useState([]);
 
-    // For totals
+    // For totals & downloads
     const [orderTotals, setOrderTotals] = useState({});
+    const [orderDetailsForDownload, setOrderDetailsForDownload] = useState([]);
 
     // Enrich AND filter orders
     const enrichedAndFilteredOrders = orders.map(order => ({
@@ -45,7 +46,7 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
     let downloadName, companyDetails
     if (props_companyDetails) {
         companyDetails = Object.entries(props_companyDetails);
-        downloadName = `ReactApp_${props_companyDetails.companyName} ${(new Date()).toLocaleDateString()}`;
+        downloadName = `CRM_Download_${props_companyDetails.companyName}_${(new Date()).toLocaleDateString()}`;
         console.log("downloadName", downloadName);
     }
 
@@ -77,7 +78,7 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
                     return map;
                 }, {});
                 setUsers(userMap);
-                console.log("🟡 ALL SQL USERS: ", userMap)
+                //console.log("🟡 ALL SQL USERS: ", userMap)
             } catch (error) {
                 console.error('🟡Error fetching users:', error);
             }
@@ -100,17 +101,35 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
         // Fetch and calculate totals for each order
         const fetchAndCalculateTotals = async () => {
             let newOrderTotals = {};
+            let allOrderDetails = [["OrderId", "CustomerId", "Order Placed","itemId", "Qty", "Unit Price (U$D)", "Total (Qty * U.Price)"]];
+
             for (const order of orders) {
                 const orderDetails = await fetchOrderDetails(order.orderId);
-                let total = orderDetails.reduce((acc, detail) => acc + detail.quantity * detail.unitPrice_usd, 0);
-                newOrderTotals[order.orderId] = total.toFixed(2);
+                if (orderDetails) {
+                    let total = orderDetails.reduce((acc, detail) => acc + detail.quantity * detail.unitPrice_usd, 0);
+                    newOrderTotals[order.orderId] = total.toFixed(2);
+                 
+                    // Format Deatails for download
+                    orderDetails.forEach(detail => {
+                        allOrderDetails.push([
+                            order.orderId,
+                            order.companyId,
+                            new Date(order.orderDate).toLocaleDateString(),
+                            detail.itemId,
+                            detail.quantity,
+                            detail.unitPrice_usd.toFixed(2),
+                            (detail.quantity * detail.unitPrice_usd).toFixed(2)
+                        ]);
+                    });
             }
-            setOrderTotals(newOrderTotals);
-        };
-    
-        if (orders.length > 0) {
-            fetchAndCalculateTotals();
         }
+        setOrderTotals(newOrderTotals);
+        setOrderDetailsForDownload(allOrderDetails);
+    };
+
+    if (orders.length > 0) {
+        fetchAndCalculateTotals();
+    }
     }, [orders]);
     
     
@@ -118,15 +137,21 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
     const fetchOrderDetails = async (orderId) => {
         try {
             const response = await axios.get(`${url}/api/intOrderItem/${orderId}`);
-            return response.data;
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                console.error(`Error: Response status ${response.status} for orderId ${orderId}`);
+                return null;
+            }
         } catch (error) {
             console.error('Error fetching order details:', error);
-            return [];
+            return null;
         }
     };
 
+
     // Create a reverse map from emails to userIds
-    const emailToUserId = Object.fromEntries(Object.entries(users).map(([id, email]) => [email, id]));
+    // const emailToUserId = Object.fromEntries(Object.entries(users).map(([id, email]) => [email, id]));
 
     // Filter by multiple conditions
     const filteredOrders = orders.filter(order => {
@@ -136,12 +161,12 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
     });
 
     // Sorting logic
-    const getSortDirectionText = (key) => {
-        if (sortConfig.key === key) {
-            return sortConfig.direction === 'ascending' ? ' ⬇⬇' : ' ⬆⬆';
-        }
-        return '';
-    };
+    // const getSortDirectionText = (key) => {
+    //     if (sortConfig.key === key) {
+    //         return sortConfig.direction === 'ascending' ? ' ⬇⬇' : ' ⬆⬆';
+    //     }
+    //     return '';
+    // };
 
     const resetFilters = () => {
         setSelectedStatus('All');
@@ -152,14 +177,16 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
         props_OrderSelect(orderId); // Invokes handleOrderSelect() in crm.js & passing orderId as argument.
     };
 
-    const tableHeaders = ["OrderId", "Order Status", "Order Creation", "Order Creator"];
+    const orderTableHeaders = ["OrderId", "Order Status", "Order Creation", "Order Creator"];
     const ordersForDownload = filteredOrders.map(order => [
         order.orderId,
         order.status,
         new Date(order.orderDate).toLocaleDateString(),
         users[order.userId]
     ])
-    if (ordersForDownload && ordersForDownload.length > 0)  { ordersForDownload.unshift(tableHeaders); }
+    if (ordersForDownload && ordersForDownload.length > 0)  { 
+        ordersForDownload.unshift(orderTableHeaders); 
+    }
 
     //if (!orders) return <div>Select an order to see details</div>;
     const payload = { 
@@ -168,6 +195,7 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
         ssName: downloadName, 
         data: [ 
             { swName: "Orders", values: ordersForDownload },  
+            { swName: "Order_Details", values: orderDetailsForDownload  },  
             //{ swName: "Orders_second", values: ordersForDownload }, // One of these objs for each sheet of data
             ], 
         }

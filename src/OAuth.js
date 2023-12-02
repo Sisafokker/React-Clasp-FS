@@ -1,4 +1,4 @@
-// OAuth.js
+// src/OAuth.js
 // Dependencies
 import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios';
@@ -21,31 +21,58 @@ export const AuthContext = React.createContext();
 
 function OAuth({ prop_renderRoutes }) {
     const { user, setUser, setTokenClient } = useContext(Context);
-    //const [tokenClient, setTokenClient] = useState({});
     const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
     const navigate = useNavigate();
 
-    // useEffect hook to handle component initialization and cleanup
+    // Initial Mount
     useEffect(() => {
-        //console.log("CLIENT_ID",CLIENT_ID);
-        const initializeGoogleSignIn = () => {
-            if (window.google && window.google.accounts) {
-                // Google API is loaded, proceed with initialization
-                console.log("👍App initialized");
+        const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+        console.log('CLIENT_ID_1:', CLIENT_ID.slice(0, 2));
+        loadGoogleSignInScript();
+    }, []);
+
+    const loadGoogleSignInScript = () => {
+        if (!window.google) {
+            const script = document.createElement('script');
+            script.src = "https://accounts.google.com/gsi/client";
+            script.onload = () => {
+                console.log('Google Sign-In script loaded');
+                initializeGoogleSignIn();
+            };
+            script.onerror = () => console.error("Error loading Google Sign-In");
+            document.body.appendChild(script);
+        } else {
+            console.log('Google Sign-In script already loaded');
+            initializeGoogleSignIn();
+        }
+    };
+
+    const initializeGoogleSignIn = () => {
+        console.log('Initializing Google Sign-In...');
+        console.log('window.google:', window.google);
+        console.log('CLIENT_ID:', CLIENT_ID.slice(0, 2));
+
+        if (window.google && window.google.accounts) {
+            try {
                 const storedUser = localStorage.getItem("local_user");
+                
                 if (storedUser) {
                     setUser(JSON.parse(storedUser));
                     document.getElementById("googleLogIn").style.display = "none";
-                } else {
-                    window.google.accounts.id.prompt();
-                }
+                } else {                      
+                    window.google.accounts.id.initialize({
+                        client_id: CLIENT_ID,
+                        context: 'signin',
+                        callback: handleCallbackResponse,
+                        cancel_on_tap_outside: false,
+                    });
 
-                window.google.accounts.id.initialize({
-                    client_id: CLIENT_ID,
-                    context: 'signin',
-                    callback: handleCallbackResponse,
-                    cancel_on_tap_outside: false,
-                });
+                    if (CLIENT_ID) {
+                        window.google.accounts.id.prompt();
+                    } else {
+                        console.error("Client ID is missing");
+                    }
+                }
 
                 window.google.accounts.id.renderButton(document.getElementById("googleLogIn"), {
                     theme: "outline",
@@ -53,14 +80,13 @@ function OAuth({ prop_renderRoutes }) {
                     width: 250
                 });
 
-            } else {
-                setTimeout(initializeGoogleSignIn, 100); // Wait and try initializeGoogleSignIn again
+            } catch (e)  {
+                console.log("G.Loaded Google Sign-In initializing error");
             }
-        };
-
-        // Initialize the entire process
-        initializeGoogleSignIn();
-    }, []); // The empty dependency array ensures that this effect runs once after the initial render
+        } else {
+            setTimeout(initializeGoogleSignIn, 100); // Go again
+        }
+    }
     
     function decodeJwtResponse(token) {
         let base64Url = token.split('.')[1];
@@ -75,31 +101,31 @@ function OAuth({ prop_renderRoutes }) {
     function handleCallbackResponse(response) {
         console.log("👍HandleSignIn")
         let userCredentials = response.credential;
-        //let userObject = jwtDecode(userCredentials);          // Alternative 1: Decode the JWT token to get user data
-        let temp_userObject = decodeJwtResponse(userCredentials);    // Alternative 2: To Decode the JWT token
+        //let userObject = jwtDecode(userCredentials);              // Alternative 1: Decode the JWT token to get user data
+        let temp_userObject = decodeJwtResponse(userCredentials);   // Alternative 2: To Decode the JWT token
         
         let userObject = {
             name:  temp_userObject.name,
             email: temp_userObject.email,
-            iss: "Google"
+            iss: "Google",
+            type: null
           };
 
         
         // Verify Google User's type and status in own DB
         axios.post(`${process.env.REACT_APP_Backend_URL}/api/verifyUser`, { email: userObject.email })
         .then(verifResponse => {
-            //console.log("verifResponse", verifResponse.data)
-            const { type, status } = verifResponse.data.user;
+            //console.log("verifResponse", verifResponse.data.user)
+            const { type, status, id } = verifResponse.data.user;
             userObject.type = type;
             userObject.status = status;
+            userObject.id = id;
 
-            // Set user in component state
             setUser(userObject);
             localStorage.setItem("local_user", JSON.stringify(userObject));
 
-            // Render Routes after signin and navigate to the desired route
-            prop_renderRoutes();
-            navigate("/customers");
+            prop_renderRoutes();    // Render Routes after signin 
+            navigate("/customers"); // navigate to the desired route
 
             // Hide SignIn Button
             const allLoginElement = document.getElementById("allLogin");
@@ -119,23 +145,9 @@ function OAuth({ prop_renderRoutes }) {
         console.log("👍handleSignOut")
         localStorage.removeItem("local_user");  // Clear user local storage
         setUser({});                            // Clear user state
-        setTokenClient({});
-            
-        //navigate("/home");
-        // // Show SignIn Div and Prompt
-        // const allLoginElement = document.getElementById("allLogin");
-        // if (allLoginElement) {
-        //     allLoginElement.style.display = "block";
-        // }
-        // //window.google.accounts.id.prompt();
-
-        // if (window.google && window.google.accounts) {
-        //     window.google.accounts.id.prompt();
-        // }
-
+        setTokenClient({}); 
     }
 
-    // Render the OAuth component
     return (
         <div className="auth-wrapper">
             {!user || Object.keys(user).length === 0 && (

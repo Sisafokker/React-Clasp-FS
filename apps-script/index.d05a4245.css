@@ -194,7 +194,6 @@ button.cancel:disabled {
 }
 
 input, select {
-  text-align: center;
   border: 1px solid #ddd;
   width: 98%;
   margin: 2px 0 0;
@@ -326,12 +325,6 @@ select {
 
 .vertical-table tr td:nth-child(2n):hover {
   background-color: #f5f5f5;
-}
-
-.vertical-table tfoot .totals-row td {
-  color: red !important;
-  background-color: #666 !important;
-  font-size: 80% !important;
 }
 
 .auth-wrapper {
@@ -937,12 +930,6 @@ h3 {
   background-color: #f5f5f5;
 }
 
-.crm-company-detail .vertical-table tfoot .totals-row td {
-  color: red !important;
-  background-color: #666 !important;
-  font-size: 80% !important;
-}
-
 .crm-order-list .section-title {
   text-align: center;
   margin-top: 4px;
@@ -1090,8 +1077,9 @@ h3 {
 
 .crm-order-detail .section-title {
   text-align: center;
-  margin-top: 4px;
-  margin-bottom: 8px;
+  margin-top: 15px;
+  margin-bottom: 0;
+  font-weight: 600;
 }
 
 .crm-order-detail .order-filter {
@@ -1111,7 +1099,6 @@ h3 {
 }
 
 .crm-order-detail .order-filter .filter select {
-  text-align: center;
   border: 1px solid #ddd;
   width: 100%;
   margin: 2px 0 0;
@@ -1156,7 +1143,8 @@ h3 {
 }
 
 .crm-order-detail .filtered-orders .order-item {
-  cursor: pointer;
+  cursor: none;
+  background-color: #f6f6f6;
   border-bottom: 1px solid #ccc;
   padding: 5px;
 }
@@ -1166,11 +1154,15 @@ h3 {
 }
 
 .crm-order-detail .filtered-orders .order-item:hover {
-  background-color: #f0f0f0;
+  background-color: #f6f6f6;
 }
 
-.crm-order-detail table th, .crm-order-detail table td {
-  cursor: pointer;
+.crm-order-detail table thead th {
+  background-color: gray;
+}
+
+.crm-order-detail table tbody tr, .crm-order-detail table tbody tr td, .crm-order-detail table tbody tr:hover {
+  background-color: #f6f6f6;
 }
 
 .crm-order-detail table tfoot .totals-row td {
@@ -1225,7 +1217,7 @@ h3 {
 
 .popup-container .popup-content .product-name {
   color: #f6f6f6;
-  background-color: #26bfd4;
+  background-color: #026f7e;
   justify-content: space-between;
   padding: 5px;
   font-weight: bold;
@@ -1257,7 +1249,6 @@ h3 {
 }
 
 .input, select {
-  text-align: center;
   border: 1px solid #ddd;
   width: 98%;
   margin: 2px 0 0;
@@ -1298,7 +1289,7 @@ h3 {
 }
 
 .crm-company-list, .crm-company-details, .crm-order-list, .crm-order-detail {
-  flex-grow: 1;
+  min-height: 150px;
   box-shadow: 0 0 15px #00000019;
 }
 

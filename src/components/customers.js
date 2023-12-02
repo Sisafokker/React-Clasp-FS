@@ -22,30 +22,30 @@ const Customers = () => {
         axios.get(url)
             .then(response => {
                 setCustomers(response.data);
-                console.log("Handle success: ", response.data)
+                //console.log("👍customers.js Get All Customers: ", response.data)
             })
             .catch(error => console.error('Error getting customers:', error));
     }, []);
 
     const addCustomer = (customerData) => {
         axios.post(url, customerData)
-            .then(response => { console.log("Handle success: ", response.data) })
+            .then(response => { console.log("👍 customers.js addCustomer: ", response.data) })
             .catch(error => { console.log("❌ Handle Error") });
     };
 
     const editCustomer = (customerId, updatedData) => {
         axios.patch(`${url}/${customerId}`, updatedData)
-            .then(response => { console.log("Handle success: ", response.data) })
+            .then(response => { console.log("👍 customers.js editCustomer: ", response.data) })
             .catch(error => { console.log("❌ Handle Error") });
     };
 
     const deleteCustomer = (customerId) => {
         axios.delete(`${url}/${customerId}`)
-            .then(response => { console.log("Handle success: ", response.data) })
+            .then(response => { console.log("👍 customers.js deleteCustomer: ", response.data) })
             .catch(error => { console.log("❌ Handle Error") });
     };
 
-    // Adding an indicator when sorting th is clicked... 
+    // Adding a Visual indicator when sorting th is clicked... 
     // const getSortDirectionText = (key) => {
     //     if (sortConfig.key === key) {
     //         return sortConfig.direction === 'ascending' ? ' ⬇⬇' : ' ⬆⬆';
@@ -87,6 +87,7 @@ const Customers = () => {
             </div>
             <div className='component-wrapper'>
                 <div className='form-container'>
+                    {/* 🚧 PENDING CRUD CUSTOMERS 🚧  */}
                     {/* <AppusersForm 
                     prop_handleUserAction={handleUserAction} 
                     prop_userAction={userAction} 

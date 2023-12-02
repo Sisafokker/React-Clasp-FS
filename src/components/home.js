@@ -20,7 +20,7 @@ function Home() {
         src="https://lh3.googleusercontent.com/17JVDv4jno5isn9OoNozJ-ghj_46GKB3mrcu7cHY9EVIG-gI3EYwUyL0BiFOv1cbEzNWTbmr2GfEcgT14Vk3EXhaKmp9rk1l2AGeaOgSLBoQy5NiUHj_xs3BKmpMLOkpD7lK6UoExw=w2400"
         alt="Hoakeen"
       />
-      <h3>Built by Joaquin Pagliettini</h3>
+      <h3>Beatriz</h3>
     </div>
   );
 }

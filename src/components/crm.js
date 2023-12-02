@@ -38,18 +38,22 @@ const CRM = () => {
             const response = await axios.get(`${url}/api/companies`);
             console.log("CRM👍get_companies: ",response)
             let filteredCompanies;
-            if (response.status === 200) {
-                if (user && user.userType === 'usuario') {
-                    filteredCompanies = response.data.filter(company => company.userId === userId) 
-                } else {
-                    filteredCompanies = response.data;
-                }  
-                setCompanies(filteredCompanies);
-                console.log("User👍Props_Companies: ",companies)
+            if (user && user.type === 'admin') {
+                filteredCompanies = response.data;
+                console.log("Admin 👍 props_Companies: ", filteredCompanies);
             } else {
-                console.error("CRM ❌")
-                setCompanies(null);
+                const intCompanyUserResponse = await axios.get(`${url}/api/intCompanyUser`); // Fetch the intCompanyUser data
+                if (intCompanyUserResponse.status === 200) {
+                    const userCompanies = intCompanyUserResponse.data
+                        .filter(icu => icu.userId === user.id)
+                        .map(icu => icu.companyId);
+                    
+                    filteredCompanies = response.data.filter(company => userCompanies.includes(company.companyId));
+                    console.log("Non-Admin 👍 props_Companies: ", filteredCompanies);
+                }
             }
+                setCompanies(filteredCompanies);
+                
         } catch (error) {
             console.error('Error fetching companies:', error);
             setCompanies(null);

@@ -1,4 +1,4 @@
-// App.js
+// src/App.js
 
 // Dependencies
 import React, { useState, useEffect, useContext } from "react";
@@ -16,7 +16,7 @@ import OAuth from "./OAuth";
 import Crm from "./components/crm";
 import Home from "./components/home";
 import Customers from "./components/customers";
-import Download from "./components/download";
+import Download from "./actions/download";
 import Inventory from "./components/inventory";
 import AppUsers from "./components/appusers";
 import Tutorials from "./components/tutorials";
@@ -29,7 +29,7 @@ import { Context } from "./Context";
 
 function App() {
   const { user, setUser } = useContext(Context)
-  const [data, setData] = useState([]);
+  //const [data, setData] = useState([]);
   //const [isSignedIn, setIsSignedIn] = useState(false);
 
   useEffect(() => {
@@ -50,56 +50,56 @@ function App() {
     const url = process.env.REACT_APP_Backend_URL;
     axios.get(`${url}/api/users`)
       .then(response => {
-        setData(response.data);
-        console.log("App 👍get_users")//, response.data)
+        //setData(response.data);
+        //console.log("App 👍get_users")//, response.data)
       }).catch(error => {
         console.error("App ❌get_users", error);
       });
 
       axios.get(`${url}/api/companies`)
       .then(response => {
-        setData(response.data);
-        console.log("App 👍get_companies")//, response.data)
+        //setData(response.data);
+        //console.log("App 👍get_companies")//, response.data)
       }).catch(error => {
         console.error("App ❌get_companies", error);
       });
 
       axios.get(`${url}/api/contacts`)
       .then(response => {
-        setData(response.data);
-        console.log("App 👍get_contacts")//, response.data)
+        //setData(response.data);
+        //console.log("App 👍get_contacts")//, response.data)
       }).catch(error => {
         console.error("App ❌get_contacts", error);
       });
 
       axios.get(`${url}/api/orders`)
       .then(response => {
-        setData(response.data);
-        console.log("App 👍get_orders")//, response.data)
+        //setData(response.data);
+        //console.log("App 👍get_orders")//, response.data)
       }).catch(error => {
         console.error("App ❌get_orders", error);
       });
 
       axios.get(`${url}/api/items`)
       .then(response => {
-        setData(response.data);
-        console.log("App 👍get_items")//, response.data)
+        //setData(response.data);
+        //console.log("App 👍get_items")//, response.data)
       }).catch(error => {
         console.error("App ❌get_items", error);
       });
 
       axios.get(`${url}/api/intCompanyUser`)
       .then(response => {
-        setData(response.data);
-        console.log("App 👍get_intCompanyUser")//, response.data)
+        //setData(response.data);
+        //console.log("App 👍get_intCompanyUser")//, response.data)
       }).catch(error => {
         console.error("App ❌get_intCompanyUser", error);
       });
 
       axios.get(`${url}/api/intOrderItem`)
       .then(response => {
-        setData(response.data);
-        console.log("App 👍get_intOrderItem")//, response.data)
+        //setData(response.data);
+        //console.log("App 👍get_intOrderItem")//, response.data)
       }).catch(error => {
         console.error("App ❌get_intOrderItem", error);
       });
@@ -108,29 +108,46 @@ function App() {
   const renderRoutes = () => {
     const storedUser = localStorage.getItem("local_user");
     console.log("User", user)
-    console.log("User.Name", user.name)
+    //console.log("User.Name", user.name)
     console.log("storedUser", storedUser)
 
     if (user && user.name || storedUser) {
-      console.log("renderRoutes(): ENABLED")
+      // console.log("App.js ENABLED renderRoutes()")
       // User is signed in, render all routes
-      return (
+      if (user.type === "admin" && user.status === "active") {   
+        return (
+          <Routes>
+            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/" element={<Crm />} />
+            <Route path="crm" element={<Crm />} />
+            <Route path="customers" element={<Customers />} />
+            <Route path="home" element={<Home />} />
+            <Route path="download" element={<Download />} />
+            <Route path="inventory" element={<Inventory />} />
+            <Route path="appusers" element={<AppUsers />} />
+            <Route path="tutorials" element={<Tutorials />} />
+            <Route path="*" element={<Navigate to="/crm" />} />
+          </Routes>
+        );
+      } else if (user.type === "usuario" && user.status === "active") {
+        return (
+          <Routes>
+            <Route path="/" element={<Crm />} />
+            <Route path="crm" element={<Crm />} />
+            <Route path="tutorials" element={<Tutorials />} />
+            <Route path="*" element={<Navigate to="/crm" />} />
+          </Routes>
+        );
+      } else {
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/" element={<Crm />} />
-          <Route path="crm" element={<Crm />} />
-          <Route path="customers" element={<Customers />} />
-          <Route path="home" element={<Home />} />
-          <Route path="download" element={<Download />} />
-          <Route path="inventory" element={<Inventory />} />
-          <Route path="appusers" element={<AppUsers />} />
-          <Route path="tutorials" element={<Tutorials />} />
-          <Route path="*" element={<Navigate to="/crm" />} />
-        </Routes>
-      );
+          <Route path="/" element={<Home />} />  
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes> 
+      }
+    
     } else {
       // User is not signed in, render only the home route
-      console.log("renderRoutes(): DISABLED")
+      console.log("App.js DISABLED renderRoutes()")
       return (
         <Routes>
           <Route path="/" element={<Home />} />

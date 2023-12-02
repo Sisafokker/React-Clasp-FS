@@ -31,6 +31,9 @@ appExp.post('/api/signup', async (req, res) => {
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     console.error('❌Signup Error:', error);
+    if (error.toString().includes("ER_DUP_ENTRY:")){
+      error.message = "This User has already signed up. Please Sign in or sign up with a different user."
+    }
     res.status(500).json({ error: 'SignUp Error: ' + error.message });
   }
 });

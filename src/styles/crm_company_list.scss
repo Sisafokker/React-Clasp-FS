@@ -30,7 +30,8 @@
 
       select {
         @include inputSelectStyle;
-        width: 95%
+        width: 95%;
+        text-align: center;
       }
     }
   }

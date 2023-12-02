@@ -14,7 +14,7 @@ const PopupItem = ({ props_itemData, props_onClose }) => {
     return (
         <div className="popup-container">
             <div className="popup-header">
-                <div><h3>PRODUCT INFORMATION</h3>
+                <div><h3>PRODUCT INFO / DETAILS</h3>
                 </div>
             </div>
 

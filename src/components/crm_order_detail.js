@@ -114,7 +114,9 @@ const CRMOrderDetail = ({ props_orderId }) => {
 
     return (
         <div className="crm-order-details">
-            <div className='section-title'>Order Details</div>
+            {props_orderId ? <div className='section-title'>Order # {props_orderId}  ⇒  ${totalPrice.toFixed(2)} </div>
+            : <div className='section-title'>Order Details</div> }
+            
             <div className='order-details'>
             {orderDetails && orderDetails.length > 0 ? (
                 <table className='horizontal-table'>

@@ -4,9 +4,10 @@
 
 .crm-order-detail {
     .section-title {
-        margin-bottom: 8px;
-        margin-top: 4px;
+        margin-bottom: 0px;
+        margin-top: 15px;
         text-align: center;
+        font-weight: 600;
     }
 
     .order-filter {
@@ -43,26 +44,38 @@
 
     .filtered-orders {
         .order-item {
-            cursor: pointer;
+            cursor: none;
             padding: 5px;
             border-bottom: 1px solid #ccc;
+            background-color: $offwhite;
 
             p {
                 color: $primaryColor;
             }
 
             &:hover {
-                background-color: #f0f0f0;
+                background-color: $offwhite;
             }
         }
     }
 
     table {
-        th, td {
-            cursor: pointer;
+        thead th {
+            background-color:$secondaryColor
         }
-
         
+        tbody tr {
+             background-color: $offwhite;
+            
+             td {
+                background-color: $offwhite;
+             }
+      
+            &:hover {
+                background-color: $offwhite;
+            }
+        } 
+
         tfoot .totals-row td {
             background-color: $secondaryColor;
             color: $primaryColor;

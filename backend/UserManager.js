@@ -31,11 +31,13 @@ class UserManager {
     const users = await this.db.query(FIND_QUERY, [email]);
     let typeStatus = { email: email}
     if (!users || users.length === 0) {
-      typeStatus.type = "usuario"
-      typeStatus.status = "unverified"
+      typeStatus.type = "usuario";
+      typeStatus.status = null;
+      typeStatus.id = null;
     } else {
       typeStatus.type = users[0].type
       typeStatus.status = users[0].status
+      typeStatus.id = users[0].id
     }
     return typeStatus;
   }

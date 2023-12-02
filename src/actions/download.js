@@ -23,11 +23,59 @@ function Download({ props_ssPayload }) {
 
     const isGoogleSignedIn = () => {
         return user.iss === "Google";
-    };
+    } 
 
     useEffect(() => {
         console.log("Download User", user);
     }, []);
+
+
+
+
+
+
+
+    function triggerCSV() {
+        try {
+            const csvContent = generateCSVContent(props_ssPayload.data);
+            const filename = props_ssPayload.ssName + ".csv";
+            downloadCSV(csvContent, filename);
+        } catch (error) {
+            console.error("Error in local CSV creation:", error);
+            }
+    }
+
+    // Trigger SCV download
+    const downloadCSV = (csvContent, filename) => {
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", filename);
+        document.body.appendChild(link); 
+        link.click(); 
+        document.body.removeChild(link); 
+    };
+
+    const generateCSVContent = (data) => {
+        let csvContent = "data:text/csv;charset=utf-8,";   
+        data.forEach((sheet) => {
+            csvContent += sheet.swName + "\r\n";
+
+            sheet.values.forEach(row => {
+                let rowString = row.join(",");
+                csvContent += rowString + "\r\n";
+            });
+    
+            csvContent += "\r\n"; 
+        });
+    
+        return csvContent;
+    };
+
+
+
+    
+
 
     const createDriveFile = async () => {
         setIsProcessing(true);
@@ -88,6 +136,7 @@ function Download({ props_ssPayload }) {
                 }
                 setIsProcessing(false);
                 setIsDownloadComplete(true);
+                triggerCSV();
             }
         } catch (error) {
             console.error("Error in file creation or updating:", error);
@@ -187,7 +236,7 @@ function Download({ props_ssPayload }) {
 
     return (
         <>  
-            <button className="btn downloader" onClick={handleCreateFileClick} title={props_ssPayload.btnTitle} disabled={!disableDownload()}>
+            <button className="btn downloader" onClick={handleCreateFileClick} title={!disableDownload() ? "Disabled. Must Login with Google": props_ssPayload.btnTitle} disabled={!disableDownload()}>
                 <FontAwesomeIcon icon={faFileExport} /> { (props_ssPayload && props_ssPayload.btnName) || "Save to Drive" } 
             </button>
                     

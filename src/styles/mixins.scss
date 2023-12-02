@@ -100,12 +100,6 @@
         }
     }
 
-    tfoot .totals-row td {
-        background-color: #666666 !important;
-        color: red !important;
-        font-size: 80% !important;
-      }
-
 }
 
 
@@ -149,7 +143,7 @@
     margin-left: $margin-left;
     margin-right: $margin-right;
     border: 1px solid $lightgrey;
-    text-align: center;
+    //text-align: center;
 
     &:focus {
         outline: none;

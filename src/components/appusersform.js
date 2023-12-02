@@ -241,7 +241,7 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
         ...visuals,
         formError: null,
         showButton: true,
-        formSuccess: `👍 ${prop_userAction.action} User 👍`
+        formSuccess: `User ${prop_userAction.action}ed ✔`
       });
 
       setTimeout(() => {
