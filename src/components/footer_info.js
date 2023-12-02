@@ -2,13 +2,15 @@
 const Info = Object.freeze({
   project: {
     name: 'FS Bottega Final Project: Hoakeen',
-    version: { major: 1, minor: 8,  patch: 0, 
+    version: { major: 1, minor: 8,  patch: 2, 
       toString() { return `${this.major}.${this.minor}.${this.patch}`; }
     }
   },
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+    { version: "v1.8.2", title: "Improving AppUsers CRUD", details: ["Companies Select/Deselect All", "Multi select element visual improv.", ],  },
+    { version: "v1.8.1", title: "Mobile Responsive & Bug resolution", details: ["Started Mobile Responsible Css", "Improved CSS in the process", "Solved Bug in CrmCompanyList filters", "Adjusted PopupItem (also responsible)", ],  },
     { version: "v1.8.0", title: "Multiple things",  details: ["Download Included Order List and Details", "🚧 CSV Dowload for non Google users", "New OAuth.js but not convinced", "CSS Modif to CRM & CRM_Order_Details",],  },
     { version: "v1.7.0", title: "Added / Refactored Many things",  details: ["Many CSS improvements", "Reduced CSS overlaps", "Item view from Order_details","Added Images to Items","Customers Updated partially", "Mixins updates","AppUser visuals","Solved AppUsers Form glitch",],  },
     { version: "v1.6.0", title: "Refactored Sorting making it Shared Hook, enrich/expand tables", details: ["Sorting for all tables", "Expand & Sort", "Sorting via Fontawesome","Cleaner CompanyDetails render",],  },

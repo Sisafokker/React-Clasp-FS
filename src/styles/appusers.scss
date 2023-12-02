@@ -25,6 +25,10 @@
             flex: 0 0 25%; // 25% width, do not grow or shrink
             padding-right: 5px;
             box-shadow: 0 0 15px $boxshadow;
+
+            @media (max-width: $mobile) { 
+                flex: 0 0 100%; // 100% width
+            }
         }
 
         .horizontal-table-container {

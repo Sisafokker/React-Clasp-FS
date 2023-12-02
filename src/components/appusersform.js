@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSquareCheck, faSquareMinus } from '@fortawesome/free-solid-svg-icons';
 
 // styles
 import "../styles/appusers_form.scss";
@@ -256,6 +258,18 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
     prop_userAction.action = "Add"
   };
 
+
+  const selectElement = document.querySelector('.multi-selector');
+  const addAllCompanies = () => {
+    Array.from(selectElement.options).forEach(option => option.selected = true);
+  };
+  
+  const removeAllCompanies = () => {
+    Array.from(selectElement.options).forEach(option => option.selected = false);
+  };
+  
+  
+
   return (
     <div>
       {/* <h1>{formUser.type} {formUser.status} </h1> */}
@@ -303,22 +317,27 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
                               })}
                             </select>
             </label> */}
-            <label>Customers: [{formUser.companyId ? formUser.companyId.length : 0}] <select multiple value={formUser.companyId} // 'multiple' make this an array
-              onChange={(e) => {
-                const selectedCompanyIds = Array.from(e.target.selectedOptions, option => option.value);
-                setFormUser({ ...formUser, companyId: selectedCompanyIds });
-                console.log("👤Selected Companies❓: ", selectedCompanyIds);
-              }}
-              disabled={formUser.type === '' || formUser.status === 'inactive'} >
-              {prop_companies.map(company => {
-                return (
-                  <option key={company.companyId} value={company.companyId}>
-                    {company.companyName}
-                  </option>
-                );
-              })}
-            </select>
-            </label>
+            <div className="customer-select">
+              <div>           
+                <FontAwesomeIcon className="faicon" icon={faSquareCheck}  onClick={addAllCompanies} title='Select ALL'>All</FontAwesomeIcon>
+                <span title='Use "Shift"/"Ctrl" for multi selection'>⇐ selection ⇒ </span>
+                <FontAwesomeIcon className="faicon" icon={faSquareMinus}  onClick={removeAllCompanies} title='Select NONE'>None</FontAwesomeIcon>
+              </div>
+            </div>
+              <label className='label-multi-selector'>Customers: [{formUser.companyId.length}]
+                <select multiple className='multi-selector' value={formUser.companyId}
+                  onChange={(e) => {
+                    const selectedCompanyIds = Array.from(e.target.selectedOptions, option => option.value);
+                    setFormUser({ ...formUser, companyId: selectedCompanyIds });
+                  }}
+                  disabled={formUser.type === '' || formUser.status === 'inactive'} >
+                  {prop_companies.map(company => (
+                    <option key={company.companyId} value={company.companyId}>
+                      {company.companyName}
+                    </option>
+                  ))}
+                </select>
+              </label>
           </div>
           <div>
 

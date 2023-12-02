@@ -18,7 +18,6 @@
 
 @media screen and (width <= 600px) {
   .container {
-    background-color: gray;
     border: 2px solid red;
     padding-top: 155px;
   }
@@ -613,6 +612,12 @@ h3 {
   box-shadow: 0 0 15px #00000019;
 }
 
+@media (width <= 600px) {
+  .container .component-wrapper .form-container {
+    flex: 0 0 100%;
+  }
+}
+
 .container .component-wrapper .horizontal-table-container {
   flex: 1;
   box-shadow: 0 0 15px #00000019;
@@ -720,6 +725,7 @@ h3 {
 }
 
 .form-container .buttons-and-warnings {
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   margin-top: -4px;
@@ -738,6 +744,7 @@ h3 {
 
 @media screen and (width <= 600px) {
   .form-container label {
+    margin-bottom: 12px;
     font-size: 12.6px;
   }
 }
@@ -748,6 +755,22 @@ h3 {
   width: 100%;
   margin-left: 5px;
   padding: 4px;
+}
+
+.form-container label .multi-selector {
+  width: 100%;
+  height: 10rem;
+}
+
+.customer-select {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.customer-select .faicon {
+  cursor: pointer;
+  color: #26bfd4;
 }
 
 .footer-container {
@@ -880,7 +903,7 @@ h3 {
 }
 
 .crm-company-list .filtered-companies .company-item:hover:not(.selected-company) {
-  background-color: #f0f0f0;
+  background-color: #f6f6f6;
 }
 
 .crm-company-list .filtered-companies .company-item.selected-company {
@@ -894,12 +917,6 @@ h3 {
 .crm-company-list .filtered-companies .inactive-company p {
   color: #ff6868;
   font-style: italic;
-}
-
-@media screen and (width <= 600px) {
-  .crm-company-list .filtered-companies .inactive-company p {
-    color: #f6f6f6;
-  }
 }
 
 .crm-company-list .filtered-companies .company-item.inactive-company.selected-company {
@@ -1329,6 +1346,10 @@ h3 {
   .crm-company-list, .crm-company-details, .crm-order-list, .crm-order-detail {
     width: 100%;
     min-height: auto;
+  }
+
+  .crm-orders {
+    background-color: gray;
   }
 }
 

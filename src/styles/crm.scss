@@ -61,6 +61,13 @@ select {
     width: 100%;
     min-height: auto;
   }
+
+}
+
+.crm-orders {
+  @media screen and (max-width: $mobile) {
+    background-color: grey;
+  }
 }
 
 // .custom-image img {

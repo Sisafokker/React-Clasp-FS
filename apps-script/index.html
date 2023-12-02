@@ -37467,7 +37467,7 @@ var _appusersScss = require("../styles/appusers.scss");
 var _s = $RefreshSig$();
 const Customers = ()=>{
     _s();
-    const url = `${"https://reactfscloudsql.nw.r.appspot.com"}/api/companies`;
+    const url = `${"http://localhost:5000"}/api/companies`;
     const [customers, setCustomers] = (0, _react.useState)([]);
     // Hooks Passing the data array for sorting. 
     const { items: sortedCustomers, requestSort, sortConfig } = (0, _sortingTables.useSortableData)(customers, {
@@ -63426,7 +63426,7 @@ function Appusers() {
     });
     const [companies, setCompanies] = (0, _react.useState)([]);
     const [intCompUser, setIntCompUser] = (0, _react.useState)([]);
-    const url = "https://reactfscloudsql.nw.r.appspot.com";
+    const url = "http://localhost:5000";
     const { items: sortedAppUsers, requestSort, sortConfig } = (0, _sortingTables.useSortableData)(appUsers, {
         key: "lastName",
         direction: "ascending"
@@ -63928,6 +63928,8 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _reactFontawesome = require("@fortawesome/react-fontawesome");
+var _freeSolidSvgIcons = require("@fortawesome/free-solid-svg-icons");
 // styles
 var _appusersFormScss = require("../styles/appusers_form.scss");
 var _s = $RefreshSig$();
@@ -64168,6 +64170,13 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
         }
         prop_userAction.action = "Add";
     };
+    const selectElement = document.querySelector(".multi-selector");
+    const addAllCompanies = ()=>{
+        Array.from(selectElement.options).forEach((option)=>option.selected = true);
+    };
+    const removeAllCompanies = ()=>{
+        Array.from(selectElement.options).forEach((option)=>option.selected = false);
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "form-container",
@@ -64177,7 +64186,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                     children: " CRUD Users"
                 }, void 0, false, {
                     fileName: "src/components/appusersform.js",
-                    lineNumber: 263,
+                    lineNumber: 277,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -64197,7 +64206,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                             children: visuals.btnText
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 267,
+                                            lineNumber: 281,
                                             columnNumber: 36
                                         }, undefined),
                                         visuals.showButton && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -64207,13 +64216,13 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                             children: "Cancel"
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 268,
+                                            lineNumber: 282,
                                             columnNumber: 36
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 266,
+                                    lineNumber: 280,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -64224,7 +64233,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                             children: visuals.formError
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 271,
+                                            lineNumber: 285,
                                             columnNumber: 37
                                         }, undefined),
                                         visuals.formSuccess && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -64232,19 +64241,19 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                             children: visuals.formSuccess
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 272,
+                                            lineNumber: 286,
                                             columnNumber: 39
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 270,
+                                    lineNumber: 284,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/appusersform.js",
-                            lineNumber: 265,
+                            lineNumber: 279,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -64262,14 +64271,14 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                 })
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 276,
+                                            lineNumber: 290,
                                             columnNumber: 32
                                         }, undefined),
                                         " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 276,
+                                    lineNumber: 290,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -64284,14 +64293,14 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                 })
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 277,
+                                            lineNumber: 291,
                                             columnNumber: 31
                                         }, undefined),
                                         " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 277,
+                                    lineNumber: 291,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -64306,14 +64315,14 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                 })
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 278,
+                                            lineNumber: 292,
                                             columnNumber: 27
                                         }, undefined),
                                         " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 278,
+                                    lineNumber: 292,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -64331,7 +64340,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     children: "Select type"
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 282,
+                                                    lineNumber: 296,
                                                     columnNumber: 15
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -64339,7 +64348,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     children: "admin"
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 283,
+                                                    lineNumber: 297,
                                                     columnNumber: 15
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -64347,19 +64356,19 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     children: "usuario"
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 284,
+                                                    lineNumber: 298,
                                                     columnNumber: 15
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 281,
+                                            lineNumber: 295,
                                             columnNumber: 26
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 281,
+                                    lineNumber: 295,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -64377,7 +64386,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     children: "Select status"
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 288,
+                                                    lineNumber: 302,
                                                     columnNumber: 15
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -64385,7 +64394,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     children: "active"
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 289,
+                                                    lineNumber: 303,
                                                     columnNumber: 15
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -64393,28 +64402,75 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     children: "inactive"
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 290,
+                                                    lineNumber: 304,
                                                     columnNumber: 15
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 287,
+                                            lineNumber: 301,
                                             columnNumber: 28
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 287,
+                                    lineNumber: 301,
+                                    columnNumber: 13
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                    className: "customer-select",
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactFontawesome.FontAwesomeIcon), {
+                                                className: "faicon",
+                                                icon: (0, _freeSolidSvgIcons.faSquareCheck),
+                                                onClick: addAllCompanies,
+                                                title: "Select ALL",
+                                                children: "All"
+                                            }, void 0, false, {
+                                                fileName: "src/components/appusersform.js",
+                                                lineNumber: 322,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                                title: 'Use "Shift"/"Ctrl" for multi selection',
+                                                children: "\u21D0 selection \u21D2 "
+                                            }, void 0, false, {
+                                                fileName: "src/components/appusersform.js",
+                                                lineNumber: 323,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactFontawesome.FontAwesomeIcon), {
+                                                className: "faicon",
+                                                icon: (0, _freeSolidSvgIcons.faSquareMinus),
+                                                onClick: removeAllCompanies,
+                                                title: "Select NONE",
+                                                children: "None"
+                                            }, void 0, false, {
+                                                fileName: "src/components/appusersform.js",
+                                                lineNumber: 324,
+                                                columnNumber: 17
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/appusersform.js",
+                                        lineNumber: 321,
+                                        columnNumber: 15
+                                    }, undefined)
+                                }, void 0, false, {
+                                    fileName: "src/components/appusersform.js",
+                                    lineNumber: 320,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                    className: "label-multi-selector",
                                     children: [
                                         "Customers: [",
-                                        formUser.companyId ? formUser.companyId.length : 0,
-                                        "] ",
+                                        formUser.companyId.length,
+                                        "]",
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
                                             multiple: true,
+                                            className: "multi-selector",
                                             value: formUser.companyId,
                                             onChange: (e)=>{
                                                 const selectedCompanyIds = Array.from(e.target.selectedOptions, (option)=>option.value);
@@ -64422,56 +64478,53 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     ...formUser,
                                                     companyId: selectedCompanyIds
                                                 });
-                                                console.log("\uD83D\uDC64Selected Companies\u2753: ", selectedCompanyIds);
                                             },
                                             disabled: formUser.type === "" || formUser.status === "inactive",
-                                            children: prop_companies.map((company)=>{
-                                                return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                            children: prop_companies.map((company)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
                                                     value: company.companyId,
                                                     children: company.companyName
                                                 }, company.companyId, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 315,
-                                                    columnNumber: 19
-                                                }, undefined);
-                                            })
+                                                    lineNumber: 335,
+                                                    columnNumber: 21
+                                                }, undefined))
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 306,
-                                            columnNumber: 86
+                                            lineNumber: 328,
+                                            columnNumber: 17
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 306,
-                                    columnNumber: 13
+                                    lineNumber: 327,
+                                    columnNumber: 15
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/appusersform.js",
-                            lineNumber: 275,
+                            lineNumber: 289,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, void 0, false, {
                             fileName: "src/components/appusersform.js",
-                            lineNumber: 323,
+                            lineNumber: 342,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/appusersform.js",
-                    lineNumber: 264,
+                    lineNumber: 278,
                     columnNumber: 9
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/appusersform.js",
-            lineNumber: 262,
+            lineNumber: 276,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/appusersform.js",
-        lineNumber: 260,
+        lineNumber: 274,
         columnNumber: 5
     }, undefined);
 };
@@ -64486,7 +64539,7 @@ $RefreshReg$(_c, "AppusersForm");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/appusers_form.scss":"bd2hb"}],"bd2hb":[function() {},{}],"cW1FI":[function() {},{}],"kz8Tg":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../styles/appusers_form.scss":"bd2hb","@fortawesome/react-fontawesome":"clIT3","@fortawesome/free-solid-svg-icons":"5lkdy"}],"bd2hb":[function() {},{}],"cW1FI":[function() {},{}],"kz8Tg":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$0b6a = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -64907,7 +64960,7 @@ const Info = Object.freeze({
         version: {
             major: 1,
             minor: 8,
-            patch: 0,
+            patch: 1,
             toString () {
                 return `${this.major}.${this.minor}.${this.patch}`;
             }
@@ -64915,6 +64968,16 @@ const Info = Object.freeze({
     },
     notes: [
         //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+        {
+            version: "v1.8.1",
+            title: "Mobile Responsive & Bug resolution",
+            details: [
+                "Started Mobile Responsible Css",
+                "Improved CSS in the process",
+                "Solved Bug in CrmCompanyList filters",
+                "Adjusted PopupItem (also responsible)"
+            ]
+        },
         {
             version: "v1.8.0",
             title: "Multiple things",
@@ -65254,7 +65317,7 @@ var _crmScss = require("../styles/crm.scss");
 var _s = $RefreshSig$();
 const CRM = ()=>{
     _s();
-    const url = "https://reactfscloudsql.nw.r.appspot.com";
+    const url = "http://localhost:5000";
     const { user } = (0, _react.useContext)((0, _context.Context));
     const [companies, setCompanies] = (0, _react.useState)([]);
     const [selectedCompany, setSelectedCompany] = (0, _react.useState)(null);

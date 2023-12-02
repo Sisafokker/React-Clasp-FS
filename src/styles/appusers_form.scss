@@ -8,6 +8,7 @@
 
   .buttons-and-warnings {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     margin-top: -4px;
@@ -23,12 +24,37 @@
     margin-right: 5px;
     margin-left: 5px;
 
+    @media screen and (max-width: $mobile) { 
+      margin-bottom: 12px;
+    }
+
     input[type="text"], select {
       margin-left: 5px;
       padding: 4px;
       border: 1px solid $teal;
       width: 100%;            // 🚩Changing this values does NOTHING! 
       box-sizing: border-box; // 🚩Changing this values does NOTHING! 
+    
+    }
+    
+    .multi-selector {
+      height: 10rem;
+      width: 100%;
+      //overflow-y: auto;
     }
   }
+
+  
+}
+
+.customer-select {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .faicon {
+    cursor: pointer;
+    color: $teal;
+  }
+  
 }
