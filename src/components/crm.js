@@ -13,6 +13,7 @@ import "../styles/crm.scss";
 
 const CRM = () => {
     const url = process.env.REACT_APP_Backend_URL
+    const { isMenuOpen } = useContext(Context);
     const { user } = useContext(Context);
     const [companies, setCompanies] = useState([]);
     const [selectedCompany, setSelectedCompany] = useState(null);
@@ -92,7 +93,7 @@ const CRM = () => {
     };
 
     return (
-        <div className='container'>
+        <div className="container" style={{ paddingTop: isMenuOpen ? '140px' : '5px' }}>
             <div className="crm-main">
                 <div className="crm-companies">
                     <div className="crm-company-list">

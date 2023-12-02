@@ -5,6 +5,9 @@ import axios from 'axios';
 import { Context } from "./Context";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom"; // useNavigate Hook
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 
 // Styles
 import "./styles/main.scss";
@@ -20,7 +23,8 @@ const SCOPES = "https://www.googleapis.com/auth/drive https://www.googleapis.com
 export const AuthContext = React.createContext();
 
 function OAuth({ prop_renderRoutes }) {
-    const { user, setUser, setTokenClient } = useContext(Context);
+    const { user, setUser, setTokenClient, isMenuOpen, setIsMenuOpen } = useContext(Context);
+    //const [isMenuOpen, setIsMenuOpen] = useState(true);
     const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
     const navigate = useNavigate();
 
@@ -148,6 +152,12 @@ function OAuth({ prop_renderRoutes }) {
         setTokenClient({}); 
     }
 
+    const toggleMenuView = () => {
+        setIsMenuOpen(!isMenuOpen);
+        console.log("MAIN MENU CLICKED")
+        console.log("❓🔨❓isMenuOpen: ",isMenuOpen)
+    };
+
     return (
         <div className="auth-wrapper">
             {!user || Object.keys(user).length === 0 && (
@@ -156,28 +166,32 @@ function OAuth({ prop_renderRoutes }) {
                     <Auth_Form />
                 </div>
             )}
-            {user && Object.keys(user).length !== 0 && (                
-                <div className="userNav-wrapper">
-                    {/* <input type="submit" onClick={createDriveFile} value="🔴Create File🔴" /> */}
-                    <div className="user-wrapper">
-                        <div className="user-details">
-                            <img className="user-avatar" src={user.picture || "https://use.fontawesome.com/releases/v5.15.4/svgs/solid/user.svg"} alt="User" />
-                            <div className="user-text">
-                                <h3>{user.name}</h3>
-                                <p>{user.email}</p>
-                                <div className="sign-out">
-                                    <button className="sign-out-button" onClick={e => handleSignOut(e)}>Sign Out</button>
+            {user && Object.keys(user).length !== 0 && ( 
+                <div className="app">
+                    <div className="hamburger-menu" onClick={toggleMenuView}>
+                        <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
+                    </div>
+                    {isMenuOpen && (
+                        <div className="userNav-wrapper">
+                            <div className="user-wrapper">
+                                <div className="user-details">
+                                    <img className="user-avatar" src={user.picture || "https://use.fontawesome.com/releases/v5.15.4/svgs/solid/user.svg"} alt="User" />
+                                    <div className="user-text">
+                                        <h3>{user.name}</h3>
+                                        <p>{user.email}</p>
+                                        <div className="sign-out">
+                                            <button className="sign-out-button" onClick={e => handleSignOut(e)}>Sign Out</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <Nav />
                         </div>
-                    </div>
-                    <Nav />
+                    )}
                 </div>
             )}
         </div>
     );
-
 }
 
 export default OAuth;
-

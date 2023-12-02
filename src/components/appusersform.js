@@ -211,12 +211,20 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
   }
 };
 
-
   const canSubmitForm = () => {
-    return formUser.firstName != "" && formUser.lastName != "" && formUser.email != ""
-    && ["admin", "usuario"].includes(formUser.type) && ["active", "inactive"].includes(formUser.status)  
-    //&& formUser.type != "" && formUser.status != "";
-  };
+    let isValidEmail = formUser.email && /\S+@\S+\.\S+/.test(formUser.email);
+    if (prop_userAction.action === "Remove" ) {
+      return isValidEmail;
+    } else {
+      let isValidFirstName = formUser.firstName && formUser.firstName.length >= 3;
+      let isValidLastName = formUser.lastName && formUser.lastName.length >= 3;
+      let isValidType = ["admin", "usuario"].includes(formUser.type);
+      let isValidStatus = ["active", "inactive"].includes(formUser.status);
+    
+      return isValidFirstName && isValidLastName && isValidEmail && isValidType && isValidStatus;
+    }
+  }
+  
 
   // Function to clear form and reset state
   const clearForm = (wasCancelled) => {
@@ -278,7 +286,8 @@ const processCompanyToUserAssignment = (backendAction, companyId, userId) => {
         <form onSubmit={handleFormSubmit}>
           <div className="buttons-and-warnings">
             <div className="buttons-container">
-            {visuals.showButton && <button className='button advance' type="submit" disabled={!canSubmitForm()} onClick={() => setCancelled(false)} >{visuals.btnText}</button>}
+            {visuals.showButton && <button className='button advance' type="submit" disabled={!canSubmitForm()} 
+                title={!canSubmitForm() ? "Missing or incorrect values" : prop_userAction.action }onClick={() => setCancelled(false)} >{visuals.btnText}</button>}
             {visuals.showButton && <button className='button cancel' type="button" onClick={handleCancel}>Cancel</button>}
             </div>
             <div className="warnings-container">

@@ -3,28 +3,34 @@
 @import "mixins.scss";
 
 .home-wrapper {
-    position: relative;
-    height: 80vh;       // Ensure the div takes full height of the viewport
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  
-  h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-  }
-  
-  h3 {
-    font-size: 18px;
-    color: black;
-  }
+  position: top;
+  height: 80vh; // % heigh of viewport
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 
-  .custom-image {
-    width: 100%;
-    max-width: 600px;
-    margin-top: 10px;
-  }
+    h1 {
+      @include responsiveFontSize(36px);
+      margin-bottom: 10px;
+    }
+    
+    h3 {
+      @include responsiveFontSize(18px);
+      color: $primaryColor;
+    }
+  
+    .custom-image {
+      width: 100%;
+      max-width: 550px;
+      margin-top: 10px;
+  
+      @media screen and (max-width: $mobile) {
+        width: 75%;
+        max-width: 350px;
+        margin-top: 0px;
+      }
+    }
+}
   

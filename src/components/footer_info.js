@@ -2,13 +2,14 @@
 const Info = Object.freeze({
   project: {
     name: 'FS Bottega Final Project: Hoakeen',
-    version: { major: 1, minor: 8,  patch: 2, 
+    version: { major: 1, minor: 8,  patch: 3, 
       toString() { return `${this.major}.${this.minor}.${this.patch}`; }
     }
   },
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+    { version: "v1.8.3", title: "Mobile Responsive Upgrades", details: ["Mobile Hamburger Menu - Permanent", "isMenuOpen Context State", "Context added to all Parent Components", ],  },
     { version: "v1.8.2", title: "Improving AppUsers CRUD", details: ["Companies Select/Deselect All", "Multi select element visual improv.", ],  },
     { version: "v1.8.1", title: "Mobile Responsive & Bug resolution", details: ["Started Mobile Responsible Css", "Improved CSS in the process", "Solved Bug in CrmCompanyList filters", "Adjusted PopupItem (also responsible)", ],  },
     { version: "v1.8.0", title: "Multiple things",  details: ["Download Included Order List and Details", "🚧 CSV Dowload for non Google users", "New OAuth.js but not convinced", "CSS Modif to CRM & CRM_Order_Details",],  },

@@ -8,10 +8,11 @@
 
 .nav-wrapper {
     @include cardStyle;
-    width: 98%;  // 🚩🚩 SHOW NOT BE HERE. DRIVES ME CRAZY!!!!!!!!!!
+    width: 98%;  // 🚩🚩 DRIVES ME CRAZY!!!!!!!!!!
     display: flex;
     justify-content: space-evenly; // equal space between them
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 0px;
   
     .nav-link {
       @include responsiveFontSize(17px);
@@ -26,7 +27,7 @@
       
       &:not(:last-child) {
         @media screen and (max-width: $mobile) {
-         margin-right: 10px; // right margin to separate links
+         margin-right: 0px; // right margin to separate links
          
         }
       }
@@ -37,9 +38,9 @@
       font-weight: 700; 
     }
 
-  @media screen and (max-width: $mobile) {
-    background-color: $warning;
-  }
+  // @media screen and (max-width: $mobile) {
+  //   background-color: $warning;
+  // }
 
 }
   

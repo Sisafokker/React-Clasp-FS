@@ -13,14 +13,43 @@
     position: fixed;
     top: 0; // Align to the top
     width: 100%;
-    z-index: 1000; // Ensure it stays on top of other elements
+    z-index: 900; // Ensure it stays on top of other elements
     background-color: $offwhite;
+
+    @include flexCenter;
+    flex-direction: column;
+    padding-bottom: 4px;
+    padding-top: 4px;
+
+    @media screen and (max-width: $mobile) {
+      display: block; // Hide on mobile
+      display: flex;
+      justify-content: center;
+    }
+
+  }
+
+  .hamburger-menu {
+    display: block; // default
+
+    position: fixed; 
+    top: 5;          
+    right: 20;         
+    z-index: 1500;   
+    font-size: 45px;
+    color: $teal;
+    cursor: pointer;
+  
+    @media screen and (max-width: $mobile) {
+      color: $dark-teal;
+    }
   }
 
   .google-login {
     @include flexCenter;
     text-align: center;
-    margin-bottom: 12px;
+    padding-top: 15px;
+    padding-bottom: 5px;
   }
 
   .user-wrapper {
@@ -62,5 +91,4 @@
       }
     }
   }
-
 }

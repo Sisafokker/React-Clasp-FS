@@ -1,6 +1,7 @@
 // customers.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { Context } from "../Context";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faSort } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,6 +14,7 @@ import "../styles/appusers.scss";
 
 const Customers = () => {
     const url = `${process.env.REACT_APP_Backend_URL}/api/companies`;
+    const { isMenuOpen } = useContext(Context);
     const [customers, setCustomers] = useState([]);
 
     // Hooks Passing the data array for sorting. 
@@ -66,7 +68,7 @@ const Customers = () => {
 
 
     return (
-        <div className='container'>
+        <div className="container" style={{ paddingTop: isMenuOpen ? '140px' : '5px' }}>
             <div className='section-title'>Customers - Admin-Only Page</div>
             <div className='tasks-wrapper'>
                 <div>

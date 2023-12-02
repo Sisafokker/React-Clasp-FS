@@ -11,15 +11,11 @@ import "./styles/main.scss";
 //import "../apps-script/styles_compiled/main.css";
 
 // Components
-//import { ContextProvider } from './Context';
 import OAuth from "./OAuth";
 import Crm from "./components/crm";
 import Home from "./components/home";
 import Customers from "./components/customers";
-import Download from "./actions/download";
-import Inventory from "./components/inventory";
 import AppUsers from "./components/appusers";
-import Tutorials from "./components/tutorials";
 import Footer from "./components/footer";
 
 
@@ -122,10 +118,7 @@ function App() {
             <Route path="crm" element={<Crm />} />
             <Route path="customers" element={<Customers />} />
             <Route path="home" element={<Home />} />
-            <Route path="download" element={<Download />} />
-            <Route path="inventory" element={<Inventory />} />
             <Route path="appusers" element={<AppUsers />} />
-            <Route path="tutorials" element={<Tutorials />} />
             <Route path="*" element={<Navigate to="/crm" />} />
           </Routes>
         );
@@ -134,7 +127,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Crm />} />
             <Route path="crm" element={<Crm />} />
-            <Route path="tutorials" element={<Tutorials />} />
             <Route path="*" element={<Navigate to="/crm" />} />
           </Routes>
         );

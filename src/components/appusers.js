@@ -1,6 +1,7 @@
 // src/components/appusers.js
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import axios from 'axios';
+import { Context } from "../Context";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faSort } from '@fortawesome/free-solid-svg-icons';
 import AppusersForm from "./appusersform";
@@ -14,6 +15,7 @@ import "../styles/appusers.scss";
 // import "../../apps-script/styles_compiled/appusers-table.css";
 
 function Appusers() {
+    const { isMenuOpen } = useContext(Context);
     const [appUsers, setAppUsers] = useState([]);
     const [userAction, setUserAction] = useState({ user: null, action: "Add" });
     const [companies, setCompanies] = useState([]);
@@ -104,7 +106,7 @@ function Appusers() {
     ));
 
     return (
-        <div className='container'>
+        <div className="container" style={{ paddingTop: isMenuOpen ? '140px' : '5px' }}>
             <div className='section-title'>Users - Admin-Only Page</div>
             <div className='tasks-wrapper'>
                 <div>

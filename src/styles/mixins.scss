@@ -8,7 +8,7 @@
 
 @mixin cardStyle {
     background-color: $offwhite;
-    padding: 10px 20px; //  top&Bottom left&Right // top, right, bottom, left 
+    padding: 10px 0px; //  top&Bottom left&Right // top, right, bottom, left 
     border-radius: 5px;
     box-shadow: 0 0 15px $boxshadow;
     max-width: 100%;
