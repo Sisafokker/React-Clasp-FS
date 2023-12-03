@@ -7,17 +7,28 @@
 }
 
 .container {
-  border: 2px solid #00f;
   flex: 1;
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
+}
+
+.container .section-title {
+  text-align: center;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.container .section-title.sub {
+  color: gray;
+  padding-bottom: 0;
 }
 
 @media screen and (width <= 600px) {
-  .container {
-    border: 2px solid red;
+  .container .section-title.sub {
+    color: #f6f6f6;
   }
 }
 
@@ -84,13 +95,16 @@ button, input[type="submit"] {
   background-color: #26bfd4;
   border: none;
   border-radius: 4px;
+  justify-content: center;
+  align-items: center;
   width: auto;
   height: auto;
   margin-top: 5px;
-  padding: 10px 20px;
+  padding: 15px 20px;
   font-size: 12px;
   font-weight: 600;
   transition: background-color .2s;
+  display: flex;
 }
 
 @media screen and (width <= 600px) {
@@ -117,13 +131,16 @@ button.cancel {
   background-color: #26bfd4;
   border: none;
   border-radius: 4px;
+  justify-content: center;
+  align-items: center;
   width: auto;
   height: auto;
   margin-left: 15px;
-  padding: 10px 20px;
+  padding: 15px 20px;
   font-size: 12px;
   font-weight: 600;
   transition: background-color .2s;
+  display: flex;
 }
 
 button.cancel:hover {
@@ -178,9 +195,9 @@ select {
 }
 
 .tasks-wrapper {
-  grid-template-columns: 1fr 1fr;
-  place-items: center;
-  display: grid;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .svg-inline--fa {
@@ -210,6 +227,14 @@ select {
   color: #f6f6f6;
   font-weight: none;
   background-color: #464646;
+}
+
+.horizontal-table th:first-child {
+  border-top-left-radius: 5px;
+}
+
+.horizontal-table th:last-child {
+  border-top-right-radius: 5px;
 }
 
 .horizontal-table tr:nth-child(2n) {
@@ -259,7 +284,7 @@ select {
 .vertical-table tr td:first-child {
   color: #f6f6f6;
   text-align: right;
-  background-color: #464646;
+  background-color: #3d9900;
 }
 
 .vertical-table tr td:nth-child(2n) {
@@ -440,6 +465,8 @@ select {
   background-color: #26bfd4;
   border: none;
   border-radius: 4px;
+  justify-content: center;
+  align-items: center;
   width: auto;
   height: auto;
   margin-top: 5px;
@@ -447,6 +474,7 @@ select {
   font-size: 12px;
   font-weight: 600;
   transition: background-color .2s;
+  display: flex;
 }
 
 @media screen and (width <= 600px) {
@@ -551,12 +579,15 @@ select {
   background-color: #26bfd4;
   border: none;
   border-radius: 4px;
+  justify-content: center;
+  align-items: center;
   width: auto;
   height: auto;
   margin-right: 15px;
-  padding: 10px 20px;
+  padding: 15px 20px;
   font-weight: 600;
   transition: background-color .2s;
+  display: flex;
 }
 
 .oauth-form-container .signLogButton button:hover {
@@ -713,6 +744,14 @@ select {
   background-color: #464646;
 }
 
+.container .component-wrapper .horizontal-table-container .appusers-table th:first-child {
+  border-top-left-radius: 5px;
+}
+
+.container .component-wrapper .horizontal-table-container .appusers-table th:last-child {
+  border-top-right-radius: 5px;
+}
+
 .container .component-wrapper .horizontal-table-container .appusers-table tr:nth-child(2n) {
   background-color: #f2f2f2;
 }
@@ -761,6 +800,14 @@ select {
   background-color: #464646;
 }
 
+.container .component-wrapper .horizontal-table-container .customers-table th:first-child {
+  border-top-left-radius: 5px;
+}
+
+.container .component-wrapper .horizontal-table-container .customers-table th:last-child {
+  border-top-right-radius: 5px;
+}
+
 .container .component-wrapper .horizontal-table-container .customers-table tr:nth-child(2n) {
   background-color: #f2f2f2;
 }
@@ -795,6 +842,13 @@ select {
   align-items: center;
   margin-top: -4px;
   margin-bottom: 15px;
+  display: flex;
+}
+
+.form-container .buttons-and-warnings .buttons-container {
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
   display: flex;
 }
 
@@ -920,13 +974,6 @@ select {
   }
 }
 
-.crm-company-list .section-title {
-  text-align: center;
-  margin-top: 4px;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
 .crm-company-list .company-filter {
   justify-content: space-around;
   margin-bottom: 8px;
@@ -975,11 +1022,14 @@ select {
   background-color: #000;
   border: none;
   border-radius: 4px;
+  justify-content: center;
+  align-items: center;
   width: 45%;
   height: 25px;
   padding: 0 20px;
   font-weight: 600;
   transition: background-color .2s;
+  display: flex;
 }
 
 .crm-company-list .crm-company-list .section-btns .btn:hover {
@@ -1013,6 +1063,8 @@ select {
 
 .crm-company-list .filtered-companies .company-item.selected-company {
   background-color: #3d9900;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .crm-company-list .filtered-companies .company-item.selected-company p {
@@ -1026,26 +1078,20 @@ select {
 
 .crm-company-list .filtered-companies .company-item.inactive-company.selected-company {
   background-color: #ff6868;
+  border-radius: 5px;
 }
 
 .crm-company-list .filtered-companies .company-item.inactive-company.selected-company p {
   color: #f6f6f6;
 }
 
-.crm-company-detail .section-title {
-  text-align: center;
-  margin-top: 4px;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-.crm-company-detail .vertical-table {
+.crm-company-details .vertical-table {
   border-collapse: collapse;
   width: 98%;
   margin: 0 auto;
 }
 
-.crm-company-detail .vertical-table tr th, .crm-company-detail .vertical-table tr td {
+.crm-company-details .vertical-table tr th, .crm-company-details .vertical-table tr td {
   word-wrap: break-word;
   overflow-wrap: break-word;
   border-bottom: 1px solid #ddd;
@@ -1055,30 +1101,28 @@ select {
 }
 
 @media screen and (width <= 600px) {
-  .crm-company-detail .vertical-table tr th, .crm-company-detail .vertical-table tr td {
+  .crm-company-details .vertical-table tr th, .crm-company-details .vertical-table tr td {
     font-size: 12.6px;
   }
 }
 
-.crm-company-detail .vertical-table tr td:first-child {
+.crm-company-details .vertical-table tr td:first-child {
   color: #f6f6f6;
   text-align: right;
-  background-color: #464646;
+  background-color: #3d9900;
 }
 
-.crm-company-detail .vertical-table tr td:nth-child(2n) {
+.crm-company-details .vertical-table tr td:nth-child(2n) {
   text-align: left;
   padding-left: 10px;
 }
 
-.crm-company-detail .vertical-table tr td:nth-child(2n):hover {
+.crm-company-details .vertical-table tr td:nth-child(2n):hover {
   background-color: #f5f5f5;
 }
 
-.crm-order-list .section-title {
-  text-align: center;
-  margin-top: 4px;
-  margin-bottom: 8px;
+.crm-company-details .vertical-table.inactive-company tr td:first-child {
+  background-color: #ff6868;
 }
 
 .crm-order-list .order-filter {
@@ -1136,11 +1180,14 @@ select {
   background-color: #000;
   border: none;
   border-radius: 4px;
+  justify-content: center;
+  align-items: center;
   width: 25%;
   height: 25px;
   padding: 0 20px;
   font-weight: 600;
   transition: background-color .2s;
+  display: flex;
 }
 
 .crm-order-list .crm-order-list .section-btns .btn:hover {
@@ -1208,13 +1255,6 @@ select {
   cursor: pointer;
 }
 
-.crm-order-detail .section-title {
-  text-align: center;
-  margin-top: 15px;
-  margin-bottom: 0;
-  font-weight: 600;
-}
-
 .crm-order-detail .order-filter {
   justify-content: space-around;
   margin-bottom: 8px;
@@ -1257,11 +1297,14 @@ select {
   background-color: #26bfd4;
   border: none;
   border-radius: 4px;
+  justify-content: center;
+  align-items: center;
   width: auto;
   height: auto;
-  padding: 10px 20px;
+  padding: 15px 20px;
   font-weight: 600;
   transition: background-color .2s;
+  display: flex;
 }
 
 .crm-order-detail .order-filter .section-btns .btn:hover {
@@ -1296,6 +1339,14 @@ select {
 
 .crm-order-detail table tbody tr, .crm-order-detail table tbody tr td, .crm-order-detail table tbody tr:hover {
   background-color: #f6f6f6;
+}
+
+.crm-order-detail table tfoot .totals-row td:first-child {
+  border-bottom-left-radius: 5px;
+}
+
+.crm-order-detail table tfoot .totals-row td:last-child {
+  border-bottom-right-radius: 5px;
 }
 
 .crm-order-detail table tfoot .totals-row td {
@@ -1422,17 +1473,19 @@ select {
 }
 
 .crm-companies {
+  border: 1px solid gray;
+  border-radius: 5px;
   flex-direction: column;
   flex-basis: 25%;
   display: flex;
-  box-shadow: 0 0 15px #00000019;
 }
 
 .crm-orders {
+  border: 1px solid gray;
+  border-radius: 5px;
   flex-direction: column;
   flex-basis: 75%;
   display: flex;
-  box-shadow: 0 0 15px #00000019;
 }
 
 @media screen and (width <= 600px) {
@@ -1442,9 +1495,34 @@ select {
   }
 }
 
+.crm-companies .not-found, .crm-orders .not-found {
+  text-align: center;
+  color: #ff3030;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.crm-companies .not-found.no-companyId, .crm-orders .not-found.no-companyId {
+  color: gray;
+}
+
+@media screen and (width <= 600px) {
+  .crm-companies .not-found, .crm-orders .not-found {
+    color: #f6f6f6;
+  }
+
+  .crm-companies .not-found.companies, .crm-orders .not-found.companies {
+    color: #ff3030;
+  }
+}
+
 .crm-company-list, .crm-company-details, .crm-order-list, .crm-order-detail {
-  min-height: 200px;
-  box-shadow: 0 0 15px #00000019;
+  min-height: 175px;
 }
 
 @media screen and (width <= 600px) {
@@ -1452,7 +1530,13 @@ select {
     width: 100%;
     min-height: auto;
   }
+}
 
+.crm-order-list {
+  padding-bottom: 10px;
+}
+
+@media screen and (width <= 600px) {
   .crm-orders {
     background-color: gray;
   }

@@ -18,10 +18,14 @@ const CRMCompanyDetail = ({ props_companyDetails }) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    const tableClass = props_companyDetails.status === 'active' 
+                       ? 'vertical-table' 
+                       : 'vertical-table inactive-company';
+
     return (
         <div className="crm-company-details">
-            <div className='section-title'>Customer: <span>{props_companyDetails.companyName}</span></div>
-            <table className='vertical-table'>
+            {/* <div className='section-title sub'></div> */}
+            <table className= {tableClass} >
                 <tbody>
                     {detailsArray.map(([key, value]) => {
                         let displayKey = key; // New var for display purposes

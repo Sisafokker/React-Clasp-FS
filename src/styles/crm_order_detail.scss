@@ -3,12 +3,6 @@
 @import "mixins.scss";
 
 .crm-order-detail {
-    .section-title {
-        margin-bottom: 0px;
-        margin-top: 15px;
-        text-align: center;
-        font-weight: 600;
-    }
 
     .order-filter {
         display: flex;
@@ -76,14 +70,24 @@
             }
         } 
 
-        tfoot .totals-row td {
-            background-color: $secondaryColor;
-            color: $primaryColor;
-            font-size: 80%;
-            font-weight: 900;
-            padding: none;
-            margin: none;
-          }
+        tfoot .totals-row {
+            td:first-child {
+                border-bottom-left-radius: 5px;
+            }
+    
+            td:last-child {
+                border-bottom-right-radius: 5px;
+            }
+
+            td {
+                background-color: $secondaryColor;
+                color: $primaryColor;
+                font-size: 80%;
+                font-weight: 900;
+                padding: none;
+                margin: none;
+            }
+        }
       
     }
 }

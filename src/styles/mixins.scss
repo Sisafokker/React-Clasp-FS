@@ -44,6 +44,14 @@
         color: $offwhite;
         background-color: $tableheader; 
         font-weight: none;
+
+        &:first-child {
+            border-top-left-radius: 5px;
+        }
+
+        &:last-child {
+            border-top-right-radius: 5px;
+        }
     } 
 
     tr:nth-child(even) {
@@ -94,7 +102,7 @@
 
         td {
             &:first-child {  // First Col.
-                background-color: $tableheader;
+                background-color: $success; //$tableheader;
                 color: $offwhite;
                 text-align: right;
             }
@@ -116,7 +124,7 @@
 @mixin buttonStyle (
             $background-color: $teal, $color: $offwhite, $hover-color: $dark-teal, 
             $width: auto, $font-weight: 600, $height: auto, $text-align: center,
-            $padT: 10px, $padR: 20px, $padB: 10px, $padL: 20px, 
+            $padT: 15px, $padR: 20px, $padB: 15px, $padL: 20px, 
             $border: none, $border-r: 4px) {
     
     background-color: $background-color;
@@ -130,6 +138,7 @@
     text-align: $text-align;
     transition: background-color 0.2s ease;
     cursor: pointer;
+    @include flexCenter;
 
     &:hover {
         background-color: $hover-color;
@@ -141,6 +150,10 @@
         cursor: not-allowed;
         opacity: 0.5;
     }
+
+    // @media screen and (max-width: $mobile) {
+    //     padding: $padT + 10px $padR + 5px $padB + 10px $padL + 5px;
+    // }
 }
 
 @mixin inputSelectStyle($width: 98%, $padding: 5px, 

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSort, faCameraRetro } from '@fortawesome/free-solid-svg-icons';
+import { faSort, faCameraRetro, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 // Hook
 import { useSortableData } from '../actions/sortingTables';
@@ -114,8 +114,8 @@ const CRMOrderDetail = ({ props_orderId }) => {
 
     return (
         <div className="crm-order-details">
-            {props_orderId ? <div className='section-title'>Order # {props_orderId}  ⇒  ${totalPrice.toFixed(2)} </div>
-            : <div className='section-title'>Order Details</div> }
+            {props_orderId ? <div className='section-title sub'>Order # {props_orderId}  ⇒  ${totalPrice.toFixed(2)} </div>
+            : <div className='section-title sub'>Order Details</div> }
             
             <div className='order-details'>
             {orderDetails && orderDetails.length > 0 ? (
@@ -143,7 +143,12 @@ const CRMOrderDetail = ({ props_orderId }) => {
                         </tr>
                         </tfoot>
                 </table>
-            ) : ( <p>No order details available.</p> )}
+            ) : ( 
+                <div className='not-found'>        
+                    <div><FontAwesomeIcon icon={faTriangleExclamation}/> Something went wrong. <FontAwesomeIcon icon={faTriangleExclamation}/></div>
+                    <div> Please refresh.</div> 
+                </div>
+            )}
             {showPopup && <PopupItem props_itemData={currentItem} props_onClose={closeItemPopup} />}
             </div>
         </div>

@@ -145,21 +145,17 @@ function Appusers() {
 
     return (
         <div className="container" style={{ paddingTop: isMenuOpen ? '140px' : '5px' }}>
-            <div className='section-title'>Users - Admin-Only Page</div>
+            {/* <div className='section-title'>Users - Admin-Only Page</div> */}
             <div className='tasks-wrapper'>
-                <div>
-                    <h3>Methods:</h3>
-                    <ul>
-                        <li>Google API admin console</li>
-                        <li>CRUD Google Workspace Users</li>
-                    </ul>
+                <div className='task-col'>
+                    <h3>Crud Form</h3>
+                    <p>Added, Edit & Remove users</p>
+                    <p>Password edits</p>
                 </div>
-                <div>
-                    <h3>Pending:</h3>
-                    <ul>
-                        <li></li>
-                        <li></li>
-                    </ul>
+                <div className='task-col'>
+                    <h3>User's List</h3>
+                    <p>Added, Edit & Remove</p>
+                    <p>Password edits</p>
                 </div>
             </div>
             <div className='component-wrapper'>

@@ -17,18 +17,37 @@
 // Styles for Content Area
 .container {
     //padding-top: 140px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     width: 100%;
     max-width: 100%;
     margin: 0 auto; // Center the container
     flex: 1;   // Allows container to expand and push the footer down
-    border: 2px solid blue;
+    //border: 2px solid blue;
 
     @media screen and (max-width: $mobile) {
         //padding-top: 140px;          // Reduced padding
         //background-color: white;
-        border: 2px solid red;
+        //border: 2px solid red;
     }
+
+    .section-title {
+        margin-bottom: 8px;
+        margin-top: 4px;
+        text-align: center;
+        font-weight: 600;
+
+        &.sub{ 
+            color: $secondaryColor;
+            padding-bottom: 0px;
+
+            @media screen and (max-width: $mobile) { 
+                color: $offwhite;
+            }
+        }
+
+    }
+
+
 }
 
 
@@ -103,10 +122,8 @@ select {
 }
 
 .tasks-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-items: center; // Horiz
+    @include flexCenter;
+    //  
 }
 
 .svg-inline--fa {

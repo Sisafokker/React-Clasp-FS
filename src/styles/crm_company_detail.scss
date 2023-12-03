@@ -2,17 +2,17 @@
 @import "variables.scss";
 @import "mixins.scss";
 
-.crm-company-detail {
-    .section-title {
-        margin-bottom: 8px;
-        margin-top: 4px;
-        text-align: center;
-        font-weight: 600;
-    }
-    
+.crm-company-details {  
 
     .vertical-table {
         @include responsiveTable_Vertical;
-    }
 
+        &.inactive-company{
+            tr {
+                td:first-child { 
+                    background-color: $inactiveColor;
+                }
+            }
+        }
+    }
 }

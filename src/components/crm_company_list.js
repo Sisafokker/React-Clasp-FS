@@ -1,7 +1,7 @@
 // crm_company_list.js child-component
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 // styles
 import "../styles/crm_company_list.scss";
@@ -68,7 +68,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
 
     return (
         <div className="crm-company-list">
-            <div className='section-title'>Customers</div>
+            <div className='section-title'>Customer</div>
             <div className='company-filter'>
                 <div className='filter'>
                     <label><FontAwesomeIcon icon={faFilter}/> Status </label>
@@ -100,18 +100,25 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
                     </button>
             </div>
             <div className='filtered-companies'>
-                {filteredCompanies.map((company) => {
-                    const inactiveClass = company.status === 'inactive' ? 'inactive-company' : '';
+                {filteredCompanies && filteredCompanies.length > 0 ? (
+                    filteredCompanies.map((company) => {
+                        const inactiveClass = company.status === 'inactive' ? 'inactive-company' : '';
 
-                    return (
-                        <div key={company.companyId}
-                            data-company-id={company.companyId}
-                            className={`company-item ${inactiveClass}`} // Add the additional class here
-                            onClick={() => handleCompanyClick(company.companyId)} >
-                            <p>{`${company.companyName} | ${company.industry} [${company.status}]`}</p>
-                        </div>
-                    );
-                })}
+                        return (
+                            <div key={company.companyId}
+                                data-company-id={company.companyId}
+                                className={`company-item ${inactiveClass}`}
+                                onClick={() => handleCompanyClick(company.companyId)} >
+                                <p>{`${company.companyName} | ${company.industry} [${company.status}]`}</p>
+                            </div>
+                        );
+                    })
+                ) : ( 
+                    <div className='not-found companies'>                  
+                        <div><FontAwesomeIcon icon={faTriangleExclamation}/> No Customers asigned to your user. <FontAwesomeIcon icon={faTriangleExclamation}/></div> 
+                        <div>Please talk to your Admin.</div> 
+                    </div>
+                    )}
             </div>
         </div>
     );

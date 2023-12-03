@@ -31,7 +31,10 @@ select {
   display: flex;
   flex-direction: column; //Stack vertically
 
-  box-shadow: 0 0 15px $boxshadow;
+  
+  border: 1px solid $secondaryColor;
+  border-radius: 5px;
+  //box-shadow: 0 0 15px $boxshadow;
 }
 
 .crm-orders {
@@ -39,7 +42,9 @@ select {
   display: flex;
   flex-direction: column;
 
-  box-shadow: 0 0 15px $boxshadow;
+  border: 1px solid $secondaryColor;
+  border-radius: 5px;
+  //box-shadow: 0 0 15px $boxshadow;
 }
 
 .crm-companies,
@@ -48,20 +53,44 @@ select {
     flex-basis: auto;  // Auto initial size before alocation (controls width for flex-rows, height for flex-cols)
     width: 100%;
   }
+
+  .not-found {
+    @include flexCenter;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    gap: 5px;
+    color: $warning;
+
+    &.no-companyId {
+      color: $secondaryColor;
+    }
+    
+    @media screen and (max-width: $mobile) {
+      color: $offwhite;
+
+      &.companies {
+        color: $warning;
+      }
+    }
+  }
 }
 
-.crm-company-list,
-.crm-company-details,
-.crm-order-list,
-.crm-order-detail {
-  min-height: 200px;
-  box-shadow: 0 0 15px $boxshadow;
+
+.crm-company-list, .crm-company-details,
+.crm-order-list, .crm-order-detail {
+  min-height: 175px;
 
   @media screen and (max-width: $mobile) {
     width: 100%;
     min-height: auto;
   }
 
+}
+
+.crm-order-list {
+  padding-bottom: 10px;
 }
 
 .crm-orders {

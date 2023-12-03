@@ -38,6 +38,7 @@ const PopupPassword = ({ props_user, props_onClose, props_onReset, props_success
                 <h3>{props_user.email}</h3>
             </div>
             <div className="popup-content">
+            <h4>Password Reset</h4>
                 <input 
                     type="password"
                     placeholder="New Password"

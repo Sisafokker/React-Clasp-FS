@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter, faSort } from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faSort} from '@fortawesome/free-solid-svg-icons';
 
 // Components
 import Download from "../actions/download";
@@ -212,7 +212,7 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
 
     return (
         <div className="crm-order-list">
-            <div className='section-title'>List of Orders</div>
+            <div className='section-title'>Customer's Orders</div>
             <div className='order-filter'>
                 <div className='filter'>
                     <label><FontAwesomeIcon icon={faFilter}/> Status </label>
@@ -257,8 +257,16 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
                 </table>
                 </div>
                 </>
-            ) : ( <p>No orders available for this customer</p> )}
-            
+            ) : ( props_companyId ? 
+                <div className='not-found'>        
+                    <div>No Orders for this Customer</div>    
+                    <div>Please select another Customer.</div> 
+                </div>
+                :
+                <div className='not-found no-companyId'>        
+                    <div>Please select a Customer.</div> 
+                </div> 
+            )}
         </div>
     );
 };

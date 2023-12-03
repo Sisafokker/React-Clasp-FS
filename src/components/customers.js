@@ -47,7 +47,7 @@ const Customers = () => {
             .catch(error => { console.log("❌ Handle Error") });
     };
 
-    // Adding a Visual indicator when sorting th is clicked... 
+    // Add Sort Direction indicator when sorting th is clicked... 
     // const getSortDirectionText = (key) => {
     //     if (sortConfig.key === key) {
     //         return sortConfig.direction === 'ascending' ? ' ⬇⬇' : ' ⬆⬆';
@@ -69,22 +69,17 @@ const Customers = () => {
 
     return (
         <div className="container" style={{ paddingTop: isMenuOpen ? '140px' : '5px' }}>
-            <div className='section-title'>Customers - Admin-Only Page</div>
+            {/* <div className='section-title'>Customers - Admin-Only Page</div> */}
             <div className='tasks-wrapper'>
-                <div>
-                    <h3>Ideas:</h3>
-                    <ul>
-                        <li>CRUD Google Cloud SQL Database</li>
-                        <li>Action buttons (send email, etc) </li>
-                        <li>List of PO's</li>
-                    </ul>
+                <div className='task-col'>
+                    <h3>Crud Form</h3>
+                    <p>Added, Edit & Remove users</p>
+                    <p>Password edits</p>
                 </div>
-                <div>
-                    <h3>Pending:</h3>
-                    <ul>
-                        <li></li>
-                        <li></li>
-                    </ul>
+                <div className='task-col'>
+                    <h3>User's List</h3>
+                    <p>Added, Edit & Remove</p>
+                    <p>Password edits</p>
                 </div>
             </div>
             <div className='component-wrapper'>

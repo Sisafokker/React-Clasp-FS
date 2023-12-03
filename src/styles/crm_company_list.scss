@@ -3,12 +3,6 @@
 @import "mixins.scss";
 
 .crm-company-list {
-  .section-title {
-    margin-bottom: 8px;
-    margin-top: 4px;
-    text-align: center;
-    font-weight: 600;
-  }
 
   .company-filter {
     display: flex;
@@ -70,7 +64,9 @@
 
       
       &.selected-company { // when .selected-company IS present
-        background-color: $success; 
+        background-color: $success;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
         p {
           color: $offwhite;
         }
@@ -88,6 +84,7 @@
 
     .company-item.inactive-company.selected-company {
       background-color: $inactiveColor;
+      border-radius: 5px;
       p {
         color: $offwhite;
       }
