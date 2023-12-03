@@ -9,6 +9,7 @@ const Info = Object.freeze({
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+    { version: "v1.8.4", title: "Landing for Unverified / Inactive Users", details: ["Created Home_unverified",],  },
     { version: "v1.8.3", title: "Mobile Responsive Upgrades", details: ["Mobile Hamburger Menu - Permanent", "isMenuOpen Context State", "Context added to all Parent Components", ],  },
     { version: "v1.8.2", title: "Improving AppUsers CRUD", details: ["Companies Select/Deselect All", "Multi select element visual improv.", ],  },
     { version: "v1.8.1", title: "Mobile Responsive & Bug resolution", details: ["Started Mobile Responsible Css", "Improved CSS in the process", "Solved Bug in CrmCompanyList filters", "Adjusted PopupItem (also responsible)", ],  },

@@ -631,6 +631,10 @@ select {
   }
 }
 
+.unverified {
+  padding-top: 70px;
+}
+
 .container, .container .tasks-wrapper, .container .users-wrapper {
   width: 100%;
 }

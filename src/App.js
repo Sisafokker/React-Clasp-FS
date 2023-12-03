@@ -14,6 +14,7 @@ import "./styles/main.scss";
 import OAuth from "./OAuth";
 import Crm from "./components/crm";
 import Home from "./components/home";
+import Home_unverified from "./components/home_unverified";
 import Customers from "./components/customers";
 import AppUsers from "./components/appusers";
 import Footer from "./components/footer";
@@ -25,17 +26,18 @@ import { Context } from "./Context";
 
 function App() {
   const { user, setUser } = useContext(Context)
+  const [isUserLoaded, setIsUserLoaded] = useState(false);
   //const [data, setData] = useState([]);
   //const [isSignedIn, setIsSignedIn] = useState(false);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("local_user"));
-    if (storedUser) {
-      setUser(storedUser);
+    // Only update user state if it's different from the stored user
+    if (!isUserLoaded && (!user || (storedUser && user.email !== storedUser.email))) {
+        setUser(storedUser);
+        setIsUserLoaded(true);
     }
-
-    //allGetRequests()
-  }, [setUser]);
+  }, [user, setUser]);
 
   useEffect(() => {
     allGetRequests()
@@ -103,9 +105,9 @@ function App() {
 
   const renderRoutes = () => {
     const storedUser = localStorage.getItem("local_user");
-    console.log("User", user)
-    //console.log("User.Name", user.name)
-    console.log("storedUser", storedUser)
+    console.log("User", user);
+    //console.log("User.Name", user.name);
+    console.log("storedUser", storedUser);
 
     if (user && user.name || storedUser) {
       // console.log("App.js ENABLED renderRoutes()")
@@ -121,7 +123,7 @@ function App() {
             <Route path="appusers" element={<AppUsers />} />
             <Route path="*" element={<Navigate to="/crm" />} />
           </Routes>
-        );
+        ); 
       } else if (user.type === "usuario" && user.status === "active") {
         return (
           <Routes>
@@ -129,13 +131,20 @@ function App() {
             <Route path="crm" element={<Crm />} />
             <Route path="*" element={<Navigate to="/crm" />} />
           </Routes>
+        )
+      } else if (user && (user.status == null || user.status === "unverified")) {
+        return (
+          <Routes>
+            <Route path="/" element={<Home_unverified />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
         );
       } else {
         <Routes>
           <Route path="/" element={<Home />} />  
           <Route path="*" element={<Navigate to="/" />} />
         </Routes> 
-      }
+      };
     
     } else {
       // User is not signed in, render only the home route

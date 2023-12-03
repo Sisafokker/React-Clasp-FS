@@ -1,7 +1,16 @@
 PENDIENTES: 
-(1) Disable Parcel's HMR when building for Production to avoid: ❌"[parcel] 🚨 Connection to the HMR server was lost" 
-(2) Keep researching ❌"[GSI_LOGGER]: Missing required parameter: client_id."
-(3) RESET PASSWORD: AppUsers: When you add a user from the app, we set a generic password "admin_generated"
+** RESET PASSWORD: AppUsers: When you add a user from the app, we set a generic password "admin_generated"
 This is valid for assigning a role and company relationships for GoogleSign AppUsers
 BUT: If the user does not use the GoogleSignin, they will have to reset their password... set up RESET PASSWORD!
+** More OOP
+*** More orders
+** Clear DB's
+** Error Handling
+** Testing
+** Dynamic Title to Hamburger Menu (Hide / Show NavBar)
+** Landing page for unverified users
+
+
+
+
 

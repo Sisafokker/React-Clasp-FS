@@ -1,19 +1,16 @@
 // src/components/home.js
-import React, { useContext } from "react";
-import { Context } from "../Context";
+import React from "react";
 
-//import React from "react";
+// Styles
 import "../styles/home.scss";
 
 // Compiled CSS Styles files
 //import "../../apps-script/styles_compiled/home.css" 
 
 function Home() {
-  const {user, setUser} = useContext(Context);
 
   return (
-    <div className="home-wrapper"> {/* Add className for styling */}
-      {/* {user && <h1>{user.name}</h1>} */}
+    <div className="home-wrapper"> 
       <h1>React_Clasp CRM Project</h1>
       <h3>Please "Log-In" or "Sign-Up" to continue</h3>
       <img className="custom-image"
