@@ -66,17 +66,6 @@
     text-align: center;
 
 
-    .sign-out-button {
-      @include responsiveFontSize(12px);
-      @include buttonStyle($hover-color: $warning);
-      padding: 8px 16px;
-      margin-top: 5px;
-
-      &:hover {
-        background-color: $warning;
-      }
-    }
-
     .user-details {
       @include flexCenter;
       margin-top: 5px;
@@ -97,6 +86,22 @@
 
         p {
           margin: 0;
+        }
+      }
+
+      .sign-out {
+        @include flexCenter;
+        width: 100%;
+      }
+  
+      .sign-out-button {
+        @include responsiveFontSize(12px);
+        @include buttonStyle($hover-color: $warning);
+        padding: 8px 16px;
+        margin-top: 5px;
+  
+        &:hover {
+          background-color: $warning;
         }
       }
     }

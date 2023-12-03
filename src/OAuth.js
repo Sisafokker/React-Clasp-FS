@@ -115,11 +115,12 @@ function OAuth({ prop_renderRoutes }) {
         let userCredentials = response.credential;
         //let userObject = jwtDecode(userCredentials);              // Alternative 1: Decode the JWT token to get user data
         let temp_userObject = decodeJwtResponse(userCredentials);   // Alternative 2: To Decode the JWT token
-        
+        console.log("👍👍👍temp_userObject", temp_userObject)
         let userObject = {
             name:  temp_userObject.name,
             email: temp_userObject.email,
             iss: "Google",
+            picture: temp_userObject.picture,
             type: null
           };
 
@@ -183,7 +184,7 @@ function OAuth({ prop_renderRoutes }) {
                         <div className="userNav-wrapper">
                             <div className="user-wrapper">
                                 <div className="user-details">
-                                    <img className="user-avatar" src={user.picture || "https://use.fontawesome.com/releases/v5.15.4/svgs/solid/user.svg"} alt="User" />
+                                    <img className="user-avatar" src={ user.picture || "https://use.fontawesome.com/releases/v5.15.4/svgs/solid/user.svg"} alt="User" />
                                     <div className="user-text">
                                         <h3>{user.name}</h3>
                                         <p>{user.email}</p>

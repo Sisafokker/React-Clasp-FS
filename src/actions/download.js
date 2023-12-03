@@ -3,7 +3,8 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from 'axios';
 import { Context } from '../Context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileExport, faFile, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faFileExport, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faGoogleDrive } from '@fortawesome/free-brands-svg-icons';
 
 // styles
 import "../styles/crm_order_list.scss";
@@ -17,33 +18,19 @@ function Download({ props_ssPayload }) {
     const [isDownloadComplete, setIsDownloadComplete] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
 
-    const disableDownload = () => {
-        return isGoogleSignedIn() && !isProcessing;
-    }
+    // const disableDownload = () => {
+    //     return !isProcessing;
+    // }
 
-    const isGoogleSignedIn = () => {
-        return user.iss === "Google";
-    } 
+    // const isGoogleSignedIn = () => {
+    //     return user.iss === "Google";
+    // } 
 
     useEffect(() => {
         console.log("Download User", user);
     }, []);
 
 
-
-
-
-
-
-    function triggerCSV() {
-        try {
-            const csvContent = generateCSVContent(props_ssPayload.data);
-            const filename = props_ssPayload.ssName + ".csv";
-            downloadCSV(csvContent, filename);
-        } catch (error) {
-            console.error("Error in local CSV creation:", error);
-            }
-    }
 
     // Trigger SCV download
     const downloadCSV = (csvContent, filename) => {
@@ -72,9 +59,15 @@ function Download({ props_ssPayload }) {
         return csvContent;
     };
 
-
-
-    
+    function triggerCSV() {
+        try {
+            const csvContent = generateCSVContent(props_ssPayload.data);
+            const filename = props_ssPayload.ssName + ".csv";
+            downloadCSV(csvContent, filename);
+        } catch (error) {
+            console.error("Error in local CSV creation:", error);
+            }
+    }
 
 
     const createDriveFile = async () => {
@@ -236,12 +229,12 @@ function Download({ props_ssPayload }) {
 
     return (
         <>  
-            <button className="btn downloader" onClick={handleCreateFileClick} title={!disableDownload() ? "Disabled. Must Login with Google": props_ssPayload.btnTitle} disabled={!disableDownload()}>
+            <button className="btn downloader" onClick={handleCreateFileClick} title={isProcessing ? "Download as CSV only": props_ssPayload.btnTitle}>
                 <FontAwesomeIcon icon={faFileExport} /> { (props_ssPayload && props_ssPayload.btnName) || "Save to Drive" } 
             </button>
                     
             {isDownloadComplete && (
-                <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="btn-fileReady" title={`Open ${props_ssPayload.ssName}`}> <FontAwesomeIcon icon={faFile} /> </a>
+                <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="btn-fileReady" title={`Open ${props_ssPayload.ssName}`}> <FontAwesomeIcon icon={faGoogleDrive} /> </a>
             )}
 
            {isProcessing && (

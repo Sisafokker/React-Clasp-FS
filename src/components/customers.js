@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Context } from "../Context";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faSort } from '@fortawesome/free-solid-svg-icons';
+import CustomersForm from "./customersForm";
 
 // Hooks
 import { useSortableData } from '../actions/sortingTables';
@@ -16,6 +17,7 @@ const Customers = () => {
     const url = `${process.env.REACT_APP_Backend_URL}/api/companies`;
     const { isMenuOpen } = useContext(Context);
     const [customers, setCustomers] = useState([]);
+    const [customerAction, setCustomerAction] = useState({ customer: null, action: "Add" });
 
     // Hooks Passing the data array for sorting. 
     const { items: sortedCustomers, requestSort, sortConfig } = useSortableData(customers, { key: 'companyName', direction: 'ascending' });
@@ -29,43 +31,33 @@ const Customers = () => {
             .catch(error => console.error('Error getting customers:', error));
     }, []);
 
-    const addCustomer = (customerData) => {
-        axios.post(url, customerData)
-            .then(response => { console.log("👍 customers.js addCustomer: ", response.data) })
-            .catch(error => { console.log("❌ Handle Error") });
+    const handleCustomerAction = () => {
+        axios.get(url)
+            .then(response => {
+                setCustomers(response.data);
+            })
+            .catch(error => console.error('Error getting customers:', error));
     };
 
-    const editCustomer = (customerId, updatedData) => {
-        axios.patch(`${url}/${customerId}`, updatedData)
-            .then(response => { console.log("👍 customers.js editCustomer: ", response.data) })
-            .catch(error => { console.log("❌ Handle Error") });
+    const handleAction = (customer, action) => {
+        setCustomerAction({ customer, action });
+        console.log("🚧🚧 CUSTOMER: ",customer)
+        console.log("🚧🚧 ACTION: ", action)
     };
-
-    const deleteCustomer = (customerId) => {
-        axios.delete(`${url}/${customerId}`)
-            .then(response => { console.log("👍 customers.js deleteCustomer: ", response.data) })
-            .catch(error => { console.log("❌ Handle Error") });
-    };
-
-    // Add Sort Direction indicator when sorting th is clicked... 
-    // const getSortDirectionText = (key) => {
-    //     if (sortConfig.key === key) {
-    //         return sortConfig.direction === 'ascending' ? ' ⬇⬇' : ' ⬆⬆';
-    //     }
-    //     return '';
-    // };
 
     const renderTableRows = sortedCustomers.map(c => (
         <tr key={c.companyId}>
-            <td> <FontAwesomeIcon icon={faPenToSquare} className='clickable' onClick={() => handleAction(u, 'Edit')} /> </td>
-            <td> <FontAwesomeIcon icon={faTrash} className='clickable' onClick={() => handleAction(u, 'Remove')} /> </td>
+            <td> <FontAwesomeIcon icon={faPenToSquare} className='clickable' onClick={() => handleAction(c, 'Edit')} /> </td>
+            <td> <FontAwesomeIcon icon={faTrash} className='clickable' onClick={() => handleAction(c, 'Remove')} /> </td>
             <td>{c.companyId}</td>
             <td>{c.companyName}</td>
             <td>{c.companyAddress}</td>
             <td>{c.industry}</td>
+            <td>{c.status}</td>
+            <td>{c.country}</td>
+            <td>{c.state}</td>
         </tr>
-    ))
-
+    ));
 
     return (
         <div className="container" style={{ paddingTop: isMenuOpen ? '140px' : '5px' }}>
@@ -83,33 +75,34 @@ const Customers = () => {
                 </div>
             </div>
             <div className='component-wrapper'>
-                <div className='form-container'>
-                    {/* 🚧 PENDING CRUD CUSTOMERS 🚧  */}
-                    {/* <AppusersForm 
-                    prop_handleUserAction={handleUserAction} 
-                    prop_userAction={userAction} 
-                    prop_companies={companies}
-                    prop_intCompUser={intCompUser}
-                /> */}
-                </div>
+            <div className='form-container'>
+                <CustomersForm 
+                    prop_handleCustomerAction={handleCustomerAction} 
+                    prop_customerAction={customerAction} 
+                    prop_customers={customers}
+                />
+            </div>
                 <div className='horizontal-table-container'>
                     <div className='section-title'>Customers</div>
-{/*                     <div className='mobile-scroll-table'>
- */}                        <table className='horizontal-table customers-table'>
-                            <thead>
-                                <tr>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
-                                    <th className="sortable" title="Click to Sort" onClick={() => requestSort('companyId')}>Corp. Id <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
-                                    <th className="sortable" title="Click to Sort" onClick={() => requestSort('companyName')}>Corp. Name <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
-                                    <th className="sortable" title="Click to Sort" onClick={() => requestSort('companyAddress')}>Address <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
-                                    <th className="sortable" title="Click to Sort" onClick={() => requestSort('industry')}>Industry <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {renderTableRows}
-                            </tbody>
-                        </table>
+                {/* <div className='mobile-scroll-table'> */}
+                <table className='horizontal-table customers-table'>
+                        <thead>
+                            <tr>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('companyId')}>Corp. Id <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('companyName')}>Corp. Name <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('companyAddress')}>Address <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('industry')}>Industry <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('status')}>Status <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('country')}>Country <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                                <th className="sortable" title="Click to Sort" onClick={() => requestSort('state')}>State <span className="sort-indicator"><FontAwesomeIcon icon={faSort} /></span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {renderTableRows}
+                        </tbody>
+                    </table>
 {/*                     </div> */}
                 </div>
             </div>

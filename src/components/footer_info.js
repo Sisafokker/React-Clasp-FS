@@ -2,14 +2,15 @@
 const Info = Object.freeze({
   project: {
     name: 'FS Bottega Final Project: Hoakeen',
-    version: { major: 1, minor: 8,  patch: 7, 
+    version: { major: 1, minor: 8,  patch: 8, 
       toString() { return `${this.major}.${this.minor}.${this.patch}`; }
     }
   },
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
-    { version: "v1.8.7", title: "TBD", details: ["1", "2", "3",],  },
+    //{ version: "v1.8.8", title: "Download Improved", details: ["1", "2", "3",],  },
+    { version: "v1.8.7", title: "CRM Visuals and @mobile", details: ["Improved Msg's when No Customer", "Visuals when Customer is Active vs Inactive", "Improved Mixins Buttons to be more responsive", "Improved Table visuals (rounded corners)", "Vertical Table Dif Colors depending on Company Status", "Warnings if user has not companies assigned to them"],  },
     { version: "v1.8.6", title: "Password Reset by Admins ", details: ["Admins con reset users passwords", "popupPassword.js", "popupPasswords.scss",],  },
     { version: "v1.8.5", title: "Solved SignUp error", details: ["Solved SignUp bug","Added more controls over form","Improved success/fail messages",],  },
     { version: "v1.8.4", title: "Landing for Unverified / Inactive Users", details: ["Created Home_unverified",],  },

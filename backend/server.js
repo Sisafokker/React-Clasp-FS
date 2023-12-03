@@ -10,11 +10,11 @@ appExp.use(cors());
 appExp.use(bodyParser.json());
 
 const UserManager = require('./UserManager');
-const CompanyManager = require('./CompanyManager'); 
-const ContactManager = require('./ContactManager'); 
-const OrderManager = require('./OrderManager'); 
-const ItemManager = require('./ItemManager'); 
-const IntermediaryManager = require('./IntermediaryManager'); 
+const CompanyManager = require('./CompanyManager');
+const ContactManager = require('./ContactManager');
+const OrderManager = require('./OrderManager');
+const ItemManager = require('./ItemManager');
+const IntermediaryManager = require('./IntermediaryManager');
 
 const userManager = new UserManager();
 const companyManager = new CompanyManager();
@@ -28,10 +28,10 @@ appExp.post('/api/signup', async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
   try {
     await userManager.addUser(firstName, lastName, email, password);
-    res.status(201).json({ message: 'User registered successfully', user: req.body});
+    res.status(201).json({ message: 'User registered successfully', user: req.body });
   } catch (error) {
     console.error('❌Signup Error:', error);
-    if (error.toString().includes("ER_DUP_ENTRY:")){
+    if (error.toString().includes("ER_DUP_ENTRY:")) {
       error.message = `User already exists: 'Log in' OR 'Sign up with a different email'`
     }
     res.status(500).json({ error: 'SignUp Error: ' + error.message });
@@ -136,6 +136,44 @@ appExp.get('/api/companies', async (req, res) => {
   }
 });
 
+// Add Company
+appExp.post('/api/companies', async (req, res) => {
+  const { companyName, companyAddress, state, country, industry, status, createdBy, updatedBy } = req.body;
+  try {
+    await companyManager.addCompany(companyName, companyAddress, state, country, industry, status, createdBy, updatedBy);
+    res.status(201).json({ message: 'Company added successfully' });
+  } catch (error) {
+    console.error('❌Add Company Error:', error);
+    res.status(500).json({ error: 'Add Company Error: ' + error.message });
+  }
+});
+
+// Edit Company
+appExp.patch('/api/companies/:companyId', async (req, res) => {
+  const companyId = req.params.companyId;
+  const { companyName, companyAddress, state, country, industry, status, updatedBy } = req.body;
+  try {
+    await companyManager.updateCompany(companyId, companyName, companyAddress, state, country, industry, status, updatedBy);
+    res.status(200).json({ message: 'Company updated successfully' });
+  } catch (error) {
+    console.error('❌Update Company Error:', error);
+    res.status(500).json({ error: 'Update Company Error: ' + error.message });
+  }
+});
+
+// Delete Company
+appExp.delete('/api/companies/:companyId', async (req, res) => {
+  const companyId = req.params.companyId;
+  try {
+    await companyManager.deleteCompany(companyId);
+    res.status(200).json({ message: 'Company deleted successfully' });
+  } catch (error) {
+    console.error('❌Delete Company Error:', error);
+    res.status(500).json({ error: 'Delete Company Error: ' + error.message });
+  }
+});
+
+
 // Get Contacts
 appExp.get('/api/contacts', async (req, res) => {
   try {
@@ -238,7 +276,7 @@ appExp.patch('/api/items/:itemId', async (req, res) => {
   const itemId = req.params.itemId;
   const { name, description, unitprice_usd, available, userId } = req.body;
   try {
-    await itemManager.updateItem(itemId, name, description, unitprice_usd, available, userId); 
+    await itemManager.updateItem(itemId, name, description, unitprice_usd, available, userId);
     res.status(200).json({ message: 'Item updated successfully' });
   } catch (error) {
     console.error('❌Update Item Error:', error);
@@ -273,11 +311,11 @@ appExp.get('/api/intCompanyUser', async (req, res) => {
 appExp.post('/api/intCompanyUser', async (req, res) => {
   try {
     const { companyId, userId } = req.body;
-    if (!companyId && !userId ) {
+    if (!companyId && !userId) {
       throw new Error('Missing both companyId & userId');
     } else if (!companyId) {
       throw new Error('Missing companyId');
-    } else if( !userId) {
+    } else if (!userId) {
       throw new Error('Missing userId');
     }
     await intermediaryManager.addIntCompanyUser(companyId, userId);

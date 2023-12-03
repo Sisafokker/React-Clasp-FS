@@ -191,10 +191,10 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
     //if (!orders) return <div>Select an order to see details</div>;
     const payload = { 
         btnName: "Download Orders",
-        btnTitle: "Download VISIBLE Orders to Drive",
+        btnTitle: "Orders List and Details (Drive & CSV)",
         ssName: downloadName, 
         data: [ 
-            { swName: "Orders", values: ordersForDownload },  
+            { swName: "Order_List", values: ordersForDownload },  
             { swName: "Order_Details", values: orderDetailsForDownload  },  
             //{ swName: "Orders_second", values: ordersForDownload }, // One of these objs for each sheet of data
             ], 

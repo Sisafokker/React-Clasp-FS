@@ -1,3 +1,4 @@
+// backend/CompanyManajer.js
 const Database = require('./Database');
 
 class CompanyManager {

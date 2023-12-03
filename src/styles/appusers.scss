@@ -40,7 +40,7 @@
             }
 
             .customers-table { // for appusers only
-                @include responsiveTable_Horizontal;
+                @include responsiveTable_Horizontal(5, 9);
             }
         }
 
