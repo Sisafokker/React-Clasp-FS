@@ -2,13 +2,14 @@
 const Info = Object.freeze({
   project: {
     name: 'FS Bottega Final Project: Hoakeen',
-    version: { major: 1, minor: 8,  patch: 3, 
+    version: { major: 1, minor: 8,  patch: 5, 
       toString() { return `${this.major}.${this.minor}.${this.patch}`; }
     }
   },
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+    { version: "v1.8.5", title: "Solved SignUp error", details: ["Solved SignUp bug","Added more controls over form","Improved success/fail messages",],  },
     { version: "v1.8.4", title: "Landing for Unverified / Inactive Users", details: ["Created Home_unverified",],  },
     { version: "v1.8.3", title: "Mobile Responsive Upgrades", details: ["Mobile Hamburger Menu - Permanent", "isMenuOpen Context State", "Context added to all Parent Components", ],  },
     { version: "v1.8.2", title: "Improving AppUsers CRUD", details: ["Companies Select/Deselect All", "Multi select element visual improv.", ],  },

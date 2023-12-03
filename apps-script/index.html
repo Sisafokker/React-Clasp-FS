@@ -36764,6 +36764,7 @@ function OAuth({ prop_renderRoutes }) {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "hamburger-menu",
+                        title: !isMenuOpen ? "Show Navigation Bar" : "Hide Navigation Bar",
                         onClick: toggleMenuView,
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactFontawesome.FontAwesomeIcon), {
                             icon: (0, _freeSolidSvgIcons.faBars)
@@ -37056,12 +37057,44 @@ const Auth_Form = ()=>{
     });
     const handleFormSubmit = async (event)=>{
         event.preventDefault();
-        if (isSignUp && formData.passwordOne !== formData.passwordTwo) {
-            setFeedback({
-                error: `\u{274C} Both Passwords must be equal. Modify and try again`,
-                success: null
-            });
-            return;
+        if (isSignUp) {
+            const { email, passwordOne, passwordTwo, firstName, lastName } = formData;
+            if (!email || !passwordOne || !passwordTwo || !firstName || !lastName) {
+                setFeedback({
+                    error: "\u274C Please fill in all fields.",
+                    success: null
+                });
+                return;
+            }
+            if (firstName.length < 5 || lastName.length < 5) {
+                setFeedback({
+                    error: "\u274C Both names must be longer than 5 characters.",
+                    success: null
+                });
+                return;
+            }
+            const emailFormatRegex = /\S+@\S+\.\S+/;
+            if (!emailFormatRegex.test(email)) {
+                setFeedback({
+                    error: "\u274C Please enter a valid email address.",
+                    success: null
+                });
+                return;
+            }
+            if (passwordOne.length < 6 || passwordOne.length > 20) {
+                setFeedback({
+                    error: "\u274C Password must be between 6 and 20 characters long.",
+                    success: null
+                });
+                return;
+            }
+            if (passwordOne !== passwordTwo) {
+                setFeedback({
+                    error: "\u274C Both passwords must match.",
+                    success: null
+                });
+                return;
+            }
         }
         const requestData = isSignUp ? {
             firstName: formData.firstName,
@@ -37075,19 +37108,19 @@ const Auth_Form = ()=>{
         //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/${isSignUp ? 'signup' : 'login'}`;
         const url = `${"http://localhost:5000"}/api/${isSignUp ? "signup" : "login"}`;
         try {
+            console.log("\uD83D\uDD11Data!: ", requestData);
             const response = await (0, _axiosDefault.default).post(url, requestData);
-            //console.log("Success!: ", response.data.user)
+            console.log("\uD83D\uDD11Success!: ", response.data.user);
             const userObj = {
                 name: response.data.user.firstName + " " + response.data.user.lastName,
                 email: response.data.user.email,
                 type: response.data.user.type,
                 status: response.data.user.status,
-                id: response.data.user.id,
                 iss: "Not-Google"
             };
             if (isSignUp) {
                 setFeedback({
-                    success: `\u{1F44D}\u{1F44D} Congratulations ${userObj.name}, your email ${userObj.email} was approved. You can now login`,
+                    success: `${userObj.name}: You have signed up. You can now login`,
                     error: null
                 });
                 // Reset form & pass email for login
@@ -37102,7 +37135,7 @@ const Auth_Form = ()=>{
                 setIsSignUp(false); // Switch to the login form
             } else {
                 // For login, set the user in context and clear feedback
-                setUser(userObj);
+                userObj.id = response.data.user.id, setUser(userObj);
                 setFeedback({
                     success: "SignIn Success!",
                     error: null
@@ -37127,198 +37160,223 @@ const Auth_Form = ()=>{
         };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "oauth-form-container",
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
-                onSubmit: handleFormSubmit,
-                children: [
-                    isSignUp && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "signUp-wrapper",
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            className: "input-group",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+            onSubmit: handleFormSubmit,
+            children: [
+                isSignUp && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "signUp-wrapper",
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "input-group",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                children: [
+                                    "Name: ",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "text",
+                                        name: "firstName",
+                                        placeholder: "Your First Name",
+                                        value: formData.firstName,
+                                        onChange: updateFormData("firstName"),
+                                        required: true
+                                    }, void 0, false, {
+                                        fileName: "src/components/auth_form.js",
+                                        lineNumber: 129,
+                                        columnNumber: 28
+                                    }, undefined),
+                                    " "
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/auth_form.js",
+                                lineNumber: 129,
+                                columnNumber: 15
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                children: [
+                                    "Last Name: ",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "text",
+                                        name: "lastName",
+                                        placeholder: "Your Last Name",
+                                        value: formData.lastName,
+                                        onChange: updateFormData("lastName"),
+                                        required: true
+                                    }, void 0, false, {
+                                        fileName: "src/components/auth_form.js",
+                                        lineNumber: 130,
+                                        columnNumber: 33
+                                    }, undefined),
+                                    " "
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/auth_form.js",
+                                lineNumber: 130,
+                                columnNumber: 15
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                children: [
+                                    "Email: ",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "email",
+                                        name: "email",
+                                        placeholder: "Your Email",
+                                        value: formData.email,
+                                        onChange: updateFormData("email"),
+                                        required: true
+                                    }, void 0, false, {
+                                        fileName: "src/components/auth_form.js",
+                                        lineNumber: 131,
+                                        columnNumber: 29
+                                    }, undefined),
+                                    " "
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/auth_form.js",
+                                lineNumber: 131,
+                                columnNumber: 15
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                children: [
+                                    "Password: ",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "password",
+                                        name: "passwordOne",
+                                        placeholder: "Your Password",
+                                        value: formData.passwordOne,
+                                        onChange: updateFormData("passwordOne"),
+                                        required: true
+                                    }, void 0, false, {
+                                        fileName: "src/components/auth_form.js",
+                                        lineNumber: 132,
+                                        columnNumber: 32
+                                    }, undefined),
+                                    " "
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/auth_form.js",
+                                lineNumber: 132,
+                                columnNumber: 15
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                children: [
+                                    "Confirm Password: ",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "password",
+                                        name: "passwordTwo",
+                                        placeholder: "Confirm Your Password",
+                                        value: formData.passwordTwo,
+                                        onChange: updateFormData("passwordTwo"),
+                                        required: true
+                                    }, void 0, false, {
+                                        fileName: "src/components/auth_form.js",
+                                        lineNumber: 133,
+                                        columnNumber: 40
+                                    }, undefined),
+                                    " "
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/auth_form.js",
+                                lineNumber: 133,
+                                columnNumber: 15
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/auth_form.js",
+                        lineNumber: 128,
+                        columnNumber: 13
+                    }, undefined)
+                }, void 0, false, {
+                    fileName: "src/components/auth_form.js",
+                    lineNumber: 127,
+                    columnNumber: 11
+                }, undefined),
+                !isSignUp && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "logIn-wrapper",
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "input-group",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                children: [
+                                    "Email: ",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "email",
+                                        name: "email",
+                                        placeholder: "Your Email",
+                                        value: formData.email,
+                                        onChange: updateFormData("email"),
+                                        required: true
+                                    }, void 0, false, {
+                                        fileName: "src/components/auth_form.js",
+                                        lineNumber: 141,
+                                        columnNumber: 27
+                                    }, undefined),
+                                    " "
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/auth_form.js",
+                                lineNumber: 141,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                children: [
+                                    "Password: ",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "password",
+                                        name: "password",
+                                        placeholder: "Your Password",
+                                        value: formData.password,
+                                        onChange: updateFormData("password"),
+                                        required: true
+                                    }, void 0, false, {
+                                        fileName: "src/components/auth_form.js",
+                                        lineNumber: 142,
+                                        columnNumber: 30
+                                    }, undefined),
+                                    " "
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/auth_form.js",
+                                lineNumber: 142,
+                                columnNumber: 13
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/auth_form.js",
+                        lineNumber: 140,
+                        columnNumber: 13
+                    }, undefined)
+                }, void 0, false, {
+                    fileName: "src/components/auth_form.js",
+                    lineNumber: 139,
+                    columnNumber: 11
+                }, undefined),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "feedback",
                             children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                    children: [
-                                        "Name: ",
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                            type: "text",
-                                            name: "firstName",
-                                            placeholder: "Your First Name",
-                                            value: formData.firstName,
-                                            onChange: updateFormData("firstName"),
-                                            required: true
-                                        }, void 0, false, {
-                                            fileName: "src/components/auth_form.js",
-                                            lineNumber: 102,
-                                            columnNumber: 28
-                                        }, undefined),
-                                        " "
-                                    ]
-                                }, void 0, true, {
+                                feedback.error && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                    className: "error",
+                                    children: feedback.error
+                                }, void 0, false, {
                                     fileName: "src/components/auth_form.js",
-                                    lineNumber: 102,
-                                    columnNumber: 15
+                                    lineNumber: 148,
+                                    columnNumber: 32
                                 }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                    children: [
-                                        "Last Name: ",
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                            type: "text",
-                                            name: "lastName",
-                                            placeholder: "Your Last Name",
-                                            value: formData.lastName,
-                                            onChange: updateFormData("lastName"),
-                                            required: true
-                                        }, void 0, false, {
-                                            fileName: "src/components/auth_form.js",
-                                            lineNumber: 103,
-                                            columnNumber: 33
-                                        }, undefined),
-                                        " "
-                                    ]
-                                }, void 0, true, {
+                                feedback.success && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                    className: "success",
+                                    children: feedback.success
+                                }, void 0, false, {
                                     fileName: "src/components/auth_form.js",
-                                    lineNumber: 103,
-                                    columnNumber: 15
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                    children: [
-                                        "Email: ",
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                            type: "email",
-                                            name: "email",
-                                            placeholder: "Your Email",
-                                            value: formData.email,
-                                            onChange: updateFormData("email"),
-                                            required: true
-                                        }, void 0, false, {
-                                            fileName: "src/components/auth_form.js",
-                                            lineNumber: 104,
-                                            columnNumber: 29
-                                        }, undefined),
-                                        " "
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/components/auth_form.js",
-                                    lineNumber: 104,
-                                    columnNumber: 15
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                    children: [
-                                        "Password: ",
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                            type: "password",
-                                            name: "passwordOne",
-                                            placeholder: "Your Password",
-                                            value: formData.passwordOne,
-                                            onChange: updateFormData("passwordOne"),
-                                            required: true
-                                        }, void 0, false, {
-                                            fileName: "src/components/auth_form.js",
-                                            lineNumber: 105,
-                                            columnNumber: 32
-                                        }, undefined),
-                                        " "
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/components/auth_form.js",
-                                    lineNumber: 105,
-                                    columnNumber: 15
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                    children: [
-                                        "Confirm Password: ",
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                            type: "password",
-                                            name: "passwordTwo",
-                                            placeholder: "Confirm Your Password",
-                                            value: formData.passwordTwo,
-                                            onChange: updateFormData("passwordTwo"),
-                                            required: true
-                                        }, void 0, false, {
-                                            fileName: "src/components/auth_form.js",
-                                            lineNumber: 106,
-                                            columnNumber: 40
-                                        }, undefined),
-                                        " "
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/components/auth_form.js",
-                                    lineNumber: 106,
-                                    columnNumber: 15
+                                    lineNumber: 149,
+                                    columnNumber: 34
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/auth_form.js",
-                            lineNumber: 101,
-                            columnNumber: 13
-                        }, undefined)
-                    }, void 0, false, {
-                        fileName: "src/components/auth_form.js",
-                        lineNumber: 100,
-                        columnNumber: 11
-                    }, undefined),
-                    !isSignUp && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "logIn-wrapper",
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            className: "input-group",
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                    children: [
-                                        "Email: ",
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                            type: "email",
-                                            name: "email",
-                                            placeholder: "Your Email",
-                                            value: formData.email,
-                                            onChange: updateFormData("email"),
-                                            required: true
-                                        }, void 0, false, {
-                                            fileName: "src/components/auth_form.js",
-                                            lineNumber: 114,
-                                            columnNumber: 27
-                                        }, undefined),
-                                        " "
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/components/auth_form.js",
-                                    lineNumber: 114,
-                                    columnNumber: 13
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                    children: [
-                                        "Password: ",
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                            type: "password",
-                                            name: "password",
-                                            placeholder: "Your Password",
-                                            value: formData.password,
-                                            onChange: updateFormData("password"),
-                                            required: true
-                                        }, void 0, false, {
-                                            fileName: "src/components/auth_form.js",
-                                            lineNumber: 115,
-                                            columnNumber: 30
-                                        }, undefined),
-                                        " "
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/components/auth_form.js",
-                                    lineNumber: 115,
-                                    columnNumber: 13
-                                }, undefined)
-                            ]
-                        }, void 0, true, {
-                            fileName: "src/components/auth_form.js",
-                            lineNumber: 113,
-                            columnNumber: 13
-                        }, undefined)
-                    }, void 0, false, {
-                        fileName: "src/components/auth_form.js",
-                        lineNumber: 112,
-                        columnNumber: 11
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            lineNumber: 147,
+                            columnNumber: 11
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                             className: "signLogButton",
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -37326,7 +37384,7 @@ const Auth_Form = ()=>{
                                     children: isSignUp ? "Sign Up" : "Log In"
                                 }, void 0, false, {
                                     fileName: "src/components/auth_form.js",
-                                    lineNumber: 121,
+                                    lineNumber: 153,
                                     columnNumber: 13
                                 }, undefined),
                                 isSignUp ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
@@ -37335,7 +37393,7 @@ const Auth_Form = ()=>{
                                     children: "Or Log In here"
                                 }, void 0, false, {
                                     fileName: "src/components/auth_form.js",
-                                    lineNumber: 123,
+                                    lineNumber: 155,
                                     columnNumber: 15
                                 }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
                                     href: "#signup",
@@ -37343,46 +37401,30 @@ const Auth_Form = ()=>{
                                     children: "Or Sign Up here"
                                 }, void 0, false, {
                                     fileName: "src/components/auth_form.js",
-                                    lineNumber: 125,
+                                    lineNumber: 157,
                                     columnNumber: 15
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/auth_form.js",
-                            lineNumber: 120,
+                            lineNumber: 152,
                             columnNumber: 11
                         }, undefined)
-                    }, void 0, false, {
-                        fileName: "src/components/auth_form.js",
-                        lineNumber: 119,
-                        columnNumber: 9
-                    }, undefined)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/auth_form.js",
-                lineNumber: 98,
-                columnNumber: 7
-            }, undefined),
-            feedback.error && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "error",
-                children: feedback.error
-            }, void 0, false, {
-                fileName: "src/components/auth_form.js",
-                lineNumber: 130,
-                columnNumber: 26
-            }, undefined),
-            feedback.success && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "success",
-                children: feedback.success
-            }, void 0, false, {
-                fileName: "src/components/auth_form.js",
-                lineNumber: 131,
-                columnNumber: 28
-            }, undefined)
-        ]
-    }, void 0, true, {
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/auth_form.js",
+                    lineNumber: 146,
+                    columnNumber: 9
+                }, undefined)
+            ]
+        }, void 0, true, {
+            fileName: "src/components/auth_form.js",
+            lineNumber: 125,
+            columnNumber: 7
+        }, undefined)
+    }, void 0, false, {
         fileName: "src/components/auth_form.js",
-        lineNumber: 97,
+        lineNumber: 124,
         columnNumber: 5
     }, undefined);
 };
@@ -64118,7 +64160,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                     children: " CRUD Users"
                 }, void 0, false, {
                     fileName: "src/components/appusersform.js",
-                    lineNumber: 285,
+                    lineNumber: 271,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -64139,7 +64181,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                             children: visuals.btnText
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 289,
+                                            lineNumber: 275,
                                             columnNumber: 36
                                         }, undefined),
                                         visuals.showButton && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -64149,13 +64191,13 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                             children: "Cancel"
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 291,
+                                            lineNumber: 277,
                                             columnNumber: 36
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 288,
+                                    lineNumber: 274,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -64166,7 +64208,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                             children: visuals.formError
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 294,
+                                            lineNumber: 280,
                                             columnNumber: 37
                                         }, undefined),
                                         visuals.formSuccess && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -64174,19 +64216,19 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                             children: visuals.formSuccess
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 295,
+                                            lineNumber: 281,
                                             columnNumber: 39
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 293,
+                                    lineNumber: 279,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/appusersform.js",
-                            lineNumber: 287,
+                            lineNumber: 273,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -64204,14 +64246,14 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                 })
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 299,
+                                            lineNumber: 285,
                                             columnNumber: 32
                                         }, undefined),
                                         " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 299,
+                                    lineNumber: 285,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -64226,14 +64268,14 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                 })
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 300,
+                                            lineNumber: 286,
                                             columnNumber: 31
                                         }, undefined),
                                         " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 300,
+                                    lineNumber: 286,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -64248,14 +64290,14 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                 })
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 301,
+                                            lineNumber: 287,
                                             columnNumber: 27
                                         }, undefined),
                                         " "
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 301,
+                                    lineNumber: 287,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -64273,7 +64315,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     children: "Select type"
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 305,
+                                                    lineNumber: 291,
                                                     columnNumber: 15
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -64281,7 +64323,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     children: "admin"
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 306,
+                                                    lineNumber: 292,
                                                     columnNumber: 15
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -64289,19 +64331,19 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     children: "usuario"
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 307,
+                                                    lineNumber: 293,
                                                     columnNumber: 15
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 304,
+                                            lineNumber: 290,
                                             columnNumber: 26
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 304,
+                                    lineNumber: 290,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -64319,7 +64361,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     children: "Select status"
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 311,
+                                                    lineNumber: 297,
                                                     columnNumber: 15
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -64327,7 +64369,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     children: "active"
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 312,
+                                                    lineNumber: 298,
                                                     columnNumber: 15
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -64335,19 +64377,19 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     children: "inactive"
                                                 }, void 0, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 313,
+                                                    lineNumber: 299,
                                                     columnNumber: 15
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 310,
+                                            lineNumber: 296,
                                             columnNumber: 28
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 310,
+                                    lineNumber: 296,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -64362,7 +64404,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                 children: "All"
                                             }, void 0, false, {
                                                 fileName: "src/components/appusersform.js",
-                                                lineNumber: 331,
+                                                lineNumber: 317,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -64370,7 +64412,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                 children: "\u21D0 selection \u21D2 "
                                             }, void 0, false, {
                                                 fileName: "src/components/appusersform.js",
-                                                lineNumber: 332,
+                                                lineNumber: 318,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactFontawesome.FontAwesomeIcon), {
@@ -64381,18 +64423,18 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                 children: "None"
                                             }, void 0, false, {
                                                 fileName: "src/components/appusersform.js",
-                                                lineNumber: 333,
+                                                lineNumber: 319,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/appusersform.js",
-                                        lineNumber: 330,
+                                        lineNumber: 316,
                                         columnNumber: 15
                                     }, undefined)
                                 }, void 0, false, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 329,
+                                    lineNumber: 315,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -64418,46 +64460,46 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
                                                     children: company.companyName
                                                 }, company.companyId, false, {
                                                     fileName: "src/components/appusersform.js",
-                                                    lineNumber: 344,
+                                                    lineNumber: 330,
                                                     columnNumber: 21
                                                 }, undefined))
                                         }, void 0, false, {
                                             fileName: "src/components/appusersform.js",
-                                            lineNumber: 337,
+                                            lineNumber: 323,
                                             columnNumber: 17
                                         }, undefined)
                                     ]
                                 }, void 0, true, {
                                     fileName: "src/components/appusersform.js",
-                                    lineNumber: 336,
+                                    lineNumber: 322,
                                     columnNumber: 15
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/appusersform.js",
-                            lineNumber: 298,
+                            lineNumber: 284,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {}, void 0, false, {
                             fileName: "src/components/appusersform.js",
-                            lineNumber: 351,
+                            lineNumber: 337,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/appusersform.js",
-                    lineNumber: 286,
+                    lineNumber: 272,
                     columnNumber: 9
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/appusersform.js",
-            lineNumber: 284,
+            lineNumber: 270,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/appusersform.js",
-        lineNumber: 282,
+        lineNumber: 268,
         columnNumber: 5
     }, undefined);
 };
@@ -64671,7 +64713,7 @@ const Info = Object.freeze({
         version: {
             major: 1,
             minor: 8,
-            patch: 3,
+            patch: 5,
             toString () {
                 return `${this.major}.${this.minor}.${this.patch}`;
             }
@@ -64679,6 +64721,22 @@ const Info = Object.freeze({
     },
     notes: [
         //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+        {
+            version: "v1.8.5",
+            title: "Solved SignUp error",
+            details: [
+                "Solved SignUp bug",
+                "Added more controls over form",
+                "Improved success/fail messages"
+            ]
+        },
+        {
+            version: "v1.8.4",
+            title: "Landing for Unverified / Inactive Users",
+            details: [
+                "Created Home_unverified"
+            ]
+        },
         {
             version: "v1.8.3",
             title: "Mobile Responsive Upgrades",

@@ -28,11 +28,11 @@ appExp.post('/api/signup', async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
   try {
     await userManager.addUser(firstName, lastName, email, password);
-    res.status(201).json({ message: 'User registered successfully' });
+    res.status(201).json({ message: 'User registered successfully', user: req.body});
   } catch (error) {
     console.error('❌Signup Error:', error);
     if (error.toString().includes("ER_DUP_ENTRY:")){
-      error.message = "This User has already signed up. Please Sign in or sign up with a different user."
+      error.message = `User already exists: 'Log in' OR 'Sign up with a different email'`
     }
     res.status(500).json({ error: 'SignUp Error: ' + error.message });
   }
@@ -43,7 +43,7 @@ appExp.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await userManager.validateLogin(email, password);
-    res.status(200).json({ message: 'Logged in successfully', user });
+    res.status(200).json({ message: 'LoggedIn successfully', user });
   } catch (error) {
     console.error('❌Login Error:', error);
     res.status(401).json({ error: 'Login Error: ' + error.message });

@@ -149,20 +149,6 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
         });
     }
     
-    // else if (prop_userAction.action === "Edit" && formUser.id) {
-    //   axios.patch(`${url}/api/users/${prop_userAction.user.id}`, userPayload)
-    //     .then(response => {
-    //       console.log('👤User edited successfully:', response.data);
-    //       prop_handleUserAction(prop_userAction.action);
-    //       clearForm();
-    //     })
-    //     .catch(error => {
-    //       console.error("👤Edit Failed", error);
-    //       setVisuals(i => ({ ...i, formError: 'Edit Failed', showButton: true }));
-    //     });
-
-    // } 
-    
     else if (prop_userAction.action === "Remove" && formUser.id) {
       console.log("3.3 Deleting User...");
       axios.delete(`${url}/api/users/${prop_userAction.user.id}`)

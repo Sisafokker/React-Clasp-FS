@@ -23,10 +23,36 @@ const Auth_Form = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
   
-    if (isSignUp && formData.passwordOne !== formData.passwordTwo) {
-      setFeedback({ error: `❌ Both Passwords must be equal. Modify and try again`, success: null });
-      return;
+    if (isSignUp) {
+      const { email, passwordOne, passwordTwo, firstName, lastName } = formData;
+    
+      if (!email || !passwordOne || !passwordTwo || !firstName || !lastName) {
+        setFeedback({ error: '❌ Please fill in all fields.', success: null });
+        return;
+      }
+    
+      if (firstName.length < 5 || lastName.length < 5) {
+        setFeedback({ error: '❌ Both names must be longer than 5 characters.', success: null });
+        return;
+      }
+
+      const emailFormatRegex = /\S+@\S+\.\S+/;
+      if (!emailFormatRegex.test(email)) {
+        setFeedback({ error: '❌ Please enter a valid email address.', success: null });
+        return;
+      }
+    
+      if (passwordOne.length < 6 || passwordOne.length > 20) {
+        setFeedback({ error: '❌ Password must be between 6 and 20 characters long.', success: null });
+        return;
+      }
+    
+      if (passwordOne !== passwordTwo) {
+        setFeedback({ error: '❌ Both passwords must match.', success: null });
+        return;
+      }
     }
+    
   
     const requestData = isSignUp
       ? {
@@ -43,21 +69,21 @@ const Auth_Form = () => {
     //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/${isSignUp ? 'signup' : 'login'}`;
     const url = `${process.env.REACT_APP_Backend_URL}/api/${isSignUp ? 'signup' : 'login'}`;
     try {
+      console.log("🔑Data!: " ,requestData);
       const response = await axios.post(url, requestData);
-      //console.log("Success!: ", response.data.user)
+      console.log("🔑Success!: ", response.data.user);
       
       const userObj = {
         name: response.data.user.firstName + " " +response.data.user.lastName,
         email: response.data.user.email,
         type: response.data.user.type,
         status: response.data.user.status,
-        id: response.data.user.id,
         iss: "Not-Google"
       };
 
       if (isSignUp) {
         setFeedback({ 
-          success: `👍👍 Congratulations ${userObj.name}, your email ${userObj.email} was approved. You can now login`, 
+          success: `${userObj.name}: You have signed up. You can now login`, 
           error: null 
         });
   
@@ -75,6 +101,7 @@ const Auth_Form = () => {
   
       } else {
         // For login, set the user in context and clear feedback
+        userObj.id = response.data.user.id,
         setUser(userObj);
         setFeedback({ success: 'SignIn Success!', error: null });
       }
@@ -117,6 +144,11 @@ const Auth_Form = () => {
           </div>
         )}
         <div>
+          <div className='feedback'>
+            {feedback.error && <div className="error">{feedback.error}</div>}
+            {feedback.success && <div className="success">{feedback.success}</div>}
+          </div>
+
           <div className='signLogButton'>
             <button type="submit">{isSignUp ? 'Sign Up' : 'Log In'}</button>
             {isSignUp ? (
@@ -127,8 +159,6 @@ const Auth_Form = () => {
             </div>
         </div>
       </form>
-      {feedback.error && <div className="error">{feedback.error}</div>}
-      {feedback.success && <div className="success">{feedback.success}</div>}
     </div>
   );
 

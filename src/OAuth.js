@@ -168,7 +168,7 @@ function OAuth({ prop_renderRoutes }) {
             )}
             {user && Object.keys(user).length !== 0 && ( 
                 <div className="app">
-                    <div className="hamburger-menu" onClick={toggleMenuView}>
+                    <div className="hamburger-menu" title={ !isMenuOpen ? "Show Navigation Bar": "Hide Navigation Bar"} onClick={toggleMenuView}>
                         <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
                     </div>
                     {isMenuOpen && (
