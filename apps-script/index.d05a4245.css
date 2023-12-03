@@ -339,6 +339,8 @@ select {
   text-align: left;
   background-color: gray;
   border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
   margin-bottom: 10px;
   padding: 5px 20px 5px 5px;
 }
@@ -353,8 +355,26 @@ select {
   right: 10px;
 }
 
+@media screen and (width <= 600px) {
+  .fpopup-container {
+    max-width: 100%;
+  }
+}
+
 .auth-wrapper {
   width: 100%;
+}
+
+.auth-wrapper .allLogin {
+  padding: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.auth-wrapper .allLogin #googleLogIn {
+  padding-top: 1%;
 }
 
 .auth-wrapper .userNav-wrapper {
@@ -816,6 +836,46 @@ select {
 .customer-select .faicon {
   cursor: pointer;
   color: #26bfd4;
+}
+
+.popup-container .popup-content {
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+}
+
+.popup-container .popup-content input {
+  border: 1px solid #000;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.popup-container .popup-footer {
+  justify-content: center;
+  width: 100%;
+  display: flex;
+}
+
+.popup-container .popup-footer .btn {
+  border: none;
+  border-radius: 4px;
+  margin: 5px;
+  padding: 10px 20px;
+}
+
+.popup-container .popup-footer .btn:hover {
+  background-color: #16717e;
+}
+
+@media screen and (width <= 600px) {
+  .popup-container {
+    max-width: 100%;
+  }
 }
 
 .footer-container {

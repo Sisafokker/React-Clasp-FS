@@ -84,6 +84,18 @@ class UserManager {
     }
   }
 
+  async resetPassword(id, newPassword) {
+    try {
+      const hashedPassword = await this.hashPassword(newPassword);
+      const UPDATE_QUERY = `UPDATE ${this.table} SET password = ? WHERE id = ?`;
+      await this.db.query(UPDATE_QUERY, [hashedPassword, id]);
+      return { message: 'Password updated successfully' };
+    } catch (error) {
+      console.error("resetPassword RESP ERROR: ", error);
+      throw error;
+    }
+  }
+
   async deleteUser(id) {
     try{
       const DELETE_QUERY = `DELETE FROM ${this.table} WHERE id = ?`;

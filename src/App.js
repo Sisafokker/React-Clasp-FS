@@ -32,7 +32,7 @@ function App() {
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("local_user"));
-    // Only update user state if it's different from the stored user
+    // Only update user state if different from storedUser
     if (!isUserLoaded && (!user || (storedUser && user.email !== storedUser.email))) {
         setUser(storedUser);
         setIsUserLoaded(true);
@@ -109,7 +109,7 @@ function App() {
     //console.log("User.Name", user.name);
     console.log("storedUser", storedUser);
 
-    if (user && user.name || storedUser) {
+    if (user && user.name) {
       // console.log("App.js ENABLED renderRoutes()")
       // User is signed in, render all routes
       if (user.type === "admin" && user.status === "active") {   
@@ -119,7 +119,6 @@ function App() {
             <Route path="/" element={<Crm />} />
             <Route path="crm" element={<Crm />} />
             <Route path="customers" element={<Customers />} />
-            <Route path="home" element={<Home />} />
             <Route path="appusers" element={<AppUsers />} />
             <Route path="*" element={<Navigate to="/crm" />} />
           </Routes>

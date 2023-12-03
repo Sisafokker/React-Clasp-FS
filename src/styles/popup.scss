@@ -26,6 +26,8 @@
       background-color: $secondaryColor;
       border-radius: 10px;
       margin-bottom: 10px;
+      max-width: 400px;
+      width: 100%;
     }
     
     .close-btn {
@@ -37,6 +39,10 @@
       font-size: 20px;
       border: 1px solid $lightgrey;
     }
+
+    @media screen and (max-width: $mobile) {
+      max-width: 100%; 
+  }
   
   }
   

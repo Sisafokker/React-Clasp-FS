@@ -86,6 +86,19 @@ appExp.post('/api/users', async (req, res) => {
   }
 });
 
+// Reset User Password 
+appExp.post('/api/users/reset', async (req, res) => {
+  const { id, newPassword } = req.body;
+  try {
+    const result = await userManager.resetPassword(id, newPassword);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('❌Reset Password Error:', error);
+    res.status(500).json({ error: 'Reset Password Error: ' + error.message });
+  }
+});
+
+
 // Update User
 appExp.patch('/api/users/:id', async (req, res) => {
   const id = req.params.id;

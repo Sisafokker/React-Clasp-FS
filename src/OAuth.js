@@ -24,7 +24,6 @@ export const AuthContext = React.createContext();
 
 function OAuth({ prop_renderRoutes }) {
     const { user, setUser, setTokenClient, isMenuOpen, setIsMenuOpen } = useContext(Context);
-    //const [isMenuOpen, setIsMenuOpen] = useState(true);
     const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
     const navigate = useNavigate();
 
@@ -34,6 +33,15 @@ function OAuth({ prop_renderRoutes }) {
         console.log('CLIENT_ID_1:', CLIENT_ID.slice(0, 2));
         loadGoogleSignInScript();
     }, []);
+
+    useEffect(() => {
+        const googleLoginElement = document.getElementById("googleLogIn");
+        if (user && Object.keys(user).length !== 0) {
+          if (googleLoginElement) googleLoginElement.style.display = "none"; // User Logged
+        } else {
+          if (googleLoginElement) googleLoginElement.style.display = "block"; // User Not logged
+        }
+      }, [user]);      
 
     const loadGoogleSignInScript = () => {
         if (!window.google) {
