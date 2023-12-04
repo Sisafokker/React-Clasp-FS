@@ -23,11 +23,11 @@ function Appusers() {
     const [userAction, setUserAction] = useState({ user: null, action: "Add" });
     const [companies, setCompanies] = useState([]);
     const [intCompUser, setIntCompUser] = useState([]);
-    const [popupState, setPopupState] = useState({ 
-        showPasswordPopup: false, 
-        selectedUser: null 
+    const [popupState, setPopupState] = useState({
+        showPasswordPopup: false,
+        selectedUser: null
     });
-    
+
     const { items: sortedAppUsers, requestSort, sortConfig } = useSortableData(appUsers, { key: 'lastName', direction: 'ascending' }); // Hooks Passing data for sorting. 
 
     // initial mount
@@ -76,10 +76,10 @@ function Appusers() {
 
     const handleAction = (user, action) => {
         if (action === "Password") {
-            console.log("OPEN PASSWORD POPUP: ", user.id ,user.email)
-            setPopupState({ 
-                showPasswordPopup: true, 
-                selectedUser: user 
+            console.log("OPEN PASSWORD POPUP: ", user.id, user.email)
+            setPopupState({
+                showPasswordPopup: true,
+                selectedUser: user
             });
         } else {
             setUserAction({ user, action });
@@ -92,20 +92,20 @@ function Appusers() {
 
     const handleResetPassword = (userId, newPassword) => {
         console.log("Reset Pass for userId:", userId);
-        
+
         const passwordPayload = { id: userId, newPassword };
         axios.post(`${url}/api/users/reset`, passwordPayload)
             .then(response => {
                 console.log('Password reset successfully:', response.data);
                 const message = "👍 Password reset successfully"
-                setPopupState({ ...popupState, successMessage: message, errorMessage: null }); 
+                setPopupState({ ...popupState, successMessage: message, errorMessage: null });
 
                 setTimeout(() => { handleClosePopup() }, 2000);
             })
             .catch(error => {
                 console.error('Error resetting password:', error.response?.data?.error || error.message);
                 const message = '❌ Error resetting password';
-                setPopupState({ ...popupState, successMessage: null, errorMessage: message }); 
+                setPopupState({ ...popupState, successMessage: null, errorMessage: message });
             });
     };
 
@@ -146,18 +146,6 @@ function Appusers() {
     return (
         <div className="container" style={{ paddingTop: isMenuOpen ? '140px' : '5px' }}>
             {/* <div className='section-title'>Users - Admin-Only Page</div> */}
-            <div className='tasks-wrapper'>
-                <div className='task-col'>
-                    <h3>Crud Form</h3>
-                    <p>Added, Edit & Remove users</p>
-                    <p>Password edits</p>
-                </div>
-                <div className='task-col'>
-                    <h3>User's List</h3>
-                    <p>Added, Edit & Remove</p>
-                    <p>Password edits</p>
-                </div>
-            </div>
             <div className='component-wrapper'>
                 <div className='form-container'>
                     <AppusersForm
@@ -188,11 +176,38 @@ function Appusers() {
                         </tbody>
                     </table>
                 </div>
-            </div>
+             </div>
+             <div className='tasks-wrapper'>
+                    <div className='task-col'>
+                        <h3>CRUD Form Guidelines</h3>
+                        <ul>
+                            <li>Choose 'Add', 'Edit', or 'Remove' to manage user records.</li>
+                            <li>Complete the form fields based on the chosen action.</li>
+                            <li>Submit the form to update user information.</li>
+                        </ul>
+                    </div>
+                    <div className='task-col'>
+                        <h3>Users Table Interaction</h3>
+                        <ul>
+                            <li>Use 'Edit'/'Delete' icons to perform actions on users.</li>
+                            <li>'Edit' loads user data into the form for updates.</li>
+                            <li>'Delete' permanently removes the user after confirmation.</li>
+                        </ul>
+                    </div>
+                    <div className='task-col'>
+                        <h3>User Roles and Permissions</h3>
+                        <ul>
+                            <li>Only users with 'active' status can access data.</li>
+                            <li>Admins can view and edit all records and settings.</li>
+                            <li>'Usuario' users need a linked company to see related data.</li>
+                            <li>'Usuario' can view and manage orders for their assigned companies.</li>
+                        </ul>
+                    </div>
+                </div>
             {popupState.showPasswordPopup && popupState.selectedUser && (
-                <PopupPassword 
-                    props_user={popupState.selectedUser} 
-                    props_onClose={handleClosePopup} 
+                <PopupPassword
+                    props_user={popupState.selectedUser}
+                    props_onClose={handleClosePopup}
                     props_onReset={handleResetPassword}
                     props_successMessage={popupState.successMessage}
                     props_errorMessage={popupState.errorMessage}

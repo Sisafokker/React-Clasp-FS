@@ -41,7 +41,7 @@ const Customers = () => {
 
     const handleAction = (customer, action) => {
         setCustomerAction({ customer, action });
-        console.log("🚧🚧 CUSTOMER: ",customer)
+        console.log("🚧🚧 CUSTOMER: ", customer)
         console.log("🚧🚧 ACTION: ", action)
     };
 
@@ -62,30 +62,18 @@ const Customers = () => {
     return (
         <div className="container" style={{ paddingTop: isMenuOpen ? '140px' : '5px' }}>
             {/* <div className='section-title'>Customers - Admin-Only Page</div> */}
-            <div className='tasks-wrapper'>
-                <div className='task-col'>
-                    <h3>Crud Form</h3>
-                    <p>Added, Edit & Remove users</p>
-                    <p>Password edits</p>
-                </div>
-                <div className='task-col'>
-                    <h3>User's List</h3>
-                    <p>Added, Edit & Remove</p>
-                    <p>Password edits</p>
-                </div>
-            </div>
             <div className='component-wrapper'>
-            <div className='form-container'>
-                <CustomersForm 
-                    prop_handleCustomerAction={handleCustomerAction} 
-                    prop_customerAction={customerAction} 
-                    prop_customers={customers}
-                />
-            </div>
+                <div className='form-container'>
+                    <CustomersForm
+                        prop_handleCustomerAction={handleCustomerAction}
+                        prop_customerAction={customerAction}
+                        prop_customers={customers}
+                    />
+                </div>
                 <div className='horizontal-table-container'>
                     <div className='section-title'>Customers</div>
-                {/* <div className='mobile-scroll-table'> */}
-                <table className='horizontal-table customers-table'>
+                    {/* <div className='mobile-scroll-table'> */}
+                    <table className='horizontal-table customers-table'>
                         <thead>
                             <tr>
                                 <th>Edit</th>
@@ -103,9 +91,33 @@ const Customers = () => {
                             {renderTableRows}
                         </tbody>
                     </table>
-{/*                     </div> */}
+                    {/*                     </div> */}
                 </div>
             </div>
+            <div className='tasks-wrapper'>
+                <div className='task-col'>
+                    <h3>CRUD Form Instructions</h3>
+                    <ul>
+                        <li>Select an action (Add, Edit, Remove) to modify records</li>
+                        <li>Fill out / edit the form fields for the selected action</li>
+                    </ul>
+                </div>
+                <div className='task-col'>
+                    <h3>Table Interactions</h3>
+                    <ul>
+                        <li>Click on 'Edit'/'Delete' icons next to a customer to perform action</li>
+                        <li>'Edit' populates the form with customer details for modification</li>
+                    </ul>
+                </div>
+                <div className='task-col'>
+                    <h3>Managing Data</h3>
+                    <ul>
+                        <li>Review customer details in the list view</li>
+                        <li>'Delete' removes the customer after confirmation</li>
+                    </ul>
+                </div>
+            </div>
+
         </div >
     )
 }

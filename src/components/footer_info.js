@@ -2,14 +2,15 @@
 const Info = Object.freeze({
   project: {
     name: 'FS Bottega Final Project: Hoakeen',
-    version: { major: 1, minor: 8,  patch: 8, 
+    version: { major: 1, minor: 8,  patch: 9, 
       toString() { return `${this.major}.${this.minor}.${this.patch}`; }
     }
   },
 
   notes: [
     //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
-    //{ version: "v1.8.8", title: "Download Improved", details: ["1", "2", "3",],  },
+    { version: "v1.8.9", title: "Users and Customers", details: ["Task-Wrapper", "3 cols per page with basic instructions", "Mobile responsible",],  },
+    { version: "v1.8.8", title: "Download Improved & CRUD Customers", details: ["New Server.js endpoints for companies", "Crud Customers operational", "User can download as well regardless if ISS Google or not",],  },
     { version: "v1.8.7", title: "CRM Visuals and @mobile", details: ["Improved Msg's when No Customer", "Visuals when Customer is Active vs Inactive", "Improved Mixins Buttons to be more responsive", "Improved Table visuals (rounded corners)", "Vertical Table Dif Colors depending on Company Status", "Warnings if user has not companies assigned to them"],  },
     { version: "v1.8.6", title: "Password Reset by Admins ", details: ["Admins con reset users passwords", "popupPassword.js", "popupPasswords.scss",],  },
     { version: "v1.8.5", title: "Solved SignUp error", details: ["Solved SignUp bug","Added more controls over form","Improved success/fail messages",],  },

@@ -5,11 +5,6 @@
 .container {
     width: 100%;
 
-    .tasks-wrapper,
-    .users-wrapper {
-        width: 100%;
-    }
-
     .section-title{
         padding: 10px;
         text-align: center;
@@ -36,11 +31,11 @@
             box-shadow: 0 0 15px $boxshadow;
 
             .appusers-table { // for appusers only
-                @include responsiveTable_Horizontal(3, 4);
+                @include responsiveTable_Horizontal(4, 5);
             }
 
             .customers-table { // for appusers only
-                @include responsiveTable_Horizontal(5, 9);
+                @include responsiveTable_Horizontal(5, 8, 9);
             }
         }
 

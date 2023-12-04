@@ -1,6 +1,6 @@
 // Bases.scss Global Styles
 @import "variables.scss";
-@import "mixins.scss"; 
+@import "mixins.scss";
 
 // * {
 //     box-sizing: border-box;
@@ -21,7 +21,7 @@
     width: 100%;
     max-width: 100%;
     margin: 0 auto; // Center the container
-    flex: 1;   // Allows container to expand and push the footer down
+    flex: 1; // Allows container to expand and push the footer down
     //border: 2px solid blue;
 
     @media screen and (max-width: $mobile) {
@@ -36,33 +36,41 @@
         text-align: center;
         font-weight: 600;
 
-        &.sub{ 
+        &.sub {
             color: $secondaryColor;
             padding-bottom: 0px;
 
-            @media screen and (max-width: $mobile) { 
+            @media screen and (max-width: $mobile) {
                 color: $offwhite;
             }
         }
-
     }
+}
+
+.tasks-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.task-col {
+    flex: 1;
+    max-width: calc(33% - 20px);
+    padding: 0 10px;
+    text-align: center;
+    box-sizing: border-box;
 
 
 }
 
-
-// @media screen and (max-width: $mobile) {
-//     .app-wrapper {
-//         background-color: lightblue;
-//         max-width: $mobile;
-//         margin: 0 auto;
-//     }
-
-//     .navUser-wrapper {
-//         background-color: black;
-//     }
-
-// }
+@media (max-width: 600px) {
+    .task-col {
+        width: 100%;
+        max-width: none; 
+        margin-bottom: 5px;
+    }
+}
 
 
 #signInDiv {
@@ -70,19 +78,30 @@
     text-align: center;
 }
 
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-h1 { @include textStyle(24px); }
-h2 { @include textStyle(20px, $secondaryColor); }
-h3 { @include textStyle(18px); }
-p  { @include textStyle(14px, $secondaryColor); }
+h1 {
+    @include textStyle(24px);
+}
 
-button, input[type="submit"] {
+h2 {
+    @include textStyle(20px, $secondaryColor);
+}
+
+h3 {
+    @include textStyle(18px);
+}
+
+p {
+    @include textStyle(14px, $secondaryColor);
+}
+
+button,
+input[type="submit"] {
     @include responsiveFontSize(12px);
     @include buttonStyle;
     margin-top: 5px;
@@ -95,14 +114,15 @@ button.cancel {
     margin-left: 15px;
 }
 
-input, select {
+input,
+select {
     @include inputSelectStyle;
 }
 
 select {
     padding: 4px;
     border: 1px solid $teal;
-  }
+}
 
 .successWarning {
     color: $success;
@@ -119,11 +139,6 @@ select {
     &:hover {
         color: $dark-teal;
     }
-}
-
-.tasks-wrapper {
-    @include flexCenter;
-    //  
 }
 
 .svg-inline--fa {
