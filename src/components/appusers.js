@@ -91,12 +91,12 @@ function Appusers() {
     };
 
     const handleResetPassword = (userId, newPassword) => {
-        console.log("Reset Pass for userId:", userId);
+       // console.log("Reset Pass for userId:", userId);
 
         const passwordPayload = { id: userId, newPassword };
         axios.post(`${url}/api/users/reset`, passwordPayload)
             .then(response => {
-                console.log('Password reset successfully:', response.data);
+               // console.log('Password reset successfully:', response.data);
                 const message = "👍 Password reset successfully"
                 setPopupState({ ...popupState, successMessage: message, errorMessage: null });
 

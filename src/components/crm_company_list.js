@@ -54,7 +54,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
     };
 
     const handleCompanyClick = (companyId) => {
-        console.log("🔵 CRM_company_list - Clicked in companyId: ", companyId)
+        //console.log("🔵 CRM_company_list - Clicked in companyId: ", companyId)
         props_companySelect(companyId); // Invokes handleCompanySelect() in crm.js & passing companyId as argument.
         setSelectedCompany(true)
 

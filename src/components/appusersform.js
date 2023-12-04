@@ -11,7 +11,7 @@ import "../styles/appusers_form.scss";
 
 
 const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, prop_intCompUser }) => {
-  console.log("👤ACTION Prop: ", prop_userAction.action)
+ // console.log("👤ACTION Prop: ", prop_userAction.action)
   //console.log('❓Received companies:', prop_companies);
   const url = process.env.REACT_APP_Backend_URL;
   const [formUser, setFormUser] = useState({
@@ -23,8 +23,8 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
   });
 
   useEffect(() => {
-    console.log("👤prop_Action: ", prop_userAction.action)
-    console.log("👤prop_User: ", prop_userAction.user)
+   // console.log("👤prop_Action: ", prop_userAction.action)
+   // console.log("👤prop_User: ", prop_userAction.user)
     if (prop_userAction.user) {
       setFormUser({ ...prop_userAction.user });
       if (prop_userAction.action !== "Add") { // Get company IDs associated with the user
@@ -55,24 +55,20 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
   }, [prop_userAction]);
 
   const handleCancel = () => {
-    console.log("👤Action Canceled");
+    //console.log("👤Action Canceled");
     clearForm(true);
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    console.log("1 - Form Submit Initiated");
-
     if (cancelled) {
       return;
     }
-
-    console.log("2 - Processing Form: ", formUser);
+   
     setVisuals(i => ({ ...i, showButton: false }));
 
     const userPayload = { ...formUser };
-    console.log("👤userPayload: ", userPayload);
 
     if (prop_userAction.action === "Add") {
       console.log("3.1 Adding User...");
@@ -87,17 +83,17 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
             const companyAssignments = userPayload.companyId.map(companyId =>
               processCompanyToUserAssignment("Add", companyId, userId)
             );
-            console.log('👤STAGE ONE REACHED!');
+
             return Promise.all(companyAssignments); // Wait for ALL assignments
           }
           return Promise.resolve(); // If no company assignment is needed, resolve the promise chain
         })
         .then(() => {
-          console.log('👤STAGE TWO REACHED!');
+          //console.log('👤STAGE TWO REACHED!');
           if (userPayload.companyId && userPayload.companyId.length > 0) {
-            console.log('👤User && CompanyUser success.');
+           // console.log('👤User && CompanyUser success.');
           } else {
-            console.log('👤User success (withouth CompanyUser)');
+           // console.log('👤User success (withouth CompanyUser)');
           }
 
           prop_handleUserAction(prop_userAction.action); // Refresh the users list
@@ -114,7 +110,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
     else if (prop_userAction.action === "Edit" && formUser.id) {
       axios.patch(`${url}/api/users/${prop_userAction.user.id}`, userPayload)
         .then(response => {
-          console.log('👤User edited successfully:', response.data);
+          //console.log('👤User edited successfully:', response.data);
 
           // Remove company-user relationships for this user
           const deletePromises = prop_intCompUser
@@ -131,21 +127,21 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
           return Promise.all(addPromises);
         })
         .then(() => {
-          console.log('👤CompanyUser relationships updated successfully');
+        //  console.log('👤CompanyUser relationships updated successfully');
           prop_handleUserAction(prop_userAction.action); // Refresh the users list
           clearForm();
         })
         .catch(error => {
-          console.error("👤Edit Failed", error);
+         // console.error("👤Edit Failed", error);
           setVisuals(i => ({ ...i, formError: 'Edit Failed', showButton: true }));
         });
     }
 
     else if (prop_userAction.action === "Remove" && formUser.id) {
-      console.log("3.3 Deleting User...");
+     // console.log("3.3 Deleting User...");
       axios.delete(`${url}/api/users/${prop_userAction.user.id}`)
         .then(response => {
-          console.log('👤User removed successfully:', response.data);
+        //  console.log('👤User removed successfully:', response.data);
           prop_handleUserAction(prop_userAction.action);
           clearForm();
         })
@@ -166,7 +162,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
     if (backendAction === "Add" && companyId) {
       return axios.post(endpoint, { companyId, userId })
         .then(response => {
-          console.log('👤intCompanyUser added successfully:', response.data);
+       //   console.log('👤intCompanyUser added successfully:', response.data);
         })
         .catch(error => {
           console.error('👤Error adding intCompanyUser:', error);
@@ -183,7 +179,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
         });
 
     } else {
-      console.log("👤Only ADD actions have been setup for now.");
+      //console.log("👤Only ADD actions have been setup for now.");
       return Promise.reject('Missing companyId?? or invalid action??'); // Reject to propagate
     }
   };
@@ -204,7 +200,7 @@ const AppusersForm = ({ prop_handleUserAction, prop_userAction, prop_companies, 
 
   // Function to clear form and reset state
   const clearForm = (wasCancelled) => {
-    console.log("👤Clearing Form ----------")
+    //console.log("👤Clearing Form ----------")
     setFormUser({
       id: null,
       firstName: '',

@@ -42,14 +42,14 @@
   .hamburger-menu {
     display: block; // default
 
-    position: fixed; 
-    top: 5;          
-    right: 20;         
-    z-index: 1500;   
+    position: fixed;
+    top: 5;
+    right: 20;
+    z-index: 1500;
     font-size: 45px;
     color: $teal;
     cursor: pointer;
-  
+
     @media screen and (max-width: $mobile) {
       color: $dark-teal;
     }
@@ -93,13 +93,13 @@
         @include flexCenter;
         width: 100%;
       }
-  
+
       .sign-out-button {
         @include responsiveFontSize(12px);
         @include buttonStyle($hover-color: $warning);
         padding: 8px 16px;
         margin-top: 5px;
-  
+
         &:hover {
           background-color: $warning;
         }

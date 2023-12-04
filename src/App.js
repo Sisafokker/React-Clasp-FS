@@ -105,9 +105,9 @@ function App() {
 
   const renderRoutes = () => {
     const storedUser = localStorage.getItem("local_user");
-    console.log("User", user);
+   // console.log("User", user);
     //console.log("User.Name", user.name);
-    console.log("storedUser", storedUser);
+   // console.log("storedUser", storedUser);
 
     if (user && user.name) {
       // console.log("App.js ENABLED renderRoutes()")
@@ -147,7 +147,7 @@ function App() {
     
     } else {
       // User is not signed in, render only the home route
-      console.log("App.js DISABLED renderRoutes()")
+      //console.log("App.js DISABLED renderRoutes()")
       return (
         <Routes>
           <Route path="/" element={<Home />} />

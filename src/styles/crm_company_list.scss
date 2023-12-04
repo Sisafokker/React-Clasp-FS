@@ -77,9 +77,6 @@
     .inactive-company p {
       color: $inactiveColor;
       font-style: italic;
-      // @media screen and (max-width: $mobile) {
-      //   color: $offwhite;
-      //  }
     }
 
     .company-item.inactive-company.selected-company {

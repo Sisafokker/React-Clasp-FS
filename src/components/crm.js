@@ -37,11 +37,11 @@ const CRM = () => {
     const fetchCompanies = async () => {
         try {
             const response = await axios.get(`${url}/api/companies`);
-            console.log("CRM👍get_companies: ",response)
+          //  console.log("CRM👍get_companies: ",response)
             let filteredCompanies;
             if (user && user.type === 'admin') {
                 filteredCompanies = response.data;
-                console.log("Admin 👍 props_Companies: ", filteredCompanies);
+              //  console.log("Admin 👍 props_Companies: ", filteredCompanies);
             } else {
                 const intCompanyUserResponse = await axios.get(`${url}/api/intCompanyUser`); // Fetch the intCompanyUser data
                 if (intCompanyUserResponse.status === 200) {
@@ -50,7 +50,7 @@ const CRM = () => {
                         .map(icu => icu.companyId);
                     
                     filteredCompanies = response.data.filter(company => userCompanies.includes(company.companyId));
-                    console.log("Non-Admin 👍 props_Companies: ", filteredCompanies);
+                  //  console.log("Non-Admin 👍 props_Companies: ", filteredCompanies);
                 }
             }
                 setCompanies(filteredCompanies);
@@ -62,7 +62,7 @@ const CRM = () => {
     };
 
     const handleCompanySelect = async (companyId) => {
-        console.log("CRM - Clicked in companyId:", companyId);
+       // console.log("CRM - Clicked in companyId:", companyId);
         
         setSelectedCompany(companyId);
         setSelectedOrder(null); // Reset the selected order
@@ -81,7 +81,7 @@ const CRM = () => {
 
     const handleOrderSelect = (orderId) => {
         setSelectedOrder(orderId);
-        console.log("crm.js 🚩selectedOrder🚩: ", orderId);
+      //  console.log("crm.js 🚩selectedOrder🚩: ", orderId);
     };
 
     const resetCompanyList = async () => {

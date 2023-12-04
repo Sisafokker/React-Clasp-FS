@@ -30,7 +30,7 @@ function OAuth({ prop_renderRoutes }) {
     // Initial Mount
     useEffect(() => {
         const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-        console.log('CLIENT_ID_1:', CLIENT_ID.slice(0, 2));
+        //console.log('CLIENT_ID_1:', CLIENT_ID.slice(0, 2));
         loadGoogleSignInScript();
     }, []);
 
@@ -48,21 +48,21 @@ function OAuth({ prop_renderRoutes }) {
             const script = document.createElement('script');
             script.src = "https://accounts.google.com/gsi/client";
             script.onload = () => {
-                console.log('Google Sign-In script loaded');
+               // console.log('Google Sign-In script loaded');
                 initializeGoogleSignIn();
             };
             script.onerror = () => console.error("Error loading Google Sign-In");
             document.body.appendChild(script);
         } else {
-            console.log('Google Sign-In script already loaded');
+            // console.log('Google Sign-In script already loaded');
             initializeGoogleSignIn();
         }
     };
 
     const initializeGoogleSignIn = () => {
-        console.log('Initializing Google Sign-In...');
-        console.log('window.google:', window.google);
-        console.log('CLIENT_ID:', CLIENT_ID.slice(0, 2));
+        // console.log('Initializing Google Sign-In...');
+        // console.log('window.google:', window.google);
+        // console.log('CLIENT_ID:', CLIENT_ID.slice(0, 2));
 
         if (window.google && window.google.accounts) {
             try {
@@ -93,7 +93,7 @@ function OAuth({ prop_renderRoutes }) {
                 });
 
             } catch (e)  {
-                console.log("G.Loaded Google Sign-In initializing error");
+               // console.log("G.Loaded Google Sign-In initializing error");
             }
         } else {
             setTimeout(initializeGoogleSignIn, 100); // Go again
@@ -111,11 +111,11 @@ function OAuth({ prop_renderRoutes }) {
 
     // Handle the response from Google Sign-In callback
     function handleCallbackResponse(response) {
-        console.log("👍HandleSignIn")
+       // console.log("👍HandleSignIn")
         let userCredentials = response.credential;
         //let userObject = jwtDecode(userCredentials);              // Alternative 1: Decode the JWT token to get user data
         let temp_userObject = decodeJwtResponse(userCredentials);   // Alternative 2: To Decode the JWT token
-        console.log("👍👍👍temp_userObject", temp_userObject)
+      //  console.log("👍👍👍temp_userObject", temp_userObject)
         let userObject = {
             name:  temp_userObject.name,
             email: temp_userObject.email,
@@ -155,7 +155,7 @@ function OAuth({ prop_renderRoutes }) {
     function handleSignOut(e) {
         window.location.reload(); // Force Tab reload
 
-        console.log("👍handleSignOut")
+      //  console.log("👍handleSignOut")
         localStorage.removeItem("local_user");  // Clear user local storage
         setUser({});                            // Clear user state
         setTokenClient({}); 
@@ -163,8 +163,7 @@ function OAuth({ prop_renderRoutes }) {
 
     const toggleMenuView = () => {
         setIsMenuOpen(!isMenuOpen);
-        console.log("MAIN MENU CLICKED")
-        console.log("❓🔨❓isMenuOpen: ",isMenuOpen)
+        // console.log("❓🔨❓isMenuOpen: ",isMenuOpen)
     };
 
     return (

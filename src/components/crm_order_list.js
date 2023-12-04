@@ -47,11 +47,11 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
     if (props_companyDetails) {
         companyDetails = Object.entries(props_companyDetails);
         downloadName = `CRM_Download_${props_companyDetails.companyName}_${(new Date()).toLocaleDateString()}`;
-        console.log("downloadName", downloadName);
+       // console.log("downloadName", downloadName);
     }
 
     useEffect(() => {
-        console.log("🟡🟡crm_order_list.js props_companyId: ", props_companyId)
+      //  console.log("🟡🟡crm_order_list.js props_companyId: ", props_companyId)
         const fetchOrders = async () => {
             try {
                 const response = await axios.get(`${url}/api/orders/company/${props_companyId}`);
@@ -95,7 +95,7 @@ const CRMOrderList = ({ props_companyId, props_companyDetails ,props_OrderSelect
             return acc;
         }, [{ id: 'All', email: 'All' }]);
         setUserEmail(userEmailObjects);
-        console.log("🟡 userEmailObjects: ",userEmailObjects )
+       // console.log("🟡 userEmailObjects: ",userEmailObjects )
 
 
         // Fetch and calculate totals for each order

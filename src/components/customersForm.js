@@ -6,15 +6,15 @@ import axios from 'axios';
 import "../styles/appusers_form.scss";
 
 const CustomersForm = ({ prop_handleCustomerAction, prop_customerAction, prop_customers }) => {
-    console.log("🏫ACTION Prop: ", prop_customerAction.action);
+   // console.log("🏫ACTION Prop: ", prop_customerAction.action);
     const url = process.env.REACT_APP_Backend_URL;
 
     const [formCustomer, setFormCustomer] = useState({ companyId: '', companyName: '',companyAddress: '', industry:'', country: '', state: '', status:'active'});
     const [visuals, setVisuals] = useState({ btnText: `${prop_customerAction.action} Customer`, showButton: true, formError: null, formSuccess: null });
 
     useEffect(() => {
-        console.log("🏫prop_Action: ", prop_customerAction.action);
-        console.log("🏫prop_Customer: ", prop_customerAction.customer);
+      //  console.log("🏫prop_Action: ", prop_customerAction.action);
+       // console.log("🏫prop_Customer: ", prop_customerAction.customer);
     
         if (prop_customerAction.customer) {
             setFormCustomer({
@@ -35,7 +35,7 @@ const CustomersForm = ({ prop_handleCustomerAction, prop_customerAction, prop_cu
 
 
     const handleCancel = () => {
-        console.log("🏫Action Canceled");
+      //  console.log("🏫Action Canceled");
         clearForm(true);
     };
 
@@ -54,7 +54,7 @@ const CustomersForm = ({ prop_handleCustomerAction, prop_customerAction, prop_cu
             setVisuals(v => ({ ...v, formError: 'All fields must be filled and > 2 characters long', showButton: true }));
             return;
         }  
-        console.log("Form Submit Initiated: ", formCustomer);
+       // console.log("Form Submit Initiated: ", formCustomer);
      
         setVisuals(v => ({ ...v, showButton: false }));
       
@@ -62,10 +62,10 @@ const CustomersForm = ({ prop_handleCustomerAction, prop_customerAction, prop_cu
         console.log("customerPayload: ", customerPayload);
       
         if (prop_customerAction.action === "Add") {
-          console.log("Adding Customer...");
+         // console.log("Adding Customer...");
           axios.post(`${url}/api/companies`, customerPayload)
             .then(response => {
-              console.log('Customer added successfully:', response.data);
+            //  console.log('Customer added successfully:', response.data);
               prop_handleCustomerAction('Add'); 
               clearForm();
             }).catch(error => {
@@ -74,7 +74,7 @@ const CustomersForm = ({ prop_handleCustomerAction, prop_customerAction, prop_cu
             });
       
         } else if (prop_customerAction.action === "Edit") {
-          console.log("Editing Customer...");
+         // console.log("Editing Customer...");
           axios.patch(`${url}/api/companies/${formCustomer.companyId}`, customerPayload)
             .then(response => {
               console.log('Customer edited successfully:', response.data);
@@ -86,10 +86,10 @@ const CustomersForm = ({ prop_handleCustomerAction, prop_customerAction, prop_cu
             });
       
         } else if (prop_customerAction.action === "Remove") {
-          console.log("Deleting Customer...");
+         // console.log("Deleting Customer...");
           axios.delete(`${url}/api/companies/${formCustomer.companyId}`)
             .then(response => {
-              console.log('Customer removed successfully:', response.data);
+            //  console.log('Customer removed successfully:', response.data);
               prop_handleCustomerAction('Remove'); 
               clearForm();
             })
@@ -98,7 +98,7 @@ const CustomersForm = ({ prop_handleCustomerAction, prop_customerAction, prop_cu
               setVisuals(v => ({ ...v, formError: 'Remove Failed', showButton: true }));
             });
         } else {
-          console.log("Unknown action...");
+         // console.log("Unknown action...");
           setVisuals(v => ({ ...v, formError: 'Unknown Action', showButton: true }));
         }
       };
@@ -116,7 +116,7 @@ const CustomersForm = ({ prop_handleCustomerAction, prop_customerAction, prop_cu
 
     // Clear form and reset state
     const clearForm = (wasCancelled) => {
-        console.log("🏫Clearing Form ----------");
+       // console.log("🏫Clearing Form ----------");
         setFormCustomer({ companyId: '', companyName: '', companyAddress: '', industry: '', country: '', state: '' ,status: 'active' });
 
         const newVisuals = {

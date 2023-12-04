@@ -27,7 +27,7 @@ const CRMOrderDetail = ({ props_orderId }) => {
     const [showPopup, setShowPopup] = useState(false); 
     const [currentItem, setCurrentItem] = useState(null); 
 
-    console.log("crm_order_detail.js 🟢props_orderId🟢",props_orderId)
+   // console.log("crm_order_detail.js 🟢props_orderId🟢",props_orderId)
     
     // Initial Mount
     useEffect(() => {
@@ -35,7 +35,7 @@ const CRMOrderDetail = ({ props_orderId }) => {
             try {
                 const response = await axios.get(`${url}/api/items`);
                 setItemsAll(response.data);
-                console.log("crm_order_detail.js 🟢Items Response:", response.data);
+              //  console.log("crm_order_detail.js 🟢Items Response:", response.data);
                 const itemMap = {};
                 response.data.forEach(item => {
                     itemMap[item.itemId] = item.name;
@@ -53,7 +53,7 @@ const CRMOrderDetail = ({ props_orderId }) => {
             try {
                 const response = await axios.get(`${url}/api/intOrderItem/${props_orderId}`);
                 const details = response.data;
-                console.log("crm_order_detail.js 🟢inOrderItems🟢", details);
+             //   console.log("crm_order_detail.js 🟢inOrderItems🟢", details);
     
                 // Enrich details with additional information
                 const enrichedDetails = details.map(detail => ({

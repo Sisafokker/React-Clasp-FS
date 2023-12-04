@@ -319,7 +319,7 @@ appExp.post('/api/intCompanyUser', async (req, res) => {
       throw new Error('Missing userId');
     }
     await intermediaryManager.addIntCompanyUser(companyId, userId);
-    console.log('intCompanyUser_Post: success');
+    //console.log('intCompanyUser_Post: success');
     res.status(201).json({ message: 'intCompanyUser_Post: success' });
   } catch (error) {
     console.error('❌Add IntCompanyUser Error:', error);
@@ -335,7 +335,7 @@ appExp.delete('/api/intCompanyUser', async (req, res) => {
       throw new Error('Missing companyId or userId');
     }
     await intermediaryManager.deleteIntCompanyUser(companyId, userId);
-    console.log('intCompanyUser_Delete: Relationship deleted successfully');
+   // console.log('intCompanyUser_Delete: Relationship deleted successfully');
     res.status(200).json({ message: 'intCompanyUser_Delete: Relationship deleted successfully' });
   } catch (error) {
     console.error('❌Delete IntCompanyUser Error:', error);
@@ -374,7 +374,7 @@ appExp.post('/api/intOrderItem', async (req, res) => {
       throw new Error('❌Missing orderId or itemId');
     }
     await intermediaryManager.addIntOrderItem(orderId, itemId);
-    console.log('intOrderItem_Post: success');
+   // console.log('intOrderItem_Post: success');
     res.status(201).json({ message: 'intOrderItem_Post: success' });
   } catch (error) {
     console.error('❌Add IntOrderItem Error:', error);
@@ -390,7 +390,7 @@ appExp.delete('/api/intOrderItem', async (req, res) => {
       throw new Error('Missing orderId or itemId');
     }
     await intermediaryManager.deleteIntOrderItem(orderId, itemId);
-    console.log('intOrderItem_Delete: Relationship deleted successfully');
+  //  console.log('intOrderItem_Delete: Relationship deleted successfully');
     res.status(200).json({ message: 'intOrderItem_Delete: Relationship deleted successfully' });
   } catch (error) {
     console.error('❌Delete IntOrderItem Error:', error);

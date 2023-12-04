@@ -2,13 +2,13 @@
 import React from 'react';
 
 const PopupItem = ({ props_itemData, props_onClose }) => {
-    console.log("Popup props_ItemData: ", props_itemData)
+  //  console.log("Popup props_ItemData: ", props_itemData)
     if (!props_itemData) {
-        console.log("❌Popup props_ItemData")
+     //   console.log("❌Popup props_ItemData")
         return null;
     }
 
-    console.log(props_itemData)
+    //console.log(props_itemData)
     //props_itemData.image = "https://m.media-amazon.com/images/I/91MxaEAOwnL.jpg"//"https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvYTAxMC1tYXJrdXNzLTA5MjYuanBn.jpg"
 
     return (

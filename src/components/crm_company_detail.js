@@ -11,8 +11,8 @@ const CRMCompanyDetail = ({ props_companyDetails }) => {
 
     // Convert props_companyDetails in array of [key, value] pairs
     const detailsArray = Object.entries(props_companyDetails);
-    console.log("🔴 crm_company_details CompanySelected: ", props_companyDetails.companyName)
-    console.log("🔴 crm_company_details CompanyDetails", detailsArray)
+    // console.log("🔴 crm_company_details CompanySelected: ", props_companyDetails.companyName)
+    // console.log("🔴 crm_company_details CompanyDetails", detailsArray)
 
     function properName(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);

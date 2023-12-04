@@ -41,8 +41,6 @@ const Customers = () => {
 
     const handleAction = (customer, action) => {
         setCustomerAction({ customer, action });
-        console.log("🚧🚧 CUSTOMER: ", customer)
-        console.log("🚧🚧 ACTION: ", action)
     };
 
     const renderTableRows = sortedCustomers.map(c => (

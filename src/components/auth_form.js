@@ -69,9 +69,9 @@ const Auth_Form = () => {
     //const url = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/api/${isSignUp ? 'signup' : 'login'}`;
     const url = `${process.env.REACT_APP_Backend_URL}/api/${isSignUp ? 'signup' : 'login'}`;
     try {
-      console.log("🔑Data!: " ,requestData);
+      //console.log("🔑Data!: " ,requestData);
       const response = await axios.post(url, requestData);
-      console.log("🔑Success!: ", response.data.user);
+      //console.log("🔑Success!: ", response.data.user);
       
       const userObj = {
         name: response.data.user.firstName + " " +response.data.user.lastName,

@@ -26,11 +26,9 @@ function Download({ props_ssPayload }) {
     //     return user.iss === "Google";
     // } 
 
-    useEffect(() => {
-        console.log("Download User", user);
-    }, []);
-
-
+    // useEffect(() => {
+    //     console.log("Download User", user);
+    // }, []);
 
     // Trigger SCV download
     const downloadCSV = (csvContent, filename) => {
@@ -77,7 +75,7 @@ function Download({ props_ssPayload }) {
                 client_id: CLIENT_ID,
                 scope: SCOPES,
                 callback: async (tokenResponse) => {
-                    console.log("Token response: ", tokenResponse);
+                    //console.log("Token response: ", tokenResponse);
                     if (tokenResponse && tokenResponse.access_token) {
                         try {
                             const fileResponse = await axios.post("https://www.googleapis.com/drive/v3/files", {
@@ -89,7 +87,7 @@ function Download({ props_ssPayload }) {
                                 }
                             });
 
-                            console.log("File response:", fileResponse);
+                            //console.log("File response:", fileResponse);
                             resolve({ accessToken: tokenResponse.access_token, fileId: fileResponse.data.id, fileUrl: `https://docs.google.com/spreadsheets/d/${fileResponse.data.id}` });
                         } catch (error) {
                             console.error("Error in creating file:", error);
@@ -190,7 +188,7 @@ function Download({ props_ssPayload }) {
                     'Content-Type': 'application/json',
                 },
             });
-            console.log(`New sheet added: ${sheetName}`);
+            //console.log(`New sheet added: ${sheetName}`);
         } catch (error) {
             console.error(`Error adding new sheet (${sheetName}):`, error);
         }
