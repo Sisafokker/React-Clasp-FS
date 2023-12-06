@@ -12,7 +12,9 @@ const PopupFooter = ({ props_isOpen, props_closePopup, props_title, children }) 
         <div className="fpopup-content">
           {children}
         </div>
-        <button className="btn" onClick={props_closePopup}>Close</button>
+        <div className="btn-container">
+          <button className="btn" onClick={props_closePopup}>Close</button>
+        </div>  
       </div>
     </div>
   );

@@ -364,6 +364,7 @@ select {
   background: #00000080;
   justify-content: center;
   align-items: center;
+  width: 100%;
   display: flex;
   position: fixed;
   inset: 0;
@@ -373,21 +374,35 @@ select {
   z-index: 1001;
   background: #f6f6f6;
   border-radius: 10px;
+  width: 80%;
+  min-width: 500px;
+  max-width: 700px;
   padding: 20px;
   position: relative;
+}
+
+@media screen and (width <= 1000px) {
+  .fpopup-container .fpopup-header {
+    min-width: 350px;
+    max-width: 80%;
+  }
 }
 
 .fpopup-container .fpopup-content {
   text-align: left;
   background-color: gray;
   border-radius: 10px;
-  width: 100%;
-  max-width: 400px;
   margin-bottom: 10px;
   padding: 5px 20px 5px 5px;
 }
 
-.fpopup-container .close-btn {
+.fpopup-container .btn-container {
+  justify-content: center;
+  padding-top: 10px;
+  display: flex;
+}
+
+.fpopup-container .btn-container .close-btn {
   cursor: pointer;
   background: none;
   border: 1px solid #ddd;
@@ -919,7 +934,6 @@ select {
 .popup-container .popup-content {
   flex-direction: column;
   align-items: center;
-  width: 100%;
   max-width: 500px;
   display: flex;
 }
@@ -928,7 +942,7 @@ select {
   border: 1px solid #000;
   border-radius: 4px;
   width: 100%;
-  max-width: 300px;
+  max-width: 400px;
   margin-bottom: 10px;
   padding: 10px;
 }
@@ -948,12 +962,6 @@ select {
 
 .popup-container .popup-footer .btn:hover {
   background-color: #16717e;
-}
-
-@media screen and (width <= 1000px) {
-  .popup-container {
-    max-width: 100%;
-  }
 }
 
 .footer-container {
@@ -1456,7 +1464,8 @@ select {
 
 @media screen and (width <= 1000px) {
   .popup-container .popup-content .product-image img {
-    max-height: 250px;
+    max-height: 50% px;
+    max-width: 90%;
   }
 
   .popup-container .popup-content {

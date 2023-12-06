@@ -8,7 +8,9 @@ const Info = Object.freeze({
   },
 
   notes: [
-    //{ version: "v0.5.X", title: "TBD", details: ["1", "2", "3",],  },
+    //{ version: "v0.5.X", title: "Show Descrip", details: ["Show Descrip", "Show Descrip", "Show Descrip",],  },
+    { version: "v2.0.1", title: "Popups Visuals", details: ["All popups within range for Desktop and Mobile", "Pending refactoring CSS", ],  },
+    { version: "v2.0.0", title: "Cleared all Console logs", details: ["Commented all console logs in the app ... Simple update", "Detected bug in CRM status filter... ", "Mobile responsible although found things that have changes... dev popup for example", "Commented all console logs in the app ... Simple update",],  },
     { version: "v1.8.9", title: "Users and Customers", details: ["Task-Wrapper", "3 cols per page with basic instructions", "Mobile responsible",],  },
     { version: "v1.8.8", title: "Download Improved & CRUD Customers", details: ["New Server.js endpoints for companies", "Crud Customers operational", "User can download as well regardless if ISS Google or not",],  },
     { version: "v1.8.7", title: "CRM Visuals and @mobile", details: ["Improved Msg's when No Customer", "Visuals when Customer is Active vs Inactive", "Improved Mixins Buttons to be more responsive", "Improved Table visuals (rounded corners)", "Vertical Table Dif Colors depending on Company Status", "Warnings if user has not companies assigned to them"],  },

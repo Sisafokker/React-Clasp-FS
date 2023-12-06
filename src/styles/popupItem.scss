@@ -78,7 +78,8 @@
                 border-radius: 10px;
 
                 @media screen and (max-width: $mobile) {
-                    max-height: 250px;
+                    max-height: 50%px;
+                    max-width: 90%;
                 }
             }
         }
