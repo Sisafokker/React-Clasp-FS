@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Context } from "../Context";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faSort } from '@fortawesome/free-solid-svg-icons';
-import CustomersForm from "./customersForm";
+import CustomersForm from "./customersform";
 
 // Hooks
 import { useSortableData } from '../actions/sortingTables';

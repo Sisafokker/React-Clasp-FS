@@ -7,7 +7,8 @@ import "../styles/appusers_form.scss";
 
 const CustomersForm = ({ prop_handleCustomerAction, prop_customerAction, prop_customers }) => {
    // console.log("🏫ACTION Prop: ", prop_customerAction.action);
-    const url = process.env.REACT_APP_Backend_URL;
+    const backendUrl = process.env.REACT_APP_Backend_URL;
+    const url = `${backendUrl}/api/companies`
 
     const [formCustomer, setFormCustomer] = useState({ companyId: '', companyName: '',companyAddress: '', industry:'', country: '', state: '', status:'active'});
     const [visuals, setVisuals] = useState({ btnText: `${prop_customerAction.action} Customer`, showButton: true, formError: null, formSuccess: null });
@@ -41,68 +42,54 @@ const CustomersForm = ({ prop_handleCustomerAction, prop_customerAction, prop_cu
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormCustomer(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+        setFormCustomer(prevState => ({ ...prevState, [name]: value }));
     };
 
+    // Refactored using Swith. If you have time do the same in appusersform (more complex due to intCompUser)
     const handleFormSubmit = (e) => {
         e.preventDefault();
-
+    
         if (!canSubmitForm()) {
             setVisuals(v => ({ ...v, formError: 'All fields must be filled and > 2 characters long', showButton: true }));
             return;
-        }  
-       // console.log("Form Submit Initiated: ", formCustomer);
-     
-        setVisuals(v => ({ ...v, showButton: false }));
-      
+        }
+    
         const customerPayload = { ...formCustomer };
-        console.log("customerPayload: ", customerPayload);
-      
-        if (prop_customerAction.action === "Add") {
-         // console.log("Adding Customer...");
-          axios.post(`${url}/api/companies`, customerPayload)
+        //console.log("customerPayload: ", customerPayload);
+    
+        switch (prop_customerAction.action) {
+            case "Add":
+                axiosCall('post', `${url}`, customerPayload, 'Customer added successfully', 'Add');
+                break;
+            case "Edit":
+                axiosCall('patch', `${url}/${formCustomer.companyId}`, customerPayload, 'Customer edited successfully', 'Edit');
+                break;
+            case "Remove":
+                axiosCall('delete', `${url}/${formCustomer.companyId}`, null, 'Customer removed successfully', 'Remove');
+                break;
+            default:
+                setVisuals(v => ({ ...v, formError: 'Unknown Action', showButton: true }));
+                setTimeout(() => { setVisuals(v => ({ ...v, formError: null })); }, 1500);
+                break;
+        }
+    };
+    
+    const axiosCall = (method, endpoint, payload, successMessage, action) => {
+        axios[method](endpoint, payload)
             .then(response => {
-            //  console.log('Customer added successfully:', response.data);
-              prop_handleCustomerAction('Add'); 
-              clearForm();
-            }).catch(error => {
-              console.error('Add Failed: ', error);
-              setVisuals(v => ({ ...v, formError: 'Add Failed', showButton: true }));
-            });
-      
-        } else if (prop_customerAction.action === "Edit") {
-         // console.log("Editing Customer...");
-          axios.patch(`${url}/api/companies/${formCustomer.companyId}`, customerPayload)
-            .then(response => {
-              console.log('Customer edited successfully:', response.data);
-              prop_handleCustomerAction('Edit'); 
-              clearForm();
-            }).catch(error => {
-              console.error('Edit Failed: ', error);
-              setVisuals(v => ({ ...v, formError: 'Edit Failed', showButton: true }));
-            });
-      
-        } else if (prop_customerAction.action === "Remove") {
-         // console.log("Deleting Customer...");
-          axios.delete(`${url}/api/companies/${formCustomer.companyId}`)
-            .then(response => {
-            //  console.log('Customer removed successfully:', response.data);
-              prop_handleCustomerAction('Remove'); 
-              clearForm();
+                console.log(`Customer ${action}ed successfully:`, response.data);
+                prop_handleCustomerAction(action);
+                clearForm()
+                setVisuals(v => ({ ...v, formSuccess: successMessage, formError: null }));
+                setTimeout(() => { setVisuals(v => ({ ...v, formSuccess: null })); }, 1500);
             })
             .catch(error => {
-              console.error('Remove Failed: ', error);
-              setVisuals(v => ({ ...v, formError: 'Remove Failed', showButton: true }));
+                console.error(`${action} Failed: `, error);
+                setVisuals(v => ({ ...v, formError: `${action} Failed`, showButton: true }))
+                setTimeout(() => { setVisuals(v => ({ ...v, formError: null })); }, 1500)
             });
-        } else {
-         // console.log("Unknown action...");
-          setVisuals(v => ({ ...v, formError: 'Unknown Action', showButton: true }));
-        }
-      };
-      
+    };
+    
 
     const canSubmitForm = () => {
         const fields = ['companyName', 'companyAddress', 'industry', 'country', 'state', 'status'];
