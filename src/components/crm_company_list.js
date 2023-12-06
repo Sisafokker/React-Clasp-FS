@@ -51,6 +51,7 @@ const CRMCompanyList = ({ props_companies, props_companySelect, props_resetCompa
     const resetFilters = () => {
         setSelectedStatus('All');
         setSelectedIndustry('All');
+        setFilteredCompanies(props_companies);
     };
 
     const handleCompanyClick = (companyId) => {

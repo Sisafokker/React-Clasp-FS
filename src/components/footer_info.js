@@ -2,13 +2,15 @@
 const Info = Object.freeze({
   project: {
     name: 'FS Bottega Final Project: Hoakeen',
-    version: { major: 1, minor: 8,  patch: 9, 
+    version: { major: 2, minor: 0,  patch: 3, 
       toString() { return `${this.major}.${this.minor}.${this.patch}`; }
     }
   },
 
   notes: [
     //{ version: "v0.5.X", title: "Show Descrip", details: ["Show Descrip", "Show Descrip", "Show Descrip",],  },
+    { version: "v2.0.3", title: "CRM Reset Filters", details: ["Bug fixed. Not recalculating user companies", ],  },
+    { version: "v2.0.2", title: "CustomersForm updated and refactored", details: ["Now matches the same user story as appusersform", "Refactored to use switch statement", ],  },
     { version: "v2.0.1", title: "Popups Visuals", details: ["All popups within range for Desktop and Mobile", "Pending refactoring CSS", ],  },
     { version: "v2.0.0", title: "Cleared all Console logs", details: ["Commented all console logs in the app ... Simple update", "Detected bug in CRM status filter... ", "Mobile responsible although found things that have changes... dev popup for example", "Commented all console logs in the app ... Simple update",],  },
     { version: "v1.8.9", title: "Users and Customers", details: ["Task-Wrapper", "3 cols per page with basic instructions", "Mobile responsible",],  },
